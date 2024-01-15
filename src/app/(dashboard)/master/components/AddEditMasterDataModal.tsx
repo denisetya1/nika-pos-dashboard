@@ -83,7 +83,7 @@ const AddEditMasterDataModal = ({
                     <div className="mb-2 block">
                       <Label htmlFor="input-gray" color="gray" value={labelDirection} />
                     </div>
-                    <Select id="input-gray" placeholder={placeholder} {...register("direction")}>
+                    <Select id="input-gray" {...register("direction")}>
                       <option value="IN">Masuk (Panambahan)</option>
                       <option value="OUT">Keluar (Pengurangan)</option>
                     </Select>
