@@ -6,6 +6,292 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider = "mysql"
+  url = env("MYSQL_PRISMA_URL") // uses connection pooling
+  // directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
+
+model User {
+  id BigInt @id @default(autoincrement())
+  email String
+  password String
+  name String
+  phone String
+  isActive Boolean @map("is_active")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+  store Store?
+
+  @@map("users")
+}
+
+model Role {
+  id BigInt @id @default(autoincrement())
+  name String
+  storeId BigInt? @map("store_id")
+  roles Json
+  isActive Boolean @map("is_active")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+
+   @@map("roles")
+}
+
+model UserRole {
+  id BigInt @id @default(autoincrement())
+  userId BigInt @map("user_id")
+  roleId BigInt @map("role_id")
+  storeId BigInt @map("store_id")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+
+   @@map("user_roles")
+}
+
+model Province {
+  id BigInt @id @default(autoincrement())
+  name String
+  cities City[]
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+
+  @@map("provinces")
+}
+
+model City {
+  id BigInt @id @default(autoincrement())
+  name String
+  provinceId BigInt @map("province_id")
+  province Province @relation(fields: [provinceId], references: [id])
+  districts District[]
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+
+  @@map("cities")
+}
+
+model District {
+  id BigInt @id @default(autoincrement())
+  name String
+  cityId BigInt @map("city_id")
+  city City @relation(fields: [cityId], references: [id])
+  subdistricts Subdistrict[]
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+
+  @@map("districts")
+}
+
+model Subdistrict {
+  id BigInt @id @default(autoincrement())
+  name String
+  districtId BigInt @map("distric_id")
+  district District @relation(fields: [districtId], references: [id])
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+
+  @@map("subdistricts")
+}
+
+model Store{
+  id BigInt @id @default(autoincrement())
+  userId BigInt @unique @map("user_id")
+  user User @relation(fields: [userId], references: [id])
+  name String 
+  subdistrictId BigInt? @map("subdistrict_id")
+  address String
+  address2 String?
+  address3 String?
+  phone String
+  isActive Boolean @map("is_active")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+  products Product[]
+  Outlets Outlet[]
+  suppliers Suplier[]
+  productStocks ProductStock[]
+
+  @@map("stores")
+}
+model Brand {
+  id BigInt @id @default(autoincrement())
+  name String
+  description String? @db.Text()
+  img String?
+  storeId BigInt? @map("store_id")
+  products Product[]
+  isActive Boolean @map("is_active")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+
+  @@map("brands")
+}
+
+model Category {
+  id BigInt @id @default(autoincrement())
+  name String 
+  description String? @db.Text()
+  img String?
+  storeId BigInt? @map("store_id")
+  isActive Boolean @map("is_active")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+  products Product[]
+
+  @@map("categories")
+}
+
+model Product {
+  id BigInt @id @default(autoincrement())
+  name String 
+  description String? @db.Text
+  img String?
+  barcode String?
+  sku String?
+  storeId BigInt @map("store_id")
+  store Store @relation(fields: [storeId], references: [id])
+  categoryId BigInt @map("category_id")
+  category Category @relation(fields: [categoryId], references: [id])
+  brandId BigInt @map("brand_id")
+  brand Brand @relation(fields: [brandId], references: [id])
+  linkShopee String? @map("link_shopee")
+  isActive Boolean @map("is_active")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+  stocks ProductStock[]
+  StockRequestProducts StockRequestProduct[]
+
+  @@map("products")
+}
+
+model Outlet {
+  id BigInt @id @default(autoincrement())
+  name String 
+  storeId BigInt @map("store_id")
+  store Store @relation(fields: [storeId], references: [id])
+  isActive Boolean @map("is_active")
+  isActivePOS Boolean? @map("is_active_pos")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+  productStock ProductStock[]
+  reqOutlets StockRequest[] @relation("reqOutlet")
+  destOutlets StockRequest[] @relation("destOutlet")
+
+  @@map("outlets")
+}
+
+model Suplier {
+  id BigInt @id @default(autoincrement())
+  name String 
+  address String @db.Text
+  phone String
+  storeId BigInt @map("store_id")
+  store Store @relation(fields: [storeId], references: [id])
+  isActive Boolean @map("is_active")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+
+  @@map("suppliers")
+}
+
+model ProductStock {
+  id BigInt @id @default(autoincrement())
+  productId BigInt @map("product_id")
+  product Product @relation(fields: [productId], references: [id])
+  storeId BigInt
+  store Store @relation(fields: [storeId], references: [id])
+  outletId BigInt 
+  Outlet Outlet @relation(fields: [outletId], references: [id])
+  quantity Int
+  sellPrice Decimal @db.Decimal(10,2)
+  sellPriceGrosir Decimal @db.Decimal(10,2)
+  minGrosir Int
+  isActive Boolean @map("is_active")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+  stockMovements StockMovement[]
+
+  @@unique([storeId, productId, outletId])
+  @@map("product_stocks")
+}
+
+enum DirectionEnum {
+  IN
+  OUT
+}
+
+model MoveType {
+  id BigInt @id @default(autoincrement())
+  name String 
+  direction DirectionEnum @map("direction")
+  storeId BigInt? @map("store_id")
+  isActive Boolean @default(true) @map("is_active")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+  stockMovements StockMovement[]
+
+  @@map("move_types")
+}
+model StockMovement {
+  id BigInt @id @default(autoincrement())
+  moveDate DateTime @db.Date
+  productStockId BigInt @map("product_stock_id")
+  productStock ProductStock @relation(fields: [productStockId], references: [id])
+  startQuantity Int? @map("start_quantity")
+  quantity Int
+  endQuantity Int? @map("end_quantity")
+  direction DirectionEnum @map("direction")
+  moveTypeId BigInt @map("move_type_id")
+  moveType MoveType @relation(fields: [moveTypeId], references: [id])
+  supplierId BigInt? @map("supplier_id")
+  description String? @db.Text
+  cogs Decimal? @db.Decimal(10,2)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+
+  @@map("stock_movements")
+}
+model StockRequest {
+  id BigInt @id @default(autoincrement())
+  requestTime DateTime @map("request_time")
+  approvedTime DateTime? @map("approved_time")
+  requestOutletId BigInt @map("request_outled_id")
+  reqOutlet Outlet @relation("reqOutlet", fields: [requestOutletId], references: [id])
+  destinationOutletId BigInt @map("destination_outled_id")
+  destOutlet Outlet @relation("destOutlet", fields: [destinationOutletId], references: [id])
+  isClosed Boolean @map("is_closed") @default(false)
+  isApproved Boolean @map("is_approved") @default(false)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+  products StockRequestProduct[]
+}
+model StockRequestProduct {
+  id BigInt @id @default(autoincrement())
+  stockRequestId BigInt
+  stockRequest StockRequest @relation(fields:[stockRequestId], references:[id])
+  productId BigInt @map("product_id")
+  product Product @relation(fields: [productId], references: [id])
+  quantity Int 
+  isApproved Boolean @map("is_approved")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+}
+
