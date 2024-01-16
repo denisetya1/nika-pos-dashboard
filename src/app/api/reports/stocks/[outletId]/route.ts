@@ -10,7 +10,9 @@ export const GET = async (req: NextRequest, { params }: { params: { outletId: st
   const search = req.nextUrl.searchParams.get('search');
   const date = req.nextUrl.searchParams.get('date');
 
-  if(brandId === '' || brandId === null || brandId === undefined){
+  if(
+    (search === '' || search === null || search === undefined ) 
+    && (brandId === '' || brandId === null || brandId === undefined)){
     return NextResponse.json([]);
   }
 

@@ -12,7 +12,9 @@ export const GET = async (req: NextRequest) =>  {
   // if(error){
   //   return NextResponse.json({error: true, message: "Messagenya", errors: []});
   // }
-  if(brandId === '' || brandId === null || brandId === undefined){
+  if(
+    (search === '' || search === null || search === undefined ) 
+    && (brandId === '' || brandId === null || brandId === undefined)){
     return NextResponse.json([]);
   }
 
