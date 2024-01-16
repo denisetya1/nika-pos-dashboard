@@ -83,32 +83,32 @@ const ProductStock = async ({
         </thead>
         <tbody className="divide-y">
           {products.map((product, index) => (
-            <tr key={product.id} className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+            <tr key={product?.id} className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
               <td className="px-6 py-3 w-10">{index + 1}</td>
               <td className="px-6 py-3 w-80 text-black dark:text-white">
-                <div>{product.name}</div>
+                <div>{product?.name}</div>
                 <div className="flex justify-start items-center gap-4 text-gray-500 text-xs">
-                  <div>sku: {product.sku === '' || product.sku === null ? '-' : product.sku}</div>
-                  <div>barcode: {product.barcode === '' || product.barcode === null ? '-' : product.barcode}</div>
+                  <div>sku: {product?.sku === '' || product?.sku === null ? '-' : product?.sku}</div>
+                  <div>barcode: {product?.barcode === '' || product?.barcode === null ? '-' : product?.barcode}</div>
                 </div>
                 <div className="text-gray-500 text-xs">
                   shopee:<br />
-                  {product.linkShopee !== null ? <a target="_blank" className="hover:text-blue-600" href={product.linkShopee}>{product.linkShopee?.substring(0,100)}...</a> : "-" }
+                  {product?.linkShopee !== null ? <a target="_blank" className="hover:text-blue-600" href={product?.linkShopee}>{product?.linkShopee.substring(0,100)}...</a> : "-" }
                 </div>
               </td>
-              <td className="px-6 py-3">{product.category.name}</td>
-              <td className="px-6 py-3">{product.brand.name}</td>
-              {/* <td className="px-6 py-3">{ product.stocks.length > 0 ? formatCurrency(Number(product.stocks[0].sellPriceGrosir)) : "-"}</td> */}
+              <td className="px-6 py-3">{product?.category.name}</td>
+              <td className="px-6 py-3">{product?.brand.name}</td>
+              {/* <td className="px-6 py-3">{ product?.stocks.length > 0 ? formatCurrency(Number(product?.stocks[0].sellPriceGrosir)) : "-"}</td> */}
               <td className="px-6 py-3">
                 <div className="flex justify-end align-middle gap-2">
                   <div className="py-2">
-                    { product.stocks.length > 0 ? formatCurrency(Number(product.stocks[0].sellPrice)) : "-"} 
+                    { product?.stocks.length > 0 ? formatCurrency(Number(product?.stocks[0]?.sellPrice)) : "-"} 
                   </div>
                   <div className="py-2">
                     <EditPriceForm 
                       product={product}
                       outlet={outlets.filter((o) => (o.id.toString() === outletId))[0]}
-                      sellPrice={Number(product.stocks[0].sellPrice)}
+                      sellPrice={Number(product?.stocks[0]?.sellPrice)}
                     />
                   </div>
                 </div>
@@ -128,7 +128,7 @@ const ProductStock = async ({
                       />
                     </div>
                     <div className="px-2 py-2 w-[60px] border-[1px] border-gray-200 text-center">
-                      { product.stocks.length > 0 ? `${product.stocks[0].quantity}` : '0' }
+                      { product?.stocks.length > 0 ? `${product?.stocks[0]?.quantity}` : '0' }
                     </div>
                     <div className="border-[1px] border-gray-200 rounded-r-lg overflow-hidden">
                       <StockMovementForm 
