@@ -2,15 +2,15 @@ import { Prisma, PrismaClient } from '@prisma/client'
 
 const globalForPrisma = globalThis as unknown as { prisma: PrismaClient }
 
-export const prisma = globalForPrisma.prisma || new PrismaClient().$extends({
+export const extendedPrismaClient =  new PrismaClient().$extends({
   name: 'findManyAndCount',
   model: {
     $allModels: {
-      findManyAndCount<Model, Args>(
+      async findManyAndCount<Model, Args>(
         this: Model,
         args: Prisma.Exact<Args, Prisma.Args<Model, 'findMany'>>
       ): Promise<[Prisma.Result<Model, Args, 'findMany'>, number]> {
-        return prisma.$transaction([
+        return extendedPrismaClient.$transaction([
           (this as any).findMany(args),
           (this as any).count({ where: (args as any).where }),
         ]) as any;
@@ -19,9 +19,12 @@ export const prisma = globalForPrisma.prisma || new PrismaClient().$extends({
   }
 });
 
-type prisma = typeof prisma
+type ExtendedPrismaClient = typeof extendedPrismaClient
 
-if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma
+export const prisma : ExtendedPrismaClient = extendedPrismaClient
+
+
+// if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma
 
 //BigInt stringify fix
 declare global {
