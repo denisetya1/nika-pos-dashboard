@@ -1,6 +1,7 @@
 import { Brand, Category, Outlet, Prisma } from "@prisma/client"
 import queryString from "query-string";
 import StockListFilter from "./components/StocktListFilter";
+import TablePagination from "../../components/TablePagination";
 
 type StockMovement = Prisma.StockMovementGetPayload<{
   include: { 
@@ -40,7 +41,6 @@ const StockReportPage = async ({
   const brands: Brand[] = await resBrand.json()
   const query = queryString.stringify(searchParams || {});
 
-  // console.log('asd', `${process.env.URL}/api/reports/stocks/${outletId}`)
   const resStockMoves = await fetch(
     `${process.env.URL}/api/reports/stocks/${outletId}`, 
     {
@@ -48,7 +48,12 @@ const StockReportPage = async ({
     }
   )
 
-  const stockMovements: StockMovement[] = await resStockMoves.json()
+  // const stockMovements: StockMovement[] = await resStockMoves.json()
+
+  const paginated: [StockMovement[], number, number, number] = await resStockMoves.json()
+
+  const [ stockMovements, totalRow, currentPage, limit] = paginated
+  const totalPages = Math.floor(totalRow/limit)
 
   return (
     <div className="p-20">
@@ -63,6 +68,10 @@ const StockReportPage = async ({
           searchProduct={searchParams?.search}
           pageURL='/reports/stocks'
         />
+      </div>
+
+      <div>
+        <TablePagination currentPage={currentPage} totalPages={totalPages} limit={50}/>
       </div>
 
       <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -99,6 +108,10 @@ const StockReportPage = async ({
           ))}
         </tbody>
       </table>
+      <div>
+        <TablePagination currentPage={currentPage} totalPages={totalPages} limit={50}/>
+      </div>
+
     </div>
   )
 }

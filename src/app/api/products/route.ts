@@ -1,24 +1,40 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "../client";
+import { isEmptyVal } from "@/app/helpers/functions";
 
 
 export const GET = async (req: NextRequest) =>  {
-  const categoryId = req.nextUrl.searchParams.get('categoryId');
-  const brandId = req.nextUrl.searchParams.get('brandId');
-  const search = req.nextUrl.searchParams.get('search');
+  const categoryId = req.nextUrl.searchParams.get('categoryId')
+  const brandId = req.nextUrl.searchParams.get('brandId')
+  const search = req.nextUrl.searchParams.get('search')
 
-  // const error = true;
+  const sort = req.nextUrl.searchParams.get('sort')
+  const direction = req.nextUrl.searchParams.get('direction')
 
-  // if(error){
-  //   return NextResponse.json({error: true, message: "Messagenya", errors: []});
-  // }
-  if(
-    (search === '' || search === null || search === undefined ) 
-    && (brandId === '' || brandId === null || brandId === undefined)){
-    return NextResponse.json([]);
+  let limit = Number(req.nextUrl.searchParams.get('limit'))
+  let page = Number(req.nextUrl.searchParams.get('page'))
+
+  if(isEmptyVal(limit, true)){
+    limit = 50
   }
 
-  const products = await prisma.product.findMany({
+  if(isEmptyVal(page, true)){
+    page = 1
+  }
+
+  let orderBy = {}
+
+  if(!isEmptyVal(sort)){
+    orderBy = {
+      ...(sort === 'name' ? {name: direction} : {}),
+      ...(sort === 'sku' ? {sku: direction} : {}),
+      ...(sort === 'barcode' ? {barcode: direction} : {}),
+      ...(sort === 'category' ? { category: {name: direction}} : {}),
+      ...(sort === 'brand' ? { brand: {name: direction}} : {})
+    }
+  }
+
+  const products = await prisma.product.findManyAndCount({
     where: {
       AND : [
         {storeId: 1},
@@ -34,11 +50,36 @@ export const GET = async (req: NextRequest) =>  {
         }
       ]
     },
-    include: {
-      brand: true,
-      category: true
-    }
+    orderBy,
+    select: {
+      id: true,
+      name: true,
+      barcode: true,
+      sku: true,
+      categoryId: true,
+      brandId: true,
+      linkShopee: true,
+      isActive: true,
+      createdAt:true,
+      brand: {
+        select:{
+          id: true,
+          name: true
+        }
+      },
+      category: {
+        select:{
+          id: true,
+          name: true
+        }
+      }
+    },
+    skip: (page - 1) * limit,
+    take: limit,
   });
+
+  products.push(page)
+  products.push(limit)
 
   return NextResponse.json(products);
 }

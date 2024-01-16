@@ -12,3 +12,11 @@ export const formatCurrency = (
 
   return idr.format(num)
 }
+
+export const isEmptyVal= (value: any, includeZero?: boolean) => {
+  if(value === '' || value === undefined || value === null || (includeZero === true && value === 0)){
+    return true
+  }
+
+  return false
+}

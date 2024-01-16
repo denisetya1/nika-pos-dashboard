@@ -5,6 +5,9 @@ import queryString from "query-string";
 import ConfirmDeleteModal from "./components/ConfirmDeleteModal";
 import AlertContextProvider from "@/app/context/alert/AlertContextProvider";
 import { HiOutlinePencilSquare, HiOutlineTrash } from "react-icons/hi2";
+import { Pagination } from "flowbite-react";
+import TablePagination from "../components/TablePagination";
+import SortableHeader from "../components/SortableHeader";
 
 type Product = Prisma.ProductGetPayload<{
   include: { brand: true, category: true}
@@ -33,10 +36,16 @@ const page = async ({
     }
   )
 
-  const products: Product[] = await resPorduct.json()
+  const paginated: [Product[], number, number, number] = await resPorduct.json()
+
+  const [ products, totalRow, currentPage, limit] = paginated
+  const totalPages = Math.floor(totalRow/limit)
 
   return (
     <div className="p-20">
+      <div>
+        <h1 className="font-bold text-2xl mb-10">DAFTAR PRODUK</h1>
+      </div>
       <div className="flex justify-end items-center mb-10">
         <AlertContextProvider>
           <AddEditProductModal 
@@ -60,22 +69,51 @@ const page = async ({
         />
       </div>
 
+      <div>
+        <TablePagination currentPage={currentPage} totalPages={totalPages} limit={50}/>
+      </div>
+
       <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
         <thead>
           <tr className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
               <th scope="col" className="px-6 py-3">No.</th>
-              <th scope="col" className="px-6 py-3">Nama</th>
-              <th scope="col" className="px-6 py-3">SKU</th>
-              <th scope="col" className="px-6 py-3">Barcode</th>
-              <th scope="col" className="px-6 py-3">Kategori</th>
-              <th scope="col" className="px-6 py-3">Brand</th>
+              <th scope="col" className="px-6 py-3 hover:bg-gray-200">
+                <SortableHeader
+                  title="Nama"
+                  fieldName="name"
+                />
+              </th>
+              <th scope="col" className="px-6 py-3 hover:bg-gray-200">
+                <SortableHeader
+                  title="SKU"
+                  fieldName="sku"
+                />
+              </th>
+              <th scope="col" className="px-6 py-3 hover:bg-gray-200">
+                <SortableHeader
+                  title="Barcode"
+                  fieldName="barcode"
+                />
+              </th>
+              <th scope="col" className="px-6 py-3 hover:bg-gray-200">
+                <SortableHeader
+                  title="Kategori"
+                  fieldName="category"
+                />
+              </th>
+              <th scope="col" className="px-6 py-3 hover:bg-gray-200">
+                <SortableHeader
+                  title="Brand"
+                  fieldName="brand"
+                />
+              </th>
               <th scope="col" className="px-6 py-3">Action</th>
           </tr>
         </thead>
         <tbody className="divide-y">
           {products.map((product, index) => (
             <tr key={product.id} className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-              <td className="px-6 py-3 w-10">{index + 1}</td>
+              <td className="px-6 py-3 w-10">{index + 1 + ((currentPage - 1) * limit)}</td>
               <td className="px-6 py-3 w-80 text-black dark:text-white">{product.name}</td>
               <td className="px-6 py-3">{product.sku ? product.sku : '-'}</td>
               <td className="px-6 py-3">{product.barcode ? product.barcode : '-'}</td>
@@ -106,6 +144,11 @@ const page = async ({
           ))}
         </tbody>
       </table>
+
+      <div>
+        <TablePagination currentPage={currentPage} totalPages={totalPages} limit={50}/>
+      </div>
+
     </div>
   )
 }

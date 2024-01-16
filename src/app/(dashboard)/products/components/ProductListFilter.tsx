@@ -31,7 +31,6 @@ const ProductListFilter = ({
   const [search, setSearchProduct] = useState(searchProduct);
   const [outletId, setOutletId] = useState(selectedOutlet);
 
-
   useEffect(() => {
     const query = {
       categoryId,

@@ -48,7 +48,7 @@ export const POST = async (request: Request, { params }: {
           moveTypeId: Number(moveTypeId),
           direction: direction,
           quantity: Number(quantity),
-          description: description
+          description: description,
         }
       }
     }

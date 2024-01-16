@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "../../../client";
+import { isEmptyVal } from "@/app/helpers/functions";
 
 
 export const GET = async (req: NextRequest, { params }: { params: { outletId: string } }) =>  {
@@ -10,13 +11,38 @@ export const GET = async (req: NextRequest, { params }: { params: { outletId: st
   const search = req.nextUrl.searchParams.get('search');
   const date = req.nextUrl.searchParams.get('date');
 
-  if(
-    (search === '' || search === null || search === undefined ) 
-    && (brandId === '' || brandId === null || brandId === undefined)){
-    return NextResponse.json([]);
+  const sort = req.nextUrl.searchParams.get('sort')
+  const direction = req.nextUrl.searchParams.get('direction')
+
+  let limit = Number(req.nextUrl.searchParams.get('limit'))
+  let page = Number(req.nextUrl.searchParams.get('page'))
+
+  if(isEmptyVal(limit, true)){
+    limit = 50
   }
 
-  const stockMoves = await prisma.stockMovement.findMany({
+  if(isEmptyVal(page, true)){
+    page = 1
+  }
+
+
+  let orderBy = {}
+
+  if(!isEmptyVal(sort)){
+    orderBy = {
+      ...(sort === 'name' ? {productStock: { product: {name: direction} } } : {}),
+      ...(sort === 'sku' ?  {productStock: { product: {sku: direction} } } : {}),
+      ...(sort === 'barcode' ?  {productStock: { product: {barcode: direction} } } : {}),
+      ...(sort === 'category' ?  {productStock: { product: {category:{name: direction}} } } : {}),
+      ...(sort === 'brand' ? {productStock: { product: {brand:{name: direction}} } } : {}),
+      // ...(sort === 'sellPrice' ? { stocks: {sellPrice: direction, nulls: 'first'}} : {}),
+      // ...(sort === 'stock' ? { stocks: {quantity: direction}} : {})
+    }
+  } else {
+    orderBy = {productStock: { product: {name: 'asc'} } }
+  }
+
+  const stockMoves = await prisma.stockMovement.findManyAndCount({
     where: {
       productStock: {
         outletId: Number(outletId),
@@ -59,14 +85,11 @@ export const GET = async (req: NextRequest, { params }: { params: { outletId: st
         }
       }
     },
-    orderBy: {
-      productStock: {
-        product: {
-          name: 'asc'
-        }
-      }
-    }
+    orderBy
   });
+
+  stockMoves.push(page)
+  stockMoves.push(limit)
 
   return NextResponse.json(stockMoves);
 }

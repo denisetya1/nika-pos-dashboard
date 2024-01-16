@@ -32,14 +32,11 @@ export const DashboardNavbar: FC<Record<string, never>> = function () {
               </button>
               <Navbar.Brand href="/">
                 <Image
-                  alt="Flowbite logo"
+                  alt="NIKA POS - BEAUTYCAT"
                   height="24"
-                  src="/favicon.png"
-                  width="24"
+                  src="/logo-stroked.png"
+                  width="150"
                 />
-                <span className="self-center whitespace-nowrap px-3 text-xl font-semibold dark:text-white">
-                  Flowbite
-                </span>
               </Navbar.Brand>
             </div>
             <DarkThemeToggle />

@@ -28,7 +28,6 @@ const StockMovementForm = ({
   {
     outlet: Outlet
     product: Product
-    productStockId: string
     direction: string
     currentQuantity: number
     movements: MoveType[]

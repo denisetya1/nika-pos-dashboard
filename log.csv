@@ -1,0 +1,1001 @@
+brand_id,name,category_id,updated_at,is_active,store_id
+2,Acnaway Acne Patch  Infinity-size,1,2024-01-16 04:50:55,1,1
+2,Acnaway Acne Patch Day Ultra-thin,1,2024-01-16 04:50:55,1,1
+2,Acnaway Stubborn Acne Cream,1,2024-01-16 04:50:55,1,1
+1,Acne Gel Bee Clear 10ml,1,2024-01-16 04:50:55,1,1
+1,Acne Patch Let's Glow Hydrocolloid Bear,1,2024-01-16 04:50:55,1,1
+1,Acne Patch Let's Glow Hydrocolloid Bulan,1,2024-01-16 04:50:55,1,1
+1,Acne Patch Let's Glow Hydrocolloid Butterfly,1,2024-01-16 04:50:55,1,1
+1,Acne Patch Let's Glow Hydrocolloid Love,1,2024-01-16 04:50:55,1,1
+1,Acne Patch Let's Glow Hydrocolloid Sakura,1,2024-01-16 04:50:55,1,1
+1,Acne Patch Let's Glow Hydrocolloid Star,1,2024-01-16 04:50:55,1,1
+3,Acnes Creamy Wash 100gr,1,2024-01-16 04:50:55,1,1
+3,Acnes Creamy Wash 50g,1,2024-01-16 04:50:55,1,1
+3,Acnes Facewash Complete White 100gr,1,2024-01-16 04:50:55,1,1
+3,Acnes Facewash Complete White 50gr,1,2024-01-16 04:50:55,1,1
+3,Acnes Facewash Deep Pore Cleanser 100gr,1,2024-01-16 04:50:55,1,1
+3,Acnes Facewash Deep Pore Cleanser 50gr,1,2024-01-16 04:50:55,1,1
+3,Acnes Facewash Oil Control 100gr,1,2024-01-16 04:50:55,1,1
+3,Acnes Facewash Oil Control 50gr,1,2024-01-16 04:50:55,1,1
+3,Acnes Facewash Yogurt Touch 100gr,1,2024-01-16 04:50:55,1,1
+3,Acnes Facewash Yogurt Touch 50gr,1,2024-01-16 04:50:55,1,1
+3,Acnes Mentholatum Pore Strip,1,2024-01-16 04:50:55,1,1
+3,Acnes Milk Cleanser Oil Control 110ml,1,2024-01-16 04:50:55,1,1
+3,Acnes Oil Control Film,1,2024-01-16 04:50:55,1,1
+3,Acnes Oil Control Mask,1,2024-01-16 04:50:55,1,1
+3,Acnes Point Clear Mini Roll-on 9ml,1,2024-01-16 04:50:55,1,1
+3,Acnes Sealing Jell 18gr,1,2024-01-16 04:50:55,1,1
+3,Acnes Sealing Jell 9gr,1,2024-01-16 04:50:55,1,1
+3,Acnes Spot Care 12gr,1,2024-01-16 04:50:55,1,1
+3,Acnes Starter Pack,1,2024-01-16 04:50:55,1,1
+3,Acnes Tea Tree Oil Clay Mask 50gr,1,2024-01-16 04:50:55,1,1
+3,Acnes Toner Oil Control 110ml,1,2024-01-16 04:50:55,1,1
+3,Acnes Uv Tint Natural Beige SPF 35PA+++ 30gr,1,2024-01-16 04:50:55,1,1
+3,Acnes Uv Tint Natural Green SPF 35PA+++ 30gr,1,2024-01-16 04:50:55,1,1
+3,Acnes Washing Bar 80gr | Bar Soap,1,2024-01-16 04:50:55,1,1
+4,Acnoc Aceser Anti Acne Gel 15gr,1,2024-01-16 04:50:55,1,1
+1,Acnol Lotion 10ml,1,2024-01-16 04:50:55,1,1
+5,Adara Bee Clear Extra Formula,1,2024-01-16 04:50:55,1,1
+6,Allphv Blackhead Mask Step 1 17ml,1,2024-01-16 04:50:55,1,1
+7,Ariul Smooth & Pure Cleansing Foam 50ml,1,2024-01-16 04:50:55,1,1
+8,Autumn Toner Skin Conditioner With Centella Asiatica,1,2024-01-16 04:50:55,1,1
+9,Avoskin Azeclair 10% + Kombucha 3% + Niacinamide 2,5% Vaccine Serum,1,2024-01-16 04:50:55,1,1
+9,Avoskin Marine Collagen 10%+ginseng Root ,1,2024-01-16 04:50:55,1,1
+9,Avoskin Miraculous Refining Toner 100ml,1,2024-01-16 04:50:55,1,1
+9,Avoskin Miraculous Retinol Ampoule 30ml,1,2024-01-16 04:50:55,1,1
+9,Avoskin Miraculous Retinol Toner 100ml,1,2024-01-16 04:50:55,1,1
+9,Avoskin Niacinamide 12%+centella Asiatic ,1,2024-01-16 04:50:55,1,1
+9,Avoskin Salicylic Acid 2% + Zinc,1,2024-01-16 04:50:55,1,1
+9,Avoskin Spirulina + Witch Azel +glycoid Acid Niacinamide ,1,2024-01-16 04:50:55,1,1
+9,Avoskin Tea Tree + Witch Azel + Glycoid Acid Rosemary ,1,2024-01-16 04:50:55,1,1
+9,Avoskin The Great Shield Sun-essence Spf 50 5ml,1,2024-01-16 04:50:55,1,1
+9,Avoskin Ysb Alpha Arbutin 3%,1,2024-01-16 04:50:55,1,1
+9,Avoskin Ysb Lactic Acid 10% 30ml,1,2024-01-16 04:50:55,1,1
+9,Avoskin Ysb Panthenol 5%+mughwort+cica,1,2024-01-16 04:50:55,1,1
+9,Avoskin Ysb Ultimate Hyaluron Hyacross3%+greentea,1,2024-01-16 04:50:55,1,1
+9,Avoskin Ysb Vitamin C 3% + Niacinamide 2%,1,2024-01-16 04:50:55,1,1
+1,Axis-y Cera-heart My Type Duo Cream 60ml,1,2024-01-16 04:50:55,1,1
+1,Axis-y Daily Toner,1,2024-01-16 04:50:55,1,1
+1,Axis-y Dark Spot Correcting Glow Serum 10ml,1,2024-01-16 04:50:55,1,1
+1,Axis-y Dark Spot Correcting Glow Serum 50ml,1,2024-01-16 04:50:55,1,1
+1,Axis-y New Skin Resolution Gel Mask,1,2024-01-16 04:50:55,1,1
+1,Axis-y The Mini Glow Set,1,2024-01-16 04:50:55,1,1
+11,Ayodya Slim Tea Original ,1,2024-01-16 04:50:55,1,1
+11,Ayodya Slimming Tea Roselle,1,2024-01-16 04:50:55,1,1
+12,Azarine Active Bright Brightening Creamy Facial Foam 50g,1,2024-01-16 04:50:55,1,1
+12,Azarine Advanced You Barrier Moist (ungu),1,2024-01-16 04:50:55,1,1
+12,Azarine Anti Aging Serum 20ml,1,2024-01-16 04:50:55,1,1
+12,Azarine Aqua Essence Sun Shield Serum SPF 50 100ml,1,2024-01-16 04:50:55,1,1
+12,Azarine Blackhead Remover Mask 7ml,1,2024-01-16 04:50:55,1,1
+12,Azarine Blemish Rescue Acne Gentle Cleansing Foam 60ml,1,2024-01-16 04:50:55,1,1
+12,Azarine Blemish Rescue Mild Purifying Toner 90ml,1,2024-01-16 04:50:55,1,1
+12,Azarine Blemish Rescue Oil Free Brightening Daily Moisturizer 40ml,1,2024-01-16 04:50:55,1,1
+12,Azarine Brightening C-glow Serum 20ml,1,2024-01-16 04:50:55,1,1
+12,Azarine C White Brightening Facial Cleanser,1,2024-01-16 04:50:55,1,1
+12,Azarine C White Day Cream Spf 30 25gr,1,2024-01-16 04:50:55,1,1
+12,Azarine C White Eye Luminate Firming Serum 15ml,1,2024-01-16 04:50:55,1,1
+12,Azarine C White Multi-acids Glowing Toner 90ml,1,2024-01-16 04:50:55,1,1
+12,Azarine C White Night Moisturizer 25gr,1,2024-01-16 04:50:55,1,1
+12,Azarine Calm My Acne Sunscreen 40g,1,2024-01-16 04:50:55,1,1
+12,Azarine Calming Skinpair Serum 20ml,1,2024-01-16 04:50:55,1,1
+12,Azarine Cicamide Barrier Sunscreen SPF 35,1,2024-01-16 04:50:55,1,1
+12,Azarine Daily Beginner Exfoliatiing Toner ,1,2024-01-16 04:50:55,1,1
+12,Azarine Daily Defender Multivitamin Serum,1,2024-01-16 04:50:55,1,1
+12,Azarine Face Mist,1,2024-01-16 04:50:55,1,1
+12,Azarine Fresh Radiant Brightening Scrub 50g,1,2024-01-16 04:50:55,1,1
+12,Azarine Hydramax-C Sunscreen 40ml,1,2024-01-16 04:50:55,1,1
+12,Azarine Hydrasoothe Sunscreen Mist 60ml,1,2024-01-16 04:50:55,1,1
+12,Azarine Hydrasoothe Sunscreen SPF 45 30ml,1,2024-01-16 04:50:55,1,1
+12,Azarine Hydrasoothe Sunscreen SPF 45 50ml,1,2024-01-16 04:50:55,1,1
+12,Azarine Intense Luminous Barrier Moist (biru),1,2024-01-16 04:50:55,1,1
+12,Azarine Marvel Acne Spot Serum 20ml,1,2024-01-16 04:50:55,1,1
+12,Azarine Marvel Aha-bha-pha Peeling Serum 20ml,1,2024-01-16 04:50:55,1,1
+12,Azarine Marvel Hydramax Water Bank Serum 20ml,1,2024-01-16 04:50:55,1,1
+12,Azarine Marvel Miracle Oil Serum 20ml,1,2024-01-16 04:50:55,1,1
+12,Azarine Marvel Niacinamide 5% Serum 20ml,1,2024-01-16 04:50:55,1,1
+12,Azarine Marvel Pore Tightening Serum 20ml,1,2024-01-16 04:50:55,1,1
+12,Azarine Marvel Radiant Luminous Serum ,1,2024-01-16 04:50:55,1,1
+12,Azarine Marvel Retinol Smooth Glowing Serum ,1,2024-01-16 04:50:55,1,1
+12,Azarine Moisture Rich Hydrating Toner 90ml,1,2024-01-16 04:50:55,1,1
+12,Azarine Polypeptide Fresh Vitality Toner ,1,2024-01-16 04:50:55,1,1
+12,Azarine Pure Radiance Barrier Moist (hijau),1,2024-01-16 04:50:55,1,1
+12,Azarine Purifying Deep Cleansing Clay Mask 60gr,1,2024-01-16 04:50:55,1,1
+12,Azarine Revitalizing Anti Aging Serum 20ml,1,2024-01-16 04:50:55,1,1
+12,Azarine Tone Up Mineral Sunscreen Serum 27ml,1,2024-01-16 04:50:55,1,1
+12,Azarine Vitamin Lab Let It Glow Hydraveil Primer Serum 20ml,1,2024-01-16 04:50:55,1,1
+12,Azarine Vitamin Lab Matte My Day Hydraveil Primer Serum 20ml,1,2024-01-16 04:50:55,1,1
+13,Azrina Acne Purifying Clay Mask,1,2024-01-16 04:50:55,1,1
+13,Azrina Pure Charcoal Mud Mask 50ml,1,2024-01-16 04:50:55,1,1
+1,Bandana,1,2024-01-16 04:50:55,1,1
+14,Beaudelab Collagen Powder Drink | Newlab+ Collagen Drink,1,2024-01-16 04:50:55,1,1
+1,Beauty Blender Young Beauty,1,2024-01-16 04:50:55,1,1
+15,Bio Beauty Lab Acne Treatment Facial Oil Serum 10ml,1,2024-01-16 04:50:55,1,1
+15,Bio Beauty Lab Acne Treatment Facial Oil Serum 5ml,1,2024-01-16 04:50:55,1,1
+15,Bio Beauty Lab Luxurious Facial Oil Serum 10ml,1,2024-01-16 04:50:55,1,1
+15,Bio Beauty Lab Luxurious Facial Oil Serum 5ml,1,2024-01-16 04:50:55,1,1
+1,Bio Oil Minyak Perawatan Kulit 25ml,1,2024-01-16 04:50:55,1,1
+16,Bioaqua 24K Essence Cream,1,2024-01-16 04:50:55,1,1
+16,Bioaqua 24K Gold Body Wash 400ml,1,2024-01-16 04:50:55,1,1
+16,Bioaqua Sheetmask Aloe Vera,1,2024-01-16 04:50:55,1,1
+16,Bioaqua Sheetmask Apple,1,2024-01-16 04:50:55,1,1
+16,Bioaqua Sheetmask Avocado,1,2024-01-16 04:50:55,1,1
+16,Bioaqua Sheetmask Blackcurrant,1,2024-01-16 04:50:55,1,1
+16,Bioaqua Sheetmask Blueberry,1,2024-01-16 04:50:55,1,1
+16,Bioaqua Sheetmask Carrot,1,2024-01-16 04:50:55,1,1
+16,Bioaqua Sheetmask Centella ,1,2024-01-16 04:50:55,1,1
+16,Bioaqua Sheetmask Chamomile,1,2024-01-16 04:50:55,1,1
+16,Bioaqua Sheetmask Cherry,1,2024-01-16 04:50:55,1,1
+16,Bioaqua Sheetmask Coconut ,1,2024-01-16 04:50:55,1,1
+16,Bioaqua Sheetmask Cucumber,1,2024-01-16 04:50:55,1,1
+16,Bioaqua Sheetmask Dragon Fruit,1,2024-01-16 04:50:55,1,1
+16,Bioaqua Sheetmask Grape Copper ,1,2024-01-16 04:50:55,1,1
+16,Bioaqua Sheetmask Grape Fruit,1,2024-01-16 04:50:55,1,1
+16,Bioaqua Sheetmask Honey,1,2024-01-16 04:50:55,1,1
+16,Bioaqua Sheetmask Kiwi,1,2024-01-16 04:50:55,1,1
+16,Bioaqua Sheetmask Lemon Vit C,1,2024-01-16 04:50:55,1,1
+16,Bioaqua Sheetmask Orange ,1,2024-01-16 04:50:55,1,1
+16,Bioaqua Sheetmask Papaya,1,2024-01-16 04:50:55,1,1
+16,Bioaqua Sheetmask Peach,1,2024-01-16 04:50:55,1,1
+16,Bioaqua Sheetmask Pomegranate,1,2024-01-16 04:50:55,1,1
+16,Bioaqua Sheetmask Sea Buckthom ,1,2024-01-16 04:50:55,1,1
+16,Bioaqua Sheetmask Tomato,1,2024-01-16 04:50:55,1,1
+17,Blinkz Soap 60gr,1,2024-01-16 04:50:55,1,1
+18,Bloomka Happy Barrier Melted Moisturizer,1,2024-01-16 04:50:55,1,1
+19,Breylee Blackhead Mask Step 1 17ml,1,2024-01-16 04:50:55,1,1
+19,Breylee Step 2,1,2024-01-16 04:50:55,1,1
+19,Breylee Tea Tree Nose Strips,1,2024-01-16 04:50:55,1,1
+20,Byout By Nisa Brightening Spot Cream,1,2024-01-16 04:50:55,1,1
+20,Byout By Nisa Cream Morning Glowing,1,2024-01-16 04:50:55,1,1
+20,Byout By Nisa Cream Wajah Glowing 2 Whitening Super,1,2024-01-16 04:50:55,1,1
+20,Byout By Nisa Eye Dark Circle Serum,1,2024-01-16 04:50:55,1,1
+20,Byout By Nisa Facial Wash Acne Clear ,1,2024-01-16 04:50:55,1,1
+20,Byout By Nisa Facial Wash Brightening Arbutin,1,2024-01-16 04:50:55,1,1
+20,Byout By Nisa New Acne Glowing,1,2024-01-16 04:50:55,1,1
+20,Byout By Nisa Toner Norml Skin | Brightening Toner,1,2024-01-16 04:50:55,1,1
+21,Camille Little Pop Face Mist 100ml,1,2024-01-16 04:50:55,1,1
+22,Carasun Solar Smart Uv Protector 30ml,1,2024-01-16 04:50:55,1,1
+22,Carasun Solar Smart Uv Protector Sunscreen 8ml,1,2024-01-16 04:50:55,1,1
+23,Cetaphil Gentle Skin Cleanser 1000ml,1,2024-01-16 04:50:55,1,1
+23,Cetaphil Gentle Skin Cleanser 125ml,1,2024-01-16 04:50:55,1,1
+23,Cetaphil Gentle Skin Cleanser 250ml,1,2024-01-16 04:50:55,1,1
+23,Cetaphil Gentle Skin Cleanser 500ml,1,2024-01-16 04:50:55,1,1
+23,Cetaphil Gentle Skin Cleanser 59ml,1,2024-01-16 04:50:55,1,1
+23,Cetaphil Moisturizing Lotion 59ml (hijau),1,2024-01-16 04:50:55,1,1
+24,Chava Face Mist Organic 100gr,1,2024-01-16 04:50:55,1,1
+25,Cleora Beauty 3 Minutes Exfoliating Gel 50ml,1,2024-01-16 04:50:55,1,1
+26,Cosrx Acne Pimple Masker Patch,1,2024-01-16 04:50:55,1,1
+26,Cosrx Advanced Snail 96 Mucin Power Essence 100ml,1,2024-01-16 04:50:55,1,1
+26,Cosrx Low Ph Good Morning Gel Cleanser 150ml,1,2024-01-16 04:50:55,1,1
+26,Cosrx Low Ph Good Morning Gel Cleanser 20ml,1,2024-01-16 04:50:55,1,1
+26,Cosrx Low Ph Good Morning Gel Cleanser 50ml,1,2024-01-16 04:50:55,1,1
+26,Cosrx AHA/BHA Clarifiying Treatment Toner,1,2024-01-16 04:50:55,1,1
+27,Daisy Organic Chocolate 20gr,1,2024-01-16 04:50:55,1,1
+27,Daisy Organic Greentea 20gr,1,2024-01-16 04:50:55,1,1
+27,Daisy Organic Milk 20gr,1,2024-01-16 04:50:55,1,1
+27,Daisy Organic Strawberry 20gr,1,2024-01-16 04:50:55,1,1
+28,Dazzle Me Lip Tin Oran-gee,1,2024-01-16 04:50:55,1,1
+28,Dazzle Me Lip Tin Smiley,1,2024-01-16 04:50:55,1,1
+28,Dazzle Me Lip Tin Swipe Up,1,2024-01-16 04:50:55,1,1
+28,Dazzle Me Lip Tin Touch Down,1,2024-01-16 04:50:55,1,1
+29,Dear Me Beauty 10% Vitamin C + Orange Extract Face Serum 12ml,1,2024-01-16 04:50:55,1,1
+30,Derma Angel Acne Gel Patch Day 12,1,2024-01-16 04:50:55,1,1
+30,Derma Angel Acne Gel Patch Night 12,1,2024-01-16 04:50:55,1,1
+30,Derma Angel Acne Gel Patch Night 6,1,2024-01-16 04:50:55,1,1
+30,Derma Angel Acne Patch Day 6pcs,1,2024-01-16 04:50:55,1,1
+30,Derma Angel Acne Path Mix 18pcs,1,2024-01-16 04:50:55,1,1
+31,Diy Compressed Mask 100pcs,1,2024-01-16 04:50:55,1,1
+32,Dorskin Matcha Glow Dream Mask 30gr,1,2024-01-16 04:50:55,1,1
+33,Dr Brandon Brightening & Firm Serum 20ml,1,2024-01-16 04:50:55,1,1
+33,Dr Brandon Brightening Face Serum 20ml,1,2024-01-16 04:50:55,1,1
+33,Dr Brandon Hydrating Face Serum,1,2024-01-16 04:50:55,1,1
+33,Dr Brandon Intensive Bright Serum Alpha Arbutin Centella Asiatica 20ml,1,2024-01-16 04:50:55,1,1
+33,Dr Brandon Peeling Solution 20ml,1,2024-01-16 04:50:55,1,1
+34,Eiem Beauty Water Bank Moisture Gel 30gr,1,2024-01-16 04:50:55,1,1
+1,Eiem Serum Niacinamide,1,2024-01-16 04:50:55,1,1
+35,Eileen Grace Deep Cleansing Black Jelly Mask 300ml,1,2024-01-16 04:50:55,1,1
+35,Eileen Grace Moisturize Rose Jelly Mask 300ml,1,2024-01-16 04:50:55,1,1
+36,Emina Bright Stuff Face Wash 100ml,1,2024-01-16 04:50:55,1,1
+36,Emina Bright Stuff Face Wash 50ml,1,2024-01-16 04:50:55,1,1
+36,Emina Lip Mask,1,2024-01-16 04:50:55,1,1
+36,Emina Sun Battle Sunscreen SPF 30 60ml,1,2024-01-16 04:50:55,1,1
+36,Emina Sun Battle Sunscreen SPF 30 Fun Size 23ml,1,2024-01-16 04:50:55,1,1
+37,Envygreen Acne Shot Solution 10ml,1,2024-01-16 04:50:55,1,1
+37,Envygreen Bye Bye Flake Lips Lip Scrub 7gr,1,2024-01-16 04:50:55,1,1
+37,Envygreen Clean Pore Facial Foam 30ml,1,2024-01-16 04:50:55,1,1
+37,Envygreen Clean Pore Toner 100ml,1,2024-01-16 04:50:55,1,1
+37,Envygreen Clean Pore Toner 30ml,1,2024-01-16 04:50:55,1,1
+37,Envygreen Clear Daily Protection 5gr,1,2024-01-16 04:50:55,1,1
+37,Envygreen Dead Skin Cell Remover ,1,2024-01-16 04:50:55,1,1
+37,Envygreen Eye And Neck Hyalugen Serum 3ml,1,2024-01-16 04:50:55,1,1
+37,Envygreen Gentle And Fresh Face Toner 100ml,1,2024-01-16 04:50:55,1,1
+37,Envygreen Gentle And Fresh Face Toner 30ml,1,2024-01-16 04:50:55,1,1
+37,Envygreen Gentle And Fresh Facial Foam 100ml,1,2024-01-16 04:50:55,1,1
+37,Envygreen Gentle And Fresh Facial Foam 30ml,1,2024-01-16 04:50:55,1,1
+37,Envygreen Glow Up Exfoliating Toner 100ml,1,2024-01-16 04:50:55,1,1
+37,Envygreen Glow Up Exfoliating Toner 30ml,1,2024-01-16 04:50:55,1,1
+37,Envygreen Hyalugen Skin Barrier Serum 15ml,1,2024-01-16 04:50:55,1,1
+37,Envygreen Hyalugen Skin Barrier Serum 3ml,1,2024-01-16 04:50:55,1,1
+37,Envygreen Intensify Brightening Serum 3ml,1,2024-01-16 04:50:55,1,1
+37,Envygreen Moisture Boost Cream 25gr,1,2024-01-16 04:50:55,1,1
+37,Envygreen Mugcera Intensify Brightening Serum 10ml,1,2024-01-16 04:50:55,1,1
+37,Envygreen Night Extra Whitening 20gr,1,2024-01-16 04:50:55,1,1
+37,Envygreen Night Extra Whitening 5gr,1,2024-01-16 04:50:55,1,1
+37,Envygreen Pore Refining Minimizer Serum 10ml,1,2024-01-16 04:50:55,1,1
+37,Envygreen Pore Refining Minimizer Serum 5ml,1,2024-01-16 04:50:55,1,1
+37,Envygreen Skin Bestie Soothing Toner 60ml,1,2024-01-16 04:50:55,1,1
+37,Envygreen Soft Moist And Nourish Cream 25gr,1,2024-01-16 04:50:55,1,1
+37,Envygreen Soft Moist And Nourish Cream 5gr,1,2024-01-16 04:50:55,1,1
+37,Envygreen Ultimate Sun Protection 20gr,1,2024-01-16 04:50:55,1,1
+37,Envygreen Ultimate Sun Protection 5gr,1,2024-01-16 04:50:55,1,1
+38,Er123 Cleanser,1,2024-01-16 04:50:55,1,1
+39,Facetology Facial Wash,1,2024-01-16 04:50:55,1,1
+39,Facetology Triple Care Sunscreen Spf 40PA+++,1,2024-01-16 04:50:55,1,1
+40,Fameux Whitening Body Cream,1,2024-01-16 04:50:55,1,1
+41,Focallure Eyebrow Cream 01 Auburn,1,2024-01-16 04:50:55,1,1
+41,Focallure Eyebrow Cream 02,1,2024-01-16 04:50:55,1,1
+41,Focallure Eyebrow Cream 03,1,2024-01-16 04:50:55,1,1
+41,Focallure Eyebrow Cream 04,1,2024-01-16 04:50:55,1,1
+41,Focallure Eyebrow Cream 05 Ebony,1,2024-01-16 04:50:55,1,1
+41,Focallure Patch Acne Day,1,2024-01-16 04:50:55,1,1
+41,Focallure Patch Acne Night,1,2024-01-16 04:50:55,1,1
+42,Garnier Micellar Cleansing Water In Oil 125ml (biphas),1,2024-01-16 04:50:55,1,1
+42,Garnier Micellar Cleansing Water Pink 125ml,1,2024-01-16 04:50:55,1,1
+42,Garnier Micellar Cleansing Water Pink 400ml,1,2024-01-16 04:50:55,1,1
+42,Garnier Micellar Cleansing Water Pink 50ml,1,2024-01-16 04:50:55,1,1
+42,Garnier Micellar Cleansing Water Rose Water 125ml,1,2024-01-16 04:50:55,1,1
+42,Garnier Micellar Cleansing Water Salicylic Bha 125ml (biru),1,2024-01-16 04:50:55,1,1
+42,Garnier Micellar Cleansing Water Vitamin C 125ml,1,2024-01-16 04:50:55,1,1
+42,Garnier Micellar Oil-infused Cleansing Water 50ml,1,2024-01-16 04:50:55,1,1
+43,Geamoore Body Wash Bacca 540 100ml,1,2024-01-16 04:50:55,1,1
+43,Geamoore Body Wash Bo Coffee 100ml,1,2024-01-16 04:50:55,1,1
+43,Geamoore Body Wash Jmlone 100ml,1,2024-01-16 04:50:55,1,1
+43,Geamoore Collaberry Minuan Serbuk 55gr,1,2024-01-16 04:50:55,1,1
+43,Geamoore Parfum Addict 15ml Blush Sunny,1,2024-01-16 04:50:55,1,1
+43,Geamoore Parfum Addict 15ml Cotton Candy,1,2024-01-16 04:50:55,1,1
+43,Geamoore Parfum Addict 15ml Flamingo Fame,1,2024-01-16 04:50:55,1,1
+43,Geamoore Parfum Addict 15ml Greentelova,1,2024-01-16 04:50:55,1,1
+43,Geamoore Parfum Addict 15ml Peach Cookies,1,2024-01-16 04:50:55,1,1
+43,Geamoore Parfum Addict 15ml Vanillatte,1,2024-01-16 04:50:55,1,1
+43,Geamoore Parfum Addict 5ml Blush Sunny,1,2024-01-16 04:50:55,1,1
+43,Geamoore Parfum Addict 5ml Cotton Candy,1,2024-01-16 04:50:55,1,1
+43,Geamoore Parfum Addict 5ml Flamingo Fame,1,2024-01-16 04:50:55,1,1
+43,Geamoore Parfum Addict 5ml Greentelova,1,2024-01-16 04:50:55,1,1
+43,Geamoore Parfum Addict 5ml Peach Cookies,1,2024-01-16 04:50:55,1,1
+43,Geamoore Parfum Addict 5ml Vanillatte,1,2024-01-16 04:50:55,1,1
+43,Geamoore Parfum Baby Backaratz 30ml,1,2024-01-16 04:50:55,1,1
+43,Geamoore Parfum Baby Backaratz 6ml,1,2024-01-16 04:50:55,1,1
+43,Geamoore Parfum Baby Sweet Powder 30ml,1,2024-01-16 04:50:55,1,1
+43,Geamoore Parfum Baby Sweet Powder 6ml,1,2024-01-16 04:50:55,1,1
+43,Geamoore Parfum Backaratz 30ml,1,2024-01-16 04:50:55,1,1
+43,Geamoore Parfum Backaratz 6ml,1,2024-01-16 04:50:55,1,1
+43,Geamoore Parfum Blackophie 30ml,1,2024-01-16 04:50:55,1,1
+43,Geamoore Parfum Blackophie 6ml,1,2024-01-16 04:50:55,1,1
+43,Geamoore Parfum Peachy Oh Baby 30ml,1,2024-01-16 04:50:55,1,1
+43,Geamoore Parfum Peachy Oh Baby 6ml,1,2024-01-16 04:50:55,1,1
+43,Geamoore Parfum Peony Joo Malone 30ml,1,2024-01-16 04:50:55,1,1
+43,Geamoore Parfum Peony Joo Malone 6ml,1,2024-01-16 04:50:55,1,1
+43,Geamoore Parfum The Scandalous 30ml,1,2024-01-16 04:50:55,1,1
+43,Geamoore Parfum The Scandalous 6ml,1,2024-01-16 04:50:55,1,1
+43,Geamoore Parfum Vanilla 30ml,1,2024-01-16 04:50:55,1,1
+43,Geamoore Parfum Vanilla 6ml,1,2024-01-16 04:50:55,1,1
+44,Girlpal Centella Asiatica Peeling Gel,1,2024-01-16 04:50:55,1,1
+45,Glad2glow Blueberry Ceramide Low Ph Gel Cleanser ,1,2024-01-16 04:50:55,1,1
+45,Glad2glow Blueberry Moist,1,2024-01-16 04:50:55,1,1
+45,Glad2glow Centella 2% Ceramide Soothing Toner 40ml,1,2024-01-16 04:50:55,1,1
+45,Glad2glow Centella Moisturizer 30gr,1,2024-01-16 04:50:55,1,1
+45,Glad2glow Centella Moisturizer 55gr,1,2024-01-16 04:50:55,1,1
+45,Glad2glow Jeju Tangerine Vita C Power Bright Glow Serum 17ml ,1,2024-01-16 04:50:55,1,1
+45,Glad2glow Milk Amino Acids Gentle Cleanser 80g,1,2024-01-16 04:50:55,1,1
+45,Glad2glow Niacinamide Pomegrante 5% Niacinamide Brightening Moist 30ml,1,2024-01-16 04:50:55,1,1
+45,Glad2glow Pomegranate 10% Niacinamide Power Bright Serum ,1,2024-01-16 04:50:55,1,1
+45,Glad2glow Real Mugwort Salicyc Acid Acne Control Clay Mask ,1,2024-01-16 04:50:55,1,1
+45,Glad2glow Sunscreen SPF 50,1,2024-01-16 04:50:55,1,1
+45,Glad2glow Volcano 3D Acid Pore Clay Mask 30gr,1,2024-01-16 04:50:55,1,1
+45,Glad2glow Volcano 3D Acid Pore Clay Stick ,1,2024-01-16 04:50:55,1,1
+45,Glad2glow Yuja Symwhite 377 Dark Spot Moisture,1,2024-01-16 04:50:55,1,1
+1,Gloria Minty Sunscreen Spray 2 In 1 60ml,1,2024-01-16 04:50:55,1,1
+47,Gluta Collagen Soap Chocowhite,1,2024-01-16 04:50:55,1,1
+48,Golden Vierra Soap,1,2024-01-16 04:50:55,1,1
+49,Grace And Glow Black Opium Brightening Sun Body Serum 100ml ,1,2024-01-16 04:50:55,1,1
+49,Grace And Glow Body Serum Black Opium 300ml,1,2024-01-16 04:50:55,1,1
+49,Grace And Glow Body Serum English Pear 300ml,1,2024-01-16 04:50:55,1,1
+49,Grace And Glow Body Serum Miss Moisture 300ml,1,2024-01-16 04:50:55,1,1
+49,Grace And Glow Body Serum Peony Blush,1,2024-01-16 04:50:55,1,1
+49,Grace And Glow Body Serum Rouge 300ml,1,2024-01-16 04:50:55,1,1
+49,Grace And Glow Body Wash Black Opium/brightening Solution,1,2024-01-16 04:50:55,1,1
+49,Grace And Glow Body Wash English Pear,1,2024-01-16 04:50:55,1,1
+49,Grace And Glow Body Wash Miss Moisture,1,2024-01-16 04:50:55,1,1
+49,Grace And Glow Body Wash Peony Blush Soft,1,2024-01-16 04:50:55,1,1
+49,Grace And Glow Body Wash Rouge 540,1,2024-01-16 04:50:55,1,1
+49,Grace And Glow Daisy Hair Vitamin Mist Kuning 100ml,1,2024-01-16 04:50:55,1,1
+49,Grace And Glow Deodorant Black Opium,1,2024-01-16 04:50:55,1,1
+49,Grace And Glow Deodorant English Pear,1,2024-01-16 04:50:55,1,1
+49,Grace And Glow Deodorant Moiselle 50ml,1,2024-01-16 04:50:55,1,1
+49,Grace And Glow Deodorant Rouge 540 50ml,1,2024-01-16 04:50:55,1,1
+49,Grace And Glow Nourish Shampoo Secret Bombshell,1,2024-01-16 04:50:55,1,1
+50,Grownlash 10ml,1,2024-01-16 04:50:55,1,1
+1,Gua Sha Biru / Guasha Biru,1,2024-01-16 04:50:55,1,1
+1,Gua Sha Hijau / Guasha Hijau,1,2024-01-16 04:50:55,1,1
+1,Gua Sha Pink / Guasha Pink,1,2024-01-16 04:50:55,1,1
+1,Gua Sha Putih / Guasha Putih,1,2024-01-16 04:50:55,1,1
+1,Gua Sha Ungu / Guasha Ungu Purple,1,2024-01-16 04:50:55,1,1
+51,Hada Labo Goku Jyun Alpha Ultimate Anti-aging Lotion ,1,2024-01-16 04:50:55,1,1
+51,Hada Labo Goku Jyun Alpha Ultimate Anti-aging Milk,1,2024-01-16 04:50:55,1,1
+51,Hada Labo Goku Jyun Stater Pack Alpha Ultimate Anti Aging ,1,2024-01-16 04:50:55,1,1
+51,Hada Labo Goku Jyun Stater Pack Ultimate Moisturizing ,1,2024-01-16 04:50:55,1,1
+51,Hada Labo Goku Jyun Ultimate Moisturizing Face Wash 100gr,1,2024-01-16 04:50:55,1,1
+51,Hada Labo Goku Jyun Ultimate Moisturizing Face Wash 50gr,1,2024-01-16 04:50:55,1,1
+51,Hada Labo Goku Jyun Ultimate Moisturizing Light Lotion 100ml,1,2024-01-16 04:50:55,1,1
+51,Hada Labo Goku Jyun Ultimate Moisturizing Lotion 100ml,1,2024-01-16 04:50:55,1,1
+51,Hada Labo Goku Jyun Ultimate Moisturizing Milk 100ml,1,2024-01-16 04:50:55,1,1
+51,Hada Labo Mild Peeling Aha + Bha Face Wash 100gr,1,2024-01-16 04:50:55,1,1
+51,Hada Labo Mild Peeling Aha + Bha Face Wash 50gr,1,2024-01-16 04:50:55,1,1
+51,Hada Labo Shiro Jyun Starter Pack,1,2024-01-16 04:50:55,1,1
+51,Hada Labo Shiro Jyun Ultimate Whitening Face Wash 100gr,1,2024-01-16 04:50:55,1,1
+51,Hada Labo Shiro Jyun Ultimate Whitening Face Wash 50gr,1,2024-01-16 04:50:55,1,1
+51,Hada Labo Shiro Jyun Ultimate Whitening Lotion 100ml,1,2024-01-16 04:50:55,1,1
+51,Hada Labo Shiro Jyun Ultimate Whitening Milk 100ml,1,2024-01-16 04:50:55,1,1
+51,Hadalabo Goku Jyun Cleansing Oil Lotion ,1,2024-01-16 04:50:55,1,1
+52,Hanasui Body Spa Body Exfoliating Gel Aloe Vera 300ml ,1,2024-01-16 04:50:55,1,1
+52,Hanasui Body Spa Body Exfoliating Gel Blueberry 300ml,1,2024-01-16 04:50:55,1,1
+52,Hanasui Body Spa Body Exfoliating Gel Cherry 300ml,1,2024-01-16 04:50:55,1,1
+52,Hanasui Body Spa Body Exfoliating Gel Coffee 300ml,1,2024-01-16 04:50:55,1,1
+52,Hanasui Body Spa Body Exfoliating Gel Lemon 300ml,1,2024-01-16 04:50:55,1,1
+52,Hanasui Body Spa Body Exfoliating Gel Orange 300ml,1,2024-01-16 04:50:55,1,1
+52,Hanasui Body Spa Body Exfoliating Gel Rainbow 300ml,1,2024-01-16 04:50:55,1,1
+52,Hanasui Body Spa Body Exfoliating Gel Rice 300ml,1,2024-01-16 04:50:55,1,1
+52,Hanasui Body Spa Body Exfoliating Gel Strawberry 300ml,1,2024-01-16 04:50:55,1,1
+52,Hanasui Collagen Water Spf 50 PA++++ 30ml,1,2024-01-16 04:50:55,1,1
+52,Hanasui Collagen Water Sunscreen Spf 30,1,2024-01-16 04:50:55,1,1
+52,Hanasui Eyedorable Mascara,1,2024-01-16 04:50:55,1,1
+52,Hanasui Eyetractive Liner Pen,1,2024-01-16 04:50:55,1,1
+52,Hanasui Fix & Glow Setting Spray 60ml,1,2024-01-16 04:50:55,1,1
+52,Hanasui Flawless-glow 10 Gentle Cleanser 60gr,1,2024-01-16 04:50:55,1,1
+52,Hanasui Flawless-glow 10 Starter Kit,1,2024-01-16 04:50:55,1,1
+52,Hanasui Lip Sleeping Serum,1,2024-01-16 04:50:55,1,1
+52,Hanasui Mattedorable Lip Cream 01 Forest Berry,1,2024-01-16 04:50:55,1,1
+52,Hanasui Mattedorable Lip Cream 02 Brown Sugar,1,2024-01-16 04:50:55,1,1
+52,Hanasui Mattedorable Lip Cream 03 Salted Caramel,1,2024-01-16 04:50:55,1,1
+52,Hanasui Mattedorable Lip Cream 04 Pink Lava,1,2024-01-16 04:50:55,1,1
+52,Hanasui Mattedorable Lip Cream 05 Creamy Peach,1,2024-01-16 04:50:55,1,1
+52,Hanasui Mattedorable Lip Cream 06 Hazelnut Latte,1,2024-01-16 04:50:55,1,1
+52,Hanasui Men Bright Active Serum ,1,2024-01-16 04:50:55,1,1
+52,Hanasui Milky Lotion 240ml,1,2024-01-16 04:50:55,1,1
+52,Hanasui Naturgo Lightening Peel Off Mask 60gr,1,2024-01-16 04:50:55,1,1
+52,Hanasui Perfect Cheek Blush & Go 01 Pink,1,2024-01-16 04:50:55,1,1
+52,Hanasui Perfect Cheek Blush & Go 02 Peach,1,2024-01-16 04:50:55,1,1
+52,Hanasui Power Acne Serum,1,2024-01-16 04:50:55,1,1
+52,Hanasui Power Bakuchiol Serum,1,2024-01-16 04:50:55,1,1
+52,Hanasui Power Barrier Serum,1,2024-01-16 04:50:55,1,1
+52,Hanasui Power Bright Serum,1,2024-01-16 04:50:55,1,1
+52,Hanasui Power BrightExpert Serum,1,2024-01-16 04:50:55,1,1
+52,Hanasui Power Minipore Serum ,1,2024-01-16 04:50:55,1,1
+52,Hanasui Power Peeling Serum,1,2024-01-16 04:50:55,1,1
+52,Hanasui Power Post Acne Serum,1,2024-01-16 04:50:55,1,1
+52,Hanasui Serum Anti Acne (pink),1,2024-01-16 04:50:55,1,1
+52,Hanasui Serum Cushion 01 Light 15gr,1,2024-01-16 04:50:55,1,1
+52,Hanasui Serum Cushion 02 Natural 15gr,1,2024-01-16 04:50:55,1,1
+52,Hanasui Serum Cushion 03 15gr,1,2024-01-16 04:50:55,1,1
+52,Hanasui Serum Vit C + Collagen (biru),1,2024-01-16 04:50:55,1,1
+52,Hanasui Serum Vitamin C 20ml (kuning),1,2024-01-16 04:50:55,1,1
+52,Hanasui Serum Whitening Gold 20ml (gold),1,2024-01-16 04:50:55,1,1
+52,Hanasui Tintdorable Lip Stain 02 Peachy,1,2024-01-16 04:50:55,1,1
+52,Hanasui Tintdorable Lip Stain 05 Coral,1,2024-01-16 04:50:55,1,1
+52,Hanasui Tintdorable Lip Stain Bloody 06,1,2024-01-16 04:50:55,1,1
+52,Hanasui Tintdorable Lip Stain Cherry 01,1,2024-01-16 04:50:55,1,1
+52,Hanasui Tintdorable Lip Stain Ruby 03,1,2024-01-16 04:50:55,1,1
+52,Hanasui Tintdorable Lip Stain Sweet 04,1,2024-01-16 04:50:55,1,1
+53,Hatomugi Skin Conditioner 500ml,1,2024-01-16 04:50:55,1,1
+54,Hb Jepang Bodycream Cherry Blossom,1,2024-01-16 04:50:55,1,1
+55,Himalaya Purifying Neem Mask 100ml ,1,2024-01-16 04:50:55,1,1
+55,Himalaya Purifying Neem Mask 50ml ,1,2024-01-16 04:50:55,1,1
+56,Ibcccndc Eyebrow Powder Black,1,2024-01-16 04:50:55,1,1
+56,Ibcccndc Eyebrow Powder Brown,1,2024-01-16 04:50:55,1,1
+56,Ibcccndc Eyebrow Powder Dark Brown ,1,2024-01-16 04:50:55,1,1
+1,Images Beautecret Black,1,2024-01-16 04:50:55,1,1
+1,Images Eye Patch Collagen Crytal,1,2024-01-16 04:50:55,1,1
+1,Images Eye Patch Collagen Moisturizing Eye Mask 7.5gr,1,2024-01-16 04:50:55,1,1
+1,Images Eye Patch Green Mung Bean Crystal Penetration Eye Mask 7.5gr,1,2024-01-16 04:50:55,1,1
+1,Images Eye Patch Seaweed Elastic White Tender Eye Mask (hijau),1,2024-01-16 04:50:55,1,1
+1,Images Eye Patsc Golden Osmanthus Crystal Moisture Eye Mask 7.5gr,1,2024-01-16 04:50:55,1,1
+57,Implora 24K Gold Serum 20ml,1,2024-01-16 04:50:55,1,1
+57,Implora Acne Serum 20ml,1,2024-01-16 04:50:55,1,1
+57,Implora Bakuchiol Serum,1,2024-01-16 04:50:55,1,1
+57,Implora Birdnest Skin Nouris Serum ,1,2024-01-16 04:50:55,1,1
+57,Implora Cheek & Liptint 01 Vampire Blood,1,2024-01-16 04:50:55,1,1
+57,Implora Cheek & Liptint 02 Cherry Bomb,1,2024-01-16 04:50:55,1,1
+57,Implora Cheek & Liptint 03 Candy Apple,1,2024-01-16 04:50:55,1,1
+57,Implora Cheek & Liptint 04 Red Wine,1,2024-01-16 04:50:55,1,1
+57,Implora Cheek & Liptint 05 Cranberry,1,2024-01-16 04:50:55,1,1
+57,Implora Cheek & Liptint 06 Pumpkin,1,2024-01-16 04:50:55,1,1
+57,Implora Eyebrow Pencil Black,1,2024-01-16 04:50:55,1,1
+57,Implora Eyebrow Pencil Brown,1,2024-01-16 04:50:55,1,1
+57,Implora Eyebrow Pencil Dark Brown,1,2024-01-16 04:50:55,1,1
+57,Implora Eyebrow Pencil Grey  Brown,1,2024-01-16 04:50:55,1,1
+57,Implora Eyebrow Pencil Silver,1,2024-01-16 04:50:55,1,1
+57,Implora Hydrating Serum 20ml,1,2024-01-16 04:50:55,1,1
+57,Implora Jelly Tint 01 Mariposa,1,2024-01-16 04:50:55,1,1
+57,Implora Jelly Tint 02 Savvy Red,1,2024-01-16 04:50:55,1,1
+57,Implora Jelly Tint 03 True Vintage,1,2024-01-16 04:50:55,1,1
+57,Implora Jelly Tint 04 Rosy Posy,1,2024-01-16 04:50:55,1,1
+57,Implora Jelly Tint 05 Dream Peach,1,2024-01-16 04:50:55,1,1
+57,Implora Jelly Tint 06 Flamingo,1,2024-01-16 04:50:55,1,1
+57,Implora Jelly Tint 07 Sangria,1,2024-01-16 04:50:55,1,1
+57,Implora Jelly Tint 08 Burnt Orange,1,2024-01-16 04:50:55,1,1
+57,Implora Jelly Tint 09 Rosewood,1,2024-01-16 04:50:55,1,1
+57,Implora Lip Crayon Satin 01-curious,1,2024-01-16 04:50:55,1,1
+57,Implora Lip Crayon Satin First Kiss,1,2024-01-16 04:50:55,1,1
+57,Implora Lip Crayon Satin Jealousy,1,2024-01-16 04:50:55,1,1
+57,Implora Lip Crayon Satin Misery,1,2024-01-16 04:50:55,1,1
+57,Implora Lip Crayon Satin Play Date,1,2024-01-16 04:50:55,1,1
+57,Implora Lip Crayon Satin Promises,1,2024-01-16 04:50:55,1,1
+57,Implora Lip Moist Essence,1,2024-01-16 04:50:55,1,1
+57,Implora Lip Moist Serum,1,2024-01-16 04:50:55,1,1
+57,Implora Lip Velvet Attractive,1,2024-01-16 04:50:55,1,1
+57,Implora Lip Velvet Extrovert,1,2024-01-16 04:50:55,1,1
+57,Implora Lip Velvet Fearless,1,2024-01-16 04:50:55,1,1
+57,Implora Lip Velvet Honest,1,2024-01-16 04:50:55,1,1
+57,Implora Lip Velvet Naive,1,2024-01-16 04:50:55,1,1
+57,Implora Lip Velvet Serenity,1,2024-01-16 04:50:55,1,1
+57,Implora Luminous Brightening Serum 20ml,1,2024-01-16 04:50:55,1,1
+57,Implora Midnight Serum 20ml,1,2024-01-16 04:50:55,1,1
+57,Implora Peeling Serum 20ml,1,2024-01-16 04:50:55,1,1
+57,Implora Perfect Shield Sunscreen SPF 40 50ml,1,2024-01-16 04:50:55,1,1
+57,Implora Salmon DNA Serum ,1,2024-01-16 04:50:55,1,1
+57,Implora Urban Lip Cream Matte 02 Terra Cotta,1,2024-01-16 04:50:55,1,1
+57,Implora Urban Lip Cream Matte 03 Dark Berry,1,2024-01-16 04:50:55,1,1
+57,Implora Urban Lip Cream Matte 05 Allure,1,2024-01-16 04:50:55,1,1
+57,Implora Urban Lip Cream Matte 07 Truffle Mauve,1,2024-01-16 04:50:55,1,1
+57,Implora Urban Lip Cream Matte 08 Pink Latte,1,2024-01-16 04:50:55,1,1
+57,Implora Urban Lip Cream Matte 09 Butterscotch,1,2024-01-16 04:50:55,1,1
+57,Implora Urban Lip Cream Matte 10 Gingerbread,1,2024-01-16 04:50:55,1,1
+57,Implora Urban Lip Cream Matte 12 Brown Sugar,1,2024-01-16 04:50:55,1,1
+57,Implora Urban Lip Cream Matte 18 Ruby,1,2024-01-16 04:50:55,1,1
+57,Implora Urban Lipcream 16 Dusty Peach ,1,2024-01-16 04:50:55,1,1
+57,Implora Urban Lipcream Matte 01 Dusky Nude ,1,2024-01-16 04:50:55,1,1
+57,Implora Urban Lipcream Matte 06 Lumiere ,1,2024-01-16 04:50:55,1,1
+57,Implora Urban Lipcream Matte 11 Red Bean ,1,2024-01-16 04:50:55,1,1
+57,Implora Urban Lipcream Matte 13 Hazelnude,1,2024-01-16 04:50:55,1,1
+57,Implora Urban Lipcream Matte 14 Baby Rose ,1,2024-01-16 04:50:55,1,1
+57,Implora Urban Lipcream Matte 15 Salmon Pink ,1,2024-01-16 04:50:55,1,1
+57,Implora Urban Lipcream Matte 17 Redwoood ,1,2024-01-16 04:50:55,1,1
+57,Implora Urban Lipcream Matte 19 Carolina ,1,2024-01-16 04:50:55,1,1
+57,Implora Urban Lipcream Matte 20 Red Gala ,1,2024-01-16 04:50:55,1,1
+1,Jade Roler,1,2024-01-16 04:50:55,1,1
+58,Jarte Sunscreen Spray 30ml,1,2024-01-16 04:50:55,1,1
+59,Jiera Lip Serum 10ml,1,2024-01-16 04:50:55,1,1
+60,K Brothers Soap 60gr Sabun Beras Thailand,1,2024-01-16 04:50:55,1,1
+61,Kahf Face Wash Brightening(biru),1,2024-01-16 04:50:55,1,1
+61,Kahf Face Wash Gentle Exfoliating Face Scrub 100ml(coklat),1,2024-01-16 04:50:55,1,1
+61,Kahf Face Wash Oil And Acne Care 100ml (hijau),1,2024-01-16 04:50:55,1,1
+61,Kahf Face Wash Triple Action Oil And Comedo Defense 100ml(hitam),1,2024-01-16 04:50:55,1,1
+1,Kapas Selection 175pcs,1,2024-01-16 04:50:55,1,1
+1,Kapas Selection 60gram,1,2024-01-16 04:50:55,1,1
+62,Kleveru Sea Buckthorn Cleansing Gel 100ml,1,2024-01-16 04:50:55,1,1
+63,Kojie San Soap 135gr,1,2024-01-16 04:50:55,1,1
+63,Kojie San Soap 45gr,1,2024-01-16 04:50:55,1,1
+63,Kojie San Soap 65gr,1,2024-01-16 04:50:55,1,1
+63,Kojie San Soap Travel Pack,1,2024-01-16 04:50:55,1,1
+1,Kuas Make-up Brush,1,2024-01-16 04:50:55,1,1
+1,Kutus Kutus Tamba Waras Minyak Balur 100ml,1,2024-01-16 04:50:55,1,1
+64,La Personal Acne Patch Butterfly,1,2024-01-16 04:50:55,1,1
+64,La Personal Acne Patch Circle,1,2024-01-16 04:50:55,1,1
+65,Lacoco Dark Spot Essence 12ml,1,2024-01-16 04:50:55,1,1
+1,Lacoco Intensive Treatment Eye Serum 15ml,1,2024-01-16 04:50:55,1,1
+66,Lae Sa Luay Keratin Smooth Shampoo 200ml,1,2024-01-16 04:50:55,1,1
+66,Lae Sa Luay Spa Smooth Keratin 250ml,1,2024-01-16 04:50:55,1,1
+67,Laneige Lip Sleeping Mask,1,2024-01-16 04:50:55,1,1
+67,Laneige Water Sleeping Mask_ex 15ml,1,2024-01-16 04:50:55,1,1
+68,Larissa Obat Totol Jerawat,1,2024-01-16 04:50:55,1,1
+69,Lashboss Rapunzel Serum For Lash And Brow 5.5ml | Lash Boss,1,2024-01-16 04:50:55,1,1
+70,Lea Gloria Peel Off Mask With Petals Lavender 15gr,1,2024-01-16 04:50:55,1,1
+70,Lea Gloria Peel Off Mask With Petals Rose 15gr,1,2024-01-16 04:50:55,1,1
+71,Lippie Serum,1,2024-01-16 04:50:55,1,1
+72,Lomira Lip Serum Colour,1,2024-01-16 04:50:55,1,1
+73,Lucido Vitamin Hair Spray Kuning,1,2024-01-16 04:50:55,1,1
+73,Lucido Vitamin Hair Spray Orange ,1,2024-01-16 04:50:55,1,1
+73,Lucido Vitamin Hair Spray Pink,1,2024-01-16 04:50:55,1,1
+74,Lunadream Mugwort Rose Peeling Solution 15gr,1,2024-01-16 04:50:55,1,1
+74,Lunadream Mugwort Rose Peeling Solution 30gr,1,2024-01-16 04:50:55,1,1
+74,Lunadream Sunscreen,1,2024-01-16 04:50:55,1,1
+1,Madame Gia Shower Glow 01 Joy,1,2024-01-16 04:50:55,1,1
+75,Madame Gie Bamboo Charcoal & Black Sugar Mini Peel Of Mask ,1,2024-01-16 04:50:55,1,1
+75,Madame Gie Charmseeker 2in1 Ombre 01 Cheeky,1,2024-01-16 04:50:55,1,1
+75,Madame Gie Charmseeker 2in1 Ombre 02 Sassy,1,2024-01-16 04:50:55,1,1
+75,Madame Gie Charmseeker 2in1 Ombre 03 Baddie,1,2024-01-16 04:50:55,1,1
+75,Madame Gie Concealer 3gr Beige,1,2024-01-16 04:50:55,1,1
+75,Madame Gie Concealer 3gr Ivory,1,2024-01-16 04:50:55,1,1
+75,Madame Gie Concealer 3gr Tan,1,2024-01-16 04:50:55,1,1
+75,Madame Gie Let's Glow Tinted Sunscreen 10ml (biru) 01 Light,1,2024-01-16 04:50:55,1,1
+75,Madame Gie Let's Glow Tinted Sunscreen 10ml (biru) 02 Medium,1,2024-01-16 04:50:55,1,1
+75,Madame Gie Let's Glow Tinted Sunscreen 10ml (biru) 03 Deep,1,2024-01-16 04:50:55,1,1
+75,Madame Gie Lippil Lip Serum 01,1,2024-01-16 04:50:55,1,1
+75,Madame Gie Pimple Spot Cream Acne Solution,1,2024-01-16 04:50:55,1,1
+75,Madame Gie Protect Me Sunscreen Spf 30 Pa+++,1,2024-01-16 04:50:55,1,1
+75,Madame Gie Protect Me Sunscreen Spf 50 Pa+++,1,2024-01-16 04:50:55,1,1
+75,Madame Gie Shower Glow 02,1,2024-01-16 04:50:55,1,1
+75,Madame Gie Shower Glow 03 Calm,1,2024-01-16 04:50:55,1,1
+75,Madame Gie Skin Barrier Moisturizer 50ml,1,2024-01-16 04:50:55,1,1
+1,Madame Lip Pills Berry Jam,1,2024-01-16 04:50:55,1,1
+1,Madame Lip Pills Bold Wine,1,2024-01-16 04:50:55,1,1
+1,Madame Lip Pills Butterscoth,1,2024-01-16 04:50:55,1,1
+1,Madame Lip Pills Cotton Candy,1,2024-01-16 04:50:55,1,1
+1,Madame Lip Pills Mulberry Cane,1,2024-01-16 04:50:55,1,1
+1,Madame Lip Pills Sweet Cherry,1,2024-01-16 04:50:55,1,1
+1,Madame Lip Pills Witchs Syrup,1,2024-01-16 04:50:55,1,1
+75,Madamegie Avocado & Oatmeal Mini Peel Of Mask ,1,2024-01-16 04:50:55,1,1
+75,Madamegie Honeydew & Chamomile Mini Peel Of Mask ,1,2024-01-16 04:50:55,1,1
+75,Madamegie Lemon &honey Mini Peel Of Mask ,1,2024-01-16 04:50:55,1,1
+76,Makarizo Hair Energy Blue Coast Hair & Body Fragrance 100ml,1,2024-01-16 04:50:55,1,1
+76,Makarizo Hair Energy Cherry Blossoms Hair & Body Fragrance 100ml,1,2024-01-16 04:50:55,1,1
+76,Makarizo Hair Energy Fresh Bouquet Hair Fragrance 100ml,1,2024-01-16 04:50:55,1,1
+76,Makarizo Hair Energy Morning Dew Hair & Body Fragrance 100ml,1,2024-01-16 04:50:55,1,1
+76,Makarizo Hair Energy Ocean Breeze Hair Fragance 100ml,1,2024-01-16 04:50:55,1,1
+76,Makarizo Hair Energy Shampoo Aloe Vera 170ml,1,2024-01-16 04:50:55,1,1
+76,Makarizo Hair Energy Shampoo Kiwi Extract 170ml,1,2024-01-16 04:50:55,1,1
+76,Makarizo Hair Energy Shampoo Olive Extract 170ml,1,2024-01-16 04:50:55,1,1
+76,Makarizo Hair Energy Shampoo Royal Jelly Extract 170ml,1,2024-01-16 04:50:55,1,1
+76,Makarizo Hair Energy White Musk Hair & Body Fragrance 100ml,1,2024-01-16 04:50:55,1,1
+77,Mako Fresh Glowy Skin Day & Night Moisture,1,2024-01-16 04:50:55,1,1
+77,Mako Fresh Glowy Sleeping Mask 20gr,1,2024-01-16 04:50:55,1,1
+77,Mako Toner Essence Mist 60ml,1,2024-01-16 04:50:55,1,1
+1,Mangkok Set Masker,1,2024-01-16 04:50:55,1,1
+78,Marina Natural Lotion Apple  Grapefruits And Sunscreen 190ml Pink,1,2024-01-16 04:50:55,1,1
+78,Marina Natural Lotion Apple  Grapefruits And Sunscreen 95ml Pink,1,2024-01-16 04:50:55,1,1
+78,Marina Natural Lotion Avocado And Olive Oil 190ml Hijau,1,2024-01-16 04:50:55,1,1
+78,Marina Natural Lotion Avocado And Olive Oil 95ml Hijau,1,2024-01-16 04:50:55,1,1
+78,Marina Natural Lotion Honey And Macadamia 190ml Orange,1,2024-01-16 04:50:55,1,1
+78,Marina Natural Lotion Honey And Macadamia 95ml Orange,1,2024-01-16 04:50:55,1,1
+78,Marina Natural Lotion Sweet Almond And Chia Almond 190ml Kuning,1,2024-01-16 04:50:55,1,1
+78,Marina Natural Lotion Sweet Almond And Chia Almond 95ml Kuning,1,2024-01-16 04:50:55,1,1
+78,Marina Natural Lotion Vit.c  Vit.e  Pro-vit.d3 And Oat 190ml Ungu,1,2024-01-16 04:50:55,1,1
+78,Marina Natural Lotion Vit.c  Vit.e Pro-vit.d3 And Oat 95ml Ungu,1,2024-01-16 04:50:55,1,1
+79,Marshwillow Candy Cane 110,1,2024-01-16 04:50:55,1,1
+79,Marshwillow Candy Cane 112,1,2024-01-16 04:50:55,1,1
+79,Marshwillow Candy Crush Biru,1,2024-01-16 04:50:55,1,1
+79,Marshwillow Candy Crush Hijau,1,2024-01-16 04:50:55,1,1
+79,Marshwillow Candy Crush Kuning,1,2024-01-16 04:50:55,1,1
+79,Marshwillow Candy Crush Orange,1,2024-01-16 04:50:55,1,1
+79,Marshwillow Candy Crush Pink ,1,2024-01-16 04:50:55,1,1
+79,Marshwillow Candy Crush Ungu,1,2024-01-16 04:50:55,1,1
+79,Marshwillow Eyebrow Pencil Black,1,2024-01-16 04:50:55,1,1
+79,Marshwillow Eyebrow Pencil Brown,1,2024-01-16 04:50:55,1,1
+79,Marshwillow Eyebrow Pencil Dark Brown,1,2024-01-16 04:50:55,1,1
+79,Marshwillow Mascara Extra Volume (pink),1,2024-01-16 04:50:55,1,1
+79,Marshwillow Mascara Eyeliner (pink Tua),1,2024-01-16 04:50:55,1,1
+79,Marshwillow Mascara Maxi Curl (pink Tua),1,2024-01-16 04:50:55,1,1
+79,Marshwillow Mascara Overcurl (biru),1,2024-01-16 04:50:55,1,1
+1,Masker Mata Hitam,1,2024-01-16 04:50:55,1,1
+1,Masker Mata Pink,1,2024-01-16 04:50:55,1,1
+1,Masker Spirulina,1,2024-01-16 04:50:55,1,1
+80,Mathiswomen Patch Acne Bear And Duck,1,2024-01-16 04:50:55,1,1
+80,Mathiswomen Patch Acne Butterfly ,1,2024-01-16 04:50:55,1,1
+80,Mathiswomen Patch Acne Clear,1,2024-01-16 04:50:55,1,1
+80,Mathiswomen Patch Acne Clouds,1,2024-01-16 04:50:55,1,1
+80,Mathiswomen Patch Acne Love,1,2024-01-16 04:50:55,1,1
+80,Mathiswomen Patch Acne Sakura ,1,2024-01-16 04:50:55,1,1
+80,Mathiswomen Patch Acne Star,1,2024-01-16 04:50:55,1,1
+81,Maybelline Hyper Curl Waterproof Mascara,1,2024-01-16 04:50:55,1,1
+82,Mayra Bright And Glow Serum 20ml,1,2024-01-16 04:50:55,1,1
+83,Milk Recipe 4in1 Hair Removal Cream 70gr,1,2024-01-16 04:50:55,1,1
+84,Mimi White Aha Body Lotion 200ml,1,2024-01-16 04:50:55,1,1
+84,Mimi White Aha Body Serum 100ml,1,2024-01-16 04:50:55,1,1
+84,Mimi White Aha Body Serum 30,1,2024-01-16 04:50:55,1,1
+84,Mimi White Aha Lotion 100ml,1,2024-01-16 04:50:55,1,1
+85,Moriganic Uv Watery Sun Cream 40gr,1,2024-01-16 04:50:55,1,1
+86,Mykonos Vanilla Clouds 100ml,1,2024-01-16 04:50:55,1,1
+86,Mykonos Vanilla Clouds 50ml,1,2024-01-16 04:50:55,1,1
+86,Mykonos Vanilla Clouds 50ml,1,2024-01-16 04:50:55,1,1
+87,Nature Republic Aloevera,1,2024-01-16 04:50:55,1,1
+88,Neogen Bio-peel Gauze Peeling Lemon 30pcs,1,2024-01-16 04:50:55,1,1
+89,Noera Bright And Glow Serum 20ml,1,2024-01-16 04:50:55,1,1
+89,Noera Collagen Drink Peach 15pcs,1,2024-01-16 04:50:55,1,1
+89,Noera Collagen Drink Peach 7pcs,1,2024-01-16 04:50:55,1,1
+89,Noera Collagen Drink Strawberry 15pcs,1,2024-01-16 04:50:55,1,1
+89,Noera Collagen Drink Strawbery 7pcs,1,2024-01-16 04:50:55,1,1
+89,Noera Glowme Skin 30 Kapsul,1,2024-01-16 04:50:55,1,1
+89,Noera Skin Lightening Cream,1,2024-01-16 04:50:55,1,1
+89,Noera Slim Boost,1,2024-01-16 04:50:55,1,1
+89,Noera Slimming Tea 120gr 60kantong,1,2024-01-16 04:50:55,1,1
+89,Noera Slimming Tea 60gr 30kantong,1,2024-01-16 04:50:55,1,1
+89,Noera Vita Lip Serum,1,2024-01-16 04:50:55,1,1
+89,Noera Watermelon Lip Scrub 5gr,1,2024-01-16 04:50:55,1,1
+89,Noera Watermelon Moisturizing Lip Balm 5gr,1,2024-01-16 04:50:55,1,1
+90,Npure Centella Asiatica Face Toner 150ml,1,2024-01-16 04:50:55,1,1
+90,Npure Centella Asiatica Face Toner 30ml,1,2024-01-16 04:50:55,1,1
+90,Npure Cica Acne Spot 20gr,1,2024-01-16 04:50:55,1,1
+90,Npure Cica Beat The Sun Powder 5gr,1,2024-01-16 04:50:55,1,1
+90,Npure Cica Chocomint Clay Mask,1,2024-01-16 04:50:55,1,1
+90,Npure Cica Clear Pad Sachet,1,2024-01-16 04:50:55,1,1
+90,Npure Licorice Light Up Brightening Pad Gentle Exfoliating ,1,2024-01-16 04:50:55,1,1
+90,Npure Noni Probiotics Gel Cleanser 100ml,1,2024-01-16 04:50:55,1,1
+90,Npure Noni Probiotics Gel Cleanser 50ml,1,2024-01-16 04:50:55,1,1
+91,Nu Face Nu Glow Acne Prone Care Facial Wash ,1,2024-01-16 04:50:55,1,1
+91,Nu Face Nu Glow Acne Prone Care Toner ,1,2024-01-16 04:50:55,1,1
+91,Nu Face Nu Glow Brighten & Supple Skin Facial Wash ,1,2024-01-16 04:50:55,1,1
+91,Nu Face Nu Glow Brighten & Supple Skin Toner ,1,2024-01-16 04:50:55,1,1
+91,Nu Face Nu Glow Hydra Lock &youthful Skin Facial Wash,1,2024-01-16 04:50:55,1,1
+91,Nu Face Nu Glow Hydra Lock &youthful Skin Toner,1,2024-01-16 04:50:55,1,1
+92,Nutrishe Intensive Bright & Glow Serum 20ml,1,2024-01-16 04:50:55,1,1
+92,Nutrishe Intensive Bright & Glow Serum 30ml,1,2024-01-16 04:50:55,1,1
+93,Oh My Glow Mask Saffron Detox Greentea 25gr,1,2024-01-16 04:50:55,1,1
+93,Oh My Glow Mask Saffron Freshy Minty 25gr,1,2024-01-16 04:50:55,1,1
+93,Oh My Glow Mask Saffron Glow Honey 25gr,1,2024-01-16 04:50:55,1,1
+93,Oh My Glow Mask Saffron Sakura 25gr,1,2024-01-16 04:50:55,1,1
+94,OMG Oh My Glam Coverlast Two Way Cake | Bedak Padat 21W Light,1,2024-01-16 04:50:55,1,1
+94,OMG Oh My Glam Coverlast Two Way Cake | Bedak Padat 32N Natural,1,2024-01-16 04:50:55,1,1
+94,OMG Oh My Glam Coverlast Two Way Cake | Bedak Padat 41W Sand,1,2024-01-16 04:50:55,1,1
+94,OMG Oh My Glam Lip Cream Matte Kiss 01 Creamy,1,2024-01-16 04:50:55,1,1
+94,OMG Oh My Glam Lip Cream Matte Kiss 02 Juicy,1,2024-01-16 04:50:55,1,1
+94,OMG Oh My Glam Lip Cream Matte Kiss 03 Flame,1,2024-01-16 04:50:55,1,1
+94,OMG Oh My Glam Lip Cream Matte Kiss 04 Sunset,1,2024-01-16 04:50:55,1,1
+94,OMG Oh My Glam Lip Cream Matte Kiss 05 Punch,1,2024-01-16 04:50:55,1,1
+94,OMG Oh My Glam Lip Cream Matte Kiss 06 Sparkle,1,2024-01-16 04:50:55,1,1
+94,OMG Oh My Glam Lip Cream Matte Kiss 07 Delight,1,2024-01-16 04:50:55,1,1
+94,OMG Oh My Glam Lip Cream Matte Kiss 08 Skyfall,1,2024-01-16 04:50:55,1,1
+94,OMG Oh My Glam Lip Cream Matte Kiss 09 Charm,1,2024-01-16 04:50:55,1,1
+94,OMG Oh My Glam Lip Cream Matte Kiss 10 Shell,1,2024-01-16 04:50:55,1,1
+94,OMG Oh My Glam Lip Cream Matte Kiss 11 Bumble,1,2024-01-16 04:50:55,1,1
+94,OMG Oh My Glam Lip Cream Matte Kiss 12 Scarlett,1,2024-01-16 04:50:55,1,1
+94,OMG Oh My Glam Lip Cream Matte Kiss 13 Latte,1,2024-01-16 04:50:55,1,1
+94,OMG Oh My Glam Lip Cream Matte Kiss 14 Cappucino,1,2024-01-16 04:50:55,1,1
+94,OMG Oh My Glam Lip Cream Matte Kiss 15 Espresso,1,2024-01-16 04:50:55,1,1
+94,OMG Oh My Glam Lip Cream Matte Kiss 16 Elegant,1,2024-01-16 04:50:55,1,1
+94,OMG Oh My Glam Lip Cream Matte Kiss 17 Queen,1,2024-01-16 04:50:55,1,1
+94,OMG Oh My Glam Lip Cream Matte Kiss 18 Luxe,1,2024-01-16 04:50:55,1,1
+94,OMG Oh My Glam Liquid Foundation 32N Natural,1,2024-01-16 04:50:55,1,1
+94,OMG Oh My Glam Liquid Pondation 13c Ivory,1,2024-01-16 04:50:55,1,1
+94,OMG Oh My Glam Liquid Pondation 21w Light,1,2024-01-16 04:50:55,1,1
+94,OMG Oh My Glam Liquid Pondation 21w Sand,1,2024-01-16 04:50:55,1,1
+94,OMG Oh My Glam Liquid Pondation 31w Beige,1,2024-01-16 04:50:55,1,1
+94,OMG Oh My Glam Liquid Pondation 52N Caramel,1,2024-01-16 04:50:55,1,1
+1,Pencukur Alis/pisau Alis,1,2024-01-16 04:50:55,1,1
+95,Phesha Beauty Cream Colek ,1,2024-01-16 04:50:55,1,1
+95,Phesha Beauty Cream Tube 50ml,1,2024-01-16 04:50:55,1,1
+96,Pinkflash Auto Eyebrow 01  Natural Brown ,1,2024-01-16 04:50:55,1,1
+96,Pinkflash Auto Eyebrow 02 Chocolate Brown,1,2024-01-16 04:50:55,1,1
+96,Pinkflash Auto Eyebrow 03 Gray Brown,1,2024-01-16 04:50:55,1,1
+96,Pinkflash Auto Eyebrow 04 Natural Gray,1,2024-01-16 04:50:55,1,1
+96,Pinkflash Baby Skin Blender,1,2024-01-16 04:50:55,1,1
+96,Pinkflash Care Plus Lip Oil,1,2024-01-16 04:50:55,1,1
+96,Pinkflash Eyebrown Pencil PF-E02 02 Natural Brown,1,2024-01-16 04:50:55,1,1
+96,Pinkflash Eyebrown Pencil PF-E02 03 Chocolate Brown,1,2024-01-16 04:50:55,1,1
+96,Pinkflash Eyebrown Pencil PF-E02 04 Dark Gray Brown,1,2024-01-16 04:50:55,1,1
+96,Pinkflash Eyebrown Pencil PF-E02 Latte Brown,1,2024-01-16 04:50:55,1,1
+96,Pinkflash Eyeshadow Palette 01,1,2024-01-16 04:50:55,1,1
+96,Pinkflash Eyeshadow Palette 02,1,2024-01-16 04:50:55,1,1
+96,Pinkflash Eyeshadow Palette 03,1,2024-01-16 04:50:55,1,1
+96,Pinkflash Eyeshadow Palette 04,1,2024-01-16 04:50:55,1,1
+96,Pinkflash Lasting Matte Foundation #2 Sand Beige,1,2024-01-16 04:50:55,1,1
+96,Pinkflash Lasting Matte Foundation #3 Warm Beige ,1,2024-01-16 04:50:55,1,1
+96,Pinkflash Lasting Matte Foundation #4 Medium Peach,1,2024-01-16 04:50:55,1,1
+96,Pinkflash Lasting Matte Foundation #6 Tan ,1,2024-01-16 04:50:55,1,1
+96,Pinkflash Lasting Matte Foundation 05 ,1,2024-01-16 04:50:55,1,1
+96,Pinkflash Lasting Matte Lipcream BB01,1,2024-01-16 04:50:55,1,1
+96,Pinkflash Lasting Matte Lipcream N01,1,2024-01-16 04:50:55,1,1
+96,Pinkflash Lasting Matte Lipcream N02,1,2024-01-16 04:50:55,1,1
+96,Pinkflash Lasting Matte Lipcream N03,1,2024-01-16 04:50:55,1,1
+96,Pinkflash Lasting Matte Lipcream N04,1,2024-01-16 04:50:55,1,1
+96,Pinkflash Lasting Matte Lipcream N05,1,2024-01-16 04:50:55,1,1
+96,Pinkflash Lasting Matte Lipcream N06,1,2024-01-16 04:50:55,1,1
+96,Pinkflash Lasting Matte Lipcream O01,1,2024-01-16 04:50:55,1,1
+96,Pinkflash Lasting Matte Lipcream O02,1,2024-01-16 04:50:55,1,1
+96,Pinkflash Lasting Matte Lipcream O03,1,2024-01-16 04:50:55,1,1
+96,Pinkflash Lasting Matte Lipcream O04,1,2024-01-16 04:50:55,1,1
+96,Pinkflash Lasting Matte Lipcream OR05,1,2024-01-16 04:50:55,1,1
+96,Pinkflash Lasting Matte Lipcream P01,1,2024-01-16 04:50:55,1,1
+96,Pinkflash Lasting Matte Lipcream P02,1,2024-01-16 04:50:55,1,1
+96,Pinkflash Lasting Matte Lipcream P03,1,2024-01-16 04:50:55,1,1
+96,Pinkflash Lasting Matte Lipcream P04,1,2024-01-16 04:50:55,1,1
+96,Pinkflash Lasting Matte Lipcream PK05,1,2024-01-16 04:50:55,1,1
+96,Pinkflash Lasting Matte Lipcream R01,1,2024-01-16 04:50:55,1,1
+96,Pinkflash Lasting Matte Lipcream R02,1,2024-01-16 04:50:55,1,1
+96,Pinkflash Lasting Matte Lipcream R03,1,2024-01-16 04:50:55,1,1
+96,Pinkflash Lasting Matte Lipcream R04,1,2024-01-16 04:50:55,1,1
+96,Pinkflash Loose Powder #000,1,2024-01-16 04:50:55,1,1
+96,Pinkflash Loose Powder #111,1,2024-01-16 04:50:55,1,1
+96,Pinkflash Loose Powder #222,1,2024-01-16 04:50:55,1,1
+96,Pinkflash Matte Pressed Powder #000,1,2024-01-16 04:50:55,1,1
+96,Pinkflash Matte Pressed Powder #111,1,2024-01-16 04:50:55,1,1
+96,Pinkflash Matte Pressed Powder #222,1,2024-01-16 04:50:55,1,1
+96,Pinkflash Oil Proof Curl Mascara Black,1,2024-01-16 04:50:55,1,1
+96,Pinkflash Oil Proof Curl Mascara Pink,1,2024-01-16 04:50:55,1,1
+96,Pinkflash Soft Smooth Cotton Pads 40pcs,1,2024-01-16 04:50:55,1,1
+96,Pinkflash Waterproof Easy Eyeliner PF-E01 Black,1,2024-01-16 04:50:55,1,1
+96,Pinkflash Waterproof Easy Eyeliner PF-E01 Brown,1,2024-01-16 04:50:55,1,1
+1,Pinkkflash Soft Pigment Blush 001 ,1,2024-01-16 04:50:55,1,1
+1,Pinkkflash Soft Pigment Blush 002,1,2024-01-16 04:50:55,1,1
+1,Pinkkflash Soft Pigment Blush 003 ,1,2024-01-16 04:50:55,1,1
+1,Pinkkflash Soft Pigment Blush N01,1,2024-01-16 04:50:55,1,1
+1,Pinkkflash Soft Pigment Blush N02,1,2024-01-16 04:50:55,1,1
+1,Pinkkflash Soft Pigment Blush N03,1,2024-01-16 04:50:55,1,1
+1,Pinkkflash Soft Pigment Blush P01,1,2024-01-16 04:50:55,1,1
+1,Pinkkflash Soft Pigment Blush P02,1,2024-01-16 04:50:55,1,1
+1,Pinkkflash Soft Pigment Blush P03,1,2024-01-16 04:50:55,1,1
+97,Pixy Beauty Skin Primer,1,2024-01-16 04:50:55,1,1
+98,Pratista Calming Spray 100ml,1,2024-01-16 04:50:55,1,1
+98,Pratista Hyalu Hydrating Toner,1,2024-01-16 04:50:55,1,1
+99,Precious Alpha Arbutin Collagen Body Serum 500ml,1,2024-01-16 04:50:55,1,1
+99,Precious Alpha Arbutin Collagen Foaming Cleanser,1,2024-01-16 04:50:55,1,1
+99,Precious Alpha Arbutin Lotion 500ml,1,2024-01-16 04:50:55,1,1
+99,Precious Alpha Arbutin Salt Scrub,1,2024-01-16 04:50:55,1,1
+99,Precious Alpha Arbutin Whitening Plus (kapsul Pemutih),1,2024-01-16 04:50:55,1,1
+99,Precious Skin Aha Body Booster Serum 30ml,1,2024-01-16 04:50:55,1,1
+99,Precious Skin Aha Body Soap 80gr,1,2024-01-16 04:50:55,1,1
+99,Precious Skin Alpha Arbutin Organic Underarm Night Cream 50gr,1,2024-01-16 04:50:55,1,1
+99,Precious Skin Alpha Arbutin Soap 80gr,1,2024-01-16 04:50:55,1,1
+99,Precious Skin Kojic Collagen Soap 60gr,1,2024-01-16 04:50:55,1,1
+100,Pure Paw Paw Passion Fruit 25gr,1,2024-01-16 04:50:55,1,1
+101,Pyunkang Yul Essence Toner 100ml,1,2024-01-16 04:50:55,1,1
+101,Pyunkang Yul Essence Toner 200ml,1,2024-01-16 04:50:55,1,1
+101,Pyunkang Yul Essence Toner 30ml,1,2024-01-16 04:50:55,1,1
+101,Pyunkang Yul Mist Toner 100ml,1,2024-01-16 04:50:55,1,1
+101,Pyunkang Yul Mist Toner 200ml,1,2024-01-16 04:50:55,1,1
+101,Pyunkang Yul Essense Toner 10ml,1,2024-01-16 04:50:55,1,1
+1,QL Mascara Waterproof&curling,1,2024-01-16 04:50:55,1,1
+102,Rd123 Gold Day Cream,1,2024-01-16 04:50:55,1,1
+102,Rd123 Gold Night Cream,1,2024-01-16 04:50:55,1,1
+102,Rd123 Sabun,1,2024-01-16 04:50:55,1,1
+102,Rd123 Toner,1,2024-01-16 04:50:55,1,1
+102,Rd123 Vitamin C Serum Collagen ,1,2024-01-16 04:50:55,1,1
+1,Sabun Papaya RDL,1,2024-01-16 04:50:55,1,1
+103,Sacrlett Body Lotion Charming,1,2024-01-16 04:50:55,1,1
+1,Saffron Face Mist 100ml (tanpa Label),1,2024-01-16 04:50:55,1,1
+1,Saffron Mist 100ml (dengan Label),1,2024-01-16 04:50:55,1,1
+104,Salsa Hair Serum Growth (merah),1,2024-01-16 04:50:55,1,1
+104,Salsa Hair Serum Keratin Repair Hair Serum (kuning),1,2024-01-16 04:50:55,1,1
+104,Salsa Hair Serum Rose (pink),1,2024-01-16 04:50:55,1,1
+104,Salsa Vinylash Eyelash,1,2024-01-16 04:50:55,1,1
+105,Saturday Looks Minty Clay Mask 125gr,1,2024-01-16 04:50:55,1,1
+105,Saturday Looks Minty Gentle Scrub 125gr,1,2024-01-16 04:50:55,1,1
+1,Scarlett 7x Ceramide Moisturizer,1,2024-01-16 04:50:55,1,1
+1,Scarlett Acne Cream Night 20gr,1,2024-01-16 04:50:55,1,1
+1,Scarlett Acne Day Cream,1,2024-01-16 04:50:55,1,1
+1,Scarlett Acne Essence Toner 100ml,1,2024-01-16 04:50:55,1,1
+1,Scarlett Acne Facial Wash 100ml,1,2024-01-16 04:50:55,1,1
+1,Scarlett Acne Night Cream,1,2024-01-16 04:50:55,1,1
+1,Scarlett Acne Serum 15ml,1,2024-01-16 04:50:55,1,1
+1,Scarlett Acne To Glow Mini Series,1,2024-01-16 04:50:55,1,1
+1,Scarlett Body Lotion Fantasia 300ml,1,2024-01-16 04:50:55,1,1
+1,Scarlett Body Lotion Freshy 300ml,1,2024-01-16 04:50:55,1,1
+1,Scarlett Body Scrub Coffee 250ml,1,2024-01-16 04:50:55,1,1
+1,Scarlett Body Scrub Pomegrante 250ml,1,2024-01-16 04:50:55,1,1
+1,Scarlett Body Scrub Romansa 250ml,1,2024-01-16 04:50:55,1,1
+1,Scarlett Body Serum Cerathione Hyalu Charming 250ml,1,2024-01-16 04:50:55,1,1
+1,Scarlett Body Serum Cerathione Hyalu Happy 250ml,1,2024-01-16 04:50:55,1,1
+1,Scarlett Body Serum Cerathione Hyalu Jolly 250ml,1,2024-01-16 04:50:55,1,1
+1,Scarlett Body Serum Cerathione Hyalu Loving 250ml,1,2024-01-16 04:50:55,1,1
+1,Scarlett Brightening Day Cream,1,2024-01-16 04:50:55,1,1
+1,Scarlett Brightening Facial Wash 100ml,1,2024-01-16 04:50:55,1,1
+1,Scarlett Brightening Shower Charming 300ml,1,2024-01-16 04:50:55,1,1
+1,Scarlett Brightening Shower Coffee 300ml,1,2024-01-16 04:50:55,1,1
+1,Scarlett Brightening Shower Cucumber 300ml,1,2024-01-16 04:50:55,1,1
+1,Scarlett Brightening Shower Freshy 300ml,1,2024-01-16 04:50:55,1,1
+1,Scarlett Brightening Shower Jolly 300ml,1,2024-01-16 04:50:55,1,1
+1,Scarlett Brightening Shower Mango 300ml,1,2024-01-16 04:50:55,1,1
+1,Scarlett Brightening Shower Pomegrante 300ml,1,2024-01-16 04:50:55,1,1
+1,Scarlett Brightly Essence Toner 100ml,1,2024-01-16 04:50:55,1,1
+1,Scarlett Brightly Ever After Cream 20gr,1,2024-01-16 04:50:55,1,1
+1,Scarlett Brightly Ever After Serum 15ml,1,2024-01-16 04:50:55,1,1
+1,Scarlett Brightly To Glow Mini Series,1,2024-01-16 04:50:55,1,1
+1,Scarlett C-power Serum 15ml,1,2024-01-16 04:50:55,1,1
+1,Scarlett Fragance Brightening Body Lotion Charming 180ml,1,2024-01-16 04:50:55,1,1
+1,Scarlett Fragance Brightening Body Lotion Jolly 180ml,1,2024-01-16 04:50:55,1,1
+1,Scarlett Fragance Brightening Body Lotion Romansa 180ml,1,2024-01-16 04:50:55,1,1
+1,Scarlett Fragrance Body Cream 7x Ceramide Charming 300ml,1,2024-01-16 04:50:55,1,1
+1,Scarlett Fragrance Body Cream 7x Ceramide Happy 300ml,1,2024-01-16 04:50:55,1,1
+1,Scarlett Fragrance Body Cream 7x Ceramide Jolly 300ml,1,2024-01-16 04:50:55,1,1
+1,Scarlett Fragrance Body Cream 7x Ceramide Loving 300ml,1,2024-01-16 04:50:55,1,1
+1,Scarlett Glowtening Serum 15ml,1,2024-01-16 04:50:55,1,1
+1,Scarlett Herbalism Mugwort Mask 100gr,1,2024-01-16 04:50:55,1,1
+1,Scarlett Seriously Soothing & Hydrating Gel Mask 100gr,1,2024-01-16 04:50:55,1,1
+1,Scarlett Yordania Shampoo (kemasan Lama),1,2024-01-16 04:50:55,1,1
+1,Scarlett Yordanian Sea Salt Conditioner 250ml,1,2024-01-16 04:50:55,1,1
+1,Scarlett Yordanian Sea Salt Conditioner 250ml (kemasan Lama),1,2024-01-16 04:50:55,1,1
+106,Seomgum Glowing Soap ,1,2024-01-16 04:50:55,1,1
+1,Sexy Boobs,1,2024-01-16 04:50:55,1,1
+107,Sheeby Beauty Collagen,1,2024-01-16 04:50:55,1,1
+108,Shinzui Skin Lightening Body Cleanser Hana 180ml,1,2024-01-16 04:50:55,1,1
+108,Shinzui Skin Lightening Body Cleanser Kensho 180ml,1,2024-01-16 04:50:55,1,1
+108,Shinzui Skin Lightening Body Cleanser Kirei 200ml,1,2024-01-16 04:50:55,1,1
+108,Shinzui Skin Lightening Body Cleanser Matsu 180ml,1,2024-01-16 04:50:55,1,1
+108,Shinzui Skin Lightening Body Cleanser Myori 200ml,1,2024-01-16 04:50:55,1,1
+108,Shinzui Skin Lightening Body Cleanser Sakura 180ml,1,2024-01-16 04:50:55,1,1
+108,Shinzui Skin Lightening Body Cleanser Sakura 200ml,1,2024-01-16 04:50:55,1,1
+108,Shinzui Skin Lightening Body Scrub Hana 110gr,1,2024-01-16 04:50:55,1,1
+108,Shinzui Skin Lightening Body Scrub Hana 200gr,1,2024-01-16 04:50:55,1,1
+108,Shinzui Skin Lightening Body Scrub Kensho 110gr,1,2024-01-16 04:50:55,1,1
+108,Shinzui Skin Lightening Body Scrub Kensho 200gr,1,2024-01-16 04:50:55,1,1
+108,Shinzui Skin Lightening Body Scrub Kirei 200gr,1,2024-01-16 04:50:55,1,1
+108,Shinzui Skin Lightening Body Scrub Matsu 120gr,1,2024-01-16 04:50:55,1,1
+108,Shinzui Skin Lightening Body Scrub Matsu 200gr,1,2024-01-16 04:50:55,1,1
+108,Shinzui Skin Lightening Body Scrub Myori 110gr,1,2024-01-16 04:50:55,1,1
+108,Shinzui Skin Lightening Body Scrub Myori 200gr,1,2024-01-16 04:50:55,1,1
+108,Shinzui Skin Lightening Body Scrub Sakura 110gr,1,2024-01-16 04:50:55,1,1
+108,Shinzui Skin Lightening Body Scrub Sakura 200gr,1,2024-01-16 04:50:55,1,1
+108,Shinzui Skin Lighteninh Body Scrub Kirei 110gr,1,2024-01-16 04:50:55,1,1
+108,Shinzui Skin Ligtening Body Cleanser Hana 200ml,1,2024-01-16 04:50:55,1,1
+108,Shinzui Skin Ligtening Body Cleanser Kensho 200ml,1,2024-01-16 04:50:55,1,1
+1,Shower Puff / Spon Mandi,1,2024-01-16 04:50:55,1,1
+109,Skin Aqua | Skinaqua Tone Up Essence Hijau Spf 50,1,2024-01-16 04:50:55,1,1
+109,Skin Aqua Sunscreen Whitening Milk Spf 50,1,2024-01-16 04:50:55,1,1
+109,Skin Aqua Tone Up Uv Essence Spf 50+ 40gr,1,2024-01-16 04:50:55,1,1
+109,Skin Aqua UV Mild Milk SPF 25 PA++,1,2024-01-16 04:50:55,1,1
+109,Skin Aqua UV Moisture Gel SPF 30 PA++,1,2024-01-16 04:50:55,1,1
+109,Skin Aqua UV Moisture Milk SPF 50 PA ++,1,2024-01-16 04:50:55,1,1
+109,Skin Aqua UV Whitening Milk SPF 20 PA++ ,1,2024-01-16 04:50:55,1,1
+1,Skin Game Acne Warrior | Skingame,1,2024-01-16 04:50:55,1,1
+110,Skintific 2% Salicylic Acid Anti Acne Serum 20ml,1,2024-01-16 04:50:55,1,1
+110,Skintific 4D Hyaluronic Acid Barrier Essence Toner 20ml,1,2024-01-16 04:50:55,1,1
+110,Skintific 5% Aha Bha Pha Exfoliating Toner 80ml,1,2024-01-16 04:50:55,1,1
+110,Skintific 5x Ceramide Barrier Repair Moisture Gel 30gr,1,2024-01-16 04:50:55,1,1
+110,Skintific 5x Ceramide Barrier Repair Moisture Gel 6gr,1,2024-01-16 04:50:55,1,1
+110,Skintific 5x Ceramide Barrier Repair Serum 20ml,1,2024-01-16 04:50:55,1,1
+110,Skintific 5x Ceramide Low Ph Cleanser 15ml,1,2024-01-16 04:50:55,1,1
+110,Skintific 5x Ceramide Low Ph Cleanser 80ml,1,2024-01-16 04:50:55,1,1
+110,Skintific 5x Ceramide Soothing Toner 20ml,1,2024-01-16 04:50:55,1,1
+110,Skintific 5x Ceramide Soothing Toner 80ml,1,2024-01-16 04:50:55,1,1
+110,Skintific Crystal Massager Lifting Eye Cream 20gr,1,2024-01-16 04:50:55,1,1
+110,Skintific Msh Niacinamide Moisturizer 6gr (pink),1,2024-01-16 04:50:55,1,1
+110,Skintific Mugwort Anti Pores & Acne Clay Mask 55g,1,2024-01-16 04:50:55,1,1
+110,Skintific Mugwort Anti Pores & Acne Clay Stick 40gr,1,2024-01-16 04:50:55,1,1
+110,Skintific Retinol Cream Pelembab Moisturizer,1,2024-01-16 04:50:55,1,1
+110,Skintific Salycylic Acid Acne Spot Treatment,1,2024-01-16 04:50:55,1,1
+1,Slimming Kapus 30kapsul,1,2024-01-16 04:50:55,1,1
+111,Some By Mi / Somebymi Yuja Niacin Serum 50ml,1,2024-01-16 04:50:55,1,1
+111,Some By Mi Bye Bye Blackhead Bubble Cleanser,1,2024-01-16 04:50:55,1,1
+111,Some By Mi Propolis B5 Glow Barrier Calming Serum 50ml,1,2024-01-16 04:50:55,1,1
+111,Some By Mi Propolis B5 Glow Barrier Calming Toner 50ml,1,2024-01-16 04:50:55,1,1
+111,Some By Mi Red Teatree Cicassoside 60gr,1,2024-01-16 04:50:55,1,1
+111,Some By Mi Snail Truecica Miracle Repair Serum 50ml,1,2024-01-16 04:50:55,1,1
+111,Some By Mi Super Matcha Pore Clean Clay Mask ,1,2024-01-16 04:50:55,1,1
+111,Some By Mi Super Matcha Pore Clean Cleansing Gel 100ml ,1,2024-01-16 04:50:55,1,1
+111,Some By Mi Super Matcha Pore Tightening Serum 50ml,1,2024-01-16 04:50:55,1,1
+111,Some By Mi Super Matcha Pore Tightening Toner 150ml,1,2024-01-16 04:50:55,1,1
+111,Some By Mi Yuja Niacin 30 Days Brightening Starter Kit,1,2024-01-16 04:50:55,1,1
+111,Some By Mi Yuja Niacin Brightening Sleeping Mask 15gr,1,2024-01-16 04:50:55,1,1
+112,Somethinc Aha Bha Pha Peeling Solution 20ml,1,2024-01-16 04:50:55,1,1
+112,Somethinc Bakuchiol Skinpair Oil Serum ,1,2024-01-16 04:50:55,1,1
+112,Somethinc Calm Down Pha 3% Everyday Toner 100ml,1,2024-01-16 04:50:55,1,1
+112,Somethinc Calm Down Pha 3% Everyday Toner 40ml,1,2024-01-16 04:50:55,1,1
+112,Somethinc Ceramic Skin Saviour 25ml,1,2024-01-16 04:50:55,1,1
+112,Somethinc Ceramic Skin Saviour 50ml,1,2024-01-16 04:50:55,1,1
+112,Somethinc Fabric Lasting Tint Ambitious,1,2024-01-16 04:50:55,1,1
+112,Somethinc Game Changer,1,2024-01-16 04:50:55,1,1
+112,Somethinc Hangover Mascara,1,2024-01-16 04:50:55,1,1
+112,Somethinc Low Ph Gentle Jelly Cleanser 100ml,1,2024-01-16 04:50:55,1,1
+112,Somethinc Low Ph Gentle Jelly Cleanser 15ml,1,2024-01-16 04:50:55,1,1
+112,Somethinc Niacinamide Barrier 5% 20ml,1,2024-01-16 04:50:55,1,1
+112,Somethinc Reset Gentle Micellar Cleansing Water 160ml,1,2024-01-16 04:50:55,1,1
+112,Somethinc Reset Gentle Micellar Cleansing Water 40ml,1,2024-01-16 04:50:55,1,1
+112,Somethinc Scandal Waterproof Eyeliner Dark Choco,1,2024-01-16 04:50:55,1,1
+112,Somethinc Serum Lemonade Vit C,1,2024-01-16 04:50:55,1,1
+112,Somethinc Serum Revive 3%,1,2024-01-16 04:50:55,1,1
+112,Somethinc Sunscreen Sglowing Up Tick Spf 50,1,2024-01-16 04:50:55,1,1
+112,Somethinc Supple Power 120ml,1,2024-01-16 04:50:55,1,1
+112,Somethinc Supple Power 60ml,1,2024-01-16 04:50:55,1,1
+1,Spatula Biru,1,2024-01-16 04:50:55,1,1
+1,Spatula Kecil,1,2024-01-16 04:50:55,1,1
+1,Spatula Orange,1,2024-01-16 04:50:55,1,1
+1,Spatula Pink,1,2024-01-16 04:50:55,1,1
+1,Spatula Ungu,1,2024-01-16 04:50:55,1,1
+1,Spons Bedak | Spon Bedak,1,2024-01-16 04:50:55,1,1
+113,Ssp Sabun Susu Pemutih,1,2024-01-16 04:50:55,1,1
+114,Studio Tropik Herbitus Skin Tonic 100ml,1,2024-01-16 04:50:55,1,1
+115,Sukin Signature Foaming Facial Cleanser 125ml,1,2024-01-16 04:50:55,1,1
+115,Sukin Signature Natural Deodorant 125ml,1,2024-01-16 04:50:55,1,1
+1,Sunscreen Hiqween,1,2024-01-16 04:50:55,1,1
+1,Tender Compaction Eye Mask 7.5gr,1,2024-01-16 04:50:55,1,1
+116,The Aubree Ceramide Soft Cream 30g,1,2024-01-16 04:50:55,1,1
+117,The Ordinary Niacinamide 10% + Zinc 1% 30ml,1,2024-01-16 04:50:55,1,1
+118,The Orifginote Txa 377 Dark Spot Serum,1,2024-01-16 04:50:55,1,1
+1,The Originote Acne B5 Serum,1,2024-01-16 04:50:55,1,1
+1,The Originote Asthaciol Serum,1,2024-01-16 04:50:55,1,1
+1,The Originote Ceraluronic Essence Toner,1,2024-01-16 04:50:55,1,1
+1,The Originote Ceratides Barrier Serum ,1,2024-01-16 04:50:55,1,1
+1,The Originote Gluta Bright B3 Serum,1,2024-01-16 04:50:55,1,1
+1,The Originote Hyalu-c Serum,1,2024-01-16 04:50:55,1,1
+1,The Originote Lip Oil Serum,1,2024-01-16 04:50:55,1,1
+1,The Originote Moisturizer 50ml,1,2024-01-16 04:50:55,1,1
+1,The Originote Peeling Solution Serum,1,2024-01-16 04:50:55,1,1
+1,The Originote Retinol B3 Serum,1,2024-01-16 04:50:55,1,1
+119,True To Skin Matcha Oat Gentle Cleanser,1,2024-01-16 04:50:55,1,1
+119,True To Skin Matcha Oat Gentle Cleanser 15ml,1,2024-01-16 04:50:55,1,1
+120,Tumitku,1,2024-01-16 04:50:55,1,1
+121,Vaseline Gluta Hya Dewy Radiance 200ml,1,2024-01-16 04:50:55,1,1
+121,Vaseline Gluta Hya Flawless Bright 200ml,1,2024-01-16 04:50:55,1,1
+122,Vavl Beauty Water,1,2024-01-16 04:50:55,1,1
+122,Vavl Blemish Water Strong,1,2024-01-16 04:50:55,1,1
+122,Vavl Sunscreen,1,2024-01-16 04:50:55,1,1
+123,Vightne Vavl Blemish Serum 15ml,1,2024-01-16 04:50:55,1,1
+123,Vightne Vavl Pure White Brightening Face Wash 100ml,1,2024-01-16 04:50:55,1,1
+123,Vightne Vavl Pure White Glowing Serum 15ml,1,2024-01-16 04:50:55,1,1
+123,Vightne Vavl Pure White Whitening Night Cream 12gr,1,2024-01-16 04:50:55,1,1
+124,Vio Acne Patch,1,2024-01-16 04:50:55,1,1
+125,Viva Air Mawar,1,2024-01-16 04:50:55,1,1
+125,Viva Anti Aging Serum,1,2024-01-16 04:50:55,1,1
+125,Viva Face Tonic Bengkoang 100ml,1,2024-01-16 04:50:55,1,1
+125,Viva Face Tonic Cucumber,1,2024-01-16 04:50:55,1,1
+125,Viva Face Tonic Greentea,1,2024-01-16 04:50:55,1,1
+125,Viva Face Tonic Lemon,1,2024-01-16 04:50:55,1,1
+125,Viva Face Tonic Original 100ml,1,2024-01-16 04:50:55,1,1
+125,Viva Face Tonic Spirulina,1,2024-01-16 04:50:55,1,1
+125,Viva Glowing White Serum,1,2024-01-16 04:50:55,1,1
+125,Viva Milk Cleanser Bengkoang 100ml,1,2024-01-16 04:50:55,1,1
+125,Viva Milk Cleanser Cucumber,1,2024-01-16 04:50:55,1,1
+125,Viva Milk Cleanser Greentea,1,2024-01-16 04:50:55,1,1
+125,Viva Milk Cleanser Lemon,1,2024-01-16 04:50:55,1,1
+125,Viva Milk Cleanser Original 100ml,1,2024-01-16 04:50:55,1,1
+125,Viva Milk Cleanser Spirulina,1,2024-01-16 04:50:55,1,1
+125,Viva Peeling Serum,1,2024-01-16 04:50:55,1,1
+126,Wardah  Lightening Micellar Gentle Wash 100ml,1,2024-01-16 04:50:55,1,1
+126,Wardah Acnederm Acne Spot Gel 15ml,1,2024-01-16 04:50:55,1,1
+126,Wardah Acnederm Day Moisturizer 40ml,1,2024-01-16 04:50:55,1,1
+126,Wardah Acnederm Night Cream Moisturizer,1,2024-01-16 04:50:55,1,1
+126,Wardah Acnederm Pure Foaming Cleanser 60ml,1,2024-01-16 04:50:55,1,1
+126,Wardah Acnederm Toner,1,2024-01-16 04:50:55,1,1
+126,Wardah Fruity Sheer Lip Balm Grape 4 Gr,1,2024-01-16 04:50:55,1,1
+126,Wardah Fruity Sheer Lip Balm Strawberry 4gr,1,2024-01-16 04:50:55,1,1
+126,Wardah Lightening Cleansing Milk 100ml,1,2024-01-16 04:50:55,1,1
+126,Wardah Lightening Day Cream 20ml,1,2024-01-16 04:50:55,1,1
+126,Wardah Lightening Day Cream 30ml,1,2024-01-16 04:50:55,1,1
+126,Wardah Lightening Face Mist 60ml,1,2024-01-16 04:50:55,1,1
+126,Wardah Lightening Face Toner 125ml,1,2024-01-16 04:50:55,1,1
+126,Wardah Lightening Gentle Exfo 50ml,1,2024-01-16 04:50:55,1,1
+126,Wardah Lightening Matte Powder 01 Neutral Fair,1,2024-01-16 04:50:55,1,1
+126,Wardah Lightening Matte Powder 02 Neutral Beige,1,2024-01-16 04:50:55,1,1
+126,Wardah Lightening Matte Powder 03 Warm Ivory,1,2024-01-16 04:50:55,1,1
+126,Wardah Lightening Matte Powder 04 Light Ivory,1,2024-01-16 04:50:55,1,1
+126,Wardah Lightening Micellar Gentel Wash 50ml,1,2024-01-16 04:50:55,1,1
+126,Wardah Lightening Night Cream 20ml,1,2024-01-16 04:50:55,1,1
+126,Wardah Lightening Night Cream 30ml,1,2024-01-16 04:50:55,1,1
+126,Wardah Lightening Oil-infused Micellar Water 50ml,1,2024-01-16 04:50:55,1,1
+126,Wardah Lightening Serum Ampoule 30ml,1,2024-01-16 04:50:55,1,1
+126,Wardah Lightening Serum Ampoule 8ml,1,2024-01-16 04:50:55,1,1
+126,Wardah Moisture Lip Nutrision Greentea,1,2024-01-16 04:50:55,1,1
+126,Wardah Moisture Lip Nutrision Honey ,1,2024-01-16 04:50:55,1,1
+126,Wardah Moisture Lip Nutrision Strawberry,1,2024-01-16 04:50:55,1,1
+126,Wardah Seaweed Cleansing Micellar Water 100ml,1,2024-01-16 04:50:55,1,1
+126,Wardah Sunscreen Spf 50 Active,1,2024-01-16 04:50:55,1,1
+126,Wardah Uv Shield Spf 35,1,2024-01-16 04:50:55,1,1
+126,Wardah Uv Shield Spf 50,1,2024-01-16 04:50:55,1,1
+127,Whitelab Acne Care Facial Wash ,1,2024-01-16 04:50:55,1,1
+127,Whitelab Acne Cream 10gr,1,2024-01-16 04:50:55,1,1
+127,Whitelab Acne Serum 20ml,1,2024-01-16 04:50:55,1,1
+127,Whitelab Acne Soap 80gr,1,2024-01-16 04:50:55,1,1
+127,Whitelab Acne Toner,1,2024-01-16 04:50:55,1,1
+127,Whitelab Bamboo Charcoal Brightening Gel Mask,1,2024-01-16 04:50:55,1,1
+127,Whitelab Brightening Day Cream 20gr,1,2024-01-16 04:50:55,1,1
+127,Whitelab Brightening Facial Wash 100gr,1,2024-01-16 04:50:55,1,1
+127,Whitelab Brightening Night Cream 20gr,1,2024-01-16 04:50:55,1,1
+127,Whitelab Brightening Toner 100ml,1,2024-01-16 04:50:55,1,1
+127,Whitelab C-Dose+ Brightening Serum 20ml,1,2024-01-16 04:50:55,1,1
+127,Whitelab Cera-mug Barrier Moisturizing Gel 20gr,1,2024-01-16 04:50:55,1,1
+127,Whitelab Exfoliating Toner,1,2024-01-16 04:50:55,1,1
+127,Whitelab Eye Cream 10gr,1,2024-01-16 04:50:55,1,1
+127,Whitelab Hydrating Face Essence 60ml,1,2024-01-16 04:50:55,1,1
+127,Whitelab Hydrating Serum ,1,2024-01-16 04:50:55,1,1
+127,Whitelab Intensive Care Serum 15ml,1,2024-01-16 04:50:55,1,1
+127,Whitelab Mugwort Pore Clarifying Mask,1,2024-01-16 04:50:55,1,1
+127,Whitelab N10 Dose Brightening Serum,1,2024-01-16 04:50:55,1,1
+127,Whitelab N5 Dose Brightening Serum,1,2024-01-16 04:50:55,1,1
+127,Whitelab Ph Balanced Facial Cleanser,1,2024-01-16 04:50:55,1,1
+127,Whitelab Retinol Treatment Serum,1,2024-01-16 04:50:55,1,1
+127,Whitelab Soothing Toner 60ml,1,2024-01-16 04:50:55,1,1
+127,Whitelab Uv Shield Tank Sunscreen Gel Spf 50 Pa++++ 30gr,1,2024-01-16 04:50:55,1,1
+128,Xi Xiu Divine Eyebrow Matic Pencil  Black ,1,2024-01-16 04:50:55,1,1
+128,Xi Xiu Divine Eyebrow Matic Pencil  Brown ,1,2024-01-16 04:50:55,1,1
+128,Xi Xiu Eyebrow Pensil Alis Black ,1,2024-01-16 04:50:55,1,1
+128,Xi Xiu Eyebrow Pensil Alis Brown,1,2024-01-16 04:50:55,1,1
+128,Xi Xiu Eyeliner (pink),1,2024-01-16 04:50:55,1,1
+128,Xi Xiu Ultimate Eyeliner Pen (putih),1,2024-01-16 04:50:55,1,1
+129,Yoni Toner Badan 100ml,1,2024-01-16 04:50:55,1,1
+130,You Acne Plus B5 Soothing Sheet Mask ,1,2024-01-16 04:50:55,1,1
+130,You Acneplus Triple Action Spot Care,1,2024-01-16 04:50:55,1,1
+130,You Hy Amino Ac Ttack Facial Wash Anti Acne,1,2024-01-16 04:50:55,1,1
+130,You Hy Amino Bye Byeteria Facial Wash,1,2024-01-16 04:50:55,1,1
+130,You Hy Amino Contr Oil Facial Wash,1,2024-01-16 04:50:55,1,1
+130,You Hy Amino Wow Tery Facial Wash,1,2024-01-16 04:50:55,1,1
+130,You Hyl Amino Facial Wash ,1,2024-01-16 04:50:55,1,1
+131,Zozu Alpukat Masker Mata,1,2024-01-16 04:50:55,1,1
+131,Zozu Gold Masker Mata,1,2024-01-16 04:50:55,1,1
