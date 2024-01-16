@@ -17,8 +17,6 @@ export const DashboardSidebar: FC = function () {
   const { isCollapsed } = useSidebarContext()
   const pathname = usePathname()
 
-  console.log(pathname)
-
   const menus = [
     {
       name: 'home',
