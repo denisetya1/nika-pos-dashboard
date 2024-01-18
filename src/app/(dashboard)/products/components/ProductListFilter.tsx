@@ -48,7 +48,7 @@ const ProductListFilter = ({
   }, [categoryId, brandId, search, outletId, pageURL, router])
 
   return (
-    <div className="flex flex-row justify-start gap-5 items-center mb-8">
+    <div className="sm:flex flex-row justify-start gap-5 items-center mb-8">
 
       {outlets && outlets?.length > 0 ? <div>
         <div className="mb-2 block">
@@ -79,11 +79,11 @@ const ProductListFilter = ({
         </Select>
       </div>
 
-      <div>
+      <div className="grow">
         <div className="mb-2 block">
           <Label htmlFor="product-name" value="Cari Produk" />
         </div>
-        <TextInput id="product-name" className="w-80" value={searchProduct} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchProduct(e.target.value)} type="text" placeholder="Cari berdasarkan nama produk/barcode/sku"/>
+        <TextInput id="product-name" className="w-full" value={searchProduct} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchProduct(e.target.value)} type="text" placeholder="Cari berdasarkan nama produk/barcode/sku"/>
       </div>
     </div>
   )

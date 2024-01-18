@@ -34,7 +34,7 @@ export const GET = async (req: NextRequest) =>  {
       ...(sort === 'barcode' ? {barcode: direction} : {}),
       ...(sort === 'category' ? { category: {name: direction}} : {}),
       ...(sort === 'brand' ? { brand: {name: direction}} : {}),
-       ...(sort === 'sellprice' ? { stocks: {sellPrice: direction, nulls: 'first'}} : {}),
+      ...(sort === 'sellprice' ? { stocks: {sellPrice: direction, nulls: 'first'}} : {}),
       // ...(sort === 'stock' ? { stocks: {quantity: direction}} : {})
     }
   }

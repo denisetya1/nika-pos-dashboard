@@ -28,7 +28,7 @@ const TablePagination = ({currentPage, totalPages, limit} :
   }, [selectedPage])
 
   return (
-    <div className="flex my-5 w-full justify-end">
+    <div className="flex my-5 w-full justify-center sm:justify-end">
       <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={onPageChange} />
     </div>
   );

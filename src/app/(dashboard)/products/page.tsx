@@ -42,7 +42,7 @@ const page = async ({
   const totalPages = Math.floor(totalRow/limit)
 
   return (
-    <div className="p-20">
+    <div  className="p-5 sm:p-8 md:p-10 lg:p-20">
       <div>
         <h1 className="font-bold text-2xl mb-10">DAFTAR PRODUK</h1>
       </div>
@@ -83,25 +83,25 @@ const page = async ({
                   fieldName="name"
                 />
               </th>
-              <th scope="col" className="px-6 py-3 hover:bg-gray-200">
+              <th scope="col" className="hidden sm:table-cell px-6 py-3 hover:bg-gray-200">
                 <SortableHeader
                   title="SKU"
                   fieldName="sku"
                 />
               </th>
-              <th scope="col" className="px-6 py-3 hover:bg-gray-200">
+              <th scope="col" className="hidden sm:table-cell px-6 py-3 hover:bg-gray-200">
                 <SortableHeader
                   title="Barcode"
                   fieldName="barcode"
                 />
               </th>
-              <th scope="col" className="px-6 py-3 hover:bg-gray-200">
+              <th scope="col" className="hidden sm:table-cell px-6 py-3 hover:bg-gray-200">
                 <SortableHeader
                   title="Kategori"
                   fieldName="category"
                 />
               </th>
-              <th scope="col" className="px-6 py-3 hover:bg-gray-200">
+              <th scope="col" className="hidden sm:table-cell px-6 py-3 hover:bg-gray-200">
                 <SortableHeader
                   title="Brand"
                   fieldName="brand"
@@ -114,11 +114,19 @@ const page = async ({
           {products.map((product, index) => (
             <tr key={product.id} className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
               <td className="px-6 py-3 w-10">{index + 1 + ((currentPage - 1) * limit)}</td>
-              <td className="px-6 py-3 w-80 text-black dark:text-white">{product.name}</td>
-              <td className="px-6 py-3">{product.sku ? product.sku : '-'}</td>
-              <td className="px-6 py-3">{product.barcode ? product.barcode : '-'}</td>
-              <td className="px-6 py-3">{product.category.name}</td>
-              <td className="px-6 py-3">{product.brand.name}</td>
+              <td className="px-6 py-3 w-80 text-black dark:text-white">
+                <div>
+                  {product.name}
+                </div>
+                <div className="sm:hidden text-xs text-gray-400 flex justify-start gap-3">
+                  <div>SKU: {product.sku ? product.sku : '-'}</div>
+                  <div>Barcode: {product.barcode ? product.barcode : '-'}</div>
+                </div>
+              </td>
+              <td className="hidden sm:table-cell px-6 py-3">{product.sku ? product.sku : '-'}</td>
+              <td className="hidden sm:table-cell px-6 py-3">{product.barcode ? product.barcode : '-'}</td>
+              <td className="hidden sm:table-cell px-6 py-3">{product.category.name}</td>
+              <td className="hidden sm:table-cell px-6 py-3">{product.brand.name}</td>
               <td className="px-6 py-3">
                 <div className="flex flex-row gap-3">
                   <AddEditProductModal 

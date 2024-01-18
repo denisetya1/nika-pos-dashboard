@@ -62,7 +62,7 @@ const ProductStock = async ({
   const totalPages = Math.floor(totalRow/limit)
 
   return (
-    <div className="p-20">
+    <div className="p-5 sm:p-8 md:p-10 lg:p-20">
       <div>
         <h1 className="font-bold text-2xl mb-10">DAFTAR STOK &amp; HARGA</h1>
       </div>
@@ -87,20 +87,20 @@ const ProductStock = async ({
       <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
         <thead>
           <tr className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-              <th scope="col" className="px-6 py-3">No.</th>
+              <th scope="col" className="w-[40px] px-6 py-3">No.</th>
               <th scope="col" className="px-6 py-3 hover:bg-gray-200">
                 <SortableHeader
                   title="Nama"
                   fieldName="name"
                 />
               </th>
-              <th scope="col" className="px-6 py-3 hover:bg-gray-200">
+              <th scope="col" className="hidden sm:table-cell px-6 py-3 hover:bg-gray-200">
                 <SortableHeader
                   title="Kategori"
                   fieldName="category"
                 />
               </th>
-              <th scope="col" className="px-6 py-3 hover:bg-gray-200">
+              <th scope="col" className="hidden sm:table-cell px-6 py-3 hover:bg-gray-200">
                 <SortableHeader
                   title="Brand"
                   fieldName="brand"
@@ -124,13 +124,13 @@ const ProductStock = async ({
                   <div>sku: {product.sku === '' || product.sku === null ? '-' : product.sku}</div>
                   <div>barcode: {product.barcode === '' || product.barcode === null ? '-' : product.barcode}</div>
                 </div>
-                <div className="text-gray-500 text-xs">
+                {/* <div className="text-gray-500 text-xs">
                   shopee:<br />
                   {product.linkShopee !== null ? <a target="_blank" className="hover:text-blue-600" href={product.linkShopee}>{product.linkShopee.substring(0,100)}...</a> : "-" }
-                </div>
+                </div> */}
               </td>
-              <td className="px-6 py-3">{product.category.name}</td>
-              <td className="px-6 py-3">{product.brand.name}</td>
+              <td className="hidden sm:table-cell px-6 py-3">{product.category.name}</td>
+              <td className="hidden sm:table-cell px-6 py-3">{product.brand.name}</td>
               <td className="px-6 py-3">
                 <div className="flex justify-end align-middle gap-2">
                   <div className="py-2">
