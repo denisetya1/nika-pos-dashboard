@@ -58,8 +58,9 @@ const ProductStock = async ({
 
   const paginated: [Product[], number, number, number] = await resProduct.json()
 
-  const [ products, totalRow, currentPage, limit] = paginated
-  const totalPages = Math.floor(totalRow/limit)
+  const displayLimit = 50
+  const [ products, totalRow, currentPage ] = paginated
+  const totalPages = Math.ceil(totalRow/displayLimit)
 
   return (
     <div className="p-5 sm:p-8 md:p-10 lg:p-20">
@@ -81,7 +82,7 @@ const ProductStock = async ({
       </div>
 
       <div>
-        <TablePagination currentPage={currentPage} totalPages={totalPages} limit={50}/>
+        <TablePagination currentPage={currentPage} totalPages={totalPages} limit={displayLimit}/>
       </div>
       
       <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -106,11 +107,17 @@ const ProductStock = async ({
                   fieldName="brand"
                 />
               </th>
-              <th scope="col" className="px-6 py-3">
-                Harga
+              <th scope="col" className="hidden sm:table-cell px-6 py-3 hover:bg-gray-200">
+                <SortableHeader
+                  title="Harga"
+                  fieldName="sellprice"
+                />
               </th>
-              <th scope="col" className="px-6 py-3">
-                Stock
+              <th scope="col" className="hidden sm:table-cell px-6 py-3 hover:bg-gray-200">
+                <SortableHeader
+                  title="Stock"
+                  fieldName="quantity"
+                />
               </th>
           </tr>
         </thead>
@@ -179,7 +186,7 @@ const ProductStock = async ({
       </table>
 
       <div>
-        <TablePagination currentPage={currentPage} totalPages={totalPages} limit={50}/>
+        <TablePagination currentPage={currentPage} totalPages={totalPages} limit={displayLimit}/>
       </div>
 
     </div>

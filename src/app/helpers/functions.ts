@@ -20,3 +20,13 @@ export const isEmptyVal= (value: any, includeZero?: boolean) => {
 
   return false
 }
+
+export const sortByKey = (arr: Array<any>, key: string, sort: string) => {
+  if(sort === 'asc'){
+    arr.sort(function(a, b){return a[key] - b[key]});
+  } else {
+    arr.sort(function(a, b){return b[key] - a[key]});
+  }
+
+  return arr
+}

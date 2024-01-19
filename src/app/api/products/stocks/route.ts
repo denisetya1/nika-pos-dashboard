@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "../../client";
 import { ProductStock } from "@prisma/client";
-import { isEmptyVal } from "@/app/helpers/functions";
+import { isEmptyVal, sortByKey } from "@/app/helpers/functions";
 
 
 export const GET = async (req: NextRequest) =>  {
@@ -11,7 +11,7 @@ export const GET = async (req: NextRequest) =>  {
   const search = req.nextUrl.searchParams.get('search');
 
   const sort = req.nextUrl.searchParams.get('sort')
-  const direction = req.nextUrl.searchParams.get('direction')
+  const direction = req.nextUrl.searchParams.get('direction') || "asc"
 
   let limit = Number(req.nextUrl.searchParams.get('limit'))
   let page = Number(req.nextUrl.searchParams.get('page'))
@@ -34,11 +34,55 @@ export const GET = async (req: NextRequest) =>  {
       ...(sort === 'barcode' ? {barcode: direction} : {}),
       ...(sort === 'category' ? { category: {name: direction}} : {}),
       ...(sort === 'brand' ? { brand: {name: direction}} : {}),
-      ...(sort === 'sellprice' ? { stocks: {sellPrice: direction, nulls: 'first'}} : {}),
+      // ...(sort === 'sellprice' ? { stocks: {sellPrice: direction, nulls: 'first'}} : {}),
       // ...(sort === 'stock' ? { stocks: {quantity: direction}} : {})
     }
   }
 
+  let ids: bigint[] = []
+  let count = 0
+  let isSortedByPriceQuantity = false
+
+  if(!isEmptyVal(sort) && (sort === 'sellprice' || sort === 'quantity')){
+    const productsStocks = await prisma.productStock.findManyAndCount({
+      where: {
+        AND : [
+          {storeId: 1},
+          {...(brandId !== "" && brandId !== undefined && brandId !== null ? {product: { brandId: Number(brandId)}} : {})},
+          {...(categoryId !== "" && categoryId !== undefined && categoryId !== null ? {product: { categoryId: Number(categoryId) }} : {})},
+          {...(search !== null ? { OR: [
+              {product: {
+                  name: {
+                    contains: search
+                  }
+                }
+              },
+              {product: { sku: search }
+              },
+              {product: { barcode: search }
+              }
+            ] } : {})
+          },
+          {outletId: Number(outletId)}
+        ]
+      },
+      orderBy: {
+        ...(sort === 'sellprice' ? {sellPrice: direction === "asc" ? "asc" : "desc"} : {}),
+        ...(sort === 'quantity' ? {quantity: direction === "asc" ? "asc" : "desc"} : {}),
+      },
+      select: {
+        productId: true
+      },
+      skip: (page - 1) * limit,
+      take: limit,
+    })
+
+    const [list, listCount] = productsStocks
+    ids = list.map((item)=> item.productId)
+    count = listCount
+    isSortedByPriceQuantity = true
+  }
+  
   const products = await prisma.product.findManyAndCount({
     where: {
       AND : [
@@ -52,7 +96,12 @@ export const GET = async (req: NextRequest) =>  {
             {sku: search},
             {barcode: search}
           ] } : {})
-        }
+        },
+        {...(ids.length > 0 ? {
+          id: {
+            in: ids
+          }
+        } : {} )}
       ]
     },
     orderBy,
@@ -91,9 +140,26 @@ export const GET = async (req: NextRequest) =>  {
         }
       }
     },
-    skip: (page - 1) * limit,
-    take: limit,
+    ...(!isSortedByPriceQuantity ? {skip: (page - 1) * limit} : {}),
+    ...(!isSortedByPriceQuantity ? {take: limit} : {} ),
   });
+
+  if(sort === 'sellprice'){
+    products[1] = count
+
+    if(direction === 'asc')
+      products[0].sort(function(a, b){return Number(a.stocks[0].sellPrice) - Number(b.stocks[0].sellPrice)});
+    else
+      products[0].sort(function(a, b){return Number(b.stocks[0].sellPrice) - Number(a.stocks[0].sellPrice)});
+  }
+  if(sort === 'quantity'){
+    products[1] = count
+
+    if(direction === 'asc')
+      products[0].sort(function(a, b){return a.stocks[0].quantity - b.stocks[0].quantity});
+    else
+      products[0].sort(function(a, b){return b.stocks[0].quantity - a.stocks[0].quantity});
+  }
 
   products.push(page)
   products.push(limit)
