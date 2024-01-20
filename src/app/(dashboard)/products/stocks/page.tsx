@@ -171,7 +171,14 @@ const ProductStock = async ({
 
               <td className="hidden sm:table-cell px-6 py-3">{product.stocks.length > 0 && product.stocks[0]?.markupPercentage}</td>
               <td className="hidden sm:table-cell px-6 py-3">{product.stocks.length > 0 && product.stocks[0]?.discountPercentage}</td>
-              <td className="hidden sm:table-cell px-6 py-3">{product.stocks.length > 0 && getFinalPrice(Number(product.stocks[0]?.sellPrice), product.stocks[0].markupPercentage, product.stocks[0].discountPercentage, true)}</td>
+              <td className="hidden sm:table-cell px-6 py-3">
+                <div className="text-xs line-through">
+                  {product.stocks.length > 0 && getFinalPrice(Number(product.stocks[0]?.sellPrice), product.stocks[0].markupPercentage, 0, true)}
+                </div>
+                <div>
+                  {product.stocks.length > 0 && getFinalPrice(Number(product.stocks[0]?.sellPrice), product.stocks[0].markupPercentage, product.stocks[0].discountPercentage, true)}
+                </div>
+              </td>
               <td className="px-6 py-3 text-center">
                   <div className="flex justify-center items-center">
                     <div className="border-[1px] border-gray-200 rounded-l-lg overflow-hidden">
