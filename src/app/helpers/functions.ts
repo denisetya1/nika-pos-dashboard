@@ -31,13 +31,21 @@ export const sortByKey = (arr: Array<any>, key: string, sort: string) => {
   return arr
 }
 
-export const getFinalPrice = (price : Number, markup: Number | null, discount: Number | null, formatted: boolean = false) => {
+export const roundNearest500 = (num: Number) => {
+  return Math.round(Number(num) / 500) * 500;
+}
+
+export const getFinalPrice = (price : Number, markup: Number | null, discount: Number | null, rounded: boolean = false, formatted: boolean = false) => {
   if(markup === null)
     markup = 0
   if(discount === null)
     discount = 0
 
-  const finalPrice = ((Number(price)* (1+ Number(markup)/100)) * (1-Number(discount)/100))
+  let finalPrice = ((Number(price)* (1+ Number(markup)/100)) * (1-Number(discount)/100))
+
+  if(rounded) {
+    finalPrice = roundNearest500(finalPrice)
+  }
 
   if(formatted)
     return formatCurrency(finalPrice)

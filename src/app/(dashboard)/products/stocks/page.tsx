@@ -2,7 +2,7 @@ import { Brand, Category, MoveType, Outlet, Prisma } from "@prisma/client"
 import queryString from "query-string"
 import ProductListFilter from "../components/ProductListFilter"
 import StockMovementForm from "../components/StockMovementForm"
-import { formatCurrency, getFinalPrice } from "@/app/helpers/functions"
+import { formatCurrency, getFinalPrice, isEmptyVal } from "@/app/helpers/functions"
 import EditPriceForm from "../components/EditPriceForm"
 import SortableHeader from "../../components/SortableHeader"
 import TablePagination from "../../components/TablePagination"
@@ -172,11 +172,14 @@ const ProductStock = async ({
               <td className="hidden sm:table-cell px-6 py-3">{product.stocks.length > 0 && product.stocks[0]?.markupPercentage}</td>
               <td className="hidden sm:table-cell px-6 py-3">{product.stocks.length > 0 && product.stocks[0]?.discountPercentage}</td>
               <td className="hidden sm:table-cell px-6 py-3">
+              {
+                product.stocks.length > 0 && !isEmptyVal(product.stocks[0].markupPercentage) && !isEmptyVal(product.stocks[0]?.markupPercentage) &&
                 <div className="text-xs line-through">
-                  {product.stocks.length > 0 && getFinalPrice(Number(product.stocks[0]?.sellPrice), product.stocks[0].markupPercentage, 0, true)}
+                  {product.stocks.length > 0 && getFinalPrice(Number(product.stocks[0]?.sellPrice), product.stocks[0].markupPercentage, 0, false, true)}
                 </div>
+              }
                 <div>
-                  {product.stocks.length > 0 && getFinalPrice(Number(product.stocks[0]?.sellPrice), product.stocks[0].markupPercentage, product.stocks[0].discountPercentage, true)}
+                  {product.stocks.length > 0 && getFinalPrice(Number(product.stocks[0]?.sellPrice), product.stocks[0].markupPercentage, product.stocks[0].discountPercentage, true, true)}
                 </div>
               </td>
               <td className="px-6 py-3 text-center">
