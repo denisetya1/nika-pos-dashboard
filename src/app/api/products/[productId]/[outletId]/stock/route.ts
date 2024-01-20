@@ -41,6 +41,8 @@ export const POST = async (request: Request, { params }: {
       minGrosir: 0,
       sellPrice: 0,
       sellPriceGrosir: 0,
+      markupPercentage: 0,
+      discountPercentage: 0,
       isActive: true,
       stockMovements: {
         create: {

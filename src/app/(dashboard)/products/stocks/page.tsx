@@ -2,8 +2,7 @@ import { Brand, Category, MoveType, Outlet, Prisma } from "@prisma/client"
 import queryString from "query-string"
 import ProductListFilter from "../components/ProductListFilter"
 import StockMovementForm from "../components/StockMovementForm"
-import { formatCurrency } from "@/app/helpers/functions"
-import { TextInput } from "flowbite-react"
+import { formatCurrency, getFinalPrice } from "@/app/helpers/functions"
 import EditPriceForm from "../components/EditPriceForm"
 import SortableHeader from "../../components/SortableHeader"
 import TablePagination from "../../components/TablePagination"
@@ -63,7 +62,7 @@ const ProductStock = async ({
   const totalPages = Math.ceil(totalRow/displayLimit)
 
   return (
-    <div className="p-5 sm:p-8 md:p-10 lg:p-20">
+    <div className="p-5 sm:p-8 md:p-10 lg:p-10">
       <div>
         <h1 className="font-bold text-2xl mb-10">DAFTAR STOK &amp; HARGA</h1>
       </div>
@@ -115,6 +114,21 @@ const ProductStock = async ({
               </th>
               <th scope="col" className="hidden sm:table-cell px-6 py-3 hover:bg-gray-200">
                 <SortableHeader
+                  title="Mark Up"
+                  fieldName="markupPercentage"
+                />
+              </th>
+              <th scope="col" className="hidden sm:table-cell px-6 py-3 hover:bg-gray-200">
+                <SortableHeader
+                  title="Diskon"
+                  fieldName="discountPercentage"
+                />
+              </th>
+              <th scope="col" className="hidden sm:table-cell px-6 py-3 hover:bg-gray-200">
+                Harga Final
+              </th>
+              <th scope="col" className="hidden sm:table-cell px-6 py-3 hover:bg-gray-200">
+                <SortableHeader
                   title="Stock"
                   fieldName="quantity"
                 />
@@ -148,10 +162,16 @@ const ProductStock = async ({
                       product={product}
                       outlet={outlets.filter((o) => (o.id.toString() === outletId))[0]}
                       sellPrice={Number(product.stocks[0]?.sellPrice)}
+                      discountPercentage={product.stocks.length > 0 ? product.stocks[0].discountPercentage : 0}
+                      markupPercentage={product.stocks.length > 0 ? product.stocks[0].markupPercentage : 0 }
                     />
                   </div>
                 </div>
               </td>
+
+              <td className="hidden sm:table-cell px-6 py-3">{product.stocks.length > 0 && product.stocks[0]?.markupPercentage}</td>
+              <td className="hidden sm:table-cell px-6 py-3">{product.stocks.length > 0 && product.stocks[0]?.discountPercentage}</td>
+              <td className="hidden sm:table-cell px-6 py-3">{product.stocks.length > 0 && getFinalPrice(Number(product.stocks[0]?.sellPrice), product.stocks[0].markupPercentage, product.stocks[0].discountPercentage, true)}</td>
               <td className="px-6 py-3 text-center">
                   <div className="flex justify-center items-center">
                     <div className="border-[1px] border-gray-200 rounded-l-lg overflow-hidden">

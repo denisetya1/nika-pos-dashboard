@@ -1,4 +1,5 @@
 'use client';
+import { formatCurrency } from "@/app/helpers/functions";
 import { Outlet, Product } from "@prisma/client";
 import { Button, Label, Modal, TextInput, Tooltip } from "flowbite-react";
 import { useRouter } from "next/navigation";
@@ -9,18 +10,24 @@ import { LuPencilLine } from "react-icons/lu";
 type FormValues = {
   sellPrice: Number
   productStockId: String,
-  linkShopee: String | null
+  linkShopee: String | null,
+  discountPercentage: Number | null,
+  markupPercentage: Number | null,
 }
 
 const EditPriceForm = ({
     outlet, 
     product,
-    sellPrice
+    sellPrice,
+    discountPercentage,
+    markupPercentage,
   }:
   {
     outlet: Outlet
     product: Product
-    sellPrice?: Number
+    sellPrice?: Number,
+    discountPercentage?: Number | null,
+    markupPercentage?: Number | null,
   }) => {
   const router = useRouter()
   const [isOpen, setOpen] = useState(false)
@@ -28,7 +35,9 @@ const EditPriceForm = ({
   const formOptions = {
     defaultValues: {
       sellPrice: sellPrice ? `${sellPrice}` : '0',
-      linkShopee: product.linkShopee
+      linkShopee: product.linkShopee,
+      discountPercentage,
+      markupPercentage
     }
   }
 
@@ -50,7 +59,7 @@ const EditPriceForm = ({
   useEffect(() => {
     reset({...formOptions.defaultValues})
 
-  }, [product.linkShopee, sellPrice])
+  }, [sellPrice, discountPercentage, markupPercentage])
 
   const setSelected = (e: FocusEvent<HTMLInputElement>) => {
     e.target.select();
@@ -93,10 +102,24 @@ const EditPriceForm = ({
 
                   <div className="col-span-2">
                     <div className="mb-2 block">
+                      <Label htmlFor="input-gray" color="gray" value="Markup Harga" />
+                    </div>
+                    <TextInput className="w-[150px]" onFocus={setSelected} min={0} type="number" {...register('markupPercentage')} placeholder="" />
+                  </div>
+
+                  <div className="col-span-2">
+                    <div className="mb-2 block">
+                      <Label htmlFor="input-gray" color="gray" value="Diskon" />
+                    </div>
+                    <TextInput className="w-[150px]" onFocus={setSelected} min={0} type="number" {...register('discountPercentage')} placeholder="" />
+                  </div>
+
+                  {/* <div className="col-span-2">
+                    <div className="mb-2 block">
                       <Label htmlFor="input-gray" color="gray" value="Link Shopee" />
                     </div>
                     <TextInput min={0} type="text" {...register('linkShopee')} placeholder="" />
-                  </div>
+                  </div> */}
               
                 </div>
 

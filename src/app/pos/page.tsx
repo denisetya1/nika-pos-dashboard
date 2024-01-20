@@ -1,6 +1,5 @@
 'use client'
 
-import Image from "next/image"
 import { useRef } from "react";
 import { useReactToPrint } from "react-to-print";
 import ComponentToPrint from "./components/ComponentToPrint";

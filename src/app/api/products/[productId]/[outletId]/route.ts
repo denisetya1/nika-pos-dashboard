@@ -11,7 +11,7 @@ export const GET = async (req: NextRequest,
     } 
   }
 ) =>  {
-  const {productId, outletId } = params
+  const { outletId } = params
   const categoryId = req.nextUrl.searchParams.get('categoryId');
   const brandId = req.nextUrl.searchParams.get('brandId');
   const search = req.nextUrl.searchParams.get('search');
@@ -79,6 +79,8 @@ export const POST = async (request: Request) =>  {
           minGrosir: 0,
           sellPrice: 0,
           sellPriceGrosir: 0,
+          markupPercentage: 0,
+          discountPercentage: 0,
           isActive: true,
           stockMovements: {
             create: {

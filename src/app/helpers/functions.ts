@@ -30,3 +30,17 @@ export const sortByKey = (arr: Array<any>, key: string, sort: string) => {
 
   return arr
 }
+
+export const getFinalPrice = (price : Number, markup: Number | null, discount: Number | null, formatted: boolean = false) => {
+  if(markup === null)
+    markup = 0
+  if(discount === null)
+    discount = 0
+
+  const finalPrice = ((Number(price)* (1+ Number(markup)/100)) * (1-Number(discount)/100))
+
+  if(formatted)
+    return formatCurrency(finalPrice)
+  else 
+    return finalPrice
+}

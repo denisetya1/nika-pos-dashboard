@@ -137,6 +137,8 @@ export const GET = async (req: NextRequest) =>  {
           sellPrice: true,
           sellPriceGrosir: true,
           minGrosir: true,
+          markupPercentage: true,
+          discountPercentage: true
         }
       }
     },
@@ -183,6 +185,8 @@ export const POST = async (request: Request) =>  {
           minGrosir: 0,
           sellPrice: 0,
           sellPriceGrosir: 0,
+          markupPercentage: 0,
+          discountPercentage: 0,
           isActive: true,
           stockMovements: {
             create: {
