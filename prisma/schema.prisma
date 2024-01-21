@@ -110,7 +110,7 @@ model Store{
   userId BigInt @unique @map("user_id")
   user User @relation(fields: [userId], references: [id])
   name String 
-  slug String
+  slug String?
   subdistrictId BigInt? @map("subdistrict_id")
   address String
   address2 String?
