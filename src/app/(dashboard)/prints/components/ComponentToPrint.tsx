@@ -28,7 +28,7 @@ class ComponentToPrint extends React.Component<MyProps> {
   render (){
     return (
       <div className="grid grid-cols-4 gap-0 w-full">
-        { this.props.productPrices.map((pp) => <div className="relative flex flex-col justify-between align-top h-[150px] border-r-[1px] border-b-[1px] border-dashed border-gray-100 p-3">
+        { this.props.productPrices.map((pp) => <div key={pp.id} className="relative flex flex-col justify-between align-top h-[150px] border-r-[1px] border-b-[1px] border-dashed border-gray-100 p-3">
             <div className="text-sm">{pp.product.name.substring(0,36)}</div>
 
             <div className="grow">
