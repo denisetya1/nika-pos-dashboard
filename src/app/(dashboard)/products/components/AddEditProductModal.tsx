@@ -3,18 +3,19 @@
 import { Brand, Category, Product } from "@prisma/client";
 import { Button, FileInput, Label, Modal, Select, TextInput, Tooltip } from "flowbite-react";
 import { useRouter } from "next/navigation";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { useForm, SubmitHandler } from 'react-hook-form';
 import AlertMsg from "../../components/AlertMsg";
 import { useAlertContext } from "@/app/context/alert/AlertContext";
 
 type FormValues = {
-  name: string
-  description?: string | null | undefined
-  categoryId: bigint
-  brandId: bigint
-  sku?: string | null | undefined,
-  barcode?: string | null | undefined,
+  name?: string
+  priceTagLabel?: string | null
+  description?: string | null
+  categoryId?: Number
+  brandId?: Number
+  sku?: string | null,
+  barcode?: string | null,
 }
 
 const AddEditProductModal = ({categories, brands, product, btnTitle, btnColor, endpoint, tooltipText}:
@@ -33,7 +34,9 @@ const AddEditProductModal = ({categories, brands, product, btnTitle, btnColor, e
   const isEdit = product !== undefined
 
   const formOptions = {
-    defaultValues: {...product}
+    defaultValues: {
+      ...product
+    }
   }
 
   const { register, handleSubmit, reset } = useForm<FormValues>(formOptions);
@@ -42,6 +45,7 @@ const AddEditProductModal = ({categories, brands, product, btnTitle, btnColor, e
     const body = {
       name: formData.name,
       description: formData.description,
+      priceTagLabel: formData.priceTagLabel,
       categoryId: Number(formData.categoryId),
       brandId: Number(formData.brandId),
       sku: formData.sku,
@@ -66,6 +70,10 @@ const AddEditProductModal = ({categories, brands, product, btnTitle, btnColor, e
     }
   }
 
+  useEffect(() => {
+    reset({...product})
+  }, [product])
+
   return (
     <>
       <Tooltip content={tooltipText} placement="bottom">
@@ -87,12 +95,12 @@ const AddEditProductModal = ({categories, brands, product, btnTitle, btnColor, e
                   <TextInput id="input-gray" {...register("name")} placeholder="Nama Produk" />
                 </div>
 
-                {/* <div id="fileUpload" className="col-span-2 max-w-md">
+                <div className="col-span-2">
                   <div className="mb-2 block">
-                    <Label htmlFor="file" value="Photo Produk" />
+                    <Label htmlFor="input-gray" color="gray" value="Nama di Label Harga" />
                   </div>
-                  <FileInput id="file" name="file" helperText="Photo Produk" />
-                </div> */}
+                  <TextInput id="input-gray" {...register("priceTagLabel")} maxLength={38} placeholder="max. 38 karakter" />
+                </div>
 
                 <div className="col-span-1">
                   <div className="mb-2 block">

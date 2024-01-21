@@ -109,7 +109,7 @@ const ProductStock = async ({
               <th scope="col" className="hidden sm:table-cell px-6 py-3 hover:bg-gray-200">
                 <SortableHeader
                   title="Harga"
-                  fieldName="sellprice"
+                  fieldName="sellPrice"
                 />
               </th>
               <th scope="col" className="hidden sm:table-cell px-6 py-3 hover:bg-gray-200">

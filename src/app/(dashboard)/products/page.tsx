@@ -5,9 +5,10 @@ import queryString from "query-string";
 import ConfirmDeleteModal from "./components/ConfirmDeleteModal";
 import AlertContextProvider from "@/app/context/alert/AlertContextProvider";
 import { HiOutlinePencilSquare, HiOutlineTrash } from "react-icons/hi2";
-import { Pagination } from "flowbite-react";
+import { IoPricetagOutline } from "react-icons/io5";
 import TablePagination from "../components/TablePagination";
 import SortableHeader from "../components/SortableHeader";
+import { Tooltip } from "flowbite-react";
 
 type Product = Prisma.ProductGetPayload<{
   include: { brand: true, category: true}
@@ -119,6 +120,12 @@ const page = async ({
                 <div>
                   {product.name}
                 </div>
+                {product.priceTagLabel !== null && product.priceTagLabel !== '' && <div className="flex justify-start gap-1 text-xm text-gray-400">
+                  <Tooltip content="Nama di label harga" style="light" placement="bottom">
+                    <IoPricetagOutline />
+                  </Tooltip>
+                  {product.priceTagLabel}
+                </div>}
                 <div className="sm:hidden text-xs text-gray-400 flex justify-start gap-3">
                   <div>SKU: {product.sku ? product.sku : '-'}</div>
                   <div>Barcode: {product.barcode ? product.barcode : '-'}</div>

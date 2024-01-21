@@ -28,7 +28,7 @@ const ProductListFilter = ({
   const router = useRouter();
   const [categoryId, setCategoryId] = useState(selectedCategory);
   const [brandId, setBrandId] = useState(selectedBrand);
-  const [search, setSearchProduct] = useState(searchProduct);
+  const [search, setSearch] = useState(searchProduct || '');
   const [outletId, setOutletId] = useState(selectedOutlet);
 
   useEffect(() => {
@@ -83,7 +83,7 @@ const ProductListFilter = ({
         <div className="mb-2 block">
           <Label htmlFor="product-name" value="Cari Produk" />
         </div>
-        <TextInput id="product-name" className="w-full" value={searchProduct} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchProduct(e.target.value)} type="text" placeholder="Cari berdasarkan nama produk/barcode/sku"/>
+        <TextInput id="product-name" className="w-full" value={search} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)} type="text" placeholder="Cari berdasarkan nama produk/barcode/sku"/>
       </div>
     </div>
   )

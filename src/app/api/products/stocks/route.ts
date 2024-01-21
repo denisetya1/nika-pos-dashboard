@@ -10,7 +10,7 @@ export const GET = async (req: NextRequest) =>  {
   const brandId = req.nextUrl.searchParams.get('brandId');
   const search = req.nextUrl.searchParams.get('search');
 
-  const sort = req.nextUrl.searchParams.get('sort')
+  const sort: string = req.nextUrl.searchParams.get('sort') || ''
   const direction = req.nextUrl.searchParams.get('direction') || "asc"
 
   let limit = Number(req.nextUrl.searchParams.get('limit'))
@@ -33,17 +33,23 @@ export const GET = async (req: NextRequest) =>  {
       ...(sort === 'sku' ? {sku: direction} : {}),
       ...(sort === 'barcode' ? {barcode: direction} : {}),
       ...(sort === 'category' ? { category: {name: direction}} : {}),
-      ...(sort === 'brand' ? { brand: {name: direction}} : {}),
-      // ...(sort === 'sellprice' ? { stocks: {sellPrice: direction, nulls: 'first'}} : {}),
-      // ...(sort === 'stock' ? { stocks: {quantity: direction}} : {})
+      ...(sort === 'brand' ? { brand: {name: direction}} : {})
     }
   }
 
   let ids: bigint[] = []
   let count = 0
-  let isSortedByPriceQuantity = false
+  let isSortedByStockField = false
+  const specialSorts: string[] = [
+    'sellPrice', 
+    'quantity', 
+    'discountPercentage', 
+    'markupPercentage'
+  ]
 
-  if(!isEmptyVal(sort) && (sort === 'sellprice' || sort === 'quantity')){
+  if(
+    !isEmptyVal(sort) && specialSorts.indexOf(sort) > -1
+  ){
     const productsStocks = await prisma.productStock.findManyAndCount({
       where: {
         AND : [
@@ -67,8 +73,10 @@ export const GET = async (req: NextRequest) =>  {
         ]
       },
       orderBy: {
-        ...(sort === 'sellprice' ? {sellPrice: direction === "asc" ? "asc" : "desc"} : {}),
+        ...(sort === 'sellPrice' ? {sellPrice: direction === "asc" ? "asc" : "desc"} : {}),
         ...(sort === 'quantity' ? {quantity: direction === "asc" ? "asc" : "desc"} : {}),
+        ...(sort === 'discountPercentage' ? {discountPercentage: direction === "asc" ? "asc" : "desc"} : {}),
+        ...(sort === 'markupPercentage' ? {markupPercentage: direction === "asc" ? "asc" : "desc"} : {}),
       },
       select: {
         productId: true
@@ -80,7 +88,7 @@ export const GET = async (req: NextRequest) =>  {
     const [list, listCount] = productsStocks
     ids = list.map((item)=> item.productId)
     count = listCount
-    isSortedByPriceQuantity = true
+    isSortedByStockField = true
   }
   
   const products = await prisma.product.findManyAndCount({
@@ -142,25 +150,18 @@ export const GET = async (req: NextRequest) =>  {
         }
       }
     },
-    ...(!isSortedByPriceQuantity ? {skip: (page - 1) * limit} : {}),
-    ...(!isSortedByPriceQuantity ? {take: limit} : {} ),
+    ...(!isSortedByStockField ? {skip: (page - 1) * limit} : {}),
+    ...(!isSortedByStockField ? {take: limit} : {} ),
   });
 
-  if(sort === 'sellprice'){
+  if(isSortedByStockField){
     products[1] = count
 
-    if(direction === 'asc')
-      products[0].sort(function(a, b){return Number(a.stocks[0].sellPrice) - Number(b.stocks[0].sellPrice)});
-    else
-      products[0].sort(function(a, b){return Number(b.stocks[0].sellPrice) - Number(a.stocks[0].sellPrice)});
-  }
-  if(sort === 'quantity'){
-    products[1] = count
-
-    if(direction === 'asc')
-      products[0].sort(function(a, b){return a.stocks[0].quantity - b.stocks[0].quantity});
-    else
-      products[0].sort(function(a, b){return b.stocks[0].quantity - a.stocks[0].quantity});
+    if(direction === 'asc'){
+      products[0].sort((a, b) => (Number(a.stocks[0][sort as keyof typeof a.stocks[0]]) - Number(b.stocks[0][sort as keyof typeof b.stocks[0]])))
+    } else {
+      products[0].sort((a, b) => (Number(b.stocks[0][sort as keyof typeof b.stocks[0]]) - Number(a.stocks[0][sort as keyof typeof a.stocks[0]])))
+    }
   }
 
   products.push(page)

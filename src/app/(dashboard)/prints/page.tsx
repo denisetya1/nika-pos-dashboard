@@ -140,43 +140,14 @@ const PrintPricePage = ({
       </div>
 
       <div className="w-full">
+        
           <div className="flex justify-end align-middle mb-5">
             <Button color="blue" onClick={handlePrint}>Cetak Label</Button>
           </div>
           <ComponentToPrint ref={componentRef} productPrices={productPrices}/>
         </div>
-           
-      {/* <div className="grid grid-cols-4 gap-0"> */}
-        
-        {/* { productPrice.map((pp) => <div className="relative flex flex-col justify-between align-top h-[150px] border-r-[1px] border-b-[1px] border-dashed border-gray-100 p-3">
-            <div className="text-sm">{pp.product.name}</div>
 
-            <div className="grow">
-              <div className="flex flex-col h-full justify-center align-middle text-right">
-                {
-                  !isEmptyVal(pp.markupPercentage, true) && !isEmptyVal(pp.markupPercentage, true) &&
-                  <div className="text-xs line-through">
-                    {getFinalPrice(Number(pp.sellPrice), pp.markupPercentage, 0, false, true)}
-                  </div>
-               }
-                <div className="font-bold mb-2">
-                  {getFinalPrice(Number(pp.sellPrice), pp.markupPercentage, pp.discountPercentage, true, true)}
-                </div>
-              </div>
-            </div>
-
-            <div className="absolute bottom-2 right-2">
-              <img
-                    alt="NIKA POS - BEAUTYCAT"
-                    height="24"
-                    src="/receipt-logo.png"
-                    width="30"
-                  />
-            </div>
-          </div>
-          )} */}
       </div>
-    // </div>
   )
 }
 

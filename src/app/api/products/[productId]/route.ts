@@ -4,9 +4,8 @@ import { prisma } from "../../client";
 export const PUT = async (req: Request, { params }: { params: { productId: string } }) =>  {
   const body = await req.json()
   const { productId } = params
-  // const { name } = body
 
-  const cat = await prisma.product.update({
+  const product = await prisma.product.update({
     where:{
       id: Number(productId)
     },
@@ -15,7 +14,7 @@ export const PUT = async (req: Request, { params }: { params: { productId: strin
     }
   })
   
-  return NextResponse.json(cat);
+  return NextResponse.json(product);
 }
 
 export const DELETE = async (req: Request, { params }: { params: { productId: string } }) =>  {

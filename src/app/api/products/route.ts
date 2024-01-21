@@ -54,6 +54,8 @@ export const GET = async (req: NextRequest) =>  {
     select: {
       id: true,
       name: true,
+      description: true,
+      priceTagLabel: true,
       barcode: true,
       sku: true,
       categoryId: true,
@@ -91,6 +93,7 @@ export const POST = async (request: Request) =>  {
     data: {
       name: body.name,
       description: body.description,
+      priceTagLabel: body.priceTagLabel,
       categoryId: body.categoryId,
       brandId: body.brandId,
       sku: body.sku,
