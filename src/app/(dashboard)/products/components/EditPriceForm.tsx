@@ -104,14 +104,14 @@ const EditPriceForm = ({
                     <div className="mb-2 block">
                       <Label htmlFor="input-gray" color="gray" value="Markup Harga" />
                     </div>
-                    <TextInput className="w-[150px]" onFocus={setSelected} min={0} type="number" {...register('markupPercentage')} placeholder="" />
+                    <TextInput className="w-[150px]" onFocus={setSelected} min={0} max={99} type="number" {...register('markupPercentage')} placeholder="" />
                   </div>
 
                   <div className="col-span-2">
                     <div className="mb-2 block">
                       <Label htmlFor="input-gray" color="gray" value="Diskon" />
                     </div>
-                    <TextInput className="w-[150px]" onFocus={setSelected} min={0} type="number" {...register('discountPercentage')} placeholder="" />
+                    <TextInput className="w-[150px]" onFocus={setSelected} min={0} max={99} type="number" {...register('discountPercentage')} placeholder="" />
                   </div>
 
                   {/* <div className="col-span-2">

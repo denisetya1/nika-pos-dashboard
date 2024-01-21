@@ -173,7 +173,7 @@ const ProductStock = async ({
               <td className="hidden sm:table-cell px-6 py-3">{product.stocks.length > 0 && product.stocks[0]?.discountPercentage}</td>
               <td className="hidden sm:table-cell px-6 py-3">
               {
-                product.stocks.length > 0 && !isEmptyVal(product.stocks[0].markupPercentage) && !isEmptyVal(product.stocks[0]?.markupPercentage) &&
+                product.stocks.length > 0 && !isEmptyVal(product.stocks[0].markupPercentage, true) && !isEmptyVal(product.stocks[0]?.markupPercentage, true) &&
                 <div className="text-xs line-through">
                   {product.stocks.length > 0 && getFinalPrice(Number(product.stocks[0]?.sellPrice), product.stocks[0].markupPercentage, 0, false, true)}
                 </div>
