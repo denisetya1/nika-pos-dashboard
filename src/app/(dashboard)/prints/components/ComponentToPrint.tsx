@@ -1,9 +1,10 @@
 'use client'
 
-import { formatCurrency, getFinalPrice, isEmptyVal } from '@/app/helpers/functions';
+import { getFinalPrice, isEmptyVal } from '@/app/helpers/functions';
 import { Prisma } from '@prisma/client';
 import React from 'react'
 import Image from "next/image";
+import Barcode from 'react-barcode';
 
 type ProductStock = Prisma.ProductStockGetPayload<{
   include: { 
@@ -28,21 +29,27 @@ class ComponentToPrint extends React.Component<MyProps> {
   render (){
     return (
       <div className="grid grid-cols-4 gap-0 w-full">
-        { this.props.productPrices.map((pp) => <div key={pp.id} className="relative flex flex-col justify-between align-top h-[150px] border-r-[1px] border-b-[1px] border-dashed border-gray-100 p-3">
-            <div className="text-sm">{pp.product.name.substring(0,36)}</div>
+        { this.props.productPrices.map((pp, index) => <div key={pp.id} className={`relative flex flex-col justify-between align-top h-[150px] border-[1px] border-dashed border-gray-200 p-3 ${(index+1)%28 === 0 ? 'mb-[80px]' : ''} `}>
+            <div className="text-sm">
+              {pp.product.priceTagLabel !== '' && pp.product.priceTagLabel !== null? pp.product.priceTagLabel : pp.product.name.substring(0,36)}
+            </div>
 
             <div className="grow">
               <div className="flex flex-col h-full justify-center align-middle text-right">
                 {
                   !isEmptyVal(pp.markupPercentage, true) && !isEmptyVal(pp.markupPercentage, true) &&
-                  <div className="text-xs line-through">
-                    {getFinalPrice(Number(pp.sellPrice), pp.markupPercentage, 0, false, true)}
+                  <div className="text-xs">
+                    <span className="line-through">{getFinalPrice(Number(pp.sellPrice), pp.markupPercentage, 0, false, true)}</span>
+                    <span> (-{pp.discountPercentage}%)</span>
                   </div>
                }
                 <div className="font-bold mb-2">
                   {getFinalPrice(Number(pp.sellPrice), pp.markupPercentage, pp.discountPercentage, true, true)}
                 </div>
               </div>
+            </div>
+            <div>
+              {pp.product.barcode !== null && pp.product.barcode !== '' && <Barcode height={15} width={1} displayValue={false} value={pp.product.barcode} />}
             </div>
 
             <div className="absolute bottom-2 right-2">

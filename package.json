@@ -16,6 +16,7 @@
     "prisma": "^5.7.0",
     "query-string": "^8.1.0",
     "react": "^18",
+    "react-barcode": "^1.4.6",
     "react-dom": "^18",
     "react-hook-form": "^7.49.2",
     "react-icons": "^4.12.0",

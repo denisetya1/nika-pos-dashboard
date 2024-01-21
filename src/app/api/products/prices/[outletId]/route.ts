@@ -30,11 +30,18 @@ export const GET = async (req: NextRequest, {params}: {params: {
         ]
       }
     },
+    orderBy: {
+      product: {
+        name: 'asc'
+      }
+    },
     include: {
       product: {
         select: {
           id: true,
           name: true,
+          barcode: true,
+          priceTagLabel: true,
           brand: {
             select: {
               id: true,
