@@ -41,6 +41,7 @@ const AddEditProductModal = ({categories, brands, product, btnTitle, btnColor, e
 
   const { register, handleSubmit, reset } = useForm<FormValues>(formOptions);
 
+  
   const SubmitForm : SubmitHandler<FormValues> = async (formData) => {
     const body = {
       name: formData.name,
