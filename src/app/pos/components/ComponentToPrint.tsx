@@ -6,12 +6,7 @@ class ComponentToPrint extends React.Component {
   render (){
     return (<div>
       <div className="logo flex justify-center py-5">
-        <img
-                  alt="NIKA POS - BEAUTYCAT"
-                  height="24"
-                  src="/receipt-logo.png"
-                  width="150"
-                />
+       
       </div>
       <div className='border-y-[2px] p-3'>
         1234567
