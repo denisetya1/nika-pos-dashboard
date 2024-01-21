@@ -3,6 +3,7 @@
 import { formatCurrency, getFinalPrice, isEmptyVal } from '@/app/helpers/functions';
 import { Prisma } from '@prisma/client';
 import React from 'react'
+import Image from "next/image";
 
 type ProductStock = Prisma.ProductStockGetPayload<{
   include: { 
@@ -45,7 +46,7 @@ class ComponentToPrint extends React.Component<MyProps> {
             </div>
 
             <div className="absolute bottom-2 right-2">
-              <img
+              <Image
                     alt="NIKA POS - BEAUTYCAT"
                     height="24"
                     src="/receipt-logo.png"
