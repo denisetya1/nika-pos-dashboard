@@ -3,7 +3,7 @@ import { Prisma, PrismaClient } from '@prisma/client'
 const globalForPrisma = globalThis as unknown as { prisma: PrismaClient }
 
 export const extendedPrismaClient =  new PrismaClient().$extends({
-  name: 'findManyAndCount',
+  name: 'POSExtension',
   model: {
     $allModels: {
       async findManyAndCount<Model, Args>(
@@ -14,6 +14,32 @@ export const extendedPrismaClient =  new PrismaClient().$extends({
           (this as any).findMany(args),
           (this as any).count({ where: (args as any).where }),
         ]) as any;
+      },
+      async delete<Model, Args>(
+        this: Model,
+        args: Prisma.Exact<Args, Prisma.Args<Model, 'findMany'>>
+      ): Promise<[Prisma.Result<Model, Args, 'findMany'>, number]>{
+        return (this as any).update({
+          ...args as any,
+          data: {
+            deletedAt: new Date()
+          }
+        })
+      }
+    }
+  },
+  query: {
+    $allModels: {
+      async $allOperations({ args, query, operation }) {
+        if (operation === "findMany" || operation === "findFirst" || operation === "findUnique") {
+          
+          args.where =  {
+            ...args.where,
+            deletedAt: null
+          }
+        }
+        
+        return query(args);
       }
     }
   }

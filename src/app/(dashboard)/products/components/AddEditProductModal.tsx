@@ -1,9 +1,9 @@
 'use client';
 
 import { Brand, Category, Product } from "@prisma/client";
-import { Button, FileInput, Label, Modal, Select, TextInput, Tooltip } from "flowbite-react";
+import { Button,  Label, Modal, Select, TextInput, Tooltip } from "flowbite-react";
 import { useRouter } from "next/navigation";
-import { FC, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm, SubmitHandler } from 'react-hook-form';
 import AlertMsg from "../../components/AlertMsg";
 import { useAlertContext } from "@/app/context/alert/AlertContext";
