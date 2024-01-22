@@ -5,6 +5,8 @@ import { Prisma } from '@prisma/client';
 import React from 'react'
 import Image from "next/image";
 import Barcode from 'react-barcode';
+import { HiTrash } from 'react-icons/hi2';
+import { Button } from 'flowbite-react';
 
 type ProductStock = Prisma.ProductStockGetPayload<{
   include: { 
@@ -29,7 +31,7 @@ class ComponentToPrint extends React.Component<MyProps> {
   render (){
     return (
       <div className="grid grid-cols-4 gap-0 w-full">
-        { this.props.productPrices.map((pp, index) => <div key={pp.id} className={`relative flex flex-col justify-between align-top h-[150px] border-[1px] border-dashed border-gray-200 p-3 ${(index+1)%28 === 0 ? 'mb-[70px]' : ''} `}>
+        { this.props.productPrices.map((pp, index) => <div key={pp.id} className={`relative flex flex-col justify-between align-top h-[150px] border-[1px] border-dashed border-gray-200 p-3 ${(index+1)%28 === 0 ? 'mb-[61px]' : ''} `}>
             <div className="text-sm">
               {pp.product.priceTagLabel !== '' && pp.product.priceTagLabel !== null? pp.product.priceTagLabel : pp.product.name.substring(0,36)}
             </div>
@@ -60,6 +62,10 @@ class ComponentToPrint extends React.Component<MyProps> {
                     width="30"
                   />
             </div>
+
+            <button className='absolute print:hidden bottom-2 left-1 px-[0px]' color='light'>
+              <HiTrash />
+            </button>
           </div>
           )}
       </div>

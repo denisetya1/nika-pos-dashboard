@@ -18,15 +18,15 @@ export const GET = async (req: NextRequest, {params}: {params: {
       product: {
         AND: [
           {...(!isEmptyVal(brandId) ? {brandId: Number(brandId)} : {})},
-          {...(!isEmptyVal(categoryId) ? {categoryId: Number(categoryId)} : {})}
-          // {...(!isEmptyVal(search) ? { OR: [
-          //     {name: {
-          //       contains: search
-          //     }},
-          //     {sku: search},
-          //     {barcode: search}
-          //   ] } : {})
-          // },
+          {...(!isEmptyVal(categoryId) ? {categoryId: Number(categoryId)} : {})},
+          {...(!isEmptyVal(search) ? { OR: [
+              // {name: {
+              //   contains: search
+              // }},
+              {sku: search},
+              {barcode: search}
+            ] } : {})
+          },
         ]
       }
     },
