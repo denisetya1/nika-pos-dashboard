@@ -3,8 +3,9 @@
 import React, { useEffect, useState } from "react"
 import { Brand, Category, Outlet } from "@prisma/client"
 import { Datepicker, Label, Select, TextInput } from "flowbite-react"
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import queryString from "query-string";
+import moment from "moment";
 
 const StockListFilter = ({
   categories, 
@@ -14,7 +15,7 @@ const StockListFilter = ({
   searchProduct,
   outlets,
   selectedOutlet,
-  pageURL,
+  selectedDate,
 } : {
   categories: Category[]
   brands: Brand[]
@@ -23,13 +24,15 @@ const StockListFilter = ({
   selectedBrand: string | undefined
   selectedOutlet?: string | undefined
   searchProduct: string | undefined
-  pageURL?: string | undefined
+  selectedDate?: string
 }) => {
   const router = useRouter();
+  const pathname = usePathname()
   const [categoryId, setCategoryId] = useState(selectedCategory);
   const [brandId, setBrandId] = useState(selectedBrand);
   const [search, setSearchProduct] = useState(searchProduct);
   const [outletId, setOutletId] = useState(selectedOutlet);
+  const [moveDateStr, setMoveDateStr] = useState(selectedDate)
 
   useEffect(() => {
     const query = {
@@ -37,6 +40,7 @@ const StockListFilter = ({
       brandId,
       outletId,
       search,
+      moveDateStr
     }
 
     const qs = queryString.stringify(query, {
@@ -44,8 +48,9 @@ const StockListFilter = ({
       skipNull: true
     })
 
-    router.push(`${pageURL}?${qs}`)
-  }, [categoryId, brandId, search, outletId, router, pageURL])
+    router.push(`${pathname}?${qs}`)
+    router.refresh()
+  }, [categoryId, brandId, search, outletId, router, moveDateStr])
 
   return (
     <div className="flex flex-row justify-start gap-5 items-center mb-8">
@@ -83,7 +88,7 @@ const StockListFilter = ({
         <div className="mb-2 block">
           <Label htmlFor="product-name" value="Cari Produk" />
         </div>
-        <TextInput id="product-name" className="w-80" value={searchProduct} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchProduct(e.target.value)} type="text" placeholder="Cari berdasarkan nama produk/barcode/sku"/>
+        <TextInput id="product-name" className="w-80" value={search} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchProduct(e.target.value)} type="text" placeholder="Cari berdasarkan nama produk/barcode/sku"/>
       </div>
 
       <div>
@@ -94,7 +99,9 @@ const StockListFilter = ({
           language="en-ID" 
           labelTodayButton="Hari Ini" 
           labelClearButton="Batal" 
+          defaultDate={new Date(moment(selectedDate).format())}
           weekStart={1}
+          onSelectedDateChanged={(d) => setMoveDateStr(moment(d).format('YYYY-MM-D'))}
         />
       </div>
     </div>

@@ -220,9 +220,9 @@ model ProductStock {
   id BigInt @id @default(autoincrement())
   productId BigInt @map("product_id")
   product Product @relation(fields: [productId], references: [id])
-  storeId BigInt
+  storeId BigInt @map("store_id")
   store Store @relation(fields: [storeId], references: [id])
-  outletId BigInt 
+  outletId BigInt @map("outlet_id")
   Outlet Outlet @relation(fields: [outletId], references: [id])
   quantity Int
   sellPrice Decimal @db.Decimal(10,2)
@@ -260,7 +260,8 @@ model MoveType {
 }
 model StockMovement {
   id BigInt @id @default(autoincrement())
-  moveDate DateTime @db.Date
+  moveDate DateTime @db.Date @map("move_date")
+  moveDateStr String @map("move_date_str") @default("")
   productStockId BigInt @map("product_stock_id")
   productStock ProductStock @relation(fields: [productStockId], references: [id])
   startQuantity Int? @map("start_quantity")
@@ -311,7 +312,7 @@ model StockRequestProduct {
 }
 
 model PaymentType {
-  id BigInt @id @default(autoincrement())
+  id Int @id @default(autoincrement())
   name String 
   displayName String @map("display_name")
   description String? @db.Text()
@@ -321,6 +322,7 @@ model PaymentType {
   updatedAt DateTime @updatedAt @map("updated_at")
   deletedAt DateTime? @map("deleted_at")
   sales Sales[]
+  OutletPaymentTypes OutletPaymentType[]
 
   @@map("payment_types")
 }
@@ -329,6 +331,8 @@ model OutletPaymentType {
   id BigInt @id @default(autoincrement())
   outletId BigInt? @map("outlet_id")
   storeId BigInt? @map("storeId")
+  paymentTypeId Int @map("payment_type_id")
+  paymentType PaymentType @relation(fields:[paymentTypeId], references:[id])
   isActive Boolean @map("is_active")
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
@@ -339,22 +343,22 @@ model OutletPaymentType {
 
 model Sales {
   id String @id @db.VarChar(25)
-  outletId BigInt
+  outletId BigInt @map("outlet_id")
   outlet Outlet @relation(fields:[outletId], references:[id])
-  userId BigInt
+  userId BigInt @map("user_id")
   user User @relation(fields:[userId], references:[id])
 
-  totalQuantity Int @map("total_quantity")
-  totalPrice Decimal @db.Decimal(10,2) @map("total_price")
-  totalDiscount Decimal @db.Decimal(10,2) @map("total_discount")
-  totalFinalPrice Decimal @db.Decimal(10,2) @map("total_final_price")
-  paymentAmount Decimal @db.Decimal(10,2) @map("payment_amount")
-  changeAmount Decimal @db.Decimal(10,2) @map("change_amount")
+  totalQuantity Int? @map("total_quantity")
+  totalPrice Decimal? @db.Decimal(10,2) @map("total_price")
+  totalDiscount Decimal? @db.Decimal(10,2) @map("total_discount")
+  totalFinalPrice Decimal? @db.Decimal(10,2) @map("total_final_price")
+  paymentAmount Decimal? @db.Decimal(10,2) @map("payment_amount")
+  changeAmount Decimal? @db.Decimal(10,2) @map("change_amount")
 
-  paymentTypeId BigInt
-  PaymentType PaymentType @relation(fields: [paymentTypeId], references: [id])
-  cardNumber String @map("card_number")
-  confirmNumber String @map("consfirm_number")
+  paymentTypeId Int? @map("payment_type_id")
+  PaymentType PaymentType? @relation(fields: [paymentTypeId], references: [id])
+  cardNumber String? @map("card_number")
+  confirmNumber String? @map("confirm_number")
 
   status Boolean
   createdAt DateTime @default(now()) @map("created_at")

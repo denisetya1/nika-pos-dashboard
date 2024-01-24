@@ -9,7 +9,7 @@ export const GET = async (req: NextRequest, { params }: { params: { outletId: st
   const categoryId = req.nextUrl.searchParams.get('categoryId');
   const brandId = req.nextUrl.searchParams.get('brandId');
   const search = req.nextUrl.searchParams.get('search');
-  const date = req.nextUrl.searchParams.get('date');
+  const moveDate = new Date(req.nextUrl.searchParams.get('moveDate') || '')
 
   const sort = req.nextUrl.searchParams.get('sort')
   const direction = req.nextUrl.searchParams.get('direction')
@@ -35,8 +35,6 @@ export const GET = async (req: NextRequest, { params }: { params: { outletId: st
       ...(sort === 'barcode' ?  {productStock: { product: {barcode: direction} } } : {}),
       ...(sort === 'category' ?  {productStock: { product: {category:{name: direction}} } } : {}),
       ...(sort === 'brand' ? {productStock: { product: {brand:{name: direction}} } } : {}),
-      // ...(sort === 'sellPrice' ? { stocks: {sellPrice: direction, nulls: 'first'}} : {}),
-      // ...(sort === 'stock' ? { stocks: {quantity: direction}} : {})
     }
   } else {
     orderBy = {productStock: { product: {name: 'asc'} } }

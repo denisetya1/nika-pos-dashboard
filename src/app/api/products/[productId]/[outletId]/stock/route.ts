@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { prisma } from "../../../../client";
+import moment from "moment";
 
 export const POST = async (request: Request, { params }: { 
   params: { 
@@ -9,7 +10,27 @@ export const POST = async (request: Request, { params }: {
 }) =>  {
   const {productId, outletId } = params
   const body = await request.json()
-  const { quantity, moveTypeId, direction, description} = body
+  const { quantity, moveTypeId, direction, description, moveDateStr} = body
+
+  const stock = await prisma.productStock.findFirst({
+    where: {
+      storeId: 1,
+      productId: Number(productId),
+      outletId: Number(outletId)
+    }
+  })
+
+  let startQuantity = 0
+  let endQuantity = Number(quantity)
+
+  if(stock !== null){
+    startQuantity = stock.quantity
+
+    if(body.direction === 'IN')
+      endQuantity = startQuantity + Number(quantity)
+    else
+      endQuantity = startQuantity - Number(quantity)
+  }
 
   const updateStock = await prisma.productStock.upsert({
     where: {
@@ -25,10 +46,13 @@ export const POST = async (request: Request, { params }: {
       },
       stockMovements: {
         create: {
-          moveDate: new Date(),
+          moveDate: new Date(moment(moveDateStr).format()),
+          moveDateStr: moveDateStr,
           moveTypeId: Number(moveTypeId),
           direction: direction,
+          startQuantity,
           quantity: Number(quantity),
+          endQuantity,
           description: description
         }
       }
@@ -46,10 +70,13 @@ export const POST = async (request: Request, { params }: {
       isActive: true,
       stockMovements: {
         create: {
-          moveDate: new Date(),
+          moveDate: new Date(moment(moveDateStr).format()),
+          moveDateStr: moveDateStr,
           moveTypeId: Number(moveTypeId),
           direction: direction,
+          startQuantity,
           quantity: Number(quantity),
+          endQuantity,
           description: description,
         }
       }

@@ -2,14 +2,13 @@ import { useSidebarContext } from "@/context/SidebarContext";
 import { Sidebar } from "flowbite-react";
 import { usePathname } from "next/navigation";
 import type { FC } from "react";
-import { BiBuoy, BiSolidCategory } from "react-icons/bi";
+import { BiSolidCategory } from "react-icons/bi";
 import {
-  HiChartPie,
-  HiGift,
   HiHome,
   HiShoppingBag,
   HiBuildingStorefront
 } from "react-icons/hi2";
+import { FaRegCreditCard } from "react-icons/fa6"
 import { TbFileReport } from "react-icons/tb";
 import { twMerge } from "tailwind-merge";
 
@@ -61,7 +60,7 @@ export const DashboardSidebar: FC = function () {
         {
           name: 'report-stock',
           title: "Keluar/Masuk Stok",
-          url: "/reports/stocks",
+          url: "/reports/stocks/by-products",
         }
       ]
     },
@@ -70,6 +69,12 @@ export const DashboardSidebar: FC = function () {
       title: "Daftar Outlet",
       url: "/outlets",
       icon: HiBuildingStorefront
+    },
+    {
+      name: 'paymentd',
+      title: "Pembayaran",
+      url: "/payments",
+      icon: FaRegCreditCard
     },
     {
       name: 'master-data',

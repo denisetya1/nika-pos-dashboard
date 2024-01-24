@@ -1,10 +1,15 @@
 'use client';
 
-import {  MoveType, Outlet, Product, ProductStock } from "@prisma/client";
-import { Button, Label, Modal, Select, TextInput, Textarea, Tooltip } from "flowbite-react";
+import {  MoveType, Outlet, Prisma, ProductStock } from "@prisma/client";
+import { Button, Datepicker, Label, Modal, Select, TextInput, Textarea, Tooltip } from "flowbite-react";
+import moment from "moment";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { useForm, SubmitHandler } from 'react-hook-form';
+import { useForm, SubmitHandler, Controller } from 'react-hook-form';
+
+type Product = Prisma.ProductGetPayload<{
+  include: { brand: true, category: true, stocks: true}
+}>
 
 type FormValues = {
   quantity: String
@@ -14,16 +19,17 @@ type FormValues = {
   productId: String
   productStockId: String
   direction: String
+  moveDate: string
 }
 
 const StockMovementForm = ({
     outlet, 
     product, 
     direction, 
-    currentQuantity, 
     movements,
     productStock,
-    disabled
+    disabled,
+    currentQuantity
   }:
   {
     outlet: Outlet
@@ -36,6 +42,7 @@ const StockMovementForm = ({
   }) => {
   const router = useRouter()
   const [isOpen, setOpen] = useState(false)
+  const [moveDateStr, setMoveDateStr] = useState(moment().format('YYYY-MM-D'))
 
   const formOptions = {
     defaultValues: {
@@ -48,14 +55,17 @@ const StockMovementForm = ({
 
   movements = movements.filter((m) => m.direction === direction);
 
-  const { register, handleSubmit, reset } = useForm<FormValues>(formOptions);
+  const { register, handleSubmit, reset, control } = useForm<FormValues>(formOptions);
 
   const SubmitForm : SubmitHandler<FormValues> = async (formData) => {
     const body = formData
 
     const res = await fetch(`/api/products/${product.id}/${outlet.id}/stock`, {
       method: 'POST',
-      body: JSON.stringify(body)
+      body: JSON.stringify({
+        ...body,
+        moveDateStr
+      })
     })
 
     reset({...formOptions.defaultValues})
@@ -79,7 +89,7 @@ const StockMovementForm = ({
       <Modal show={isOpen} onClose={() => setOpen(false)}>
         <form onSubmit={handleSubmit(SubmitForm)}>
           <Modal.Header>{direction === 'IN' ? 'PENAMBAHAN STOK (STOK MASUK)' : 'PENGURANGAN STOK (STOK KELUAR)'}</Modal.Header>
-          <Modal.Body>
+          <Modal.Body className="dark:text-gray-300">
             <div className="space-y-6">
                 <div className="grid gap-4 mb-4 grid-cols-2">
 
@@ -95,13 +105,37 @@ const StockMovementForm = ({
                       <Label htmlFor="input-gray" color="gray" value="Nama Produk" />
                     </div>
                     <TextInput id="input-gray" name="name" value={product.name} disabled/>
+                    
+                  </div>
+
+                  <div className="col-span-2">
+                    <div className="mb-2 block">
+                      <Label htmlFor="input-gray" color="gray" value="Tanggal" />
+                    </div>
+
+                    <Datepicker 
+                          language="en-ID" 
+                          labelTodayButton="Hari Ini" 
+                          labelClearButton="Batal" 
+                          weekStart={1}
+                          onSelectedDateChanged={(d) => setMoveDateStr(moment(d).format('YYYY-MM-D'))}
+                          defaultDate={new Date(moment().format())}
+                          minDate={new Date(moment().subtract(4, 'days').format())}
+                        />
+                    
                   </div>
 
                   <div className="col-span-2">
                     <div className="mb-2 block">
                       <Label htmlFor="input-gray" color="gray" value="Jumlah" />
                     </div>
-                    <TextInput className="w-[100px]" min={1} type="number" {...register('quantity')} placeholder="" />
+                    <TextInput className="w-[100px]" min={1} max={direction === 'OUT' ? currentQuantity : 999999999} type="number" {...register('quantity')} placeholder="" 
+                      helperText={
+                        <>
+                        stok tersedia: {currentQuantity}
+                        </>
+                      }
+                    />
                   </div>
 
                   <div className="col-span-2">

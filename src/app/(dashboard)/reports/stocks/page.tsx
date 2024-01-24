@@ -66,7 +66,6 @@ const StockReportPage = async ({
           selectedBrand={searchParams?.brandId}
           selectedCategory={searchParams?.categoryId}
           searchProduct={searchParams?.search}
-          pageURL='/reports/stocks'
         />
       </div>
 
@@ -92,14 +91,14 @@ const StockReportPage = async ({
               <td className="px-6 py-3 w-10">{index + 1}</td>
               <td className="px-6 py-3 w-80 text-black dark:text-white">{sm.productStock.product.name}</td>
               <td className="px-6 py-3">{`${new Date(sm.moveDate).getDate()}-${new Date(sm.moveDate).getMonth() + 1}-${new Date(sm.moveDate).getFullYear()}`}</td>
-              <td className="px-6 py-3">{0}</td>
+              <td className="px-6 py-3">{sm.startQuantity}</td>
               <td className="px-6 py-3 text-right">
                 <span className={`${sm.direction === 'IN' ? 'text-blue-500' : 'text-red-500'}`}>
                   {`${sm.direction === 'IN' ? '+' : '-'}`}
                   {sm.quantity}
                 </span>
               </td>
-              <td className="px-6 py-3">{0}</td>
+              <td className="px-6 py-3">{sm.endQuantity}</td>
               <td className="px-6 py-3">
                 <div>{sm.moveType.name}</div>
                 <div>{sm.description}</div>
