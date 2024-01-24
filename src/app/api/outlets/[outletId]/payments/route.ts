@@ -16,20 +16,20 @@ export const GET = async (req: NextRequest, {params}: {params: {
   return NextResponse.json(paymentList);
 }
 
-export const POST = async (request: Request, {params}: {params: {
-  outletId: string
-}}) =>  {
-  const { outletId } = params;
-  const body = await request.json()
+// export const POST = async (request: Request, {params}: {params: {
+//   outletId: string
+// }}) =>  {
+//   const { outletId } = params;
+//   const body = await request.json()
 
-  const outletPaymentType = await prisma.outletPaymentType.create({
-    data: {
-      outletId: Number(outletId),
-      storeId: 1,
-      paymentTypeId: Number(body.PaymentTypeId),
-      isActive: true
-    }
-  })
+//   const outletPaymentType = await prisma.outletPaymentType.create({
+//     data: {
+//       outletId: Number(outletId),
+//       storeId: 1,
+//       paymentTypeId: Number(body.PaymentTypeId),
+//       isActive: true
+//     }
+//   })
 
-  return NextResponse.json(outletPaymentType);
-}
+//   return NextResponse.json(outletPaymentType);
+// }
