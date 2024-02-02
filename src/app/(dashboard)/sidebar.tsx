@@ -42,7 +42,7 @@ export const DashboardSidebar: FC = function () {
         {
           name: 'prints',
           title: "Cetak Harga",
-          url: "/prints",
+          url: "/products/prints",
         }
         // {
         //   name: 'stock-transfer',

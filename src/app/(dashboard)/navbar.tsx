@@ -4,6 +4,7 @@ import { DarkThemeToggle, Navbar } from "flowbite-react";
 import Image from "next/image";
 import type { FC } from "react";
 import { HiMenuAlt1, HiX } from "react-icons/hi";
+import SignOutButton from "./components/SignOutButton";
 
 export const DashboardNavbar: FC<Record<string, never>> = function () {
   const { isCollapsed: isSidebarCollapsed, setCollapsed: setSidebarCollapsed } =
@@ -39,7 +40,10 @@ export const DashboardNavbar: FC<Record<string, never>> = function () {
                 />
               </Navbar.Brand>
             </div>
-            <DarkThemeToggle />
+            <div className="flex justify-end items-center gap-4">
+              <DarkThemeToggle />
+              <SignOutButton />
+            </div>
           </div>
         </div>
       </Navbar>

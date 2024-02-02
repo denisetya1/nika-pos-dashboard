@@ -5,6 +5,7 @@ import { ThemeModeScript, Flowbite } from 'flowbite-react';
 import { FC, PropsWithChildren } from 'react';
 import { twMerge } from 'tailwind-merge';
 import { flowbiteTheme } from './theme';
+import AuthSessionProvider from './context/session/AuthSessionProvider';
 
 export const dynamic = 'force-dynamic'
 
@@ -22,7 +23,9 @@ const RootLayout: FC<PropsWithChildren> = function ({ children }) {
         <ThemeModeScript />
       </head>
       <body className={twMerge("bg-gray-50 dark:bg-gray-900", inter.className)}>
-        <Flowbite theme={{ theme: flowbiteTheme }}>{children}</Flowbite>
+        <AuthSessionProvider>
+          <Flowbite theme={{ theme: flowbiteTheme }}>{children}</Flowbite>
+        </AuthSessionProvider>
       </body>
     </html>
   );

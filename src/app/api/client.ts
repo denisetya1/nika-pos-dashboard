@@ -1,6 +1,6 @@
 import { Prisma, PrismaClient } from '@prisma/client'
 
-const globalForPrisma = globalThis as unknown as { prisma: PrismaClient }
+const globalForPrisma = globalThis as unknown as { prisma: ExtendedPrismaClient }
 
 export const extendedPrismaClient =  new PrismaClient().$extends({
   name: 'POSExtension',
@@ -50,7 +50,7 @@ type ExtendedPrismaClient = typeof extendedPrismaClient
 export const prisma : ExtendedPrismaClient = extendedPrismaClient
 
 
-// if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma
+if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma
 
 //BigInt stringify fix
 declare global {

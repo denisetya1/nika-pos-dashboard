@@ -1,34 +1,34 @@
 'use client'
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useReactToPrint } from "react-to-print";
 import ComponentToPrint from "./components/ComponentToPrint";
+import useProducts from "../hooks/useProducts";
 
 const POSPage = () => {
-  const componentRef = useRef(null);
-  
-  const handlePrint = useReactToPrint({
-    content: () => componentRef.current,
-  });
+  const [ search, setSearch ] = useState('')
+  const [ brandId, setBrandId ] = useState()
+  const [ categoryId, setCategoryId ] = useState()
+
+  const { data: products, isLoading } = useProducts({
+    search,
+    brandId,
+    categoryId,
+    limit: 20,
+    page: 1
+  })
+
 
   return (
     <div className="w-full h-screen flex justify-start align-top">
-      <div className="w-[400px] h-screen p-8">
+      <div className="receipt w-[400px] h-screen p-8">
         <div className="receipt-logo">
-          {/* <Image
-                  alt="NIKA POS - BEAUTYCAT"
-                  height="24"
-                  src="/logo-stroked.png"
-                  width="150"
-                /> */}
           
           <div>
-            <ComponentToPrint ref={componentRef} />
-            <button onClick={handlePrint}>Print this out!</button>
           </div>
         </div>
       </div>
-      <div className="grow h-screen bg-blue-300 p-10">
+      <div className="product-list grow h-screen bg-blue-300 p-10">
         dsa
       </div>
     </div>

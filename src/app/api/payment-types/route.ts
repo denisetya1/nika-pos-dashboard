@@ -5,6 +5,9 @@ export const GET = async (req: NextRequest) => {
   const paymentTypes = await prisma.paymentType.findMany({
     where:{
       isActive: true
+    },
+    include:{
+      OutletPaymentTypes: true
     }
   })
 

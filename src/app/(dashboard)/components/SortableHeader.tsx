@@ -20,7 +20,7 @@ const TablePagination = ({title, fieldName} :
     if(direction === 'asc')
       direction = 'desc'
     else
-    direction = 'asc'
+      direction = 'asc'
 
     const params = new URLSearchParams(searchParams.toString())
     params.set("sort", fieldName)

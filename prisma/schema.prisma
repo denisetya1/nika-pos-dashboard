@@ -11,12 +11,43 @@ datasource db {
   // directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
 
+model Account {
+  id            String    @id @default(cuid())
+  userId             String
+  type               String
+  provider           String
+  providerAccountId  String
+  refresh_token      String?  @db.Text
+  access_token       String?  @db.Text
+  expires_at         Int?
+  token_type         String?
+  scope              String?
+  id_token           String?  @db.Text
+  session_state      String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@map("accounts")
+}
+
+model Session {
+  id            String    @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+}
+
 model User {
-  id BigInt @id @default(autoincrement())
-  email String?
-  username String?
-  password String
+  id String @id @default(cuid())
   name String
+  username String @unique
+  emailVerified DateTime?
+  image String?
+  password String
   phone String
   isSubAccount Boolean @map("is_sub_account") @default(false)
   isActive Boolean @map("is_active") @default(true)
@@ -25,10 +56,18 @@ model User {
   deletedAt DateTime? @map("deleted_at")
   store Store?
   sales Sales[]
+  accounts      Account[]
+  sessions      Session[]
 
-  @@index([email, password])
-  @@index([username, password])
   @@map("users")
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
 }
 
 model Role {
@@ -46,7 +85,7 @@ model Role {
 
 model UserRole {
   id BigInt @id @default(autoincrement())
-  userId BigInt @map("user_id")
+  userId String @map("user_id")
   roleId BigInt @map("role_id")
   storeId BigInt @map("store_id")
   createdAt DateTime @default(now()) @map("created_at")
@@ -107,7 +146,7 @@ model Subdistrict {
 
 model Store{
   id BigInt @id @default(autoincrement())
-  userId BigInt @unique @map("user_id")
+  userId String @unique @map("user_id")
   user User @relation(fields: [userId], references: [id])
   name String 
   slug String?
@@ -279,6 +318,7 @@ model StockMovement {
 
   @@map("stock_movements")
 }
+
 model StockRequest {
   id BigInt @id @default(autoincrement())
   requestTime DateTime @map("request_time")
@@ -296,6 +336,7 @@ model StockRequest {
 
   @@map("stock_requests")
 }
+
 model StockRequestProduct {
   id BigInt @id @default(autoincrement())
   stockRequestId BigInt
@@ -338,6 +379,7 @@ model OutletPaymentType {
   updatedAt DateTime @updatedAt @map("updated_at")
   deletedAt DateTime? @map("deleted_at")
 
+  @@unique([storeId, outletId, paymentTypeId])  
   @@map("outlet_payment_types")
 }
 
@@ -345,7 +387,7 @@ model Sales {
   id String @id @db.VarChar(25)
   outletId BigInt @map("outlet_id")
   outlet Outlet @relation(fields:[outletId], references:[id])
-  userId BigInt @map("user_id")
+  userId String @map("user_id")
   user User @relation(fields:[userId], references:[id])
 
   totalQuantity Int? @map("total_quantity")

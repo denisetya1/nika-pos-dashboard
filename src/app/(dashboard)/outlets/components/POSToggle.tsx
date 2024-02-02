@@ -5,14 +5,12 @@ import { useRouter } from "next/navigation"
 import AlertMsg from "../../components/AlertMsg";
 import { useAlertContext } from "@/app/context/alert/AlertContext";
 
-const TogglePayment = ({
+const POSToggle = ({
   value,
-  outletId,
-  paymentTypeId
+  outletId
 }: {
-  value: boolean,
+  value?: boolean,
   outletId: number
-  paymentTypeId: number
 }) => {
 
   const router = useRouter()
@@ -20,12 +18,10 @@ const TogglePayment = ({
 
   const setSwitch = async (switchValue : boolean) => {
 
-    const res = await fetch(`/api/outlets/${outletId}/payments/upsert`, {
-      method: 'POST',
+    const res = await fetch(`/api/outlets/${outletId}/pos`, {
+      method: 'PATCH',
       body: JSON.stringify({
-        outletId: Number(outletId),
-        paymentTypeId: Number(paymentTypeId),
-        isActive: switchValue
+        isActivePOS: switchValue
       })
     })
 
@@ -43,9 +39,9 @@ const TogglePayment = ({
   return (
     <div className="flex max-w-md flex-col gap-4">
       <AlertMsg />
-      <ToggleSwitch checked={value} onChange={setSwitch} />
+      <ToggleSwitch checked={value ? value : false} onChange={setSwitch} />
     </div>
   )
 }
 
-export default TogglePayment
+export default POSToggle
