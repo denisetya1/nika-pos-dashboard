@@ -52,6 +52,9 @@ export const GET = async (req: NextRequest, { params }: { params: { outletId: st
         }
       }
     },
+    orderBy: {
+      moveDate: 'desc'
+    },
     include: {
       productStock: {
         include: {

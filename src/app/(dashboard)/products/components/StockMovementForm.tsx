@@ -89,7 +89,7 @@ const StockMovementForm = ({
       <Modal show={isOpen} onClose={() => setOpen(false)}>
         <form onSubmit={handleSubmit(SubmitForm)}>
           <Modal.Header>{direction === 'IN' ? 'PENAMBAHAN STOK (STOK MASUK)' : 'PENGURANGAN STOK (STOK KELUAR)'}</Modal.Header>
-          <Modal.Body className="dark:text-gray-300">
+          <Modal.Body className="dark:text-gray-300 max-h-[400px] overflow-auto">
             <div className="space-y-6">
                 <div className="grid gap-4 mb-4 grid-cols-2">
 

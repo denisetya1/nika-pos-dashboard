@@ -1,5 +1,6 @@
 import { Brand, Category, Outlet, Prisma } from "@prisma/client"
 import queryString from "query-string";
+import moment from "moment";
 import StockListFilter from "./components/StocktListFilter";
 import TablePagination from "../../components/TablePagination";
 
@@ -66,6 +67,7 @@ const StockReportPage = async ({
           selectedBrand={searchParams?.brandId}
           selectedCategory={searchParams?.categoryId}
           searchProduct={searchParams?.search}
+          selectedDate={searchParams?.moveDate}
         />
       </div>
 
@@ -90,7 +92,7 @@ const StockReportPage = async ({
             <tr key={sm.id} className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
               <td className="px-6 py-3 w-10">{index + 1}</td>
               <td className="px-6 py-3 w-80 text-black dark:text-white">{sm.productStock.product.name}</td>
-              <td className="px-6 py-3">{`${new Date(sm.moveDate).getDate()}-${new Date(sm.moveDate).getMonth() + 1}-${new Date(sm.moveDate).getFullYear()}`}</td>
+              <td className="px-6 py-3 w-[200px]">{moment(sm.moveDate).format('YYYY-MM-D')}</td>
               <td className="px-6 py-3">{sm.startQuantity}</td>
               <td className="px-6 py-3 text-right">
                 <span className={`${sm.direction === 'IN' ? 'text-blue-500' : 'text-red-500'}`}>

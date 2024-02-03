@@ -1,3 +1,5 @@
+import moment from "moment";
+
 export const formatCurrency = (
   num: number | undefined | null
 ) => {
@@ -51,4 +53,9 @@ export const getFinalPrice = (price : Number, markup: Number | null, discount: N
     return formatCurrency(finalPrice)
   else 
     return finalPrice
+}
+
+export const dateUTC = () => {
+  console.log(new Date().toDateString())
+  return new Date(moment(new Date().toDateString()).add(7, "hours").format())
 }

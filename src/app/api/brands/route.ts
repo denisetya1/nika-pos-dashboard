@@ -32,6 +32,5 @@ export const POST = async (request: Request) =>  {
     }
   })
 
-
   return NextResponse.json(brand);
 }

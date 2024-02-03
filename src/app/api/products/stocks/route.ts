@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "../../client";
 import { ProductStock } from "@prisma/client";
-import { isEmptyVal, sortByKey } from "@/app/helpers/functions";
+import { dateUTC, isEmptyVal } from "@/app/helpers/functions";
 
 
 export const GET = async (req: NextRequest) =>  {
@@ -191,7 +191,7 @@ export const POST = async (request: Request) =>  {
           isActive: true,
           stockMovements: {
             create: {
-              moveDate: new Date(),
+              moveDate: dateUTC(),
               moveTypeId: Number(body.moveTypeId),
               direction: body.direction,
               quantity: Number(body.quantity),
@@ -214,7 +214,7 @@ export const POST = async (request: Request) =>  {
         },
         stockMovements: {
           create: {
-            moveDate: new Date(),
+            moveDate: dateUTC(),
             moveTypeId: Number(body.moveTypeId),
             direction: body.direction,
             quantity: Number(body.quantity),

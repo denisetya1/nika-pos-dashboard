@@ -59,6 +59,11 @@ export const DashboardSidebar: FC = function () {
       childs: [
         {
           name: 'report-stock',
+          title: "Perpindahan Stok",
+          url: "/reports/stocks",
+        },
+        {
+          name: 'report-stock-by-products',
           title: "Keluar/Masuk Stok",
           url: "/reports/stocks/by-products",
         }

@@ -101,7 +101,7 @@ const StockListFilter = ({
           labelClearButton="Batal" 
           defaultDate={new Date(moment(selectedDate).format())}
           weekStart={1}
-          onSelectedDateChanged={(d) => setMoveDateStr(moment(d).format('YYYY-MM-D'))}
+          onSelectedDateChanged={(d) => setMoveDateStr(moment(d).format('YYYY-MM-DD'))}
         />
       </div>
     </div>
