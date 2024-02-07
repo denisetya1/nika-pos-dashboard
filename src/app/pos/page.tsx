@@ -30,7 +30,7 @@ const POSPage = () => {
   return (
     <div className="w-full h-screen flex justify-start align-top">
       <div className="receipt w-[400px] h-screen p-8">
-        <ComponentToPrint sales={sales}/>
+        {/* <ComponentToPrint sales={sales}/> */}
       </div>
 
       <div className="product-list grow h-screen bg-blue-300 p-10">
