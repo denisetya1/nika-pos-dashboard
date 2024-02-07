@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "../../../client";
-import { isEmptyVal } from "@/app/helpers/functions";
+import { dateUTC, isEmptyVal } from "@/app/helpers/functions";
+import moment from "moment";
 
 
 export const GET = async (req: NextRequest, { params }: { params: { outletId: string } }) =>  {
@@ -9,7 +10,9 @@ export const GET = async (req: NextRequest, { params }: { params: { outletId: st
   const categoryId = req.nextUrl.searchParams.get('categoryId');
   const brandId = req.nextUrl.searchParams.get('brandId');
   const search = req.nextUrl.searchParams.get('search');
-  const moveDate = new Date(req.nextUrl.searchParams.get('moveDate') || '')
+  const moveDate = dateUTC(req.nextUrl.searchParams.get('moveDate') || moment().format('YYYY-MM-DD'))
+
+  console.log('d', req.nextUrl.searchParams.get('moveDate'))
 
   const sort = req.nextUrl.searchParams.get('sort')
   const direction = req.nextUrl.searchParams.get('direction')
@@ -24,7 +27,6 @@ export const GET = async (req: NextRequest, { params }: { params: { outletId: st
   if(isEmptyVal(page, true)){
     page = 1
   }
-
 
   let orderBy = {}
 
@@ -50,10 +52,11 @@ export const GET = async (req: NextRequest, { params }: { params: { outletId: st
           ...(categoryId !== "" && categoryId !== undefined && categoryId !== null ? {categoryId: Number(categoryId)} : {}),
           ...(search !== null ? { name: { contains: search }} : {})
         }
-      }
+      },
+      moveDate
     },
     orderBy: {
-      moveDate: 'desc'
+      createdAt: 'asc'
     },
     include: {
       productStock: {
@@ -85,8 +88,7 @@ export const GET = async (req: NextRequest, { params }: { params: { outletId: st
           direction: true
         }
       }
-    },
-    orderBy
+    }
   });
 
   stockMoves.push(page)

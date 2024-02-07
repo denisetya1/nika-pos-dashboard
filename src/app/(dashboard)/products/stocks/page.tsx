@@ -6,6 +6,7 @@ import { formatCurrency, getFinalPrice, isEmptyVal } from "@/app/helpers/functio
 import EditPriceForm from "../components/EditPriceForm"
 import SortableHeader from "../../components/SortableHeader"
 import TablePagination from "../../components/TablePagination"
+import { RiBarcodeBoxLine } from "react-icons/ri"
 
 type Product = Prisma.ProductGetPayload<{
   include: { brand: true, category: true, stocks: true}
@@ -142,8 +143,8 @@ const ProductStock = async ({
               <td className="px-6 py-3 w-80 text-black dark:text-white">
                 <div>{product.name}</div>
                 <div className="flex justify-start items-center gap-4 text-gray-500 text-xs">
-                  <div>sku: {product.sku === '' || product.sku === null ? '-' : product.sku}</div>
-                  <div>barcode: {product.barcode === '' || product.barcode === null ? '-' : product.barcode}</div>
+                  {/* <div>sku: {product.sku === '' || product.sku === null ? '-' : product.sku}</div> */}
+                  <div className="flex text-gray-500 justify-start items-center gap-1"><RiBarcodeBoxLine className="text-gray-400" /> {product.barcode === '' || product.barcode === null ? '-' : product.barcode}</div>
                 </div>
                 {/* <div className="text-gray-500 text-xs">
                   shopee:<br />

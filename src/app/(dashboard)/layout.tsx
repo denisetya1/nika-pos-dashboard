@@ -3,8 +3,8 @@
 import { SidebarProvider, useSidebarContext } from "@/context/SidebarContext";
 import type { FC, PropsWithChildren } from "react";
 import { twMerge } from "tailwind-merge";
-import { DashboardNavbar } from "./navbar";
-import { DashboardSidebar } from "./sidebar";
+import { DashboardNavbar } from "./components/navbar";
+import { DashboardSidebar } from "./components/sidebar";
 import ToastContextProvider from "../context/toast/ToastContextProvider";
 import ToastMsg from "./components/ToastMsg";
 

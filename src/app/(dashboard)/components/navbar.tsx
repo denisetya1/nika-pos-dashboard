@@ -4,7 +4,7 @@ import { DarkThemeToggle, Navbar } from "flowbite-react";
 import Image from "next/image";
 import type { FC } from "react";
 import { HiMenuAlt1, HiX } from "react-icons/hi";
-import SignOutButton from "./components/SignOutButton";
+import SignOutButton from "../components/SignOutButton";
 
 export const DashboardNavbar: FC<Record<string, never>> = function () {
   const { isCollapsed: isSidebarCollapsed, setCollapsed: setSidebarCollapsed } =
@@ -37,6 +37,7 @@ export const DashboardNavbar: FC<Record<string, never>> = function () {
                   height="24"
                   src="/logo-stroked.png"
                   width="150"
+                  priority={true}
                 />
               </Navbar.Brand>
             </div>

@@ -43,7 +43,7 @@ const StockReportPage = async ({
   const query = queryString.stringify(searchParams || {});
 
   const resStockMoves = await fetch(
-    `${process.env.URL}/api/reports/stocks/${outletId}`, 
+    `${process.env.URL}/api/reports/stocks/${outletId}${query !== '' ? `?${query}` : ''}`, 
     {
       cache: 'no-cache'
     }

@@ -32,7 +32,7 @@ const StockListFilter = ({
   const [brandId, setBrandId] = useState(selectedBrand);
   const [search, setSearchProduct] = useState(searchProduct);
   const [outletId, setOutletId] = useState(selectedOutlet);
-  const [moveDateStr, setMoveDateStr] = useState(selectedDate)
+  const [moveDate, setMoveDate] = useState(selectedDate)
 
   useEffect(() => {
     const query = {
@@ -40,7 +40,7 @@ const StockListFilter = ({
       brandId,
       outletId,
       search,
-      moveDateStr
+      moveDate
     }
 
     const qs = queryString.stringify(query, {
@@ -50,7 +50,7 @@ const StockListFilter = ({
 
     router.push(`${pathname}?${qs}`)
     router.refresh()
-  }, [categoryId, brandId, search, outletId, router, moveDateStr])
+  }, [categoryId, brandId, search, outletId, router, moveDate])
 
   return (
     <div className="flex flex-row justify-start gap-5 items-center mb-8">
@@ -101,7 +101,7 @@ const StockListFilter = ({
           labelClearButton="Batal" 
           defaultDate={new Date(moment(selectedDate).format())}
           weekStart={1}
-          onSelectedDateChanged={(d) => setMoveDateStr(moment(d).format('YYYY-MM-DD'))}
+          onSelectedDateChanged={(d) => setMoveDate(moment(d).format('YYYY-MM-DD'))}
         />
       </div>
     </div>

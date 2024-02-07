@@ -1,10 +1,10 @@
 'use client';
-import { formatCurrency } from "@/app/helpers/functions";
 import { Outlet, Product } from "@prisma/client";
 import { Button, Label, Modal, TextInput, Tooltip } from "flowbite-react";
 import { useRouter } from "next/navigation";
 import { FocusEvent, useEffect, useState } from "react";
 import { useForm, SubmitHandler } from 'react-hook-form';
+import { PiPercentBold } from "react-icons/pi";
 import { LuPencilLine } from "react-icons/lu";
 
 type FormValues = {
@@ -74,7 +74,7 @@ const EditPriceForm = ({
       <Modal show={isOpen} onClose={() => setOpen(false)}>
         <form onSubmit={handleSubmit(SubmitForm)}>
           <Modal.Header>Ubah Harga Barang</Modal.Header>
-          <Modal.Body>
+          <Modal.Body className="max-h-[400px] overflow-auto">
             <div className="space-y-6">
 
                 <div className="grid gap-4 mb-4 grid-cols-2">
@@ -99,19 +99,21 @@ const EditPriceForm = ({
                     </div>
                     <TextInput className="w-[150px]" onFocus={setSelected} min={0} type="number" {...register('sellPrice')} placeholder="" />
                   </div>
-
-                  <div className="col-span-2">
-                    <div className="mb-2 block">
-                      <Label htmlFor="input-gray" color="gray" value="Markup Harga" />
+                  
+                  <div className="flex flex-row justify-between items-center">
+                    <div className="col-span-2">
+                      <div className="mb-2 block">
+                        <Label htmlFor="input-gray" color="gray" value="Markup Harga" />
+                      </div>
+                      <TextInput className="w-[90px] text-right" onFocus={setSelected} rightIcon={PiPercentBold} min={0} max={99} type="number" {...register('markupPercentage')} placeholder="" />
                     </div>
-                    <TextInput className="w-[150px]" onFocus={setSelected} min={0} max={99} type="number" {...register('markupPercentage')} placeholder="" />
-                  </div>
 
-                  <div className="col-span-2">
-                    <div className="mb-2 block">
-                      <Label htmlFor="input-gray" color="gray" value="Diskon" />
+                    <div className="col-span-2">
+                      <div className="mb-2 block">
+                        <Label htmlFor="input-gray" color="gray" value="Diskon" />
+                      </div>
+                      <TextInput className="w-[90px] text-right" onFocus={setSelected} rightIcon={PiPercentBold} min={0} max={99} type="number" {...register('discountPercentage')} placeholder="" />
                     </div>
-                    <TextInput className="w-[150px]" onFocus={setSelected} min={0} max={99} type="number" {...register('discountPercentage')} placeholder="" />
                   </div>
 
                   {/* <div className="col-span-2">

@@ -3,176 +3,249 @@ import { prisma } from "../../../client";
 import { isEmptyVal } from "@/app/helpers/functions";
 import { verifyJwt } from "@/app/lib/jwt";
 
-export const GET = async (req: NextRequest) =>  {
+export const GET = async (req: NextRequest, {params} : { params: {
+  outletId: string
+}}) =>  {
   const accessToken = req.headers.get('authorization')
 
-
-  if(accessToken && verifyJwt(accessToken)) {
-
-
-    const outletId = req.nextUrl.searchParams.get('outletId');
+  if(true) {//accessToken && verifyJwt(accessToken)) {
+    const { outletId } = params;
     const categoryId = req.nextUrl.searchParams.get('categoryId');
     const brandId = req.nextUrl.searchParams.get('brandId');
     const search = req.nextUrl.searchParams.get('search');
 
-    const sort: string = req.nextUrl.searchParams.get('sort') || ''
-    const direction = req.nextUrl.searchParams.get('direction') || "asc"
+    // const sort: string = req.nextUrl.searchParams.get('sort') || ''
+    // const direction = req.nextUrl.searchParams.get('direction') || "asc"
 
     let limit = Number(req.nextUrl.searchParams.get('limit'))
     let page = Number(req.nextUrl.searchParams.get('page'))
 
     if(isEmptyVal(limit, true)){
-      limit = 50
+      limit = 20
     }
 
     if(isEmptyVal(page, true)){
       page = 1
     }
 
+    // let orderBy = {}
 
-    let orderBy = {}
+    // if(!isEmptyVal(sort)){
+    //   orderBy = {
+    //     ...(sort === 'name' ? {name: direction} : {}),
+    //     ...(sort === 'sku' ? {sku: direction} : {}),
+    //     ...(sort === 'barcode' ? {barcode: direction} : {}),
+    //     ...(sort === 'category' ? { category: {name: direction}} : {}),
+    //     ...(sort === 'brand' ? { brand: {name: direction}} : {})
+    //   }
+    // } else {
+    //   orderBy = {
+    //     name: 'asc'
+    //   }
+    // }
 
-    if(!isEmptyVal(sort)){
-      orderBy = {
-        ...(sort === 'name' ? {name: direction} : {}),
-        ...(sort === 'sku' ? {sku: direction} : {}),
-        ...(sort === 'barcode' ? {barcode: direction} : {}),
-        ...(sort === 'category' ? { category: {name: direction}} : {}),
-        ...(sort === 'brand' ? { brand: {name: direction}} : {})
-      }
-    }
+    // let ids: bigint[] = []
+    // let count = 0
+    // let isSortedByStockField = false
+    // const specialSorts: string[] = [
+    //   'sellPrice', 
+    //   'quantity', 
+    //   'discountPercentage', 
+    //   'markupPercentage'
+    // ]
 
-    let ids: bigint[] = []
-    let count = 0
-    let isSortedByStockField = false
-    const specialSorts: string[] = [
-      'sellPrice', 
-      'quantity', 
-      'discountPercentage', 
-      'markupPercentage'
-    ]
-
-    if(
-      !isEmptyVal(sort) && specialSorts.indexOf(sort) > -1
-    ){
-      const productsStocks = await prisma.productStock.findManyAndCount({
-        where: {
-          AND : [
-            {storeId: 1},
-            {...(brandId !== "" && brandId !== undefined && brandId !== null ? {product: { brandId: Number(brandId)}} : {})},
-            {...(categoryId !== "" && categoryId !== undefined && categoryId !== null ? {product: { categoryId: Number(categoryId) }} : {})},
-            {...(search !== null ? { OR: [
-                {product: {
-                    name: {
-                      contains: search
-                    }
-                  }
-                },
-                {product: { sku: search }
-                },
-                {product: { barcode: search }
-                }
-              ] } : {})
-            },
-            {outletId: Number(outletId)}
-          ]
-        },
-        orderBy: {
-          ...(sort === 'sellPrice' ? {sellPrice: direction === "asc" ? "asc" : "desc"} : {}),
-          ...(sort === 'quantity' ? {quantity: direction === "asc" ? "asc" : "desc"} : {}),
-          ...(sort === 'discountPercentage' ? {discountPercentage: direction === "asc" ? "asc" : "desc"} : {}),
-          ...(sort === 'markupPercentage' ? {markupPercentage: direction === "asc" ? "asc" : "desc"} : {}),
-        },
-        select: {
-          productId: true
-        },
-        skip: (page - 1) * limit,
-        take: limit,
-      })
-
-      const [list, listCount] = productsStocks
-      ids = list.map((item)=> item.productId)
-      count = listCount
-      isSortedByStockField = true
-    }
-    
-    const products = await prisma.product.findManyAndCount({
+    const productsStocks = await prisma.productStock.findManyAndCount({
       where: {
         AND : [
           {storeId: 1},
-          {...(brandId !== "" && brandId !== undefined && brandId !== null ? {brandId: Number(brandId)} : {})},
-          {...(categoryId !== "" && categoryId !== undefined && categoryId !== null ? {categoryId: Number(categoryId)} : {})},
+          {outletId: Number(outletId)},
+          {...(brandId !== "" && brandId !== undefined && brandId !== null ? {product: { brandId: Number(brandId)}} : {})},
+          {...(categoryId !== "" && categoryId !== undefined && categoryId !== null ? {product: { categoryId: Number(categoryId) }} : {})},
           {...(search !== null ? { OR: [
-              {name: {
-                contains: search
-              }},
-              {sku: search},
-              {barcode: search}
+              {product: {
+                  name: {
+                    contains: search
+                  }
+                }
+              },
+              {product: { sku: search }
+              },
+              {product: { barcode: search }
+              }
             ] } : {})
           },
-          {...(ids.length > 0 ? {
-            id: {
-              in: ids
-            }
-          } : {} )}
+          {outletId: Number(outletId)}
         ]
       },
-      orderBy,
+      orderBy: {
+        product: {
+          name: "asc"
+        }
+      },
+      take: limit,
+      skip: (page - 1) * limit,
       select: {
         id: true,
-        name: true,
-        barcode: true,
-        sku: true,
-        categoryId: true,
-        brandId: true,
-        linkShopee: true,
-        isActive: true,
-        createdAt:true,
-        brand: {
+        quantity: true,
+        sellPrice: true,
+        sellPriceGrosir: true,
+        minGrosir: true,
+        markupPercentage: true,
+        discountPercentage: true,
+        product: {
           select: {
             id: true,
             name: true,
-          }
-        },
-        category: {
-          select: {
-            id: true,
-            name: true,
-          }
-        },
-        stocks: {
-          where: {
-            outletId: Number(outletId)
-          },
-          select: {
-            id: true,
-            quantity: true,
-            sellPrice: true,
-            sellPriceGrosir: true,
-            minGrosir: true,
-            markupPercentage: true,
-            discountPercentage: true
+            barcode: true,
+            sku: true,
+            categoryId: true,
+            brandId: true,
+            linkShopee: true,
+            isActive: true,
+            createdAt:true,
+            brand: {
+              select: {
+                id: true,
+                name: true,
+              }
+            },
+            category: {
+              select: {
+                id: true,
+                name: true,
+              }
+            }
           }
         }
       },
-      ...(!isSortedByStockField ? {skip: (page - 1) * limit} : {}),
-      ...(!isSortedByStockField ? {take: limit} : {} ),
-    });
+    })
 
-    if(isSortedByStockField){
-      products[1] = count
+    productsStocks.push(page)
+    productsStocks.push(limit)
 
-      if(direction === 'asc'){
-        products[0].sort((a, b) => (Number(a.stocks[0][sort as keyof typeof a.stocks[0]]) - Number(b.stocks[0][sort as keyof typeof b.stocks[0]])))
-      } else {
-        products[0].sort((a, b) => (Number(b.stocks[0][sort as keyof typeof b.stocks[0]]) - Number(a.stocks[0][sort as keyof typeof a.stocks[0]])))
-      }
-    }
+    return NextResponse.json(productsStocks);
 
-    products.push(page)
-    products.push(limit)
+    // if(
+    //   !isEmptyVal(sort) && specialSorts.indexOf(sort) > -1
+    // ){
+    //   const productsStocks = await prisma.productStock.findManyAndCount({
+    //     where: {
+    //       AND : [
+    //         {storeId: 1},
+    //         {...(brandId !== "" && brandId !== undefined && brandId !== null ? {product: { brandId: Number(brandId)}} : {})},
+    //         {...(categoryId !== "" && categoryId !== undefined && categoryId !== null ? {product: { categoryId: Number(categoryId) }} : {})},
+    //         {...(search !== null ? { OR: [
+    //             {product: {
+    //                 name: {
+    //                   contains: search
+    //                 }
+    //               }
+    //             },
+    //             {product: { sku: search }
+    //             },
+    //             {product: { barcode: search }
+    //             }
+    //           ] } : {})
+    //         },
+    //         {outletId: Number(outletId)}
+    //       ]
+    //     },
+    //     orderBy: {
+    //       ...(sort === 'sellPrice' ? {sellPrice: direction === "asc" ? "asc" : "desc"} : {}),
+    //       ...(sort === 'quantity' ? {quantity: direction === "asc" ? "asc" : "desc"} : {}),
+    //       ...(sort === 'discountPercentage' ? {discountPercentage: direction === "asc" ? "asc" : "desc"} : {}),
+    //       ...(sort === 'markupPercentage' ? {markupPercentage: direction === "asc" ? "asc" : "desc"} : {}),
+    //     },
+    //     select: {
+    //       productId: true
+    //     },
+    //     skip: (page - 1) * limit,
+    //     take: limit,
+    //   })
 
-    return NextResponse.json(products);
+    //   const [list, listCount] = productsStocks
+    //   ids = list.map((item)=> item.productId)
+    //   count = listCount
+    //   isSortedByStockField = true
+    // }
+    
+    // const products = await prisma.product.findManyAndCount({
+    //   where: {
+    //     AND : [
+    //       {storeId: 1},
+    //       {...(brandId !== "" && brandId !== undefined && brandId !== null ? {brandId: Number(brandId)} : {})},
+    //       {...(categoryId !== "" && categoryId !== undefined && categoryId !== null ? {categoryId: Number(categoryId)} : {})},
+    //       {...(search !== null ? { OR: [
+    //           {name: {
+    //             contains: search
+    //           }},
+    //           {sku: search},
+    //           {barcode: search}
+    //         ] } : {})
+    //       },
+    //       {...(ids.length > 0 ? {
+    //         id: {
+    //           in: ids
+    //         }
+    //       } : {} )}
+    //     ]
+    //   },
+    //   orderBy,
+    //   select: {
+    //     id: true,
+    //     name: true,
+    //     barcode: true,
+    //     sku: true,
+    //     categoryId: true,
+    //     brandId: true,
+    //     linkShopee: true,
+    //     isActive: true,
+    //     createdAt:true,
+    //     brand: {
+    //       select: {
+    //         id: true,
+    //         name: true,
+    //       }
+    //     },
+    //     category: {
+    //       select: {
+    //         id: true,
+    //         name: true,
+    //       }
+    //     },
+    //     stocks: {
+    //       where: {
+    //         outletId: Number(outletId)
+    //       },
+    //       select: {
+    //         id: true,
+    //         quantity: true,
+    //         sellPrice: true,
+    //         sellPriceGrosir: true,
+    //         minGrosir: true,
+    //         markupPercentage: true,
+    //         discountPercentage: true
+    //       }
+    //     }
+    //   },
+    //   ...(!isSortedByStockField ? {skip: (page - 1) * limit} : {}),
+    //   ...(!isSortedByStockField ? {take: limit} : {} ),
+    // });
+
+    // if(isSortedByStockField){
+    //   products[1] = count
+
+    //   if(direction === 'asc'){
+    //     products[0].sort((a, b) => (Number(a.stocks[0][sort as keyof typeof a.stocks[0]]) - Number(b.stocks[0][sort as keyof typeof b.stocks[0]])))
+    //   } else {
+    //     products[0].sort((a, b) => (Number(b.stocks[0][sort as keyof typeof b.stocks[0]]) - Number(a.stocks[0][sort as keyof typeof a.stocks[0]])))
+    //   }
+    // }
+
+    // products.push(page)
+    // products.push(limit)
+
+    // return NextResponse.json(products);
   } else {
     return NextResponse.json({
       code: "UNATHORIZED",

@@ -55,7 +55,8 @@ export const getFinalPrice = (price : Number, markup: Number | null, discount: N
     return finalPrice
 }
 
-export const dateUTC = () => {
-  console.log(new Date().toDateString())
-  return new Date(moment(new Date().toDateString()).add(7, "hours").format())
+export const dateUTC = (dateString: string) => {
+  const date = new Date(dateString)
+  
+  return new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()))
 }

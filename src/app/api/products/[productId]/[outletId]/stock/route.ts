@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { prisma } from "../../../../client";
 import moment from "moment";
+import { dateUTC } from "@/app/helpers/functions";
 
 export const POST = async (request: Request, { params }: { 
   params: { 
@@ -46,7 +47,7 @@ export const POST = async (request: Request, { params }: {
       },
       stockMovements: {
         create: {
-          moveDate: new Date(moment(moveDateStr).format()),
+          moveDate: dateUTC(moveDateStr),
           moveDateStr: moveDateStr,
           moveTypeId: Number(moveTypeId),
           direction: direction,
@@ -70,7 +71,7 @@ export const POST = async (request: Request, { params }: {
       isActive: true,
       stockMovements: {
         create: {
-          moveDate: new Date(moment(moveDateStr).format()),
+          moveDate: dateUTC(moveDateStr),
           moveDateStr: moveDateStr,
           moveTypeId: Number(moveTypeId),
           direction: direction,
