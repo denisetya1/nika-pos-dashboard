@@ -11,6 +11,7 @@ import {
 import { FaRegCreditCard } from "react-icons/fa6"
 import { TbFileReport } from "react-icons/tb";
 import { twMerge } from "tailwind-merge";
+import { HiUser } from "react-icons/hi";
 
 export const DashboardSidebar: FC = function () {
   const { isCollapsed } = useSidebarContext()
@@ -71,15 +72,31 @@ export const DashboardSidebar: FC = function () {
     },
     {
       name: 'outlets',
-      title: "Daftar Outlet",
+      title: "Outlet",
       url: "/outlets",
-      icon: HiBuildingStorefront
-    },
-    {
-      name: 'paymentd',
-      title: "Pembayaran",
-      url: "/payments",
-      icon: FaRegCreditCard
+      icon: HiBuildingStorefront,
+      childs: [
+        {
+          name: 'list-outlet',
+          title: "Daftar Outlet",
+          url: "/outlets",
+        },
+        {
+          name: 'outlet-payment-methods',
+          title: "Metode Pembayaran",
+          url: "/outlets/payment-methods",
+        },
+        {
+          name: 'outlet-shifts',
+          title: "Daftar Shift Kasir",
+          url: "/outlets/shifts",
+        },
+        {
+          name: 'outlet-users',
+          title: "Daftar Pengguna Outlet",
+          url: "/outlets/users",
+        }
+      ]
     },
     {
       name: 'master-data',
@@ -104,6 +121,30 @@ export const DashboardSidebar: FC = function () {
         },
       ]
     },
+    {
+      name: 'sub-accounts',
+      title: "Manajemen Pengguna",
+      url: "/users/",
+      icon: HiUser,
+      childs: [
+        {
+          name: 'user-sub-accounts',
+          title: "Daftar Pengguna",
+          url: "/users/sub-accounts",
+        },
+        {
+          name: 'user-roles',
+          title: "Daftar Hak Akses",
+          url: "/users/roles",
+        },
+      ]
+    }
+    // {
+    //   name: 'sub-accounts',
+    //   title: "Daftar Pengguna",
+    //   url: "/sub-accounts",
+    //   icon: HiUser
+    // }
   ]
 
   return (

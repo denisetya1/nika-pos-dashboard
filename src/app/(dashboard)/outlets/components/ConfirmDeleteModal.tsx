@@ -5,7 +5,7 @@ import { Button, Modal } from "flowbite-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-const ConfirmDeleteModal = ({
+const ConfirmDeleteModal= ({
   data,
   endpoint, 
   buttonTitle,
@@ -13,7 +13,9 @@ const ConfirmDeleteModal = ({
   disabled
 }:
   {
-    data: Category | Brand | Outlet | MoveType
+    data: {
+      name: string
+    }
     endpoint: string
     buttonTitle: string
     modalTitle: string

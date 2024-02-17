@@ -1,5 +1,4 @@
 import { Category } from "@prisma/client"
-import { Button } from "flowbite-react"
 import AddEditMasterDataModal from "../components/AddEditMasterDataModal";
 import queryString from "query-string";
 import NameFilter from "../components/NameFilter";

@@ -5,8 +5,14 @@ import type { FC, PropsWithChildren } from "react";
 import { twMerge } from "tailwind-merge";
 import { DashboardNavbar } from "./components/navbar";
 import { DashboardSidebar } from "./components/sidebar";
+import {
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query'
 import ToastContextProvider from "../context/toast/ToastContextProvider";
 import ToastMsg from "./components/ToastMsg";
+
+const queryClient = new QueryClient()
 
 const DashboardLayout: FC<PropsWithChildren> = function ({ children }) {
   return (
@@ -20,7 +26,7 @@ const DashboardLayoutContent: FC<PropsWithChildren> = function ({ children }) {
   const { isCollapsed } = useSidebarContext();
 
   return (
-    <>
+    <QueryClientProvider client={queryClient}>
       <ToastContextProvider>
         <DashboardNavbar />
         <div className="mt-16 flex items-start">
@@ -39,7 +45,7 @@ const DashboardLayoutContent: FC<PropsWithChildren> = function ({ children }) {
         <ToastMsg />
         
       </ToastContextProvider>
-    </>
+    </QueryClientProvider>
   );
 };
 
