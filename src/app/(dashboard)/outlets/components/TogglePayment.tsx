@@ -8,11 +8,11 @@ import { useAlertContext } from "@/app/context/alert/AlertContext";
 const TogglePayment = ({
   value,
   outletId,
-  paymentTypeId
+  paymentMethodId
 }: {
   value: boolean,
   outletId: number
-  paymentTypeId: number
+  paymentMethodId: number
 }) => {
 
   const router = useRouter()
@@ -24,7 +24,7 @@ const TogglePayment = ({
       method: 'POST',
       body: JSON.stringify({
         outletId: Number(outletId),
-        paymentTypeId: Number(paymentTypeId),
+        paymentMethodId: Number(paymentMethodId),
         isActive: switchValue
       })
     })

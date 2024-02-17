@@ -9,7 +9,7 @@ export const GET = async (req: NextRequest, {params} : { params: {
   if(true) {//accessToken && verifyJwt(accessToken)) {
     const { outletId } = params;
 
-    const outletPayments = await prisma.outletPaymentType.findMany({
+    const outletPayments = await prisma.outletpaymentMethod.findMany({
       where: {
         AND : [
           {storeId: 1},
@@ -20,7 +20,7 @@ export const GET = async (req: NextRequest, {params} : { params: {
         id: 'asc'
       },
       include: {
-        paymentType: {
+        paymentMethod: {
           select: {
             id: true,
             name: true,

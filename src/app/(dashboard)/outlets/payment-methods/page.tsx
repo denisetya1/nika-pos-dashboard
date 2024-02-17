@@ -46,7 +46,7 @@ const PaymentMethodPage = async ({
                 <div className="flex gap-3">
                   <TogglePayment 
                     value={payment?.OutletPaymentMethods?.length > 0 ? payment?.OutletPaymentMethods[0]?.isActive : false}
-                    paymentTypeId={payment.id}
+                    paymentMethodId={payment.id}
                     outletId={Number(outletId)}
                   />
                 </div>
