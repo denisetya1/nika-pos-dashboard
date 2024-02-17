@@ -56,7 +56,9 @@ const Roles = async ({
                   <ConfirmDeleteModal 
                     modalTitle="Hapus Role"
                     buttonTitle="Hapus"
-                    data={role}
+                    data={{
+                      name: role.name
+                    }}
                     endpoint={`/api/roles/${role.id}`}
                     disabled={role.storeId === null ? true : false}
                   />

@@ -13,7 +13,9 @@ const ConfirmDeleteModal = ({
   disabled
 }:
   {
-    data: Category | Brand | Outlet | MoveType
+    data: {
+      name: string
+    }
     endpoint: string
     buttonTitle: string
     modalTitle: string
