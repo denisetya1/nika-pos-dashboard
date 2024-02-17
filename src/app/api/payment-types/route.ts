@@ -2,14 +2,14 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "../client";
 
 export const GET = async (req: NextRequest) => {
-  const paymentTypes = await prisma.paymentType.findMany({
+  const paymentMethods = await prisma.paymentMethod.findMany({
     where:{
       isActive: true
     },
     include:{
-      OutletPaymentTypes: true
+      OutletPaymentMethods: true
     }
   })
 
-  return NextResponse.json(paymentTypes)
+  return NextResponse.json(paymentMethods)
 }
