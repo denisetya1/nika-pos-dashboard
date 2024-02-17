@@ -26,9 +26,10 @@ const fetchProduct = (filter: ProductFilter) => {
 }
 
 const useProducts = ( productFilter: ProductFilter ) => {
-  return useQuery('products', () => fetchProduct(productFilter), {
-    select: (data) => data
-  })
+  return []
+  // return useQuery('products', () => fetchProduct(productFilter), {
+  //   select: (data) => data
+  // })
 }
 
 export default useProducts

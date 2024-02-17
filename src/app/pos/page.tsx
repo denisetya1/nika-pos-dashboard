@@ -18,14 +18,14 @@ const POSPage = () => {
   const [ outletId, setOutletId ] = useState('')
   const [ sales, setSales ] = useState<ProductSales[]>([])
 
-  const { data: products, isLoading } = useProducts({
-    search,
-    brandId,
-    categoryId,
-    outletId,
-    limit: 20,
-    page: 1
-  })
+  // const { data: products, isLoading } = useProducts({
+  //   search,
+  //   brandId,
+  //   categoryId,
+  //   outletId,
+  //   limit: 20,
+  //   page: 1
+  // })
 
   return (
     <div className="w-full h-screen flex justify-start align-top">
