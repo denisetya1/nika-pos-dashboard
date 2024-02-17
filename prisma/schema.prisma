@@ -83,7 +83,7 @@ model Role {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime? @updatedAt @map("updated_at")
   deletedAt DateTime? @map("deleted_at")
-  updateBy String?  @default("")
+  updateBy String? @default("") @map("updated_by")
   userOutlets UserOutlet[]
 
    @@map("roles")
@@ -97,7 +97,7 @@ model UserRole {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime? @updatedAt @map("updated_at")
   deletedAt DateTime? @map("deleted_at")
-  updateBy String?  @default("")
+  updateBy String? @default("") @map("updated_by")
 
    @@map("user_roles")
 }
@@ -109,7 +109,7 @@ model Province {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime? @updatedAt @map("updated_at")
   deletedAt DateTime? @map("deleted_at")
-  updateBy String?  @default("")
+  updateBy String? @default("") @map("updated_by")
 
   @@map("provinces")
 }
@@ -123,7 +123,7 @@ model City {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime? @updatedAt @map("updated_at")
   deletedAt DateTime? @map("deleted_at")
-  updateBy String?  @default("")
+  updateBy String? @default("") @map("updated_by")
 
   @@map("cities")
 }
@@ -137,7 +137,7 @@ model District {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime? @updatedAt @map("updated_at")
   deletedAt DateTime? @map("deleted_at")
-  updateBy String?  @default("")
+  updateBy String? @default("") @map("updated_by")
 
   @@map("districts")
 }
@@ -150,7 +150,7 @@ model Subdistrict {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime? @updatedAt @map("updated_at")
   deletedAt DateTime? @map("deleted_at")
-  updateBy String?  @default("")
+  updateBy String? @default("") @map("updated_by")
 
   @@map("subdistricts")
 }
@@ -169,7 +169,7 @@ model Store{
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime? @updatedAt @map("updated_at")
   deletedAt DateTime? @map("deleted_at")
-  updateBy String?  @default("")
+  updateBy String? @default("") @map("updated_by")
   products Product[]
   Outlets Outlet[]
   suppliers Suplier[]
@@ -189,7 +189,7 @@ model Brand {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime? @updatedAt @map("updated_at")
   deletedAt DateTime? @map("deleted_at")
-  updateBy String?  @default("")
+  updateBy String? @default("") @map("updated_by")
 
   @@map("brands")
 }
@@ -204,7 +204,7 @@ model Category {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime? @updatedAt @map("updated_at")
   deletedAt DateTime? @map("deleted_at")
-  updateBy String?  @default("")
+  updateBy String? @default("") @map("updated_by")
   products Product[]
 
   @@map("categories")
@@ -229,7 +229,7 @@ model Product {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime? @updatedAt @map("updated_at")
   deletedAt DateTime? @map("deleted_at")
-  updateBy String?  @default("")
+  updateBy String? @default("") @map("updated_by")
   stocks ProductStock[]
   StockRequestProducts StockRequestProduct[]
 
@@ -246,7 +246,7 @@ model Outlet {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime? @updatedAt @map("updated_at")
   deletedAt DateTime? @map("deleted_at")
-  updateBy String?  @default("")
+  updateBy String? @default("") @map("updated_by")
   productStock ProductStock[]
   reqOutlets StockRequest[] @relation("reqOutlet")
   destOutlets StockRequest[] @relation("destOutlet")
@@ -268,7 +268,7 @@ model Suplier {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime? @updatedAt @map("updated_at")
   deletedAt DateTime? @map("deleted_at")
-  updateBy String?  @default("")
+  updateBy String? @default("") @map("updated_by")
 
   @@map("suppliers")
 }
@@ -291,7 +291,7 @@ model ProductStock {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime? @updatedAt @map("updated_at")
   deletedAt DateTime? @map("deleted_at")
-  updateBy String?  @default("")
+  updateBy String? @default("") @map("updated_by")
   stockMovements StockMovement[]
 
   @@unique([storeId, productId, outletId])
@@ -312,7 +312,7 @@ model MoveType {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime? @updatedAt @map("updated_at")
   deletedAt DateTime? @map("deleted_at")
-  updateBy String?  @default("")
+  updateBy String? @default("") @map("updated_by")
   stockMovements StockMovement[]
 
   @@map("move_types")
@@ -335,7 +335,7 @@ model StockMovement {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime? @updatedAt @map("updated_at")
   deletedAt DateTime? @map("deleted_at")
-  updateBy String?  @default("")
+  updateBy String? @default("") @map("updated_by")
 
   @@map("stock_movements")
 }
@@ -353,7 +353,7 @@ model StockRequest {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime? @updatedAt @map("updated_at")
   deletedAt DateTime? @map("deleted_at")
-  updateBy String?  @default("")
+  updateBy String? @default("") @map("updated_by")
   products StockRequestProduct[]
 
   @@map("stock_requests")
@@ -370,7 +370,7 @@ model StockRequestProduct {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime? @updatedAt @map("updated_at")
   deletedAt DateTime? @map("deleted_at")
-  updateBy String?  @default("")
+  updateBy String? @default("") @map("updated_by")
 
   @@map("stock_request_products")
 }
@@ -385,7 +385,7 @@ model PaymentMethod {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime? @updatedAt @map("updated_at")
   deletedAt DateTime? @map("deleted_at")
-  updateBy String?  @default("")
+  updateBy String? @default("") @map("updated_by")
   OutletPaymentMethods OutletPaymentMethod[]
 
   @@map("payment_methods")
@@ -401,7 +401,7 @@ model OutletPaymentMethod {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime? @updatedAt @map("updated_at")
   deletedAt DateTime? @map("deleted_at")
-  updateBy String?  @default("")
+  updateBy String? @default("") @map("updated_by")
   transactions Transaction[]
 
   @@unique([storeId, outletId, paymentMethodId])  
@@ -420,7 +420,7 @@ model UserOutlet {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime? @updatedAt @map("updated_at")
   deletedAt DateTime? @map("deleted_at")
-  updateBy String?  @default("")
+  updateBy String? @default("") @map("updated_by")
 
   @@map("user_outlets")
 }
@@ -436,7 +436,7 @@ model Shift {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime? @updatedAt @map("updated_at")
   deletedAt DateTime? @map("deleted_at")
-  updateBy String?  @default("")
+  updateBy String? @default("") @map("updated_by")
   transactions Transaction[]
   dailyShifts DailyShift[]
 
@@ -456,7 +456,7 @@ model DailyShift {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime? @updatedAt @map("updated_at")
   deletedAt DateTime? @map("deleted_at")
-  updateBy String?  @default("")
+  updateBy String? @default("") @map("updated_by")
 
   @@map("daily_shifts")
 }
@@ -486,7 +486,7 @@ model Transaction {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime? @updatedAt @map("updated_at")
   deletedAt DateTime? @map("deleted_at")
-  updateBy String?  @default("")
+  updateBy String? @default("") @map("updated_by")
   transactonDetails TransactionDetail[]
 
   @@map("transactions")
@@ -522,7 +522,7 @@ model TransactionDetail {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime? @updatedAt @map("updated_at")
   deletedAt DateTime? @map("deleted_at")
-  updateBy String?  @default("")
+  updateBy String? @default("") @map("updated_by")
 
   @@map("transaction_details")
 }
