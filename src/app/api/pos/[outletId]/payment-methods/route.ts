@@ -9,7 +9,7 @@ export const GET = async (req: NextRequest, {params} : { params: {
   if(true) {//accessToken && verifyJwt(accessToken)) {
     const { outletId } = params;
 
-    const outletPayments = await prisma.outletpaymentMethod.findMany({
+    const outletPayments = await prisma.outletPaymentMethod.findMany({
       where: {
         AND : [
           {storeId: 1},
