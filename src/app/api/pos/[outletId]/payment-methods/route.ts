@@ -14,6 +14,7 @@ export const GET = async (req: NextRequest, {params} : { params: {
         AND : [
           {storeId: 1},
           {outletId: Number(outletId)},
+          {isActive: true}
         ]
       },
       orderBy: {
