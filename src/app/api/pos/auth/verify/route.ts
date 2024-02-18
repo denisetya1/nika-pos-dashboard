@@ -2,7 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { verifyJwt } from "@/app/lib/jwt";
 
 export const GET = async (req: NextRequest) =>  {
-  const accessToken = req.headers.get('authorization')
+  const authorization = req.headers.get('authorization') || ''
+  const [__, accessToken] = authorization.split(' ')
 
   if(accessToken && verifyJwt(accessToken)) {
     return NextResponse.json({
