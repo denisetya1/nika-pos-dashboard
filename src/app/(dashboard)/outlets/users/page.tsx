@@ -2,6 +2,7 @@ import { Outlet, Prisma } from "@prisma/client"
 import ToggleActive from "../components/ToggleActive";
 import AddUserOutletModal from "./components/AddUserOutletModal";
 import ConfirmDeleteModal from "../components/ConfirmDeleteModal";
+import OutletFilter from "../components/OutletFilter";
 
 type UserOutlet = Prisma.UserOutletGetPayload<{
   include: { user: true }
@@ -32,6 +33,10 @@ const OutletUserPage = async ({
           addedListId={userOutletsId}
           outletId={Number(outletId)}
         />
+      </div>
+
+      <div>
+        <OutletFilter outlets={outlets}/>
       </div>
 
       <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
