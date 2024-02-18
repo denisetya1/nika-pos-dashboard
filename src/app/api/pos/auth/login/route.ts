@@ -25,13 +25,22 @@ export const POST = async (request: Request) =>  {
   const body = await request.json()
   const { username, password } = body
  
-  const user = await prisma.user.findFirst({
+  let user = await prisma.user.findFirst({
     where: {
       username
     }
   })
 
   if(user && (await bcrypt.compare(password, user.password))) {
+    user = await prisma.user.update({
+      where: {
+        id: user.id,
+      },
+      data: {
+        lastLogin: new Date()
+      }
+    })
+
     const { password , ...userWithoutPass } = user
     const accessToken = signJwtAccessToken(userWithoutPass)
 
