@@ -5,10 +5,15 @@ export const GET = async (req: NextRequest) =>  {
   const authorization = req.headers.get('authorization') || ''
   const [__, accessToken] = authorization.split(' ')
 
-  if(accessToken && verifyJwt(accessToken)) {
+  const userData = verifyJwt(accessToken)
+
+  if(accessToken && userData) {
     return NextResponse.json({
       code: "SUCCESS",
-      message: "authorized"
+      message: "authorized",
+      data: {
+        ...userData
+      }
     }, {
       status: 200
     });

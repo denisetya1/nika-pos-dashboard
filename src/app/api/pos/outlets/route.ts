@@ -11,7 +11,8 @@ export const GET = async (req: NextRequest) =>  {
   if(accessToken && userData) {
     const userOulets = await prisma.userOutlet.findMany({
       where: {
-       userId: userData.id
+       userId: userData.id,
+       isActive: true
       },
       orderBy: {
         id: 'asc'
@@ -21,12 +22,15 @@ export const GET = async (req: NextRequest) =>  {
           select: {
             id: true,
             name: true,
+            isActive: true
           }
         }
       }
     })
 
-    const outlets = userOulets.map((userOulet) => userOulet.outlet)
+    const outlets = userOulets.map((userOulet) => {
+     return {...userOulet.outlet}
+    })
 
     return NextResponse.json(outlets);
 
