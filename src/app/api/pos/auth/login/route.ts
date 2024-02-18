@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import bcrypt from 'bcrypt';
-import { prisma } from "../../client";
+import { prisma } from "../../../client";
 import { signJwtAccessToken } from "@/app/lib/jwt";
 
 export const GET = async (request: Request) =>  {
