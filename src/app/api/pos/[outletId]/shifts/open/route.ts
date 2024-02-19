@@ -20,7 +20,7 @@ export const POST = async (req: NextRequest, {params} : { params: {
         shiftId: Number(shiftId),
         userId,
         startDateTime: {
-          gte: new Date(moment().format("yyyy-MM-dd")),
+          gte: new Date(moment().format("yyyy-MM-DD")),
         }
       }
     })
