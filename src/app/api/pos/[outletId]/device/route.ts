@@ -9,22 +9,22 @@ export const POST = async (req: NextRequest) =>  {
   const userData = verifyJwt(accessToken)
 
   if(accessToken && userData) {
-    const body = await req.json()
-    const {1} = body
+    // const body = await req.json()
+    // const {1} = body
 
-    const count = await prisma.device.count({
-      where:{
-        storeId: userData.
-      }
-    })
-    const device = await prisma.device.create({
-      data: {
-       userId: userData.id,
-       isActive: true
-      }
-    })
+    // const count = await prisma.device.count({
+    //   where:{
+    //     storeId: userData.
+    //   }
+    // })
+    // const device = await prisma.device.create({
+    //   data: {
+    //    userId: userData.id,
+    //    isActive: true
+    //   }
+    // })
 
-    return NextResponse.json(device);
+    return NextResponse.json({});
 
   } else {
     return NextResponse.json({
