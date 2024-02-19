@@ -6,8 +6,8 @@
 
 */
 -- DropForeignKey
-ALTER TABLE `transactions` DROP FOREIGN KEY `transactions_shift_id_fkey`;
+-- ALTER TABLE `transactions` DROP FOREIGN KEY `transactions_shift_id_fkey`;
 
 -- AlterTable
-ALTER TABLE `transactions` DROP COLUMN `shift_id`,
-    ADD COLUMN `user_shift_id` BIGINT NOT NULL;
+--ALTER TABLE `transactions` DROP COLUMN `shift_id`,
+  --  ADD COLUMN `user_shift_id` BIGINT NOT NULL;
