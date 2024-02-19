@@ -57,7 +57,7 @@ export const POST = async (request: Request) =>  {
       code: 'DATA_NOT_EXISTS',
       message: 'User tidak ditemukan!'
     }, {
-      status: 401,
+      status: 404,
     });
   }
 }

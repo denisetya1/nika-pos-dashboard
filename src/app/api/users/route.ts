@@ -7,7 +7,7 @@ export const GET = async (req: NextRequest) =>  {
 
   const users = await prisma.user.findManyAndCount({
     where: {
-      subAccountOf: 1,
+      storeId: 1,
       ...(search !== "" && search !== undefined && search !== null ? {name: { contains: search }} : {})
     }
   });
@@ -24,7 +24,7 @@ export const POST = async (request: Request) =>  {
       username: body.username,
       password: await bcrypt.hash(body.password, 10),
       phone: body.phone,
-      subAccountOf: 1,
+      storeId: 1,
       isActive: true,
     }
   })

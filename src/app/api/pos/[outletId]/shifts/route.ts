@@ -13,7 +13,7 @@ export const GET = async (req: NextRequest, {params} : { params: {
   if(accessToken && userData) {
     const { outletId } = params;
 
-    const openedShift = await prisma.dailyShift.findFirst({
+    const openedShift = await prisma.userShift.findFirst({
       where: {
         userId: userData.id,
         endDateTime: null

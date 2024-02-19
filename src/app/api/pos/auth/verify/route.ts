@@ -10,7 +10,7 @@ export const GET = async (req: NextRequest) =>  {
   if(accessToken && userData) {
     return NextResponse.json({
       code: "SUCCESS",
-      message: "authorized",
+      message: "",
       data: {
         ...userData
       }

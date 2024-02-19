@@ -49,7 +49,7 @@ model User {
   image String?
   password String
   phone String?
-  subAccountOf BigInt? @map("sub_account_of")
+  storeId BigInt? @map("store_id")
   isActive Boolean @map("is_active") @default(true)
   lastLogin DateTime? @map("last_login")
   createdAt DateTime @default(now()) @map("created_at")
@@ -59,7 +59,7 @@ model User {
   transactions Transaction[]
   accounts      Account[]
   sessions      Session[]
-  dailyShift DailyShift[]
+  userShift UserShift[]
   userOutlets UserOutlet[]
 
   @@map("users")
@@ -437,13 +437,12 @@ model Shift {
   updatedAt DateTime? @updatedAt @map("updated_at")
   deletedAt DateTime? @map("deleted_at")
   updateBy String? @default("") @map("updated_by")
-  transactions Transaction[]
-  dailyShifts DailyShift[]
+  userShifts UserShift[]
 
   @@map("shifts")
 }
 
-model DailyShift {
+model UserShift {
   id BigInt @id @default(autoincrement())
   shiftId BigInt @map("shift_id")
   shift Shift @relation(fields:[shiftId], references:[id])
@@ -458,7 +457,7 @@ model DailyShift {
   deletedAt DateTime? @map("deleted_at")
   updateBy String? @default("") @map("updated_by")
 
-  @@map("daily_shifts")
+  @@map("user_shifts")
 }
 
 model Transaction {
@@ -468,8 +467,7 @@ model Transaction {
   storeId BigInt @map("store_id")
   userId String @map("user_id")
   user User @relation(fields:[userId], references:[id])
-  shiftId BigInt @map("shift_id")
-  shift Shift @relation(fields:[shiftId], references:[id])
+  userShiftId BigInt @map("user_shift_id")
 
   totalItem Int? @map("total_item")
   totalPrice Decimal? @db.Decimal(10,2) @map("total_price")
@@ -525,4 +523,18 @@ model TransactionDetail {
   updateBy String? @default("") @map("updated_by")
 
   @@map("transaction_details")
+}
+
+model Device {
+  id String @id @default(cuid())
+  deviceId String @map("device_id")
+  deviceNumber Int @map("device_number")
+  platform String
+  outletId BigInt @map("outlet_id")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime? @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+  updateBy String? @default("") @map("updated_by")
+
+  @@map("devices")
 }
