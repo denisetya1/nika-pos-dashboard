@@ -5,13 +5,13 @@
 
 */
 -- DropForeignKey
-ALTER TABLE `daily_shifts` DROP FOREIGN KEY `daily_shifts_shift_id_fkey`;
+-- ALTER TABLE `daily_shifts` DROP FOREIGN KEY `daily_shifts_shift_id_fkey`;
 
 -- DropForeignKey
-ALTER TABLE `daily_shifts` DROP FOREIGN KEY `daily_shifts_user_id_fkey`;
+-- ALTER TABLE `daily_shifts` DROP FOREIGN KEY `daily_shifts_user_id_fkey`;
 
 -- DropTable
-DROP TABLE `daily_shifts`;
+-- DROP TABLE `daily_shifts`;
 
 -- CreateTable
 CREATE TABLE `user_shifts` (
