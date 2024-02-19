@@ -7,9 +7,9 @@
 
 */
 -- AlterTable
-ALTER TABLE `devices` DROP COLUMN `store_id` IF EXISTS `store_id`;, 
+ALTER TABLE `devices` DROP COLUMN IF EXISTS `store_id`;, 
     ADD COLUMN `outlet_id` BIGINT NOT NULL;
 
 -- AlterTable
-ALTER TABLE `users` DROP COLUMN `sub_account_of` IF EXISTS `sub_account_of`,
+ALTER TABLE `users` DROP COLUMN IF EXISTS `sub_account_of`,
     ADD COLUMN `store_id` BIGINT NULL;
