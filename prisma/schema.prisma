@@ -480,6 +480,7 @@ model Device {
   brand String? @map("brand")
   deviceName String? @map("device_name")
   deviceType Int? @map("device_type")
+  modelName String? @map("model_name")
   modelId String? @map("modelId")
   osName String? @map("os_name")
   osVersion String? @map("os_version")
