@@ -11,36 +11,6 @@ datasource db {
   // directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
 
-model Account {
-  id            String    @id @default(cuid())
-  userId             String
-  type               String
-  provider           String
-  providerAccountId  String
-  refresh_token      String?  @db.Text
-  access_token       String?  @db.Text
-  expires_at         Int?
-  token_type         String?
-  scope              String?
-  id_token           String?  @db.Text
-  session_state      String?
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@unique([provider, providerAccountId])
-  @@map("accounts")
-}
-
-model Session {
-  id            String    @id @default(cuid())
-  sessionToken String   @unique
-  userId       String
-  expires      DateTime
-  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@map("sessions")
-}
-
 model User {
   id String @id @default(cuid())
   name String
@@ -58,21 +28,10 @@ model User {
   deletedAt DateTime? @map("deleted_at")
   updateBy String? @map("update_by") @default("")
   transactions Transaction[]
-  accounts      Account[]
-  sessions      Session[]
   userShift UserShift[]
   userOutlets UserOutlet[]
 
   @@map("users")
-}
-
-model VerificationToken {
-  identifier String
-  token      String   @unique
-  expires    DateTime
-
-  @@unique([identifier, token])
-  @@map("verification_tokens")
 }
 
 model Role {
@@ -88,19 +47,6 @@ model Role {
   userOutlets UserOutlet[]
 
    @@map("roles")
-}
-
-model UserRole {
-  id BigInt @id @default(autoincrement())
-  userId String @map("user_id")
-  roleId BigInt @map("role_id")
-  storeId BigInt @map("store_id")
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime? @updatedAt @map("updated_at")
-  deletedAt DateTime? @map("deleted_at")
-  updateBy String? @default("") @map("updated_by")
-
-   @@map("user_roles")
 }
 
 model Province {
@@ -160,7 +106,7 @@ model Store{
   id BigInt @id @default(autoincrement())
   userId String @unique @map("user_id")
   name String 
-  slug String?
+  slug String @unique
   subdistrictId BigInt? @map("subdistrict_id")
   address String
   address2 String?
@@ -176,7 +122,6 @@ model Store{
   suppliers Suplier[]
   productStocks ProductStock[]
 
-  @@unique([slug])
   @@map("stores")
 }
 model Brand {
