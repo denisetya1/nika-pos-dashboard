@@ -22,6 +22,7 @@ export const GET = async (req: NextRequest) =>  {
           select: {
             id: true,
             name: true,
+            sequence: true,
             isActive: true
           }
         }

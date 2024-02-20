@@ -239,6 +239,7 @@ model Product {
 model Outlet {
   id BigInt @id @default(autoincrement())
   name String 
+  sequence Int? @map("sequence")
   storeId BigInt @map("store_id")
   store Store @relation(fields: [storeId], references: [id])
   isActive Boolean @map("is_active")
@@ -529,8 +530,14 @@ model Device {
   id String @id @default(cuid())
   deviceId String @map("device_id")
   deviceNumber Int @map("device_number")
-  platform String
-  outletId BigInt @map("outlet_id")
+  manufacturer String? @map("manufacturer")
+  brand String? @map("brand")
+  deviceName String? @map("deviceName")
+  deviceType String? @map("deviceType")
+  modelId String? @map("modelId")
+  osName String? @map("osName")
+  osVersion String? @map("osVersion")
+  platformApiLevel String? @map("platformApiLevel")
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime? @updatedAt @map("updated_at")
   deletedAt DateTime? @map("deleted_at")

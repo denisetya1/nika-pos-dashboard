@@ -23,7 +23,7 @@ export const GET = async (request: Request) =>  {
 
 export const POST = async (request: Request) =>  {
   const body = await request.json()
-  const { username, password } = body
+  const { username, password, deviceInfo } = body
  
   let user = await prisma.user.findFirst({
     where: {
@@ -44,12 +44,36 @@ export const POST = async (request: Request) =>  {
     const { password , ...userWithoutPass } = user
     const accessToken = signJwtAccessToken(userWithoutPass)
 
+    let deviceData = null
+    if(deviceInfo && deviceInfo.uuid === null){
+      const deviceCount = await prisma.device.count()
+
+      deviceData = await prisma.device.create({
+        data: {
+          deviceId: deviceInfo.uuid,
+          deviceNumber: deviceCount+1,
+          manufacturer: deviceInfo.manufacturer,
+          brand: deviceInfo.brand,
+          deviceName: deviceInfo.deviceName,
+          deviceType: deviceInfo.deviceType,
+          modelId: deviceInfo.modelId,
+          osName: deviceInfo.osName,
+          osVersion: deviceInfo.osVersion,
+          platformApiLevel: deviceInfo.platformApiLevel,
+        }
+      })
+    }
+
     return NextResponse.json({ 
       code: 'SUCCESS',
       message: '',
       data:{
         ...userWithoutPass, 
-        accessToken 
+        accessToken,
+        ...(deviceData ? {deviceInfo: {
+          uuid: deviceData.deviceId,
+          deviceNumber: deviceData.deviceNumber
+        }} :{})
       }
     })
   } else {
