@@ -58,7 +58,7 @@ export const POST = async (request: Request) =>  {
 
     let deviceData = null
 
-    if(deviceInfo && deviceInfo.uuid === null){
+    if(deviceInfo){
       const deviceCount = await prisma.device.count({
         where: {
           storeId: user.storeId || 0
