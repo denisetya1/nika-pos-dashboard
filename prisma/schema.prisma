@@ -50,6 +50,7 @@ model User {
   password String
   phone String?
   storeId BigInt? @map("store_id")
+  isSubAccount Boolean? @map("is_sub_account")
   isActive Boolean @map("is_active") @default(true)
   lastLogin DateTime? @map("last_login")
   createdAt DateTime @default(now()) @map("created_at")
@@ -537,6 +538,7 @@ model Device {
   modelId String? @map("modelId")
   osName String? @map("osName")
   osVersion String? @map("osVersion")
+  storeId BigInt @map("store_id")
   platformApiLevel String? @map("platformApiLevel")
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime? @updatedAt @map("updated_at")

@@ -44,12 +44,30 @@ export const POST = async (request: Request) =>  {
     const { password , ...userWithoutPass } = user
     const accessToken = signJwtAccessToken(userWithoutPass)
 
+    if(user.storeId === null && user.isSubAccount !== true){
+      const store = await prisma.store.findFirst({
+        where: {
+          userId: user.id
+        }
+      })
+
+      if(store){
+        user.storeId = store.id
+      }
+    }
+
     let deviceData = null
+
     if(deviceInfo && deviceInfo.uuid === null){
-      const deviceCount = await prisma.device.count()
+      const deviceCount = await prisma.device.count({
+        where: {
+          storeId: user.storeId || 0
+        }
+      })
 
       deviceData = await prisma.device.create({
         data: {
+          storeId: user.storeId || 0,
           deviceId: deviceInfo.uuid,
           deviceNumber: deviceCount+1,
           manufacturer: deviceInfo.manufacturer,
