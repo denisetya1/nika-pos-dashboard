@@ -88,7 +88,10 @@ export const POST = async (request: Request) =>  {
       data:{
         ...userWithoutPass, 
         accessToken,
-        deviceInfo: deviceData || undefined
+        ...(deviceData ? {deviceInfo: {
+          uuid: deviceData.deviceId,
+          deviceNumber: deviceData.deviceNumber
+        }} :{})
       }
     })
   } else {
