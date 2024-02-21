@@ -23,6 +23,15 @@ export const GET = async (req: NextRequest) =>  {
             id: true,
             name: true,
             sequence: true,
+            storeId: true,
+            printExtraInfo: true,
+            printHeaderLogo: true,
+            printHeaderLine1: true,
+            printHeaderLine2: true,
+            printHeaderLine3: true,
+            printHeaderLine4: true,
+            phone: true,
+            address: true,
             isActive: true
           }
         }
