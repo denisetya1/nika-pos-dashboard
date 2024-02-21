@@ -20,6 +20,13 @@ export const POST = async (request: Request) =>  {
   const outlet = await prisma.outlet.create({
     data: {
       name: body.name,
+      phone: body.phone,
+      address: body.address,
+      printExtraInfo: body.printExtraInfo,
+      printHeaderLine1: body.printHeaderLine1,
+      printHeaderLine2: body.printHeaderLine2,
+      printHeaderLine3: body.printHeaderLine3,
+      printHeaderLine4: body.printHeaderLine4,
       isActive: true,
       storeId: 1,
     }

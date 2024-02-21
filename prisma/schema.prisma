@@ -187,12 +187,12 @@ model Outlet {
   name String
   address String?
   phone String?
-  printHeaderLogo String?
-  printHeaderLine1 String?
-  printHeaderLine2 String?
-  printHeaderLine3 String?
-  printHeaderLine4 String?
-  printExtraInfo String?
+  printHeaderLogo String? @map("print_header_logo")
+  printHeaderLine1 String? @map("print_header_line1")
+  printHeaderLine2 String? @map("print_header_line2")
+  printHeaderLine3 String? @map("print_header_line3")
+  printHeaderLine4 String? @map("print_header_line4")
+  printExtraInfo String? @map("printExtraInfo")
   sequence Int? @map("sequence")
   storeId BigInt @map("store_id")
   store Store @relation(fields: [storeId], references: [id])
