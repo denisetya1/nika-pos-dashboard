@@ -411,6 +411,7 @@ model UserShift {
   updatedAt DateTime? @updatedAt @map("updated_at")
   deletedAt DateTime? @map("deleted_at")
   updateBy String? @default("") @map("updated_by")
+  transactions Transaction[]
 
   @@map("user_shifts")
 }
@@ -423,7 +424,7 @@ model Transaction {
   userId String @map("user_id")
   user User @relation(fields:[userId], references:[id])
   userShiftId BigInt @map("user_shift_id")
-
+  userShift UserShift @relation(fields:[userShiftId], references:[id])
   totalItem Int? @map("total_item")
   totalPrice Decimal? @db.Decimal(10,2) @map("total_price")
   totalDiscount Decimal? @db.Decimal(10,2) @map("total_discount")

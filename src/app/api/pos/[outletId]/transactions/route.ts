@@ -26,7 +26,11 @@ export const POST = async (req: NextRequest) =>  {
             id: body.userId
           }
         },
-        userShiftId: body.userShiftId,
+        userShift: {
+          connect: {
+            id: body.userShiftId
+          }
+        },
         totalItem: body.totalItem,
         totalPrice: body.totalPrice,
         totalDiscount: 0,
