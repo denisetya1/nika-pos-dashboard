@@ -205,7 +205,7 @@ model Outlet {
   productStock ProductStock[]
   reqOutlets StockRequest[] @relation("reqOutlet")
   destOutlets StockRequest[] @relation("destOutlet")
-  transactions Transaction[]
+  // transactions Transaction[]
   shifts Shift[]
   userOutlets UserOutlet[]
 
@@ -418,7 +418,7 @@ model UserShift {
 model Transaction {
   id String @id @db.VarChar(25)
   outletId BigInt @map("outlet_id")
-  outlet Outlet @relation(fields:[outletId], references:[id])
+  // outlet Outlet? @relation(fields:[outletId], references:[id])
   storeId BigInt @map("store_id")
   userId String @map("user_id")
   user User @relation(fields:[userId], references:[id])

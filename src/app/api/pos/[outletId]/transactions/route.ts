@@ -18,13 +18,11 @@ export const POST = async (req: NextRequest) =>  {
         storeId: body.storeId,
         userId: body.userId,
         userShiftId: body.userShiftId,
-
         totalItem: body.totalItem,
         totalPrice: body.totalPrice,
         totalDiscount: 0,
         amountPaid: body.amountPaid,
         amountChange: body.amountChange,
-
         outletPaymentMethodId: body.outletPaymentMethodId,
         cardNumber: body.cardNumber,
         confirmNumber: body.confirmNumber,
