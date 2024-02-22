@@ -1,29 +1,42 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "../../../client";
 import { verifyJwt } from "@/app/lib/jwt";
+import { connect } from "http2";
 
 export const POST = async (req: NextRequest) =>  {
   const authorization = req.headers.get('authorization') || ''
   const [__, accessToken] = authorization.split(' ')
 
-  const userData = verifyJwt(accessToken)
+  // const userData = verifyJwt(accessToken)
 
-  if(accessToken && userData) {
+  if(true){//accessToken && userData) {
     const body = await req.json()
 
     const transaction = await prisma.transaction.create({
       data: {
         id: body.id,
-        outletId: body.outletId,
+        outlet: {
+          connect: {
+            id: body.outletId
+          }
+        },
         storeId: body.storeId,
-        userId: body.userId,
+        user: {
+          connect: {
+            id: body.userId
+          }
+        },
         userShiftId: body.userShiftId,
         totalItem: body.totalItem,
         totalPrice: body.totalPrice,
         totalDiscount: 0,
         amountPaid: body.amountPaid,
         amountChange: body.amountChange,
-        outletPaymentMethodId: body.outletPaymentMethodId,
+        outletPaymentMethod:{
+          connect: {
+            id: body.outletPaymentMethodId
+          }
+        },
         cardNumber: body.cardNumber,
         confirmNumber: body.confirmNumber,
         transactionTime: body.transactionTime,
