@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
-import { prisma } from "../../../client";
+import { prisma } from "../../../../client";
+import { isEmptyVal } from "@/app/helpers/functions";
 import { verifyJwt } from "@/app/lib/jwt";
+import moment from "moment";
 
 export const GET = async (req: NextRequest, {params} : { params: {
   outletId: string
@@ -11,40 +13,41 @@ export const GET = async (req: NextRequest, {params} : { params: {
   const userData = verifyJwt(accessToken)
 
   if(accessToken && userData) {
-    const { outletId } = params;
-
-    const outletPayments = await prisma.outletPaymentMethod.findMany({
+    const transactions = await prisma.transaction.findMany({
       where: {
-        AND : [
-          {storeId: 1},
-          {outletId: Number(outletId)},
-          {isActive: true}
-        ]
-      },
-      orderBy: {
-        id: 'asc'
-      },
+        outletId: parseInt(params.outletId),
+        transactionTime: {
+          lte: new Date(moment().format('DD-MM-YYYY 23:59:59')),
+          gte: new Date(moment().format('DD-MM-YYYY 00:00:00'))
+        }
+      }, 
       include: {
-        paymentMethod: {
+        transactionDetails: true,
+        user: {
           select: {
             id: true,
-            name: true,
-            displayName: true
+            name: true
           }
         }
+      },
+      orderBy: {
+        transactionTime: 'asc'
       }
     })
 
     return NextResponse.json({
       code: "SUCCESS",
       message: "",
-      data: outletPayments
+      data: transactions
+    }, {
+      status: 401
     });
 
   } else {
     return NextResponse.json({
       code: "UNATHORIZED",
-      message: "Unathorized Error!"
+      message: "Unathorized Error!",
+      data: null
     }, {
       status: 401
     });

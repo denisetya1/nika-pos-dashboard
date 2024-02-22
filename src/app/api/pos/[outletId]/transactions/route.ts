@@ -62,7 +62,7 @@ export const POST = async (req: NextRequest) =>  {
   } else {
     return NextResponse.json({
       code: "UNATHORIZED",
-      message: "unathorized",
+      message: "Unathorized Error!",
       data: null
     }, {
       status: 401

@@ -36,12 +36,16 @@ export const POST = async (req: NextRequest, {params} : { params: {
       })
     }
 
-    return NextResponse.json(userShift);
+    return NextResponse.json({
+      code: "SUCCESS",
+      message: "",
+      data: userShift
+    });
 
   } else {
     return NextResponse.json({
       code: "UNATHORIZED",
-      message: "unathorized"
+      message: "Unathorized Error!"
     }, {
       status: 401
     });

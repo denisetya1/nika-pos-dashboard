@@ -40,12 +40,16 @@ export const GET = async (req: NextRequest, {params} : { params: {
       }
     })
 
-    return NextResponse.json(shifts);
+    return NextResponse.json({
+        code: "SUCCESS",
+        message: "",
+        data: shifts
+      });
 
   } else {
     return NextResponse.json({
       code: "UNATHORIZED",
-      message: "unathorized"
+      message: "Unathorized Error!"
     }, {
       status: 401
     });

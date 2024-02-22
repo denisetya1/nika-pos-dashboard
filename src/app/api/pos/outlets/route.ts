@@ -42,7 +42,11 @@ export const GET = async (req: NextRequest) =>  {
      return {...userOulet.outlet}
     })
 
-    return NextResponse.json(outlets);
+    return NextResponse.json({
+      code: "SUCCESS",
+      message: "",
+      data: outlets
+    });
 
   } else {
     return NextResponse.json({
