@@ -63,7 +63,7 @@ import {
 
 export const HomePageContent: NextPage = function () {
   return (
-    <div className="p-6">
+    <div className="block p-6">
       
       <section>
         <header>

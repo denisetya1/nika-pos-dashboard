@@ -24,7 +24,7 @@ const RootLayout: FC<PropsWithChildren> = function ({ children }) {
       <head>
         <ThemeModeScript />
       </head>
-      <body className={twMerge("bg-gray-50 dark:bg-gray-900", inter.className)}>
+      <body className={twMerge("bg-gray-50 dark:bg-gray-900 block w-full h-full", inter.className)}>
         <AuthSessionProvider>
             <Flowbite theme={{ theme: flowbiteTheme }}>{children}</Flowbite>
         </AuthSessionProvider>

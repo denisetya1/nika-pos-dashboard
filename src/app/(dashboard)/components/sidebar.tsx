@@ -59,6 +59,16 @@ export const DashboardSidebar: FC = function () {
       icon: TbFileReport,
       childs: [
         {
+          name: 'report-sales',
+          title: "Penjualan",
+          url: "/reports/sales",
+        },
+        {
+          name: 'report-product-sold',
+          title: "Barang Terjual",
+          url: "/reports/product-sold",
+        },
+        {
           name: 'report-stock',
           title: "Perpindahan Stok",
           url: "/reports/stocks",

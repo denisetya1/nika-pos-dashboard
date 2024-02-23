@@ -29,12 +29,12 @@ const DashboardLayoutContent: FC<PropsWithChildren> = function ({ children }) {
     <QueryClientProvider client={queryClient}>
       <ToastContextProvider>
         <DashboardNavbar />
-        <div className="mt-16 flex items-start">
+        <div className="flex w-full h-full mt-16 items-start">
           <DashboardSidebar />
           <div
             id="main-content"
             className={twMerge(
-              "relative h-full w-full overflow-y-auto bg-white dark:bg-gray-900 dark:text-gray-100",
+              "block bg-white grow h-full w-full overflow-y-auto  dark:bg-gray-900 dark:text-gray-100",
               isCollapsed ? "lg:ml-[4.5rem]" : "lg:ml-64",
             )}
           >
