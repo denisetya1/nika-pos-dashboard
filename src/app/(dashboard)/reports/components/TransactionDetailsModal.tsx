@@ -41,7 +41,7 @@ const AddEditMasterDataModal = ({
       <Modal show={isOpen} onClose={() => setOpen(false)}>
           <Modal.Header>{modalTitle}</Modal.Header>
           <Modal.Body className="py-10 overflow-auto max-h-[70%]">
-            <div>
+            <div className="w-full">
               <div className="mb-10">
                 <div>No. Transaksi: <strong>{transaction.id}</strong></div>
                 <div>Waktu: <strong>{moment(transaction.transactionTime).format('DD-MM-YYYY HH:mm:ss')}</strong></div>
@@ -53,46 +53,47 @@ const AddEditMasterDataModal = ({
                     <Table.HeadCell>Nama Produk</Table.HeadCell>
                     <Table.HeadCell>Jumlah</Table.HeadCell>
                     <Table.HeadCell>Harga</Table.HeadCell>
+                    <Table.HeadCell>Total</Table.HeadCell>
                 </Table.Head>
                 <Table.Body>
                   {transaction.transactionDetails && transaction.transactionDetails.map((td, index) => (<Table.Row key={index}>
-                        <Table.Cell className="p-2">{(index+1)}</Table.Cell>
+                        <Table.Cell className="p-2 text-center">{(index+1)}</Table.Cell>
                         <Table.Cell className="p-2">{td.name}</Table.Cell>
-                        <Table.Cell className="p-2">{td.qty}</Table.Cell>
+                        <Table.Cell className="p-2 text-center">{td.qty}</Table.Cell>
                         <Table.Cell className="text-center">
                           {formatCurrency(Number(td.finalSellPrice))}
+                        </Table.Cell>
+                        <Table.Cell className="text-right">
+                          {formatCurrency(Number(td.total))}
                         </Table.Cell>
                       </Table.Row>
                   ))}
                   <Table.Row className="bg-gray-100 p-0">
-                    <Table.Cell colSpan={3} className="p-2 text-right bg-gray-100">Total:</Table.Cell>
+                    <Table.Cell colSpan={4} className="p-2 text-right bg-gray-100">Total:</Table.Cell>
                     <Table.Cell className="text-right bg-gray-100">
                       <strong>{formatCurrency(Number(transaction.totalPrice))}</strong>
                     </Table.Cell>
                   </Table.Row>
                   <Table.Row className="bg-gray-100 p-0">
-                    <Table.Cell colSpan={3} className="p-2 text-right bg-gray-100">Total Bayar:</Table.Cell>
+                    <Table.Cell colSpan={4} className="p-2 text-right bg-gray-100">Total Bayar:</Table.Cell>
                     <Table.Cell className="text-right bg-gray-100">
                     <strong>{formatCurrency(Number(transaction.amountPaid))}</strong>
                     </Table.Cell>
                   </Table.Row>
                   <Table.Row className="bg-gray-100 p-0">
-                    <Table.Cell colSpan={3} className="p-2 text-right bg-gray-100">Total Kembali:</Table.Cell>
+                    <Table.Cell colSpan={4} className="p-2 text-right bg-gray-100">Total Kembali:</Table.Cell>
                     <Table.Cell className="text-right bg-gray-100">
                     <strong>{formatCurrency(Number(transaction.amountChange))}</strong>
                     </Table.Cell>
                   </Table.Row>
                   <Table.Row className="bg-gray-100 p-0">
-                    <Table.Cell colSpan={3} className="p-2 text-right bg-gray-100">Metode Pembayaran:</Table.Cell>
+                    <Table.Cell colSpan={4} className="p-2 text-right bg-gray-100">Metode Pembayaran:</Table.Cell>
                     <Table.Cell className="text-right bg-gray-100">
                     <strong>{transaction.outletPaymentMethod.paymentMethod.name}</strong>
                     </Table.Cell>
                   </Table.Row>
                 </Table.Body>
               </Table>
-            </div>
-            <div>
-
             </div>
           </Modal.Body>
           <Modal.Footer className="flex justify-end">
