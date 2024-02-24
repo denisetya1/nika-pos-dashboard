@@ -448,6 +448,7 @@ model Transaction {
 
 enum DetailCategoryEnum {
   PRODUCT
+  DISCOUNT
   DISCOUNT_VOUCHER
   DISCOUNT_ADDITIONAL
 }
