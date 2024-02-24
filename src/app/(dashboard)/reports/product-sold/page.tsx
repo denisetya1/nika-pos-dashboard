@@ -2,11 +2,13 @@
 import { Outlet, Prisma, Shift, TransactionDetail, User } from "@prisma/client"
 import moment from "moment";
 import OutletDateFilter from "../components/OutletDateFilter";
+import { formatCurrency } from "@/app/helpers/functions";
 
 type ProductSold = {
   _sum: { qty: number }
   productStockId: string
   barcode: string
+  finalSellPrice: string
   name: string
 }
 
@@ -53,6 +55,9 @@ const StockReportPage = async ({
             <th scope="col" className="hidden sm:table-cell px-6 py-3">
               Nama Produk
             </th>
+            <th scope="col" className="hidden sm:table-cell px-6 py-3">
+              Harga Jual Satuan
+            </th>
             <th scope="col" className="px-6 py-3 text-center">Jumlah Terjual</th>
           </tr>
         </thead>
@@ -63,6 +68,7 @@ const StockReportPage = async ({
                 <td className="px-6 py-3 w-10">{index + 1}</td>
                 <td className="px-6 py-3 text-black dark:text-white w-[100px]">{ps.barcode ? ps.barcode  : '-'}</td>
                 <td className="px-6 py-3 w-80 text-black dark:text-white">{ps.name}</td>
+                <td className="px-6 py-3 text-center">{formatCurrency(Number(ps.finalSellPrice))}</td>
                 <td className="px-6 py-3 text-center">{ps._sum.qty}</td>
               </tr>
             )

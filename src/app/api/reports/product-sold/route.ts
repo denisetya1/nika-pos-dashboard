@@ -20,7 +20,7 @@ export const GET = async (req: NextRequest) =>  {
         }
       }
     },
-    by: ['productStockId','name', 'barcode'],
+    by: ['productStockId','name', 'barcode', 'finalSellPrice'],
     _sum: {
       qty: true
     },
