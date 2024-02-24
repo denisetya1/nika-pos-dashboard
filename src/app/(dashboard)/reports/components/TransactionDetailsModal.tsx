@@ -57,16 +57,19 @@ const AddEditMasterDataModal = ({
                 </Table.Head>
                 <Table.Body>
                   {transaction.transactionDetails && transaction.transactionDetails.map((td, index) => (<Table.Row key={index}>
-                        <Table.Cell className="p-2 text-center">{(index+1)}</Table.Cell>
-                        <Table.Cell className="p-2">{td.name}</Table.Cell>
-                        <Table.Cell className="p-2 text-center">{td.qty}</Table.Cell>
-                        <Table.Cell className="text-center">
-                          {formatCurrency(Number(td.finalSellPrice))}
-                        </Table.Cell>
-                        <Table.Cell className="text-right">
-                          {formatCurrency(Number(td.total))}
-                        </Table.Cell>
-                      </Table.Row>
+                      <Table.Cell className="p-2 text-center align-top">{(index+1)}</Table.Cell>
+                      <Table.Cell className="p-2">
+                        <div>{td.name}</div>
+                        <div>{td.barcode}</div>
+                      </Table.Cell>
+                      <Table.Cell className="p-2 text-center">{td.qty}</Table.Cell>
+                      <Table.Cell className="text-center">
+                        {formatCurrency(Number(td.finalSellPrice))}
+                      </Table.Cell>
+                      <Table.Cell className="text-right">
+                        {formatCurrency(Number(td.total))}
+                      </Table.Cell>
+                    </Table.Row>
                   ))}
                   <Table.Row className="bg-gray-100 p-0">
                     <Table.Cell colSpan={4} className="p-2 text-right bg-gray-100">Total:</Table.Cell>
