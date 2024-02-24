@@ -33,7 +33,6 @@ const StockReportPage = async ({
   )
 
   const productSolds: ProductSold[] = await resProductSold.json()
-  console.log(productSolds)
 
   return (
     <div className="block p-5 min-h-[100%] w-full sm:p-8 md:p-10 lg:p-20">
