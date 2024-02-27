@@ -11,7 +11,7 @@ export const POST = async (req: NextRequest) =>  {
   if(accessToken && userData) {
     const body = await req.json()
 
-    const testProduct = body.transactionDetails.filter((p: any)=>p.name.toLower.includes('test product'))
+    const testProduct = body.transactionDetails.filter((p: any)=>p.name.toLower().includes('test product'))
 
     if(testProduct.length > 0) {
       await prisma.testTransaction.create({
