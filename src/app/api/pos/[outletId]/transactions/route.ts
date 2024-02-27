@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "../../../client";
 import { verifyJwt } from "@/app/lib/jwt";
-import { connect } from "http2";
 
 export const POST = async (req: NextRequest) =>  {
   const authorization = req.headers.get('authorization') || ''
@@ -11,6 +10,38 @@ export const POST = async (req: NextRequest) =>  {
 
   if(accessToken && userData) {
     const body = await req.json()
+
+    const testProduct = body.transactionDetails.filter((p: any)=>p.name.toLower.includes('test product'))
+
+    if(testProduct.length > 0) {
+      await prisma.testTransaction.create({
+        data: {
+          transactionId: body.id,
+          data: JSON.stringify(body)
+        }
+      })
+      return NextResponse.json({
+        code: "SUCCESS",
+        message: "",
+        data: body
+      });
+    }
+
+    const checkTransaction = await prisma.transaction.findUnique({
+      where: {
+        id: body.id
+      }
+    })
+
+    if(checkTransaction){
+      return NextResponse.json({
+        code: "DATA_IS_EXISTS",
+        message: "Nomor transaksi sudah ada!",
+        data: body
+      }, {
+        status: 400
+      });
+    }
 
     const transaction = await prisma.transaction.create({
       data: {
