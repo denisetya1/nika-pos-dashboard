@@ -30,6 +30,7 @@ export const GET = async (req: NextRequest) =>  {
             printHeaderLine2: true,
             printHeaderLine3: true,
             printHeaderLine4: true,
+            printHeaderLine5: true,
             phone: true,
             address: true,
             isActive: true
