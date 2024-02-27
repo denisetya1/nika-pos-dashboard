@@ -14,6 +14,7 @@ type FormValues = {
   printHeaderLine2: string | null
   printHeaderLine3: string | null
   printHeaderLine4: string | null
+  printHeaderLine5: string | null
   printExtraInfo: string | null
 }
 
@@ -75,6 +76,7 @@ const AddEditMasterDataModal = ({
         printHeaderLine2: data.printHeaderLine2,
         printHeaderLine3: data.printHeaderLine3,
         printHeaderLine4: data.printHeaderLine4,
+        printHeaderLine5: data.printHeaderLine5,
         printExtraInfo: data.printExtraInfo,
       })
     }
@@ -150,6 +152,14 @@ const AddEditMasterDataModal = ({
                       <Label htmlFor="input-gray" color="gray" value="Print Header Baris 4" />
                     </div>
                     <TextInput id="input-gray" placeholder={placeholder} {...register("printHeaderLine4")} />
+                  </div>
+                </div>
+                <div className="grid gap-4 mb-4 grid-cols-2">
+                  <div className="col-span-2">
+                    <div className="mb-2 block">
+                      <Label htmlFor="input-gray" color="gray" value="Print Header Baris 5" />
+                    </div>
+                    <TextInput id="input-gray" placeholder={placeholder} {...register("printHeaderLine5")} />
                   </div>
                 </div>
 

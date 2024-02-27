@@ -20,6 +20,7 @@ export const PUT = async (request: NextRequest, {params}: {params: {
       printHeaderLine2: body.printHeaderLine2,
       printHeaderLine3: body.printHeaderLine3,
       printHeaderLine4: body.printHeaderLine4,
+      printHeaderLine5: body.printHeaderLine5,
     }
   })
 

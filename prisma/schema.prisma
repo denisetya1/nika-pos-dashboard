@@ -192,6 +192,7 @@ model Outlet {
   printHeaderLine2 String? @map("print_header_line2")
   printHeaderLine3 String? @map("print_header_line3")
   printHeaderLine4 String? @map("print_header_line4")
+  printHeaderLine5 String? @map("print_header_line5")
   printExtraInfo String? @map("printExtraInfo")
   sequence Int? @map("sequence")
   storeId BigInt @map("store_id")
