@@ -1,2 +1,0 @@
--- AlterTable
-ALTER TABLE `transaction_details` MODIFY `detail_category` ENUM('PRODUCT', 'DISCOUNT', 'DISCOUNT_VOUCHER', 'DISCOUNT_ADDITIONAL') NOT NULL DEFAULT 'PRODUCT';
