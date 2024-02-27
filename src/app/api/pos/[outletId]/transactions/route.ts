@@ -11,21 +11,21 @@ export const POST = async (req: NextRequest) =>  {
   if(accessToken && userData) {
     const body = await req.json()
 
-    // const testProduct = body.transactionDetails.filter((p: any)=> p.name.toLower().includes('test product'))
-
-    // if(testProduct.length > 0) {
-    //   await prisma.testTransaction.create({
-    //     data: {
-    //       transactionId: body.id,
-    //       data: JSON.stringify(body)
-    //     }
-    //   })
-    //   return NextResponse.json({
-    //     code: "SUCCESS",
-    //     message: "",
-    //     data: body
-    //   });
-    // }
+    const testProduct = body.transactionDetails.filter((p: any)=> p.name.toLowerCase().includes('test product'))
+    
+    if(testProduct.length > 0) {
+      await prisma.testTransaction.create({
+        data: {
+          transactionId: body.id,
+          data: JSON.stringify(body)
+        }
+      })
+      return NextResponse.json({
+        code: "SUCCESS",
+        message: "",
+        data: body
+      });
+    }
 
     const checkTransaction = await prisma.transaction.findUnique({
       where: {
