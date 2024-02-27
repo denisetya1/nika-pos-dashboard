@@ -178,6 +178,7 @@ model Product {
   updateBy String? @default("") @map("updated_by")
   stocks ProductStock[]
   StockRequestProducts StockRequestProduct[]
+  custom_barcode Barcode?
 
   @@map("products")
 }
@@ -514,4 +515,17 @@ model TestTransaction {
   updatedAt DateTime? @updatedAt @map("updated_at")
   deletedAt DateTime? @map("deleted_at")
   updateBy String? @default("") @map("updated_by")
+}
+
+model Barcode {
+  id BigInt @id @default(autoincrement())
+  barcode String
+  productId BigInt @map("product_id") @unique
+  product Product @relation(fields: [productId], references: [id])
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime? @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+  updateBy String? @default("") @map("updated_by")
+
+  @@map("custom_barcodes")
 }
