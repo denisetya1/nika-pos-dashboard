@@ -7,45 +7,51 @@ export const GET = async (req: NextRequest, {params} : { params: {
   outletId: string,
   transactionId: string
 }}) =>  {
-  const { transactionId } = params;
-  
-  const transactions = await prisma.transaction.findMany({
-    where: {
-      id: transactionId
-    },
-    orderBy: {
-      transactionTime: 'asc'
-    },
-    include: {
-      user: true,
-      userShift: {
-        include: {
-          shift: true
-        }
+  const authorization = req.headers.get('authorization') || ''
+  const [__, accessToken] = authorization.split(' ')
+
+  const userData = verifyJwt(accessToken)
+
+  if(accessToken && userData) {
+    const { transactionId } = params;
+    
+    const transaction = await prisma.transaction.findFirst({
+      where: {
+        id: transactionId
       },
-      transactionDetails: true,
-      outlet: true,
-      outletPaymentMethod: {
-        include: {
-          paymentMethod: true
+      orderBy: {
+        transactionTime: 'asc'
+      },
+      include: {
+        user: true,
+        userShift: {
+          include: {
+            shift: true
+          }
+        },
+        transactionDetails: true,
+        outlet: true,
+        outletPaymentMethod: {
+          include: {
+            paymentMethod: true
+          }
         }
       }
-    }
-  })
+    })
 
-  return NextResponse.json({
-    code: "SUCCESS",
-    message: "",
-    data: transactions
-  });
+    return NextResponse.json({
+      code: "SUCCESS",
+      message: "",
+      data: transaction
+    });
 
-  // } else {
-  //   return NextResponse.json({
-  //     code: "UNATHORIZED",
-  //     message: "Unathorized Error!",
-  //     data: null
-  //   }, {
-  //     status: 401
-  //   });
-  // }
+  } else {
+    return NextResponse.json({
+      code: "UNATHORIZED",
+      message: "Unathorized Error!",
+      data: null
+    }, {
+      status: 401
+    });
+  }
 }

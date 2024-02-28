@@ -6,43 +6,59 @@ import moment from "moment";
 export const GET = async (req: NextRequest, {params} : { params: {
   outletId: string
 }}) =>  {
-  const { outletId } = params;
-  const date = req.nextUrl.searchParams.get('date') || moment().format('YYYY-MM-DD');
+  const authorization = req.headers.get('authorization') || ''
+  const [__, accessToken] = authorization.split(' ')
 
-  const startDate = new Date(date)
-  const endDate = new Date(`${moment(date).add(1, "day").format('YYYY-MM-DD')} 07:00:00`)
-  
-  const transactions = await prisma.transaction.findMany({
-    where: {
-      outletId: Number(outletId),
-      // transactionTime: {
-      //   gte: startDate,
-      //   lte: endDate
-      // }
-    },
-    orderBy: {
-      transactionTime: 'asc'
-    },
-    include: {
-      user: {
-        select:{
-          id: true,
-          name: true,
-          username: true
+  const userData = verifyJwt(accessToken)
+
+  if(accessToken && userData) {
+    const { outletId } = params;
+    const date = req.nextUrl.searchParams.get('date') || moment().format('YYYY-MM-DD');
+
+    const startDate = new Date(date)
+    const endDate = new Date(`${moment(date).add(1, "day").format('YYYY-MM-DD')} 07:00:00`)
+    
+    const transactions = await prisma.transaction.findMany({
+      where: {
+        outletId: Number(outletId),
+        transactionTime: {
+          gte: startDate,
+          lte: endDate
         }
       },
-      userShift: {
-        select:{
-          shift: {
-            select: {
-              id: true,
-              name: true
+      orderBy: {
+        transactionTime: 'asc'
+      },
+      include: {
+        user: {
+          select:{
+            id: true,
+            name: true,
+            username: true
+          }
+        },
+        userShift: {
+          select:{
+            shift: {
+              select: {
+                id: true,
+                name: true
+              }
+            }
+          }
+        },
+        outletPaymentMethod: {
+          select: {
+            paymentMethod: {
+              select: {
+                id: true,
+                name: true
+              }
             }
           }
         }
       }
-    }
-  })
+    })
 
     return NextResponse.json({
       code: "SUCCESS",
@@ -50,13 +66,13 @@ export const GET = async (req: NextRequest, {params} : { params: {
       data: transactions
     });
 
-  // } else {
-  //   return NextResponse.json({
-  //     code: "UNATHORIZED",
-  //     message: "Unathorized Error!",
-  //     data: null
-  //   }, {
-  //     status: 401
-  //   });
-  // }
+  } else {
+    return NextResponse.json({
+      code: "UNATHORIZED",
+      message: "Unathorized Error!",
+      data: null
+    }, {
+      status: 401
+    });
+  }
 }
