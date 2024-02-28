@@ -1,55 +1,62 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "../../../../client";
-import { isEmptyVal } from "@/app/helpers/functions";
 import { verifyJwt } from "@/app/lib/jwt";
 import moment from "moment";
 
 export const GET = async (req: NextRequest, {params} : { params: {
   outletId: string
 }}) =>  {
-  const authorization = req.headers.get('authorization') || ''
-  const [__, accessToken] = authorization.split(' ')
+  const { outletId } = params;
+  const date = req.nextUrl.searchParams.get('date') || moment().format('YYYY-MM-DD');
 
-  const userData = verifyJwt(accessToken)
-
-  if(accessToken && userData) {
-    const transactions = await prisma.transaction.findMany({
-      where: {
-        outletId: parseInt(params.outletId),
-        transactionTime: {
-          lte: new Date(moment().format('DD-MM-YYYY 23:59:59')),
-          gte: new Date(moment().format('DD-MM-YYYY 00:00:00'))
-        }
-      }, 
-      include: {
-        transactionDetails: true,
-        user: {
-          select: {
-            id: true,
-            name: true
-          }
+  const startDate = new Date(date)
+  const endDate = new Date(`${moment(date).add(1, "day").format('YYYY-MM-DD')} 07:00:00`)
+  
+  const transactions = await prisma.transaction.findMany({
+    where: {
+      outletId: Number(outletId),
+      // transactionTime: {
+      //   gte: startDate,
+      //   lte: endDate
+      // }
+    },
+    orderBy: {
+      transactionTime: 'asc'
+    },
+    include: {
+      user: {
+        select:{
+          id: true,
+          name: true,
+          username: true
         }
       },
-      orderBy: {
-        transactionTime: 'asc'
+      userShift: {
+        select:{
+          shift: {
+            select: {
+              id: true,
+              name: true
+            }
+          }
+        }
       }
-    })
+    }
+  })
 
     return NextResponse.json({
       code: "SUCCESS",
       message: "",
       data: transactions
-    }, {
-      status: 401
     });
 
-  } else {
-    return NextResponse.json({
-      code: "UNATHORIZED",
-      message: "Unathorized Error!",
-      data: null
-    }, {
-      status: 401
-    });
-  }
+  // } else {
+  //   return NextResponse.json({
+  //     code: "UNATHORIZED",
+  //     message: "Unathorized Error!",
+  //     data: null
+  //   }, {
+  //     status: 401
+  //   });
+  // }
 }
