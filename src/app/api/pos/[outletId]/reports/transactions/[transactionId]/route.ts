@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "../../../../../client";
 import { verifyJwt } from "@/app/lib/jwt";
-import moment from "moment";
 
 export const GET = async (req: NextRequest, {params} : { params: {
   outletId: string,

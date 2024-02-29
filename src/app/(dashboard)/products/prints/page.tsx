@@ -98,7 +98,7 @@ const PrintPricePage = ({
   }
 
   return (
-    <div  className="p-5 sm:p-8 md:p-10 lg:p-20">
+    <div  className="grow">
       <div>
         <h1 className="font-bold text-2xl mb-10">CETAK HARGA PRODUK</h1>
       </div>
@@ -139,10 +139,10 @@ const PrintPricePage = ({
         </div>
       </div>
 
-      <div className="w-full">
+      <div className="w-full bg-white p-6 rounded-md border-[1px] border-slate-200">
         
           <div className="flex justify-end align-middle mb-5">
-            <Button color="blue" onClick={handlePrint}>Cetak Label</Button>
+            <Button color="purple" onClick={handlePrint}>Cetak Label</Button>
           </div>
           <ComponentToPrint ref={componentRef} productPrices={productPrices}/>
         </div>

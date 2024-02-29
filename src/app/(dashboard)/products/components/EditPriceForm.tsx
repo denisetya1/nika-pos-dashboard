@@ -67,8 +67,8 @@ const EditPriceForm = ({
 
   return (
     <>
-      <Tooltip content='Ubah Harga Jual' placement="bottom" style="light">
-        <button className="text-blue-500" onClick={() => setOpen(true)}><LuPencilLine /></button>
+      <Tooltip content='Ubah Harga Jual' placement="bottom" style="dark">
+        <button className="text-primary-500" onClick={() => setOpen(true)}><LuPencilLine /></button>
       </Tooltip>
       
       <Modal show={isOpen} onClose={() => setOpen(false)}>

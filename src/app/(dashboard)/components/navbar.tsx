@@ -22,11 +22,11 @@ export const DashboardNavbar: FC<Record<string, never>> = function () {
               <button
                 aria-controls="sidebar"
                 aria-expanded
-                className="mr-2 cursor-pointer rounded p-2 text-gray-600 hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:ring-2 focus:ring-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:bg-gray-700 dark:focus:ring-gray-700"
+                className="mr-2 cursor-pointer rounded p-2 text-gray-600 hover:bg-violet-100 hover:text-gray-900 focus:bg-violet-100 focus:ring-2 focus:ring-violet-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:bg-gray-700 dark:focus:ring-gray-700"
                 onClick={() => setSidebarCollapsed(!isSidebarCollapsed)}
               >
                 {isSidebarCollapsed || !isSmallScreen() ? (
-                  <HiMenuAlt1 className="h-6 w-6" />
+                  <HiMenuAlt1 className="h-6 w-6 text-primary-600" />
                 ) : (
                   <HiX className="h-6 w-6" />
                 )}

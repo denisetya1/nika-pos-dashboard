@@ -63,12 +63,12 @@ import {
 
 export const HomePageContent: NextPage = function () {
   return (
-    <div className="block p-6">
-      
-      <section>
+    <div className="grow p-6 bg-white rounded-md border-[1px] border-slate-200">
+
+      <section className="p-10">
         <header>
-          <h4 className="mb-6 text-5xl font-extrabold dark:text-white">
-            Welcome to Beauty POS dashboard. 
+          <h4 className="mb-6 text-2xl font-semibold dark:text-white">
+            Welcome to BeautyCat POS dashboard powered by nikaPOS 
           </h4>
           <p>Gunakan Menu di samping kiri untuk menavigasi halaman.</p>
         </header>

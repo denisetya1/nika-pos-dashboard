@@ -52,8 +52,8 @@ const ProductListFilter = ({
 
       {outlets && outlets?.length > 0 ? <div>
         <div className="mb-2 block">
-          <Label htmlFor="product-name" value="Outlet" />
-        </div>
+          <Label className="text-slate-600" htmlFor="product-name" value="Outlet" />
+        </div> 
         <Select color="info" onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setOutletId(e.target.value)} value={outletId}>
           {outlets.map((outlet) => (<option key={outlet.id} value={outlet.id.toString()}>{outlet.name}</option>))}
         </Select>
@@ -61,7 +61,7 @@ const ProductListFilter = ({
       
       <div> 
         <div className="mb-2 block">
-          <Label htmlFor="product-name" value="Ketegori" />
+          <Label className="text-slate-600" htmlFor="product-name" value="Ketegori" />
         </div>
         <Select onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setCategoryId(e.target.value)} value={categoryId}>
           <option value="">Semua Kategori</option>
@@ -71,7 +71,7 @@ const ProductListFilter = ({
 
       <div>
         <div className="mb-2 block">
-          <Label htmlFor="product-name" value="Brand" />
+          <Label className="text-slate-600" htmlFor="product-name" value="Brand" />
         </div>
           <Select onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setBrandId(e.target.value)} value={brandId}>
           <option value="">Semua Brand</option>
@@ -81,7 +81,7 @@ const ProductListFilter = ({
 
       <div className="grow">
         <div className="mb-2 block">
-          <Label htmlFor="product-name" value="Cari Produk" />
+          <Label className="text-slate-600" htmlFor="product-name" value="Cari Produk" />
         </div>
         <TextInput id="product-name" className="w-full" value={search} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)} type="text" placeholder="Cari berdasarkan nama produk/barcode/sku"/>
       </div>
