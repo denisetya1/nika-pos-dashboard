@@ -1,5 +1,5 @@
 'use client';
-import { formatCurrency } from "@/app/helpers/functions";
+import { formatCurrency } from "@/lib/functions";
 import { Prisma } from "@prisma/client";
 import { Button, Modal, Table } from "flowbite-react";
 import moment from "moment";
@@ -48,7 +48,7 @@ const AddEditMasterDataModal = ({
                 <div>Kasir: <strong>{transaction.user.name}</strong></div>
               </div>
               <Table striped={true} className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                <Table.Head className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <Table.Head className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 border-b-[1px] border-slate-200">
                     <Table.HeadCell>No.</Table.HeadCell>
                     <Table.HeadCell>Nama Produk</Table.HeadCell>
                     <Table.HeadCell>Jumlah</Table.HeadCell>

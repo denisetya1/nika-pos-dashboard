@@ -1,4 +1,4 @@
-import { prisma } from "../app/api/client";
+import { prisma } from "@/lib/client";
 
 export const getStore = async (storeId: number) => {
   const store = await prisma.store.findFirst({

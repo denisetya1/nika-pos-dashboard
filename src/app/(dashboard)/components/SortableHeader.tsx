@@ -1,6 +1,5 @@
 'use client'
 
-import { Button } from "flowbite-react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { HiChevronDown, HiChevronUp } from "react-icons/hi";
 

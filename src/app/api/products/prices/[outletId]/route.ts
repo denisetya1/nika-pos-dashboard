@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { prisma } from "../../../client";
-import { isEmptyVal } from "@/app/helpers/functions";
+import { prisma } from "@/lib/client";
+import { isEmptyVal } from "@/lib/functions";
 
 export const GET = async (req: NextRequest, {params}: {params: {
   outletId: string

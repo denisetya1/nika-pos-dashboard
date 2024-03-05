@@ -8,7 +8,6 @@ import {
   HiShoppingBag,
   HiBuildingStorefront
 } from "react-icons/hi2";
-import { FaRegCreditCard } from "react-icons/fa6"
 import { TbFileReport } from "react-icons/tb";
 import { twMerge } from "tailwind-merge";
 import { HiUser } from "react-icons/hi";
@@ -23,6 +22,24 @@ export const DashboardSidebar: FC = function () {
       title: "Home",
       url: "/",
       icon: HiHome
+    },
+    {
+      name: 'stock-management',
+      title: "Pengelolaan Stok",
+      url: "/stock-management",
+      icon: HiShoppingBag,
+      childs: [
+        {
+          name: 'stock-management-out',
+          title: "Penjualan Online",
+          url: "/stock-management/online-sales",
+        },
+        {
+          name: 'stock-management-in',
+          title: "Barang Masuk",
+          url: "/stock-management/restock",
+        }
+      ]
     },
     {
       name: 'manage-product',
@@ -45,11 +62,6 @@ export const DashboardSidebar: FC = function () {
           title: "Cetak Harga",
           url: "/products/prints",
         }
-        // {
-        //   name: 'stock-transfer',
-        //   title: "Trasfer Stock",
-        //   url: "/products/stock-transfer",
-        // },
       ]
     },
     {

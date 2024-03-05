@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { prisma } from "../../../client";
-import { verifyJwt } from "@/app/lib/jwt";
+import { prisma } from "@/lib/client";
+import { verifyJwt } from "@/lib/jwt";
 
 export const GET = async (req: NextRequest, {params} : { params: {
   outletId: string

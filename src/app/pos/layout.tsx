@@ -1,6 +1,6 @@
 "use client";
 import type { FC, PropsWithChildren } from "react";
-import ToastContextProvider from "../context/toast/ToastContextProvider";
+import ToastContextProvider from "@/context/toast/ToastContextProvider";
 
 const POSLayoutContent: FC<PropsWithChildren> = function ({ children }) {
 

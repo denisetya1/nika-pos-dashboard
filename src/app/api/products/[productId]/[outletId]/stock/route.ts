@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
-import { prisma } from "../../../../client";
+import { prisma } from "@/lib/client";
 import moment from "moment";
-import { dateUTC } from "@/app/helpers/functions";
+import { dateUTC } from "@/lib/functions";
 
 export const POST = async (request: Request, { params }: { 
   params: { 

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { prisma } from "../../client";
+import { prisma } from "@/lib/client";
 
 export const PATCH = async (request: NextRequest, {params}: {params: {
   userId: string,

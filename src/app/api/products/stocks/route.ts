@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import { prisma } from "../../client";
-import { ProductStock } from "@prisma/client";
-import { dateUTC, isEmptyVal } from "@/app/helpers/functions";
+import { prisma } from "@/lib/client";
+import { ProductStock } from "@/lib/client";
+import { dateUTC, isEmptyVal } from "@/lib/functions";
 
 
 export const GET = async (req: NextRequest) =>  {

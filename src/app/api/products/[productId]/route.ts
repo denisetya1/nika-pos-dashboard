@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { prisma } from "../../client";
+import { prisma } from "@/lib/client";
 
 export const PUT = async (req: Request, { params }: { params: { productId: string } }) =>  {
   const body = await req.json()

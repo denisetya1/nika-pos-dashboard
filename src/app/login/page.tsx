@@ -1,6 +1,6 @@
 import { getServerSession } from "next-auth"
 import LoginForm from "./components/LoginForm"
-import { authOptions } from "../lib/authOptions"
+import { authOptions } from "@/lib/authOptions"
 import { redirect } from "next/navigation"
 
 const LoginPage = async () => {

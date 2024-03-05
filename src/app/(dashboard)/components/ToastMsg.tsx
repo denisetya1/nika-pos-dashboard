@@ -1,6 +1,6 @@
 "use client"
 
-import { useToastContext } from '@/app/context/toast/ToastContext'
+import { useToastContext } from '@/context/toast/ToastContext'
 import { Toast } from 'flowbite-react'
 import React, { useEffect, useState } from 'react'
 import { HiCheck, HiExclamation, HiX } from 'react-icons/hi'

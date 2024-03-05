@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import { prisma } from "../../../client";
-import { isEmptyVal } from "@/app/helpers/functions";
-import { verifyJwt } from "@/app/lib/jwt";
+import { prisma } from "@/lib/client";
+import { isEmptyVal } from "@/lib/functions";
+import { verifyJwt } from "@/lib/jwt";
 
 export const GET = async (req: NextRequest, {params} : { params: {
   outletId: string

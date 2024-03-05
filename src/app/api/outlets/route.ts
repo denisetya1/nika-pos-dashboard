@@ -1,12 +1,17 @@
 import { NextRequest, NextResponse } from "next/server";
-import { prisma } from "../client";
+import { prisma } from "@/lib/client";
+import { getSessionData } from "@/actions/Sessions";
 
 export const GET = async (req: NextRequest) =>  {
+  const session = await getSessionData()
   const search = req.nextUrl.searchParams.get('search');
+
+  console.log(session)
 
   const outlets = await prisma.outlet.findMany({
     where: {
-      storeId: 1,
+      storeId: Number(session?.user.storeId),
+      ...(session?.user.isSubAccount ? {id: Number(session?.user.outletId)} : {}),
       ...(search !== "" && search !== undefined && search !== null ? {name: { contains: search }} : {})
     }
   });

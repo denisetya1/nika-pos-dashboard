@@ -6,7 +6,7 @@ import { FC, PropsWithChildren } from 'react';
 import { twMerge } from 'tailwind-merge';
 import { flowbiteTheme } from './theme';
 
-import AuthSessionProvider from './context/session/AuthSessionProvider';
+import AuthSessionProvider from '@/context/session/AuthSessionProvider';
 
 
 export const dynamic = 'force-dynamic'

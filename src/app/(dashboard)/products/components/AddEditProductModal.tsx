@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useForm, SubmitHandler } from 'react-hook-form';
 import AlertMsg from "../../components/AlertMsg";
-import { useAlertContext } from "@/app/context/alert/AlertContext";
+import { useAlertContext } from "@/context/alert/AlertContext";
 
 type FormValues = {
   name?: string

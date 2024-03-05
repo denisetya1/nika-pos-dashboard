@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { verifyJwt } from "@/app/lib/jwt";
+import { verifyJwt } from "@/lib/jwt";
 
 export const GET = async (req: NextRequest) =>  {
   const authorization = req.headers.get('authorization') || ''

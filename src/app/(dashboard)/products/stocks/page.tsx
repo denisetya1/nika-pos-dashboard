@@ -2,11 +2,12 @@ import { Brand, Category, MoveType, Outlet, Prisma } from "@prisma/client"
 import queryString from "query-string"
 import ProductListFilter from "../components/ProductListFilter"
 import StockMovementForm from "../components/StockMovementForm"
-import { formatCurrency, getFinalPrice, isEmptyVal } from "@/app/helpers/functions"
+import { formatCurrency, getFinalPrice, isEmptyVal } from "@/lib/functions"
 import EditPriceForm from "../components/EditPriceForm"
 import SortableHeader from "../../components/SortableHeader"
 import TablePagination from "../../components/TablePagination"
 import { RiBarcodeBoxLine } from "react-icons/ri"
+import { getCookieString } from "@/actions/Cookies"
 
 type Product = Prisma.ProductGetPayload<{
   include: { brand: true, category: true, stocks: true}
@@ -17,13 +18,16 @@ const ProductStock = async ({
 }: {
   searchParams?: { [key: string]: string | undefined};
 }) => {
+  const requestHeaders: HeadersInit = new Headers()
+  requestHeaders.set('Cookie', getCookieString())
+  
   const resCategory = await fetch(`${process.env.URL}/api/categories`, {
-    cache: 'no-cache'
+    headers: requestHeaders,
   })
   const categories: Category[] = await resCategory.json()
 
   const resOutlet = await fetch(`${process.env.URL}/api/outlets`, {
-    cache: 'no-cache'
+    headers: requestHeaders,
   })
   const outlets: Outlet[] = await resOutlet.json()
   const outletId = searchParams?.outletId === undefined ? outlets[0].id.toString() : searchParams?.outletId
@@ -34,27 +38,27 @@ const ProductStock = async ({
   }
 
   const resBrand = await fetch(`${process.env.URL}/api/brands`, {
-    cache: 'no-cache'
+    headers: requestHeaders,
   })
   const brands: Brand[] = await resBrand.json()
 
-  const resMove = await fetch(`${process.env.URL}/api/movements`)
+  const resMove = await fetch(`${process.env.URL}/api/movements`,{
+    headers: requestHeaders,
+  })
   const movements: MoveType[] = await resMove.json()
 
   const query = queryString.stringify(searchParams || {}, {
     skipEmptyString: true,
     skipNull: true
   });
-
-
+  
   const resProduct = await fetch(
     `${process.env.URL}/api/products/stocks${query !== '' ? `?${query}` : ''}`, 
     {
+      headers: requestHeaders,
       cache: 'no-cache'
     }
   )
-
-  // const products: Product[] = await resProduct.json()
 
   const paginated: [Product[], number, number, number] = await resProduct.json()
 
@@ -89,47 +93,47 @@ const ProductStock = async ({
         <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 rounded-md overflow-hidden">
           <thead>
             <tr className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 border-top-[1px] border-slate-200 rounded-md">
-                <th scope="col" className="w-[40px] px-6 py-3">No.</th>
-                <th scope="col" className="px-6 py-3 hover:bg-gray-200">
+                <th scope="col" className="w-[40px] px-6 py-5">No.</th>
+                <th scope="col" className="px-6 py-5 hover:bg-gray-200">
                   <SortableHeader
                     title="Nama"
                     fieldName="name"
                   />
                 </th>
-                <th scope="col" className="hidden sm:table-cell px-6 py-3 hover:bg-gray-200">
+                <th scope="col" className="hidden sm:table-cell px-6 py-5 hover:bg-gray-200">
                   <SortableHeader
                     title="Kategori"
                     fieldName="category"
                   />
                 </th>
-                <th scope="col" className="hidden sm:table-cell px-6 py-3 hover:bg-gray-200">
+                <th scope="col" className="hidden sm:table-cell px-6 py-5 hover:bg-gray-200">
                   <SortableHeader
                     title="Brand"
                     fieldName="brand"
                   />
                 </th>
-                <th scope="col" className="hidden sm:table-cell px-6 py-3 hover:bg-gray-200">
+                <th scope="col" className="hidden sm:table-cell px-6 py-5 hover:bg-gray-200">
                   <SortableHeader
                     title="Harga"
                     fieldName="sellPrice"
                   />
                 </th>
-                <th scope="col" className="hidden sm:table-cell px-6 py-3 hover:bg-gray-200">
+                <th scope="col" className="hidden sm:table-cell px-6 py-5 hover:bg-gray-200">
                   <SortableHeader
                     title="Mark Up"
                     fieldName="markupPercentage"
                   />
                 </th>
-                <th scope="col" className="hidden sm:table-cell px-6 py-3 hover:bg-gray-200">
+                <th scope="col" className="hidden sm:table-cell px-6 py-5 hover:bg-gray-200">
                   <SortableHeader
                     title="Diskon"
                     fieldName="discountPercentage"
                   />
                 </th>
-                <th scope="col" className="hidden sm:table-cell px-6 py-3 hover:bg-gray-200">
+                <th scope="col" className="hidden sm:table-cell px-6 py-5 hover:bg-gray-200">
                   Harga Final
                 </th>
-                <th scope="col" className="hidden sm:table-cell px-6 py-3 hover:bg-gray-200">
+                <th scope="col" className="hidden sm:table-cell px-6 py-5 hover:bg-gray-200">
                   <SortableHeader
                     title="Stock"
                     fieldName="quantity"

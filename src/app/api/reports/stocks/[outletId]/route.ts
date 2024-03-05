@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { prisma } from "../../../client";
-import { dateUTC, isEmptyVal } from "@/app/helpers/functions";
+import { prisma } from "@/lib/client";
+import { dateUTC, isEmptyVal } from "@/lib/functions";
 import moment from "moment";
 
 
@@ -11,8 +11,6 @@ export const GET = async (req: NextRequest, { params }: { params: { outletId: st
   const brandId = req.nextUrl.searchParams.get('brandId');
   const search = req.nextUrl.searchParams.get('search');
   const moveDate = dateUTC(req.nextUrl.searchParams.get('moveDate') || moment().format('YYYY-MM-DD'))
-
-  console.log('d', req.nextUrl.searchParams.get('moveDate'))
 
   const sort = req.nextUrl.searchParams.get('sort')
   const direction = req.nextUrl.searchParams.get('direction')

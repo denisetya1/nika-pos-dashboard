@@ -1,6 +1,6 @@
 'use client'
 
-import { getFinalPrice, isEmptyVal } from '@/app/helpers/functions';
+import { getFinalPrice, isEmptyVal } from '@/lib/functions';
 import { Prisma } from '@prisma/client';
 import React from 'react'
 import Image from "next/image";

@@ -54,8 +54,6 @@ const AddEditMasterDataModal = ({
       ...formData
     }
 
-    console.log(body);
-
     const res = await fetch(endpoint, {
       method: data ? 'PUT' : 'POST',
       body: JSON.stringify(body)
@@ -84,7 +82,7 @@ const AddEditMasterDataModal = ({
 
   return (
     <>
-      <Button color="blue" onClick={() => setOpen(true)} disabled={disabled}>{buttonTitle}</Button>
+      <Button color="purple" onClick={() => setOpen(true)} disabled={disabled}>{buttonTitle}</Button>
       
       <Modal show={isOpen} onClose={() => setOpen(false)}>
         <form onSubmit={handleSubmit(SubmitForm)}>

@@ -3,7 +3,7 @@
 import { ToggleSwitch } from "flowbite-react"
 import { useRouter } from "next/navigation"
 import AlertMsg from "../../components/AlertMsg";
-import { useAlertContext } from "@/app/context/alert/AlertContext";
+import { useAlertContext } from "@/context/alert/AlertContext";
 
 const ToggleActive = ({
   value,
@@ -41,7 +41,7 @@ const ToggleActive = ({
   return (
     <div className="flex max-w-md flex-col gap-4">
       <AlertMsg />
-      <ToggleSwitch checked={value} onChange={setSwitch} />
+      <ToggleSwitch checked={value} color="purple" onChange={setSwitch} />
     </div>
   )
 }

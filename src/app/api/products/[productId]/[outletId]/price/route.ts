@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { prisma } from "../../../../client";
+import { prisma } from "@/lib/client";
 
 export const GET = async (request: Request, {params}: {params: {
   productId: string

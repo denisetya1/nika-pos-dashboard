@@ -1,6 +1,6 @@
 "use client"
 
-import { useAlertContext } from '@/app/context/alert/AlertContext'
+import { useAlertContext } from '@/context/alert/AlertContext'
 import { Alert } from 'flowbite-react';
 import { useEffect, useState } from 'react';
 

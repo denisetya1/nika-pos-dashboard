@@ -2,7 +2,8 @@
 import { Outlet, Prisma, Shift, TransactionDetail, User } from "@prisma/client"
 import moment from "moment";
 import OutletDateFilter from "../components/OutletDateFilter";
-import { formatCurrency } from "@/app/helpers/functions";
+import { formatCurrency } from "@/lib/functions";
+import { getCookieString } from "@/actions/Cookies";
 
 type ProductSold = {
   _sum: { qty: number }
@@ -17,7 +18,11 @@ const StockReportPage = async ({
 }: {
   searchParams?: { [key: string]: string | undefined};
 }) => {
+  const requestHeaders: HeadersInit = new Headers()
+  requestHeaders.set('Cookie', getCookieString())
+  
   const resOutlet = await fetch(`${process.env.URL}/api/outlets`, {
+    headers: requestHeaders,
     cache: 'no-cache'
   })
   const outlets: Outlet[] = await resOutlet.json()
@@ -28,6 +33,7 @@ const StockReportPage = async ({
   const resProductSold = await fetch(
     `${process.env.URL}/api/reports/product-sold?outletId=${outletId}&date=${date}`, 
     {
+      headers: requestHeaders,
       cache: 'no-cache'
     }
   )
@@ -35,7 +41,11 @@ const StockReportPage = async ({
   const productSolds: ProductSold[] = await resProductSold.json()
 
   return (
-    <div className="block p-5 min-h-[100%] w-full sm:p-8 md:p-10 lg:p-20">
+    <div className="grow min-h-[500px]">
+      <div>
+        <h1 className="font-bold text-2xl mb-10">LAPORAN BARANG TERJUAL HARIAN</h1>
+      </div>
+
       <div>
         <OutletDateFilter 
           outlets={outlets}
@@ -44,36 +54,38 @@ const StockReportPage = async ({
         />
       </div>
 
-      <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-        <thead>
-          <tr className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-            <th scope="col" className="px-6 py-3">No.</th>
-            <th scope="col" className="hidden sm:table-cell px-6 py-3">
-              Barcode
-            </th>
-            <th scope="col" className="hidden sm:table-cell px-6 py-3">
-              Nama Produk
-            </th>
-            <th scope="col" className="hidden sm:table-cell px-6 py-3">
-              Harga Jual Satuan
-            </th>
-            <th scope="col" className="px-6 py-3 text-center">Jumlah Terjual</th>
-          </tr>
-        </thead>
-        <tbody className="divide-y">
-          {productSolds.map((ps, index) => {
-            return (
-              <tr key={ps.productStockId} className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-                <td className="px-6 py-3 w-10">{index + 1}</td>
-                <td className="px-6 py-3 text-black dark:text-white w-[100px]">{ps.barcode ? ps.barcode  : '-'}</td>
-                <td className="px-6 py-3 w-80 text-black dark:text-white">{ps.name}</td>
-                <td className="px-6 py-3 text-center">{formatCurrency(Number(ps.finalSellPrice))}</td>
-                <td className="px-6 py-3 text-center">{ps._sum.qty}</td>
-              </tr>
-            )
-          })}
-        </tbody>
-      </table>
+      <div className="bg-white border-[1px] border-slate-200 rounded-md overflow-hidden">
+        <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+          <thead>
+            <tr className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 border-b-[1px] border-slate-200">
+              <th scope="col" className="px-6 py-5">No.</th>
+              <th scope="col" className="hidden sm:table-cell px-6 py-5">
+                Barcode
+              </th>
+              <th scope="col" className="hidden sm:table-cell px-6 py-5">
+                Nama Produk
+              </th>
+              <th scope="col" className="hidden sm:table-cell px-6 py-5">
+                Harga Jual Satuan
+              </th>
+              <th scope="col" className="px-6 py-5 text-center">Jumlah Terjual</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y">
+            {productSolds.map((ps, index) => {
+              return (
+                <tr key={ps.productStockId} className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+                  <td className="px-6 py-3 w-10">{index + 1}</td>
+                  <td className="px-6 py-3 text-black dark:text-white w-[100px]">{ps.barcode ? ps.barcode  : '-'}</td>
+                  <td className="px-6 py-3 w-80 text-black dark:text-white">{ps.name}</td>
+                  <td className="px-6 py-3 text-center">{formatCurrency(Number(ps.finalSellPrice))}</td>
+                  <td className="px-6 py-3 text-center">{ps._sum.qty}</td>
+                </tr>
+              )
+            })}
+          </tbody>
+        </table>
+      </div>
 
     </div>
   )

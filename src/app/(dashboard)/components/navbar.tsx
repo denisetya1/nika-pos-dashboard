@@ -1,15 +1,48 @@
 import { useSidebarContext } from "@/context/SidebarContext";
-import { isSmallScreen } from "@/helpers/is-small-screen";
-import { DarkThemeToggle, Navbar } from "flowbite-react";
+import { isSmallScreen } from "@/lib/is-small-screen";
+import { DarkThemeToggle, Navbar, Select } from "flowbite-react";
 import Image from "next/image";
-import type { FC } from "react";
+import { useState, type FC } from "react";
 import { HiMenuAlt1, HiX } from "react-icons/hi";
 import SignOutButton from "../components/SignOutButton";
+import { useSession } from "next-auth/react";
+import { useQuery } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
+import { Outlet } from "@prisma/client";
 
 export const DashboardNavbar: FC<Record<string, never>> = function () {
-  const { isCollapsed: isSidebarCollapsed, setCollapsed: setSidebarCollapsed } =
-    useSidebarContext();
+  const router = useRouter()
+  const {
+    data: session,
+    update: sessionUpdate
+  } = useSession()
 
+  const [outletId, setOutletId] = useState<string|undefined>(session?.user.outletId)
+  const { 
+    isCollapsed: isSidebarCollapsed, 
+    setCollapsed: setSidebarCollapsed 
+  } = useSidebarContext();
+  
+  const {data: outlets} = useQuery({
+    queryKey: ["userOutlets", session?.user.id],
+    queryFn: () => fetch(`/api/outlets`, {
+      cache: 'no-cache'
+    }).then((res) => res.json())
+  })
+
+  const updateSession = (outletId : string) => {
+    // if(outletId) {
+    //   sessionUpdate({
+    //     user: {
+    //       ...session?.user,
+    //       outletId
+    //     }
+    //   }).finally(() => {
+    //     router.refresh()
+    //   })
+    // }
+  }
+  
   return (
     <header>
       <Navbar
@@ -42,6 +75,13 @@ export const DashboardNavbar: FC<Record<string, never>> = function () {
               </Navbar.Brand>
             </div>
             <div className="flex justify-end items-center gap-4">
+              { outlets && <Select 
+                name="outletId" 
+                value={session?.user.outletId}
+                onChange={(e: React.ChangeEvent<HTMLSelectElement>) => updateSession(e.target.value)}
+              >
+                {outlets && outlets.map((outlet: Outlet) => <option key={outlet.id} value={String(outlet.id)}>{outlet.name}</option>)}
+              </Select> }
               <DarkThemeToggle />
               <SignOutButton />
             </div>

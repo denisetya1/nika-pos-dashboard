@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import bcrypt from 'bcrypt';
-import { prisma } from "../../../client";
-import { signJwtAccessToken } from "@/app/lib/jwt";
+import { prisma } from "@/lib/client";
+import { signJwtAccessToken } from "@/lib/jwt";
 
 export const GET = async (request: Request) =>  {
   const salt = bcrypt.genSaltSync()

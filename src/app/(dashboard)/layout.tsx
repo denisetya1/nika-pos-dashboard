@@ -9,8 +9,9 @@ import {
   QueryClient,
   QueryClientProvider,
 } from '@tanstack/react-query'
-import ToastContextProvider from "../context/toast/ToastContextProvider";
+import ToastContextProvider from "@/context/toast/ToastContextProvider";
 import ToastMsg from "./components/ToastMsg";
+import AuthSessionProvider from "@/context/session/AuthSessionProvider";
 
 const queryClient = new QueryClient()
 
@@ -26,26 +27,28 @@ const DashboardLayoutContent: FC<PropsWithChildren> = function ({ children }) {
   const { isCollapsed } = useSidebarContext();
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <ToastContextProvider>
-        <DashboardNavbar />
-        <div className="flex w-full h-full mt-16 items-start bg-slate-100">
-          <DashboardSidebar />
-          <div
-            id="main-content"
-            className={twMerge(
-              "flex grow h-full w-full overflow-y-auto dark:bg-slate-900 text-slate-600 dark:text-slate-100 p-5 sm:p-6 md:p-8 lg:p-10",
-              isCollapsed ? "lg:ml-[4.5rem]" : "lg:ml-64",
-            )}
-          >
-            {children}
+    <AuthSessionProvider>
+      <QueryClientProvider client={queryClient}>
+        <ToastContextProvider>
+          <DashboardNavbar />
+          <div className="flex w-full h-full mt-16 items-start bg-slate-100">
+            <DashboardSidebar />
+            <div
+              id="main-content"
+              className={twMerge(
+                "flex grow h-full w-full overflow-y-auto dark:bg-slate-900 text-slate-600 dark:text-slate-100 p-5 sm:p-6 md:p-8 lg:p-10",
+                isCollapsed ? "lg:ml-[4.5rem]" : "lg:ml-64",
+              )}
+            >
+              {children}
+            </div>
           </div>
-        </div>
-        
-        <ToastMsg />
-        
-      </ToastContextProvider>
-    </QueryClientProvider>
+          
+          <ToastMsg />
+          
+        </ToastContextProvider>
+      </QueryClientProvider>
+    </AuthSessionProvider>
   );
 };
 

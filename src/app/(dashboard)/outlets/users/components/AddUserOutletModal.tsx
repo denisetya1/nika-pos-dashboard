@@ -54,7 +54,6 @@ const AddEditMasterDataModal = ({
   }, [search])
 
   useEffect(() => {
-    console.log(page)
     setQueryString(`?search=${search}&page=${page}&limit=${limit}`)
   }, [page])
 
@@ -76,7 +75,7 @@ const AddEditMasterDataModal = ({
 
   return (
     <>
-      <Button color="blue" onClick={() => setOpen(true)} disabled={disabled}>{buttonTitle}</Button>
+      <Button color="purple" onClick={() => setOpen(true)} disabled={disabled}>{buttonTitle}</Button>
       
       <Modal show={isOpen} onClose={() => setOpen(false)}>
           <Modal.Header>{modalTitle}</Modal.Header>
@@ -99,7 +98,7 @@ const AddEditMasterDataModal = ({
                 </div>
               </div>
               <Table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                <Table.Head className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <Table.Head className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 border-b-[1px] border-slate-200">
                     <Table.HeadCell>No.</Table.HeadCell>
                     <Table.HeadCell>Nama</Table.HeadCell>
                     <Table.HeadCell>Username</Table.HeadCell>
@@ -111,7 +110,7 @@ const AddEditMasterDataModal = ({
                         <Table.Cell>{user.name}</Table.Cell>
                         <Table.Cell>{user.username}</Table.Cell>
                         <Table.Cell className="text-center">
-                          <Button disabled={addedListId.indexOf(user.id) >= 0 } color="blue" onClick={() => handleAdd(user)}>
+                          <Button disabled={addedListId.indexOf(user.id) >= 0 } color="purple" onClick={() => handleAdd(user)}>
                               Tambahkan
                             </Button>
                         </Table.Cell>

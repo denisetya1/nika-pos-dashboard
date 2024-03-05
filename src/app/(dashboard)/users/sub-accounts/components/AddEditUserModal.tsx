@@ -74,7 +74,7 @@ const AddEditUserDataModal = ({
 
   return (
     <>
-      <Button color="blue" onClick={() => setOpen(true)} disabled={disabled}>{buttonTitle}</Button>
+      <Button color="purple" onClick={() => setOpen(true)} disabled={disabled}>{buttonTitle}</Button>
       
       <Modal show={isOpen} onClose={() => setOpen(false)}>
         <form onSubmit={handleSubmit(SubmitForm)}>
