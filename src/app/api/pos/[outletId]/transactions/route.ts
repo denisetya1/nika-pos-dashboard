@@ -2,6 +2,68 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/client";
 import { verifyJwt } from "@/lib/jwt";
 
+const createTransaction = (data: any) => {
+  return prisma.$transaction(async (tx) => {
+    const transaction = await tx.transaction.create({
+      data: {
+        id: data.id,
+        outlet: {
+          connect: {
+            id: data.outletId
+          }
+        },
+        storeId: data.storeId,
+        user: {
+          connect: {
+            id: data.userId
+          }
+        },
+        userShift: {
+          connect: {
+            id: data.userShiftId
+          }
+        },
+        totalItem: data.totalItem,
+        totalPrice: data.totalPrice,
+        totalDiscount: 0,
+        amountPaid: data.amountPaid,
+        amountChange: data.amountChange,
+        outletPaymentMethod:{
+          connect: {
+            id: data.outletPaymentMethodId
+          }
+        },
+        cardNumber: data.cardNumber,
+        confirmNumber: data.confirmNumber,
+        transactionTime: data.transactionTime,
+        transactionDetails: {
+          createMany: {
+            data: data.transactionDetails
+          }
+        }
+      }, 
+      include:{
+        transactionDetails: true
+      }
+    })
+
+    transaction.transactionDetails.map(async (product) => {
+      const ps = await tx.productStock.update({
+        where: {
+          id: product.productStockId
+        },
+        data: {
+          quantity: {
+            increment: -1*product.qty
+          }
+        }
+      })
+    })
+
+    return transaction
+  })
+}
+
 export const POST = async (req: NextRequest) =>  {
   const authorization = req.headers.get('authorization') || ''
   const [__, accessToken] = authorization.split(' ')
