@@ -23,24 +23,24 @@ export const DashboardSidebar: FC = function () {
       url: "/",
       icon: HiHome
     },
-    {
-      name: 'stock-management',
-      title: "Pengelolaan Stok",
-      url: "/stock-management",
-      icon: HiShoppingBag,
-      childs: [
-        {
-          name: 'stock-management-out',
-          title: "Penjualan Online",
-          url: "/stock-management/online-sales",
-        },
-        {
-          name: 'stock-management-in',
-          title: "Barang Masuk",
-          url: "/stock-management/restock",
-        }
-      ]
-    },
+    // {
+    //   name: 'stock-management',
+    //   title: "Pengelolaan Stok",
+    //   url: "/stock-management",
+    //   icon: HiShoppingBag,
+    //   childs: [
+    //     {
+    //       name: 'stock-management-out',
+    //       title: "Penjualan Online",
+    //       url: "/stock-management/online-sales",
+    //     },
+    //     {
+    //       name: 'stock-management-in',
+    //       title: "Barang Masuk",
+    //       url: "/stock-management/restock",
+    //     }
+    //   ]
+    // },
     {
       name: 'manage-product',
       title: "Manajemen Produk",

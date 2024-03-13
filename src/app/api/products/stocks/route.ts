@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/client";
-import { ProductStock } from "@/lib/client";
-import { dateUTC, isEmptyVal } from "@/lib/functions";
+import { isEmptyVal } from "@/lib/functions";
 
 
 export const GET = async (req: NextRequest) =>  {

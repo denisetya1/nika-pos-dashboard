@@ -14,6 +14,7 @@ declare module 'next-auth'{
       isSubAccount: boolean,
       isActive: boolean,
       lastLogin: Date,
+      roles: any
     }
   }
 }

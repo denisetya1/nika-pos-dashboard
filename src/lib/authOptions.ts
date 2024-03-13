@@ -22,6 +22,7 @@ export const authOptions: NextAuthOptions = {
           if(user && (await bcrypt.compare(credentials?.password as string, user.password))) {
             const { password , ...userWithoutPass } = user
             let outletId = null
+            let roles = null
 
             if(user.isSubAccount){
               const userAccess = await prisma.userOutlet.findFirst({
@@ -30,9 +31,13 @@ export const authOptions: NextAuthOptions = {
                   outlet: {
                     storeId: Number(user.storeId)
                   }
+                },
+                include: {
+                  role: true,
                 }
               })
 
+              roles = userAccess?.role.roles
               outletId = userAccess?.outletId
             } else {
               const outlet = await prisma.outlet.findFirst({
@@ -41,12 +46,20 @@ export const authOptions: NextAuthOptions = {
                 }
               })
 
+              const role = await prisma.role.findFirst({
+                where: {
+                  id: 1
+                }
+              })
+
+              roles = role?.roles
               outletId = outlet?.id
             }
         
             return {
               ...userWithoutPass,
               outletId,
+              roles
             }
           } else {
             return null
@@ -61,20 +74,66 @@ export const authOptions: NextAuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
   debug: process.env.NODE_ENV === "development",
   callbacks: {
-    async jwt({token, trigger, session}){
-      if(trigger === 'update' && session){
-        token = {
-          ...token,
-          ...session?.user,
+    async jwt({token, user, trigger, session}){
+      if(trigger === 'update'){
+        if(String(session.update.outletId) !== String(token.outletId)){
+          
+          if(token.isSubaccount){
+            //check is user have access
+            const userOutlet = await prisma.userOutlet.findFirst({
+              where: {
+                outlet: {
+                  storeId: Number(token.storeId),
+                },
+                userId: String(token.id),
+                isActive: true
+              },
+              select: {
+                userId: true,
+                roleId: true,
+                role: {
+                  select: {
+                    id: true,
+                    name: true,
+                    roles: true
+                  }
+                },
+                outletId: true
+              }
+            })
+
+            if(userOutlet){
+              token = {
+                ...token,
+                outletId: userOutlet.outletId,
+                roles: userOutlet.role.roles
+              }
+            }
+          } else {
+            const outlet = await prisma.outlet.findFirst({
+              where: {
+                id: Number(session.update.outletId),
+                storeId: Number(token.storeId)
+              }
+            })
+            
+            if(outlet){
+              token = {
+                ...token,
+                outletId: outlet.id
+              }
+            }
+          }
+
         }
       }
 
-      return token
+      return { ...token, ...user}
     },
-    async session({session, token, trigger}){
-      session.user = token as any
-      
-      return session
+    async session({session, token}){
+     session.user = token as any
+
+     return session
     }
   },
   pages: {

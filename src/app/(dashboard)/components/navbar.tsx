@@ -8,7 +8,14 @@ import SignOutButton from "../components/SignOutButton";
 import { useSession } from "next-auth/react";
 import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
-import { Outlet } from "@prisma/client";
+import { Prisma } from "@prisma/client";
+
+type UserOutlet = Prisma.UserOutletGetPayload<{
+  include: { 
+    role: true,
+    outlet: true
+  }
+}>
 
 export const DashboardNavbar: FC<Record<string, never>> = function () {
   const router = useRouter()
@@ -23,24 +30,23 @@ export const DashboardNavbar: FC<Record<string, never>> = function () {
     setCollapsed: setSidebarCollapsed 
   } = useSidebarContext();
   
-  const {data: outlets} = useQuery({
+  const {data: userOutlets} = useQuery({
     queryKey: ["userOutlets", session?.user.id],
-    queryFn: () => fetch(`/api/outlets`, {
+    queryFn: () => fetch(`/api/users/outlets`, {
       cache: 'no-cache'
     }).then((res) => res.json())
   })
 
   const updateSession = (outletId : string) => {
-    // if(outletId) {
-    //   sessionUpdate({
-    //     user: {
-    //       ...session?.user,
-    //       outletId
-    //     }
-    //   }).finally(() => {
-    //     router.refresh()
-    //   })
-    // }
+    if(outletId) {
+      sessionUpdate({
+        update: {
+          outletId
+        }
+      }).finally(() => {
+        router.refresh()
+      })
+    }
   }
   
   return (
@@ -75,12 +81,12 @@ export const DashboardNavbar: FC<Record<string, never>> = function () {
               </Navbar.Brand>
             </div>
             <div className="flex justify-end items-center gap-4">
-              { outlets && <Select 
+              { userOutlets && <Select 
                 name="outletId" 
                 value={session?.user.outletId}
                 onChange={(e: React.ChangeEvent<HTMLSelectElement>) => updateSession(e.target.value)}
               >
-                {outlets && outlets.map((outlet: Outlet) => <option key={outlet.id} value={String(outlet.id)}>{outlet.name}</option>)}
+                {userOutlets && userOutlets.map((userOutlet: UserOutlet) => <option key={userOutlet.id} value={String(userOutlet.outlet.id)}>{userOutlet.outlet.name}</option>)}
               </Select> }
               <DarkThemeToggle />
               <SignOutButton />

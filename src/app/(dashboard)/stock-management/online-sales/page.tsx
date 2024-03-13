@@ -1,8 +1,6 @@
 import React from 'react'
 
 const OnlineSales = () => {
-  const 
-  
   return (
     <div>OnlineSales</div>
   )
