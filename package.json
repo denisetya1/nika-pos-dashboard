@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "rsync": "rsync -avz -e \"ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null\" --progress ./.next ubuntu@51.79.251.219:/ubuntu/"
+    "rsync": "rsync -avz -e \"ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null\" --progress ./.next denisetya1@103.150.190.252:/var/www/nika-pos-dashboard/"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^1.1.0",
@@ -21,6 +21,7 @@
     "moment": "^2.30.1",
     "next": "14.0.3",
     "next-auth": "^4.24.5",
+    "node-mailjet": "^6.0.5",
     "query-string": "^8.1.0",
     "react": "^18",
     "react-barcode": "^1.4.6",
