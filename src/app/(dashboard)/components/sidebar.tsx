@@ -24,6 +24,24 @@ export const DashboardSidebar: FC = function () {
       icon: HiHome
     },
     // {
+    //     name: 'online-sales',
+    //     title: "Penjualan Online",
+    //     url: "/online-sales",
+    //     icon: HiShoppingBag,
+    //     childs: [
+    //       {
+    //         name: 'online-sales-pos',
+    //         title: "Input Penjualan Online",
+    //         url: "/online-sales/transaction",
+    //       },
+    //       {
+    //         name: 'online-sales-report',
+    //         title: "Laporan Penjualan Online",
+    //         url: "/online-sales-report/reports",
+    //       }
+    //     ]
+    //   },
+    // {
     //   name: 'stock-management',
     //   title: "Pengelolaan Stok",
     //   url: "/stock-management",
@@ -74,6 +92,11 @@ export const DashboardSidebar: FC = function () {
           name: 'report-sales',
           title: "Penjualan",
           url: "/reports/sales",
+        },
+        {
+          name: 'report-online-sales',
+          title: "Penjualan Online",
+          url: "/reports/online-sales",
         },
         {
           name: 'report-product-sold',

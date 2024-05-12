@@ -6,6 +6,7 @@ import moment from "moment";
 export const GET = async (req: NextRequest) =>  {
   const outletId = req.nextUrl.searchParams.get('outletId');
   const date = req.nextUrl.searchParams.get('date') || moment().format('YYYY-MM-DD');
+  const online = req.nextUrl.searchParams.get('online') || false;
 
   const startDate = new Date(date)
   const endDate = new Date(`${moment(date).add(1, "day").format('YYYY-MM-DD')} 07:00:00`)
@@ -16,7 +17,8 @@ export const GET = async (req: NextRequest) =>  {
       transactionTime: {
         gte: startDate,
         lte: endDate
-      }
+      },
+      ...(online ? {outletPaymentMethodId: 4 } : {outletPaymentMethodId: { not: 4}})
     },
     orderBy: {
       transactionTime: 'asc'
