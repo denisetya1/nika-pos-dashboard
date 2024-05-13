@@ -18,7 +18,7 @@ export const GET = async (req: NextRequest) =>  {
         gte: startDate,
         lte: endDate
       },
-      ...(online ? {outletPaymentMethodId: 4 } : {outletPaymentMethodId: { not: 4}})
+      ...(online ? {outletPaymentMethod: {paymentMethodId: 4} } : {outletPaymentMethod: {paymentMethodId: { not: 4}} })
     },
     orderBy: {
       transactionTime: 'asc'

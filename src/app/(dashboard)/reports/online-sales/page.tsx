@@ -1,7 +1,6 @@
 import { formatCurrency } from "@/lib/functions";
 import { Outlet, Prisma, Shift, User } from "@prisma/client"
 import moment from "moment";
-import SalesFilter from "../components/SalesFilter";
 import { Tooltip } from "flowbite-react";
 import { TbListDetails } from "react-icons/tb";
 import TransactionDetailsModal from "../components/TransactionDetailsModal";
@@ -105,12 +104,12 @@ const StockReportPage = async ({
         couriers.push(cr[0])
       }
 
-      const findCr = countByCourier.find((item) => {item.name === mp[0]})
+      const findCr = countByCourier.find((item) => {item.name === cr[0]})
       if(findCr){
         findCr.value += 1
       } else {
         countByCourier.push({
-          name: mp[0], value: 1
+          name: cr[0], value: 1
         })
       }
 
@@ -135,6 +134,7 @@ const StockReportPage = async ({
     couriers,
     countByMarketPlace,
     countByCourier,
+    countAll,
   } = getFilterAndTotal(transactions)
 
   const filteredList = transactions.filter((tx) => {
@@ -194,19 +194,25 @@ const StockReportPage = async ({
         />
       </div>
       
-      <div className="bg-white border-[1px] border-slate-200 rounded-md overflow-hidden">
+      <div className="bg-white border-[1px] border-slate-200 rounded-md overflow-hidden p-10 mb-10">
           <div className="flex justify-between gap-10">
-            <div>
-              <h2>Ringkasan Berdasarkan Market Place</h2>
+            <div className="w-1/2">
+              <h2 className="text-md font-semibold">Ringkasan Berdasarkan Market Place</h2>
               <div>
-                {countByMarketPlace.map((item) => <div>{item.name}: {item.value}</div>)}
+                {countByMarketPlace.map((item: {name: string, value: number}) => <div key={item.name}>{item.name}: {item.value}</div>)}
+              </div>
+              <div>
+                <strong>Total: {countAll}</strong>
               </div>
             </div>
 
-            <div>
-              <h2>Ringkasan Berdasarkan Kurir</h2>
+            <div className="w-1/2">
+              <h2 className="text-md font-semibold">Ringkasan Berdasarkan Kurir</h2>
               <div>
-                {countByCourier.map((item) => <div>{item.name}: {item.value}</div>)}
+                {countByCourier.map((item: {name: string, value: number}) => <div key={item.name}>{item.name}: {item.value}</div>)}
+              </div>
+              <div>
+                <strong>Total: {countAll}</strong>
               </div>
             </div>
           </div>
