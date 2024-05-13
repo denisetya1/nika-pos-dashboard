@@ -105,63 +105,63 @@ export const POST = async (req: NextRequest) =>  {
       });
     }
 
-    // const transaction = await prisma.transaction.create({
-    //   data: {
-    //     id: body.id,
-    //     outlet: {
-    //       connect: {
-    //         id: body.outletId
-    //       }
-    //     },
-    //     storeId: body.storeId,
-    //     user: {
-    //       connect: {
-    //         id: body.userId
-    //       }
-    //     },
-    //     userShift: {
-    //       connect: {
-    //         id: body.userShiftId
-    //       }
-    //     },
-    //     totalItem: body.totalItem,
-    //     totalPrice: body.totalPrice,
-    //     totalDiscount: 0,
-    //     amountPaid: body.amountPaid,
-    //     amountChange: body.amountChange,
-    //     outletPaymentMethod:{
-    //       connect: {
-    //         id: body.outletPaymentMethodId
-    //       }
-    //     },
-    //     cardNumber: body.cardNumber,
-    //     confirmNumber: body.confirmNumber,
-    //     transactionTime: body.transactionTime,
-    //     transactionDetails: {
-    //       createMany: {
-    //         data: body.transactionDetails
-    //       }
-    //     }
-    //   }, 
-    //   include:{
-    //     transactionDetails: true
-    //   }
-    // })
+    const transaction = await prisma.transaction.create({
+      data: {
+        id: body.id,
+        outlet: {
+          connect: {
+            id: body.outletId
+          }
+        },
+        storeId: body.storeId,
+        user: {
+          connect: {
+            id: body.userId
+          }
+        },
+        userShift: {
+          connect: {
+            id: body.userShiftId
+          }
+        },
+        totalItem: body.totalItem,
+        totalPrice: body.totalPrice,
+        totalDiscount: 0,
+        amountPaid: body.amountPaid,
+        amountChange: body.amountChange,
+        outletPaymentMethod:{
+          connect: {
+            id: body.outletPaymentMethodId
+          }
+        },
+        cardNumber: body.cardNumber,
+        confirmNumber: body.confirmNumber,
+        transactionTime: body.transactionTime,
+        transactionDetails: {
+          createMany: {
+            data: body.transactionDetails
+          }
+        }
+      }, 
+      include:{
+        transactionDetails: true
+      }
+    })
 
-    // transaction.transactionDetails.map(async (product) => {
-    //   const ps = await prisma.productStock.update({
-    //     where: {
-    //       id: product.productStockId
-    //     },
-    //     data: {
-    //       quantity: {
-    //         increment: -1*product.qty
-    //       }
-    //     }
-    //   })
-    // })
+    transaction.transactionDetails.map(async (product) => {
+      await prisma.productStock.update({
+        where: {
+          id: product.productStockId
+        },
+        data: {
+          quantity: {
+            increment: -1 * product.qty
+          }
+        }
+      })
+    })
 
-    const transaction = await createTransaction(body)
+    // const transaction = await createTransaction(body)
 
     if(transaction){
       return NextResponse.json({

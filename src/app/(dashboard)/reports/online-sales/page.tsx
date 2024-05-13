@@ -87,26 +87,26 @@ const StockReportPage = async ({
         users.push(tr.user)
       }
 
-      if(!marketPlaces.includes(mp[0])){
+      if(marketPlaces.indexOf(mp[0]) > -1){
         marketPlaces.push(mp[0])
       }
 
-      const findMp = countByMarketPlace.find((item) => {item.name === mp[0]})
-      if(findMp){
-        findMp.value += 1
+      const findMpIndex = countByMarketPlace.findIndex((item) => item.name === mp[0])
+      if(findMpIndex > -1){
+        countByMarketPlace[findMpIndex].value += 1
       } else {
         countByMarketPlace.push({
           name: mp[0], value: 1
         })
       }
 
-      if(!couriers.includes(cr[0])){
+      if(couriers.indexOf(mp[0]) > -1){
         couriers.push(cr[0])
       }
 
-      const findCr = countByCourier.find((item) => {item.name === cr[0]})
-      if(findCr){
-        findCr.value += 1
+      const findCrIndex = countByCourier.findIndex((item) => item.name === cr[0])
+      if(findCrIndex > -1){
+        countByCourier[findCrIndex].value += 1
       } else {
         countByCourier.push({
           name: cr[0], value: 1
@@ -194,25 +194,33 @@ const StockReportPage = async ({
         />
       </div>
       
-      <div className="bg-white border-[1px] border-slate-200 rounded-md overflow-hidden p-10 mb-10">
+      <div className="bg-white border-[1px] border-slate-200 rounded-md overflow-hidden p-6 mb-10">
           <div className="flex justify-between gap-10">
             <div className="w-1/2">
               <h2 className="text-md font-semibold">Ringkasan Berdasarkan Market Place</h2>
               <div>
-                {countByMarketPlace.map((item: {name: string, value: number}) => <div key={item.name}>{item.name}: {item.value}</div>)}
+                {countByMarketPlace.map((item: {name: string, value: number}) => <div key={item.name} className="flex justify-start gap-4">
+                  <div className="w-[100px] p-1">{item.name}</div>
+                  <div>: {item.value}</div>
+                </div>)}
               </div>
-              <div>
-                <strong>Total: {countAll}</strong>
+              <div className="flex justify-start gap-4 font-semibold">
+                <div className="w-[100px] p-1">Total</div>
+                <div>: {countAll}</div>
               </div>
             </div>
 
             <div className="w-1/2">
               <h2 className="text-md font-semibold">Ringkasan Berdasarkan Kurir</h2>
               <div>
-                {countByCourier.map((item: {name: string, value: number}) => <div key={item.name}>{item.name}: {item.value}</div>)}
+                {countByCourier.map((item: {name: string, value: number}) => <div key={item.name} className="flex justify-start gap-4">
+                  <div className="w-[100px] p-1">{item.name}</div>
+                  <div>: {item.value}</div>
+                </div>)}
               </div>
-              <div>
-                <strong>Total: {countAll}</strong>
+              <div className="flex justify-start gap-4 font-semibold">
+                <div className="w-[100px] p-1">Total</div>
+                <div>: {countAll}</div>
               </div>
             </div>
           </div>
