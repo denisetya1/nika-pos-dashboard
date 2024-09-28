@@ -38,6 +38,11 @@ export const GET = async (req: NextRequest, {params} : { params: {
           {outletId: Number(outletId)},
           {...(brandId !== "" && brandId !== undefined && brandId !== null ? {product: { brandId: Number(brandId)}} : {})},
           {...(categoryId !== "" && categoryId !== undefined && categoryId !== null ? {product: { categoryId: Number(categoryId) }} : {})},
+          {
+            product: {
+              deletedAt: null
+            }
+          },
           {...(search !== null ? { OR: [
               {product: {
                   name: {
@@ -48,11 +53,6 @@ export const GET = async (req: NextRequest, {params} : { params: {
               {product: { sku: search }
               },
               {product: { barcode: search }
-              },
-              {
-                product: {
-                  deletedAt: null
-                }
               }
             ] } : {})
           },
