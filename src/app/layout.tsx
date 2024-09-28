@@ -7,7 +7,7 @@ import { twMerge } from 'tailwind-merge';
 import { flowbiteTheme } from './theme';
 
 import AuthSessionProvider from '@/context/session/AuthSessionProvider';
-
+import "react-datepicker/dist/react-datepicker.css";
 
 export const dynamic = 'force-dynamic'
 

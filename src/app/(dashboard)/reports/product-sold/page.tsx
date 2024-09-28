@@ -1,9 +1,10 @@
 
-import { Outlet, Prisma, Shift, TransactionDetail, User } from "@prisma/client"
+import { Outlet } from "@prisma/client"
 import moment from "moment";
-import OutletDateFilter from "../components/OutletDateFilter";
+import OutletDateRangeFilter from "../components/OutletDateRangeFilter";
 import { formatCurrency } from "@/lib/functions";
 import { getCookieString } from "@/actions/Cookies";
+import queryString from "query-string";
 
 type ProductSold = {
   _sum: { qty: number }
@@ -28,10 +29,24 @@ const StockReportPage = async ({
   const outlets: Outlet[] = await resOutlet.json()
   const outletId = searchParams?.outletId === undefined ? outlets[0].id.toString() : searchParams?.outletId
   
-  const date = searchParams?.date || moment().format('YYYY-MM-DD')
+  const startDate = searchParams?.startDate || moment().format('YYYY-MM-DD')
+  const endDate = searchParams?.endDate || moment().format('YYYY-MM-DD')
+  const search = searchParams?.search
+
+  const query = {
+    outletId,
+    startDate: moment(startDate).format('YYYY-MM-DD'),
+    endDate: moment(endDate).format('YYYY-MM-DD'),
+    search
+  }
+
+  const qs = queryString.stringify(query, {
+    skipEmptyString: true,
+    skipNull: true
+  })
 
   const resProductSold = await fetch(
-    `${process.env.URL}/api/reports/product-sold?outletId=${outletId}&date=${date}`, 
+    `${process.env.URL}/api/reports/product-sold?${qs}`, 
     {
       headers: requestHeaders,
       cache: 'no-cache'
@@ -47,10 +62,12 @@ const StockReportPage = async ({
       </div>
 
       <div>
-        <OutletDateFilter 
+        <OutletDateRangeFilter 
           outlets={outlets}
-          selectedDate={date}
+          selectedStartDate={startDate}
+          selectedEndDate={endDate}
           selectedOutlet={outletId}
+          searched={search}
         />
       </div>
 
