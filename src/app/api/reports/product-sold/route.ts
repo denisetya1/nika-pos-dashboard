@@ -14,7 +14,10 @@ export const GET = async (req: NextRequest) =>  {
 
   const products = await prisma.transactionDetail.groupBy({
     where: {
-      ...(search !== '' ? {name: {contains: search}} : {}),
+      ...(search !== '' ? {OR: [
+        {name: {contains: search}},
+        {barcode: search}
+      ]} : {}),
       transaction: {
         outletId: Number(outletId),
         transactionTime: {

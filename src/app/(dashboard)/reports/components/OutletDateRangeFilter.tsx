@@ -2,7 +2,8 @@
 
 import React, { useEffect, useState } from "react"
 import { Outlet } from "@prisma/client"
-import { Alert, Button, Label, Select, TextInput } from "flowbite-react"
+import { Button, Label, Select, TextInput } from "flowbite-react"
+import { RxCross2 } from "react-icons/rx";
 import DatePicker from "react-datepicker"
 import { usePathname, useRouter } from "next/navigation"
 import queryString from "query-string"
@@ -64,11 +65,18 @@ const OutletDateRangeFilter = ({
         </Select>
         </div>: <></>}
 
-      <div className="w-[250px]">
+      <div className="w-[350px]">
         <div className="mb-2 block">
           <Label className="text-slate-600" htmlFor="product-name" value="Cari Produk" />
         </div>
-        <TextInput id="product-name" className="w-full" value={search} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)} type="text" placeholder="Cari berdasarkan nama produk/barcode/sku"/>
+        <div className="relative">
+          <TextInput id="product-name" className="w-full pr-[20px]" value={search} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)} type="text" placeholder="Cari berdasarkan nama produk/barcode"/>
+          {search !== '' && <Button 
+            onClick={()=>setSearch('')}
+            className="absolute right-[30px] w-[16px] h-[16px] 
+            rounded-full text-center text-white top-[50%] mt-[-8px]"
+          ><RxCross2 size={10} /></Button>}
+        </div>
       </div>
 
       <div>
