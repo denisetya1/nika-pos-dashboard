@@ -7,7 +7,11 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "rsync": "rsync -avz -e \"ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null\" --progress ./.next denisetya1@103.150.190.252:/var/www/nika-pos-dashboard/"
+    "rsync": "rsync -avz -e \"ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null\" --progress ./.next denisetya1@103.150.190.252:/var/www/nika-pos-dashboard/",
+    "prerelease": "node release.js develop prerelease",
+    "release:major": "REPO=TIX-HOTEL-MM-DASH-NEXT-FE node release.js main major",
+    "release:minor": "REPO=TIX-HOTEL-MM-DASH-NEXT-FE node release.js main minor",
+    "release:patch": "REPO=TIX-HOTEL-MM-DASH-NEXT-FE node release.js main patch",
   },
   "dependencies": {
     "@auth/prisma-adapter": "^1.1.0",
@@ -22,6 +26,7 @@
     "next": "14.0.3",
     "next-auth": "^4.24.5",
     "node-mailjet": "^6.0.5",
+    "prompt": "^1.3.0",
     "query-string": "^8.1.0",
     "react": "^18",
     "react-barcode": "^1.4.6",
