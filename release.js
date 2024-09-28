@@ -136,9 +136,6 @@ const gitLog = execSync('git log --oneline -6').toString();
 console.log('\x1b[33m%s\x1b[0m', gitLog);
 console.log('\n');
 
-console.log('npm checking all...');
-execSync('npm run check-all');
-
 prompt.start();
 // disable prefix message & colors
 prompt.message = '';
