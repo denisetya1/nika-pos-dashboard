@@ -207,7 +207,7 @@ prompt.get(
     console.log(
       "don't forget to re-check latest commit on latest release number\nto make sure all updates has been included."
     );
-    console.log(`https://github.com/tiket/${repoName}/commits/${newVersion}`);
+    console.log(`https://github.com/denisetya1/${repoName}/commits/${newVersion}`);
     console.log('\n');
   }
 );

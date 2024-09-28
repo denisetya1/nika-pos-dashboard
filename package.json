@@ -9,9 +9,9 @@
     "lint": "next lint",
     "rsync": "rsync -avz -e \"ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null\" --progress ./.next denisetya1@103.150.190.252:/var/www/nika-pos-dashboard/",
     "prerelease": "node release.js develop prerelease",
-    "release:major": "REPO=TIX-HOTEL-MM-DASH-NEXT-FE node release.js main major",
-    "release:minor": "REPO=TIX-HOTEL-MM-DASH-NEXT-FE node release.js main minor",
-    "release:patch": "REPO=TIX-HOTEL-MM-DASH-NEXT-FE node release.js main patch",
+    "release:major": "REPO=nika-pos-dashboard node release.js main major",
+    "release:minor": "REPO=nika-pos-dashboard node release.js main minor",
+    "release:patch": "REPO=nika-pos-dashboard node release.js main patch"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^1.1.0",
