@@ -105,6 +105,32 @@ export const POST = async (req: NextRequest) =>  {
       });
     }
 
+
+    //CHEK RESI FOR MARKETPLACE
+    const paymentMethod = await prisma.outletPaymentMethod.findUnique({
+      where: {
+        id: Number(body.outletPaymentMethodId)
+      }
+    })
+
+    if(paymentMethod && paymentMethod.paymentMethodId === 4){
+      const checkResi = await prisma.transaction.findFirst({
+        where: {
+          confirmNumber: body.confirmNumber
+        }
+      })
+
+      if(checkResi){
+        return NextResponse.json({
+          code: "DATA_IS_EXISTS",
+          message: "Nomor Resi sudah ada!",
+          data: body
+        }, {
+          status: 400
+        });
+      }
+    }
+
     const transaction = await prisma.transaction.create({
       data: {
         id: body.id,

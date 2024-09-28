@@ -21,11 +21,6 @@ export const POST = async (req: NextRequest, {params} : { params: {
     const {
       code
     } = body
-
-    console.log({where: {
-      id: transactionId,
-      code
-    }})
     
     const editAuthorized = await prisma.requestEditTransaction.findFirst({
       where: {

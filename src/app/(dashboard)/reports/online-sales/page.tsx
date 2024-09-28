@@ -87,7 +87,7 @@ const StockReportPage = async ({
         users.push(tr.user)
       }
 
-      if(marketPlaces.indexOf(mp[0]) > -1){
+      if(marketPlaces.indexOf(mp[0]) < 0){
         marketPlaces.push(mp[0])
       }
 
@@ -100,10 +100,9 @@ const StockReportPage = async ({
         })
       }
 
-      if(couriers.indexOf(mp[0]) > -1){
+      if(couriers.indexOf(cr[0]) < 0){
         couriers.push(cr[0])
-      }
-
+      } 
       const findCrIndex = countByCourier.findIndex((item) => item.name === cr[0])
       if(findCrIndex > -1){
         countByCourier[findCrIndex].value += 1

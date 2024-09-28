@@ -36,7 +36,6 @@ const AddEditMasterDataModal = ({
   })
 
   useEffect(() => {
-    console.log(userResponse)
     if(userResponse){
       const [list, count] = userResponse
       setSubAccount(list)

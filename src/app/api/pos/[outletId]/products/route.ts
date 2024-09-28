@@ -48,6 +48,11 @@ export const GET = async (req: NextRequest, {params} : { params: {
               {product: { sku: search }
               },
               {product: { barcode: search }
+              },
+              {
+                product: {
+                  deletedAt: null
+                }
               }
             ] } : {})
           },

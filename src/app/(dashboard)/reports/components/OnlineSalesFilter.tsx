@@ -42,7 +42,7 @@ const StockListFilter = ({
   const [userId, setuserId] = useState(selectedUser);
   const [shiftId, setShiftId] = useState(selectedShift);
   const [marketPlace, setMarketPlace] = useState(selectedMarketPlace);
-  const [courier, setcourier] = useState(selectedCourier);
+  const [courier, setCourier] = useState(selectedCourier);
   const [outletId, setOutletId] = useState(selectedOutlet);
   const [date, setDate] = useState(selectedDate)
 
@@ -111,7 +111,7 @@ const StockListFilter = ({
         <div className="mb-2 block">
           <Label htmlFor="product-name" value="Kurir" />
         </div>
-          <Select onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setMarketPlace(e.target.value)} value={courier}>
+          <Select onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setCourier(e.target.value)} value={courier}>
           <option value="">Semua Kurir</option>
           {couriers.map((cr: string) => (<option key={cr} value={cr} >{cr}</option>))}
         </Select>

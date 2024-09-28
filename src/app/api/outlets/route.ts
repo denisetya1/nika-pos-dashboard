@@ -6,8 +6,6 @@ export const GET = async (req: NextRequest) =>  {
   const session = await getSessionData()
   const search = req.nextUrl.searchParams.get('search');
 
-  console.log(session)
-
   const outlets = await prisma.outlet.findMany({
     where: {
       storeId: Number(session?.user.storeId),
