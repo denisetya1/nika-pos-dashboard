@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 import { Outlet } from "@prisma/client"
 import { Button, Label, Select, TextInput } from "flowbite-react"
 import { RxCross2 } from "react-icons/rx";
@@ -8,7 +8,6 @@ import DatePicker from "react-datepicker"
 import { usePathname, useRouter } from "next/navigation"
 import queryString from "query-string"
 import moment from "moment"
-import { Input } from "postcss";
 
 const OutletDateRangeFilter = ({
   outlets,
@@ -31,7 +30,7 @@ const OutletDateRangeFilter = ({
   const [dateRange, setDateRange] = useState<(Date|null)[]>([new Date(selectedStartDate || ''), new Date(selectedEndDate || "")]);
   const [startDate, endDate] = dateRange;
 
-  const submitFIlter = () => {
+  const submitFilter = () => {
     if(startDate !== null && endDate !== null){
       const query = {
         outletId,
@@ -71,7 +70,7 @@ const OutletDateRangeFilter = ({
         </div>
         <div className="relative">
           <TextInput id="product-name" className="w-full pr-[20px]" value={search} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)} type="text" placeholder="Cari berdasarkan nama produk/barcode"/>
-          {search !== '' && <Button 
+          {search && search !== '' && <Button 
             onClick={()=>setSearch('')}
             className="absolute right-[30px] w-[16px] h-[16px] 
             rounded-full text-center text-white top-[50%] mt-[-8px]"
@@ -99,7 +98,7 @@ const OutletDateRangeFilter = ({
 
       <div>
         <div className="mb-2 block">&nbsp;</div>
-        <Button onClick={submitFIlter} >Tampilkan</Button>
+        <Button onClick={submitFilter} >Tampilkan</Button>
       </div>
     </div>
   )
