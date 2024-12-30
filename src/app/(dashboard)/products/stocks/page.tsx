@@ -10,17 +10,17 @@ import { RiBarcodeBoxLine } from "react-icons/ri"
 import { getCookieString } from "@/actions/Cookies"
 
 type Product = Prisma.ProductGetPayload<{
-  include: { brand: true, category: true, stocks: true}
+  include: { brand: true, category: true, stocks: true }
 }>
 
 const ProductStock = async ({
   searchParams,
 }: {
-  searchParams?: { [key: string]: string | undefined};
+  searchParams?: { [key: string]: string | undefined };
 }) => {
   const requestHeaders: HeadersInit = new Headers()
   requestHeaders.set('Cookie', getCookieString())
-  
+
   const resCategory = await fetch(`${process.env.URL}/api/categories`, {
     headers: requestHeaders,
   })
@@ -31,7 +31,7 @@ const ProductStock = async ({
   })
   const outlets: Outlet[] = await resOutlet.json()
   const outletId = searchParams?.outletId === undefined ? outlets[0].id.toString() : searchParams?.outletId
-    
+
   searchParams = {
     outletId: outlets[0].id.toString(),
     ...searchParams
@@ -42,7 +42,7 @@ const ProductStock = async ({
   })
   const brands: Brand[] = await resBrand.json()
 
-  const resMove = await fetch(`${process.env.URL}/api/movements`,{
+  const resMove = await fetch(`${process.env.URL}/api/movements`, {
     headers: requestHeaders,
   })
   const movements: MoveType[] = await resMove.json()
@@ -51,9 +51,9 @@ const ProductStock = async ({
     skipEmptyString: true,
     skipNull: true
   });
-  
+
   const resProduct = await fetch(
-    `${process.env.URL}/api/products/stocks${query !== '' ? `?${query}` : ''}`, 
+    `${process.env.URL}/api/products/stocks${query !== '' ? `?${query}` : ''}`,
     {
       headers: requestHeaders,
       cache: 'no-cache'
@@ -63,8 +63,8 @@ const ProductStock = async ({
   const paginated: [Product[], number, number, number] = await resProduct.json()
 
   const displayLimit = 50
-  const [ products, totalRow, currentPage ] = paginated
-  const totalPages = Math.ceil(totalRow/displayLimit)
+  const [products, totalRow, currentPage] = paginated
+  const totalPages = Math.ceil(totalRow / displayLimit)
 
   return (
     <div className="grow">
@@ -73,8 +73,8 @@ const ProductStock = async ({
       </div>
 
       <div>
-        <ProductListFilter 
-          categories={categories} 
+        <ProductListFilter
+          categories={categories}
           brands={brands}
           outlets={outlets}
           selectedOutlet={searchParams?.outletId}
@@ -86,59 +86,62 @@ const ProductStock = async ({
       </div>
 
       <div>
-        <TablePagination currentPage={currentPage} totalPages={totalPages} limit={displayLimit}/>
+        <TablePagination currentPage={currentPage} totalPages={totalPages} limit={displayLimit} />
       </div>
-      
+
       <div className="border-[1px] border-slate-200 rounded-md">
         <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 rounded-md overflow-hidden">
           <thead>
             <tr className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 border-top-[1px] border-slate-200 rounded-md">
-                <th scope="col" className="w-[40px] px-6 py-5">No.</th>
-                <th scope="col" className="px-6 py-5 hover:bg-gray-200">
-                  <SortableHeader
-                    title="Nama"
-                    fieldName="name"
-                  />
-                </th>
-                <th scope="col" className="hidden sm:table-cell px-6 py-5 hover:bg-gray-200">
-                  <SortableHeader
-                    title="Kategori"
-                    fieldName="category"
-                  />
-                </th>
-                <th scope="col" className="hidden sm:table-cell px-6 py-5 hover:bg-gray-200">
-                  <SortableHeader
-                    title="Brand"
-                    fieldName="brand"
-                  />
-                </th>
-                <th scope="col" className="hidden sm:table-cell px-6 py-5 hover:bg-gray-200">
-                  <SortableHeader
-                    title="Harga"
-                    fieldName="sellPrice"
-                  />
-                </th>
-                <th scope="col" className="hidden sm:table-cell px-6 py-5 hover:bg-gray-200">
-                  <SortableHeader
-                    title="Mark Up"
-                    fieldName="markupPercentage"
-                  />
-                </th>
-                <th scope="col" className="hidden sm:table-cell px-6 py-5 hover:bg-gray-200">
-                  <SortableHeader
-                    title="Diskon"
-                    fieldName="discountPercentage"
-                  />
-                </th>
-                <th scope="col" className="hidden sm:table-cell px-6 py-5 hover:bg-gray-200">
-                  Harga Final
-                </th>
-                <th scope="col" className="hidden sm:table-cell px-6 py-5 hover:bg-gray-200">
-                  <SortableHeader
-                    title="Stock"
-                    fieldName="quantity"
-                  />
-                </th>
+              <th scope="col" className="w-[40px] px-6 py-5">No.</th>
+              <th scope="col" className="px-6 py-5 hover:bg-gray-200">
+                <SortableHeader
+                  title="Nama"
+                  fieldName="name"
+                />
+              </th>
+              <th scope="col" className="hidden sm:table-cell px-6 py-5 hover:bg-gray-200">
+                <SortableHeader
+                  title="Kategori"
+                  fieldName="category"
+                />
+              </th>
+              <th scope="col" className="hidden sm:table-cell px-6 py-5 hover:bg-gray-200">
+                <SortableHeader
+                  title="Brand"
+                  fieldName="brand"
+                />
+              </th>
+              <th scope="col" className="hidden sm:table-cell px-6 py-5 hover:bg-gray-200">
+                <SortableHeader
+                  title="Harga"
+                  fieldName="sellPrice"
+                />
+              </th>
+              <th scope="col" className="hidden sm:table-cell px-6 py-5 hover:bg-gray-200">
+                <SortableHeader
+                  title="Mark Up"
+                  fieldName="markupPercentage"
+                />
+              </th>
+              <th scope="col" className="hidden sm:table-cell px-6 py-5 hover:bg-gray-200">
+                <SortableHeader
+                  title="Diskon"
+                  fieldName="discountPercentage"
+                />
+              </th>
+              <th scope="col" className="hidden sm:table-cell px-6 py-5 hover:bg-gray-200">
+                Harga Final
+              </th>
+              <th scope="col" className="hidden sm:table-cell px-6 py-5 hover:bg-gray-200">
+                <SortableHeader
+                  title="Stock"
+                  fieldName="quantity"
+                />
+              </th>
+              <th scope="col" className="hidden sm:table-cell px-6 py-5 hover:bg-gray-200">
+                Pindah Stok
+              </th>
             </tr>
           </thead>
           <tbody className="divide-y">
@@ -161,15 +164,15 @@ const ProductStock = async ({
                 <td className="px-6 py-3 align-top">
                   <div className="flex justify-end items-start align-top gap-2">
                     <div className="">
-                      { product.stocks.length > 0 ? formatCurrency(Number(product.stocks[0]?.sellPrice)) : "-"} 
+                      {product.stocks.length > 0 ? formatCurrency(Number(product.stocks[0]?.sellPrice)) : "-"}
                     </div>
                     <div className="">
-                      <EditPriceForm 
+                      <EditPriceForm
                         product={product}
                         outlet={outlets.filter((o) => (o.id.toString() === outletId))[0]}
                         sellPrice={Number(product.stocks[0]?.sellPrice)}
                         discountPercentage={product.stocks.length > 0 ? product.stocks[0].discountPercentage : 0}
-                        markupPercentage={product.stocks.length > 0 ? product.stocks[0].markupPercentage : 0 }
+                        markupPercentage={product.stocks.length > 0 ? product.stocks[0].markupPercentage : 0}
                       />
                     </div>
                   </div>
@@ -178,43 +181,43 @@ const ProductStock = async ({
                 <td className="hidden sm:table-cell px-6 py-3 align-top">{product.stocks.length > 0 && `${product.stocks[0]?.markupPercentage}%`}</td>
                 <td className="hidden sm:table-cell px-6 py-3 align-top">{product.stocks.length > 0 && `${product.stocks[0]?.discountPercentage}%`}</td>
                 <td className="hidden sm:table-cell px-6 py-3 align-top">
-                {
-                  product.stocks.length > 0 && !isEmptyVal(product.stocks[0].markupPercentage, true) && !isEmptyVal(product.stocks[0]?.markupPercentage, true) &&
-                  <div className="text-xs line-through">
-                    {product.stocks.length > 0 && getFinalPrice(Number(product.stocks[0]?.sellPrice), product.stocks[0].markupPercentage, 0, false, true)}
-                  </div>
-                }
+                  {
+                    product.stocks.length > 0 && !isEmptyVal(product.stocks[0].markupPercentage, true) && !isEmptyVal(product.stocks[0]?.markupPercentage, true) &&
+                    <div className="text-xs line-through">
+                      {product.stocks.length > 0 && getFinalPrice(Number(product.stocks[0]?.sellPrice), product.stocks[0].markupPercentage, 0, false, true)}
+                    </div>
+                  }
                   <div>
                     {product.stocks.length > 0 && getFinalPrice(Number(product.stocks[0]?.sellPrice), product.stocks[0].markupPercentage, product.stocks[0].discountPercentage, true, true)}
                   </div>
                 </td>
                 <td className="px-6 py-3 text-center">
-                    <div className="flex justify-center items-center">
-                      <div className="border-[1px] border-gray-200 rounded-l-lg overflow-hidden">
-                        <StockMovementForm 
-                          direction="OUT"
-                          product={product}
-                          outlet={outlets.filter((o) => o.id.toString() === outletId)[0]}
-                          currentQuantity={product.stocks[0]?.quantity}
-                          movements={movements}
-                          productStock={product.stocks[0]}
-                          disabled={product.stocks[0]?.quantity === undefined || product.stocks[0]?.quantity === 0 }
-                        />
-                      </div>
-                      <div className="px-2 py-2 w-[60px] border-[1px] border-gray-200 text-center">
-                        { product.stocks.length > 0 ? `${product.stocks[0]?.quantity}` : '0' }
-                      </div>
-                      <div className="border-[1px] border-gray-200 rounded-r-lg overflow-hidden">
-                        <StockMovementForm 
-                          direction="IN"
-                          product={product}
-                          outlet={outlets.filter((o) => (o.id.toString() === outletId))[0]}
-                          currentQuantity={product.stocks[0]?.quantity}
-                          movements={movements}
-                          productStock={product.stocks[0]}
-                        />
-                      </div>
+                  <div className="flex justify-center items-center">
+                    <div className="border-[1px] border-gray-200 rounded-l-lg overflow-hidden">
+                      <StockMovementForm
+                        direction="OUT"
+                        product={product}
+                        outlet={outlets.filter((o) => o.id.toString() === outletId)[0]}
+                        currentQuantity={product.stocks[0]?.quantity}
+                        movements={movements}
+                        productStock={product.stocks[0]}
+                        disabled={product.stocks[0]?.quantity === undefined || product.stocks[0]?.quantity === 0}
+                      />
                     </div>
+                    <div className="px-2 py-2 w-[60px] border-[1px] border-gray-200 text-center">
+                      {product.stocks.length > 0 ? `${product.stocks[0]?.quantity}` : '0'}
+                    </div>
+                    <div className="border-[1px] border-gray-200 rounded-r-lg overflow-hidden">
+                      <StockMovementForm
+                        direction="IN"
+                        product={product}
+                        outlet={outlets.filter((o) => (o.id.toString() === outletId))[0]}
+                        currentQuantity={product.stocks[0]?.quantity}
+                        movements={movements}
+                        productStock={product.stocks[0]}
+                      />
+                    </div>
+                  </div>
                 </td>
               </tr>
             ))}
@@ -223,7 +226,7 @@ const ProductStock = async ({
       </div>
 
       <div>
-        <TablePagination currentPage={currentPage} totalPages={totalPages} limit={displayLimit}/>
+        <TablePagination currentPage={currentPage} totalPages={totalPages} limit={displayLimit} />
       </div>
 
     </div>
