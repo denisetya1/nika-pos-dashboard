@@ -4,12 +4,15 @@ import { prisma } from "@/lib/client";
 import { getSessionData } from "./Sessions";
 
 export const getOutletList = async () => {
-  const session = getSessionData()
-  console.log('session', session)
+  const session = await getSessionData()
 
-  const outlets = await prisma.outlet.findMany()
+  const outlets = await prisma.outlet.findMany({
+    where: {
+      storeId: Number(session?.user.storeId)
+    }
+  })
 
-  return { data: 'asd' }//outlets
+  return outlets
 }
 
 // export const getOutlets = async (storeId: number) => {

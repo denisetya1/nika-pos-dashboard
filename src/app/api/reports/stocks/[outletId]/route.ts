@@ -4,9 +4,9 @@ import { dateUTC, isEmptyVal } from "@/lib/functions";
 import moment from "moment";
 
 
-export const GET = async (req: NextRequest, { params }: { params: { outletId: string } }) =>  {
+export const GET = async (req: NextRequest, { params }: { params: { outletId: string } }) => {
 
-  const { outletId }  = params
+  const { outletId } = params
   const categoryId = req.nextUrl.searchParams.get('categoryId');
   const brandId = req.nextUrl.searchParams.get('brandId');
   const search = req.nextUrl.searchParams.get('search');
@@ -18,26 +18,26 @@ export const GET = async (req: NextRequest, { params }: { params: { outletId: st
   let limit = Number(req.nextUrl.searchParams.get('limit'))
   let page = Number(req.nextUrl.searchParams.get('page'))
 
-  if(isEmptyVal(limit, true)){
+  if (isEmptyVal(limit, true)) {
     limit = 50
   }
 
-  if(isEmptyVal(page, true)){
+  if (isEmptyVal(page, true)) {
     page = 1
   }
 
   let orderBy = {}
 
-  if(!isEmptyVal(sort)){
+  if (!isEmptyVal(sort)) {
     orderBy = {
-      ...(sort === 'name' ? {productStock: { product: {name: direction} } } : {}),
-      ...(sort === 'sku' ?  {productStock: { product: {sku: direction} } } : {}),
-      ...(sort === 'barcode' ?  {productStock: { product: {barcode: direction} } } : {}),
-      ...(sort === 'category' ?  {productStock: { product: {category:{name: direction}} } } : {}),
-      ...(sort === 'brand' ? {productStock: { product: {brand:{name: direction}} } } : {}),
+      ...(sort === 'name' ? { productStock: { product: { name: direction } } } : {}),
+      ...(sort === 'sku' ? { productStock: { product: { sku: direction } } } : {}),
+      ...(sort === 'barcode' ? { productStock: { product: { barcode: direction } } } : {}),
+      ...(sort === 'category' ? { productStock: { product: { category: { name: direction } } } } : {}),
+      ...(sort === 'brand' ? { productStock: { product: { brand: { name: direction } } } } : {}),
     }
   } else {
-    orderBy = {productStock: { product: {name: 'asc'} } }
+    orderBy = { productStock: { product: { name: 'asc' } } }
   }
 
   const stockMoves = await prisma.stockMovement.findManyAndCount({
@@ -46,9 +46,9 @@ export const GET = async (req: NextRequest, { params }: { params: { outletId: st
         outletId: Number(outletId),
         product: {
           storeId: 1,
-          ...(brandId !== "" && brandId !== undefined && brandId !== null ? {brandId: Number(brandId)} : {}),
-          ...(categoryId !== "" && categoryId !== undefined && categoryId !== null ? {categoryId: Number(categoryId)} : {}),
-          ...(search !== null ? { name: { contains: search }} : {})
+          ...(brandId !== "" && brandId !== undefined && brandId !== null ? { brandId: Number(brandId) } : {}),
+          ...(categoryId !== "" && categoryId !== undefined && categoryId !== null ? { categoryId: Number(categoryId) } : {}),
+          ...(search !== null ? { name: { contains: search } } : {})
         }
       },
       moveDate
@@ -63,6 +63,7 @@ export const GET = async (req: NextRequest, { params }: { params: { outletId: st
             select: {
               id: true,
               name: true,
+              barcode: true,
               brand: {
                 select: {
                   id: true,

@@ -4,9 +4,10 @@ import moment from "moment";
 import StockListFilter from "./components/StocktListFilter";
 import TablePagination from "../../components/TablePagination";
 import { getCookieString } from "@/actions/Cookies";
+import { RiBarcodeBoxLine } from "react-icons/ri";
 
 type StockMovement = Prisma.StockMovementGetPayload<{
-  include: { 
+  include: {
     productStock: {
       include: {
         product: {
@@ -24,18 +25,18 @@ type StockMovement = Prisma.StockMovementGetPayload<{
 const StockReportPage = async ({
   searchParams,
 }: {
-  searchParams?: { [key: string]: string | undefined};
+  searchParams?: { [key: string]: string | undefined };
 }) => {
   const requestHeaders: HeadersInit = new Headers()
   requestHeaders.set('Cookie', getCookieString())
-  
+
   const resOutlet = await fetch(`${process.env.URL}/api/outlets`, {
     headers: requestHeaders,
     cache: 'no-cache'
   })
   const outlets: Outlet[] = await resOutlet.json()
   const outletId = searchParams?.outletId === undefined ? outlets[0].id.toString() : searchParams?.outletId
-  
+
   const resCategory = await fetch(`${process.env.URL}/api/categories`, {
     headers: requestHeaders,
     cache: 'no-cache'
@@ -50,7 +51,7 @@ const StockReportPage = async ({
   const query = queryString.stringify(searchParams || {});
 
   const resStockMoves = await fetch(
-    `${process.env.URL}/api/reports/stocks/${outletId}${query !== '' ? `?${query}` : ''}`, 
+    `${process.env.URL}/api/reports/stocks/${outletId}${query !== '' ? `?${query}` : ''}`,
     {
       headers: requestHeaders,
       cache: 'no-cache'
@@ -58,8 +59,8 @@ const StockReportPage = async ({
   )
   const paginated: [StockMovement[], number, number, number] = await resStockMoves.json()
 
-  const [ stockMovements, totalRow, currentPage, limit] = paginated
-  const totalPages = Math.floor(totalRow/limit)
+  const [stockMovements, totalRow, currentPage, limit] = paginated
+  const totalPages = Math.floor(totalRow / limit)
 
   return (
     <div className="grow min-h-[500px]">
@@ -68,8 +69,8 @@ const StockReportPage = async ({
       </div>
 
       <div>
-        <StockListFilter 
-          categories={categories} 
+        <StockListFilter
+          categories={categories}
           brands={brands}
           outlets={outlets}
           selectedBrand={searchParams?.brandId}
@@ -80,27 +81,30 @@ const StockReportPage = async ({
       </div>
 
       <div>
-        <TablePagination currentPage={currentPage} totalPages={totalPages} limit={50}/>
+        <TablePagination currentPage={currentPage} totalPages={totalPages} limit={50} />
       </div>
 
       <div className="bg-white border-[1px] border-slate-200 rounded-md overflow-hidden">
         <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
           <thead>
             <tr className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 border-top-[1px] border-slate-200 rounded-md">
-                <th scope="col" className="px-6 py-5">No.</th>
-                <th scope="col" className="px-6 py-5">Nama Produk</th>
-                <th scope="col" className="px-6 py-5">Tanggal</th>
-                <th scope="col" className="px-6 py-5">Stok Awal</th>
-                <th scope="col" className="px-6 py-5">Jml. Pengurangan/Penambahan</th>
-                <th scope="col" className="px-6 py-5">Stok Akhir</th>
-                <th scope="col" className="px-6 py-5">Keterangan</th>
+              <th scope="col" className="px-6 py-5">No.</th>
+              <th scope="col" className="px-6 py-5">Nama Produk</th>
+              <th scope="col" className="px-6 py-5">Tanggal</th>
+              <th scope="col" className="px-6 py-5">Stok Awal</th>
+              <th scope="col" className="px-6 py-5">Jml. Pengurangan/Penambahan</th>
+              <th scope="col" className="px-6 py-5">Stok Akhir</th>
+              <th scope="col" className="px-6 py-5">Keterangan</th>
             </tr>
           </thead>
           <tbody className="divide-y">
             {stockMovements.map((sm, index) => (
               <tr key={sm.id} className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
                 <td className="px-6 py-3 w-10">{index + 1}</td>
-                <td className="px-6 py-3 w-80 text-black dark:text-white">{sm.productStock.product.name}</td>
+                <td className="px-6 py-3 w-80 text-black dark:text-white">
+                  {sm.productStock.product.name}
+                  <div className="flex text-gray-500 justify-start items-center gap-1"><RiBarcodeBoxLine className="text-gray-400" /> {sm.productStock.product.barcode === '' || sm.productStock.product.barcode === null ? '-' : sm.productStock.product.barcode}</div>
+                </td>
                 <td className="px-6 py-3 w-[200px]">{moment(sm.moveDate).format('YYYY-MM-D')}</td>
                 <td className="px-6 py-3">{sm.startQuantity}</td>
                 <td className="px-6 py-3 text-right">
@@ -120,7 +124,7 @@ const StockReportPage = async ({
         </table>
       </div>
       <div>
-          <TablePagination currentPage={currentPage} totalPages={totalPages} limit={50}/>
+        <TablePagination currentPage={currentPage} totalPages={totalPages} limit={50} />
       </div>
 
     </div>
