@@ -12,17 +12,17 @@ import { Tooltip } from "flowbite-react";
 import { getCookieString } from "@/actions/Cookies";
 
 type Product = Prisma.ProductGetPayload<{
-  include: { brand: true, category: true}
+  include: { brand: true, category: true }
 }>
 
 const page = async ({
   searchParams,
 }: {
-  searchParams?: { [key: string]: string | undefined};
+  searchParams?: { [key: string]: string | undefined };
 }) => {
   const requestHeaders: HeadersInit = new Headers()
   requestHeaders.set('Cookie', getCookieString())
-  
+
   const resCategory = await fetch(`${process.env.URL}/api/categories`, {
     headers: requestHeaders,
     cache: 'no-cache'
@@ -37,7 +37,7 @@ const page = async ({
   const query = queryString.stringify(searchParams || {});
 
   const resPorduct = await fetch(
-    `${process.env.URL}/api/products${query !== '' ? `?${query}` : ''}`, 
+    `${process.env.URL}/api/products${query !== '' ? `?${query}` : ''}`,
     {
       headers: requestHeaders,
       cache: 'no-cache'
@@ -47,8 +47,8 @@ const page = async ({
   const paginated: [Product[], number, number, number] = await resPorduct.json()
 
   const displayLimit = 50
-  const [ products, totalRow, currentPage, limit] = paginated
-  const totalPages = Math.ceil(totalRow/limit)
+  const [products, totalRow, currentPage, limit] = paginated
+  const totalPages = Math.ceil(totalRow / limit)
 
   return (
     <div className="grow">
@@ -58,7 +58,7 @@ const page = async ({
 
       <div className="flex justify-end items-center mb-10">
         <AlertContextProvider>
-          <AddEditProductModal 
+          <AddEditProductModal
             categories={categories}
             brands={brands}
             btnTitle="Tambah Produk"
@@ -69,8 +69,8 @@ const page = async ({
       </div>
 
       <div>
-        <ProductListFilter 
-          categories={categories} 
+        <ProductListFilter
+          categories={categories}
           brands={brands}
           selectedBrand={searchParams?.brandId}
           selectedCategory={searchParams?.categoryId}
@@ -80,45 +80,45 @@ const page = async ({
       </div>
 
       <div>
-        <TablePagination currentPage={currentPage} totalPages={totalPages} limit={displayLimit}/>
+        <TablePagination currentPage={currentPage} totalPages={totalPages} limit={displayLimit} />
       </div>
 
       <div className="border-[1px] border-slate-200 rounded-md overflow-hidden">
         <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 rounded-md overflow-hidden">
           <thead>
             <tr className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 border-top-[1px] border-slate-200 rounded-md">
-                <th scope="col" className="px-6 py-5">No.</th>
-                <th scope="col" className="px-6 py-5 hover:bg-gray-200">
-                  <SortableHeader
-                    title="Nama"
-                    fieldName="name"
-                  />
-                </th>
-                <th scope="col" className="hidden sm:table-cell px-6 py-5 hover:bg-gray-200">
-                  <SortableHeader
-                    title="SKU"
-                    fieldName="sku"
-                  />
-                </th>
-                <th scope="col" className="hidden sm:table-cell px-6 py-5 hover:bg-gray-200">
-                  <SortableHeader
-                    title="Barcode"
-                    fieldName="barcode"
-                  />
-                </th>
-                <th scope="col" className="hidden sm:table-cell px-6 py-5 hover:bg-gray-200">
-                  <SortableHeader
-                    title="Kategori"
-                    fieldName="category"
-                  />
-                </th>
-                <th scope="col" className="hidden sm:table-cell px-6 py-5 hover:bg-gray-200">
-                  <SortableHeader
-                    title="Brand"
-                    fieldName="brand"
-                  />
-                </th>
-                <th scope="col" className="px-6 py-5">Action</th>
+              <th scope="col" className="px-6 py-5">No.</th>
+              <th scope="col" className="px-6 py-5 hover:bg-gray-200">
+                <SortableHeader
+                  title="Nama"
+                  fieldName="name"
+                />
+              </th>
+              <th scope="col" className="hidden sm:table-cell px-6 py-5 hover:bg-gray-200">
+                <SortableHeader
+                  title="SKU"
+                  fieldName="sku"
+                />
+              </th>
+              <th scope="col" className="hidden sm:table-cell px-6 py-5 hover:bg-gray-200">
+                <SortableHeader
+                  title="Barcode"
+                  fieldName="barcode"
+                />
+              </th>
+              <th scope="col" className="hidden sm:table-cell px-6 py-5 hover:bg-gray-200">
+                <SortableHeader
+                  title="Kategori"
+                  fieldName="category"
+                />
+              </th>
+              <th scope="col" className="hidden sm:table-cell px-6 py-5 hover:bg-gray-200">
+                <SortableHeader
+                  title="Brand"
+                  fieldName="brand"
+                />
+              </th>
+              <th scope="col" className="px-6 py-5">Action</th>
             </tr>
           </thead>
           <tbody className="divide-y">
@@ -146,7 +146,7 @@ const page = async ({
                 <td className="hidden sm:table-cell px-6 py-3">{product.brand.name}</td>
                 <td className="px-6 py-3">
                   <div className="flex flex-row gap-3">
-                    <AddEditProductModal 
+                    <AddEditProductModal
                       categories={categories}
                       brands={brands}
                       product={product}
@@ -155,9 +155,9 @@ const page = async ({
                       btnColor="light"
                       endpoint={`/api/products/${product.id}`}
                     />
-                    <ConfirmDeleteModal 
+                    <ConfirmDeleteModal
                       modalTitle="Hapus Jenis Perpindahan Stok"
-                      buttonTitle={<HiOutlineTrash className="text-red-600"/>}
+                      buttonTitle={<HiOutlineTrash className="text-red-600" />}
                       tooltipText="Hapus Produk"
                       deletedName={product.name}
                       btnColor="light"
@@ -172,7 +172,7 @@ const page = async ({
       </div>
 
       <div>
-        <TablePagination currentPage={currentPage} totalPages={totalPages} limit={displayLimit}/>
+        <TablePagination currentPage={currentPage} totalPages={totalPages} limit={displayLimit} />
       </div>
 
     </div>
