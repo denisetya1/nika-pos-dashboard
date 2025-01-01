@@ -6,6 +6,7 @@ import { FocusEvent, useEffect, useState } from "react";
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { PiPercentBold } from "react-icons/pi";
 import { LuPencilLine } from "react-icons/lu";
+import { useToastContext } from "@/context/toast/ToastContext";
 
 type FormValues = {
   sellPrice: Number
@@ -16,12 +17,12 @@ type FormValues = {
 }
 
 const EditPriceForm = ({
-    outlet, 
-    product,
-    sellPrice,
-    discountPercentage,
-    markupPercentage,
-  }:
+  outlet,
+  product,
+  sellPrice,
+  discountPercentage,
+  markupPercentage,
+}:
   {
     outlet: Outlet
     product: Product
@@ -31,6 +32,8 @@ const EditPriceForm = ({
   }) => {
   const router = useRouter()
   const [isOpen, setOpen] = useState(false)
+
+  const { setToast } = useToastContext()
 
   const formOptions = {
     defaultValues: {
@@ -43,21 +46,33 @@ const EditPriceForm = ({
 
   const { register, handleSubmit, reset } = useForm<FormValues>(formOptions);
 
-  const SubmitForm : SubmitHandler<FormValues> = async (formData) => {
+  const SubmitForm: SubmitHandler<FormValues> = async (formData) => {
     const body = formData
 
-    const res = await fetch(`/api/products/${product.id}/${outlet.id}/price`, {
-      method: 'PATCH',
-      body: JSON.stringify(body)
-    })
+    try {
+      await fetch(`/api/products/${product.id}/${outlet.id}/price`, {
+        method: 'PATCH',
+        body: JSON.stringify(body)
+      })
 
-    reset({...formOptions.defaultValues})
-    router.refresh()
-    setOpen(false)
+      setToast({
+        content: "Ubah Harga berhasil tersimpan.",
+        type: "success"
+      })
+
+      reset({ ...formOptions.defaultValues })
+      router.refresh()
+      setOpen(false)
+    } catch (e: any) {
+      setToast({
+        content: e.message,
+        type: "failure"
+      })
+    }
   }
 
   useEffect(() => {
-    reset({...formOptions.defaultValues})
+    reset({ ...formOptions.defaultValues })
 
   }, [sellPrice, discountPercentage, markupPercentage])
 
@@ -70,60 +85,60 @@ const EditPriceForm = ({
       <Tooltip content='Ubah Harga Jual' placement="bottom" style="dark">
         <button className="text-primary-500" onClick={() => setOpen(true)}><LuPencilLine /></button>
       </Tooltip>
-      
+
       <Modal show={isOpen} onClose={() => setOpen(false)}>
         <form onSubmit={handleSubmit(SubmitForm)}>
           <Modal.Header>Ubah Harga Barang</Modal.Header>
           <Modal.Body className="max-h-[400px] overflow-auto">
             <div className="space-y-6">
 
-                <div className="grid gap-4 mb-4 grid-cols-2">
+              <div className="grid gap-4 mb-4 grid-cols-2">
+
+                <div className="col-span-2">
+                  <div className="mb-2 block">
+                    <Label htmlFor="input-gray" color="gray" value="Outlet" />
+                  </div>
+                  <TextInput name="name" value={outlet.name} disabled />
+                </div>
+
+                <div className="col-span-2">
+                  <div className="mb-2 block">
+                    <Label htmlFor="input-gray" color="gray" value="Nama Produk" />
+                  </div>
+                  <TextInput id="input-gray" name="name" value={product.name} disabled />
+                </div>
+
+                <div className="col-span-2">
+                  <div className="mb-2 block">
+                    <Label htmlFor="input-gray" color="gray" value="Harga Jual" />
+                  </div>
+                  <TextInput className="w-[150px]" onFocus={setSelected} min={0} type="number" {...register('sellPrice')} placeholder="" />
+                </div>
+
+                <div className="flex flex-row justify-between items-center">
+                  <div className="col-span-2">
+                    <div className="mb-2 block">
+                      <Label htmlFor="input-gray" color="gray" value="Markup Harga" />
+                    </div>
+                    <TextInput className="w-[90px] text-right" onFocus={setSelected} rightIcon={PiPercentBold} min={0} max={99} type="number" {...register('markupPercentage')} placeholder="" />
+                  </div>
 
                   <div className="col-span-2">
                     <div className="mb-2 block">
-                      <Label htmlFor="input-gray" color="gray" value="Outlet" />
+                      <Label htmlFor="input-gray" color="gray" value="Diskon" />
                     </div>
-                    <TextInput name="name" value={outlet.name} disabled/>
+                    <TextInput className="w-[90px] text-right" onFocus={setSelected} rightIcon={PiPercentBold} min={0} max={99} type="number" {...register('discountPercentage')} placeholder="" />
                   </div>
-        
-                  <div className="col-span-2">
-                    <div className="mb-2 block">
-                      <Label htmlFor="input-gray" color="gray" value="Nama Produk" />
-                    </div>
-                    <TextInput id="input-gray" name="name" value={product.name} disabled/>
-                  </div>
+                </div>
 
-                  <div className="col-span-2">
-                    <div className="mb-2 block">
-                      <Label htmlFor="input-gray" color="gray" value="Harga Jual" />
-                    </div>
-                    <TextInput className="w-[150px]" onFocus={setSelected} min={0} type="number" {...register('sellPrice')} placeholder="" />
-                  </div>
-                  
-                  <div className="flex flex-row justify-between items-center">
-                    <div className="col-span-2">
-                      <div className="mb-2 block">
-                        <Label htmlFor="input-gray" color="gray" value="Markup Harga" />
-                      </div>
-                      <TextInput className="w-[90px] text-right" onFocus={setSelected} rightIcon={PiPercentBold} min={0} max={99} type="number" {...register('markupPercentage')} placeholder="" />
-                    </div>
-
-                    <div className="col-span-2">
-                      <div className="mb-2 block">
-                        <Label htmlFor="input-gray" color="gray" value="Diskon" />
-                      </div>
-                      <TextInput className="w-[90px] text-right" onFocus={setSelected} rightIcon={PiPercentBold} min={0} max={99} type="number" {...register('discountPercentage')} placeholder="" />
-                    </div>
-                  </div>
-
-                  {/* <div className="col-span-2">
+                {/* <div className="col-span-2">
                     <div className="mb-2 block">
                       <Label htmlFor="input-gray" color="gray" value="Link Shopee" />
                     </div>
                     <TextInput min={0} type="text" {...register('linkShopee')} placeholder="" />
                   </div> */}
-              
-                </div>
+
+              </div>
 
             </div>
           </Modal.Body>

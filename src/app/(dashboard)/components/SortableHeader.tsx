@@ -3,7 +3,7 @@
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { HiChevronDown, HiChevronUp } from "react-icons/hi";
 
-const TablePagination = ({title, fieldName} : 
+const TablePagination = ({ title, fieldName }:
   {
     title: string,
     fieldName: string
@@ -15,8 +15,9 @@ const TablePagination = ({title, fieldName} :
   const sorted = searchParams.get('sort')
   let direction = searchParams.get('direction')
 
+
   const onButtonClicked = () => {
-    if(direction === 'asc')
+    if (direction === 'asc')
       direction = 'desc'
     else
       direction = 'asc'
@@ -34,8 +35,8 @@ const TablePagination = ({title, fieldName} :
         {title.toUpperCase()}
       </span>
       <span className="text-sm">
-        {sorted === fieldName && direction === 'asc' && <HiChevronUp /> }
-        {sorted === fieldName && direction === 'desc' && <HiChevronDown /> }
+        {sorted === fieldName && direction === 'asc' && <HiChevronUp />}
+        {sorted === fieldName && direction === 'desc' && <HiChevronDown />}
       </span>
     </button>
   );

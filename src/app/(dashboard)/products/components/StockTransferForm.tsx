@@ -1,5 +1,6 @@
 'use client';
 
+import { useToastContext } from "@/context/toast/ToastContext";
 import { Outlet, Prisma, ProductStock } from "@prisma/client";
 import { Button, Label, Modal, Select, TextInput, Textarea, Tooltip } from "flowbite-react";
 import { useRouter } from "next/navigation";
@@ -25,7 +26,6 @@ type FormValues = {
 const StockMovementForm = ({
   outlet,
   product,
-  direction,
   productStock,
   disabled,
   currentQuantity,
@@ -34,7 +34,6 @@ const StockMovementForm = ({
   {
     outlet: Outlet
     product: Product
-    direction: string
     currentQuantity: number
     outlets: Outlet[]
     productStock?: ProductStock
@@ -42,31 +41,47 @@ const StockMovementForm = ({
   }) => {
   const router = useRouter()
   const [isOpen, setOpen] = useState(false)
+  const { setToast } = useToastContext()
 
   const formOptions = {
     defaultValues: {
       outletId: outlet.id.toString(),
       productId: product.id.toString(),
-      productStockId: productStock ? productStock.id.toString() : '',
-      direction
+      productStockId: productStock ? productStock.id.toString() : ''
     }
   }
 
-  const { register, handleSubmit, reset, control } = useForm<FormValues>(formOptions);
+  const { register, handleSubmit, reset, formState: { errors } } = useForm<FormValues>(formOptions);
 
   const SubmitForm: SubmitHandler<FormValues> = async (formData) => {
     const body = formData
 
-    const res = await fetch(`/api/products/${product.id}/${outlet.id}/transfer`, {
-      method: 'POST',
-      body: JSON.stringify({
-        ...body,
+    try {
+      await fetch(`/api/products/${product.id}/${outlet.id}/transfer`, {
+        method: 'POST',
+        body: JSON.stringify({
+          ...body,
+        })
       })
-    })
+        .then((res) => res.json())
+        .catch((e) => {
+          throw new Error(e.message)
+        })
 
-    reset({ ...formOptions.defaultValues })
-    router.refresh()
-    setOpen(false)
+      setToast({
+        content: "Pemindahan Stok berhasil tersimpan.",
+        type: "success"
+      })
+
+      reset({ ...formOptions.defaultValues })
+      router.refresh()
+      setOpen(false)
+    } catch (e: any) {
+      setToast({
+        content: e.message,
+        type: "failure"
+      })
+    }
   }
 
   useEffect(() => {
@@ -112,7 +127,7 @@ const StockMovementForm = ({
                     <div className="mb-2 block">
                       <Label htmlFor="input-gray" color="gray" value="Jumlah" />
                     </div>
-                    <TextInput className="w-[100px]" min={1} max={currentQuantity} type="number" {...register('quantity')} placeholder=""
+                    <TextInput className="w-[100px]" min={1} max={currentQuantity} type="number" {...register('quantity', { required: true })} placeholder=""
                       helperText={
                         <>
                           stok tersedia: {currentQuantity}
@@ -139,10 +154,11 @@ const StockMovementForm = ({
                   <div className="mb-2 block">
                     <Label htmlFor="input-gray" color="gray" value="Tujuan Outlet" />
                   </div>
-                  <Select {...register('outletDestinationId')}>
-                    <option>Pilih Outlet</option>
+                  <Select {...register('outletDestinationId', { required: true })}>
+                    <option value="">Pilih Outlet</option>
                     {outlets && outlets.map((o) => <option key={o.id} value={o.id.toString()}>{o.name}</option>)}
                   </Select>
+                  {errors.outletDestinationId && <div className="text-red-500">{errors.outletDestinationId.message}</div>}
                 </div>
 
                 <div className="col-span-2">

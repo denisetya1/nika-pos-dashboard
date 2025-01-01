@@ -1,5 +1,7 @@
 'use client';
 
+import { useAlertContext } from "@/context/alert/AlertContext";
+import { useToastContext } from "@/context/toast/ToastContext";
 import { MoveType, Outlet, Prisma, ProductStock } from "@prisma/client";
 import { Button, Datepicker, Label, Modal, Select, TextInput, Textarea, Tooltip } from "flowbite-react";
 import moment from "moment";
@@ -20,7 +22,6 @@ type FormValues = {
   productStockId: String
   direction: String
   moveDate: String
-  outletDestinationId: String
 }
 
 const StockMovementForm = ({
@@ -44,6 +45,7 @@ const StockMovementForm = ({
   const router = useRouter()
   const [isOpen, setOpen] = useState(false)
   const [moveDateStr, setMoveDateStr] = useState(moment().format('YYYY-MM-D'))
+  const { setToast } = useToastContext()
 
   const formOptions = {
     defaultValues: {
@@ -61,17 +63,30 @@ const StockMovementForm = ({
   const SubmitForm: SubmitHandler<FormValues> = async (formData) => {
     const body = formData
 
-    const res = await fetch(`/api/products/${product.id}/${outlet.id}/stock`, {
-      method: 'POST',
-      body: JSON.stringify({
-        ...body,
-        moveDateStr
+    try {
+      const res = await fetch(`/api/products/${product.id}/${outlet.id}/stock`, {
+        method: 'POST',
+        body: JSON.stringify({
+          ...body,
+          moveDateStr
+        })
       })
-    })
+        .then((res) => res.json())
+        .then(resJson => setToast({
+          content: "Ubah Stok berhasil tersimpan.",
+          type: "success"
+        }))
 
-    reset({ ...formOptions.defaultValues })
-    router.refresh()
-    setOpen(false)
+      reset({ ...formOptions.defaultValues })
+      router.refresh()
+      setOpen(false)
+
+    } catch (e: any) {
+      setToast({
+        content: e.message,
+        type: "failure"
+      })
+    }
   }
 
   useEffect(() => {
