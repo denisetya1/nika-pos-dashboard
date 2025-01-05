@@ -182,8 +182,8 @@ const ProductStock = async ({
                   </div>
                 </td>
 
-                <td className="hidden sm:table-cell px-4 py-3 align-top">{product.stocks.length > 0 && product.stocks[0]?.markupPercentage && `${product.stocks[0]?.markupPercentage}%`}</td>
-                <td className="hidden sm:table-cell px-4 py-3 align-top">{product.stocks.length > 0 && product.stocks[0]?.discountPercentage && `${product.stocks[0]?.discountPercentage}%`}</td>
+                <td className="hidden sm:table-cell px-4 py-3 align-top text-center">{product.stocks.length > 0 && product.stocks[0]?.markupPercentage && product.stocks[0]?.markupPercentage > 0 ? `${product.stocks[0]?.markupPercentage}%` : '-'}</td>
+                <td className="hidden sm:table-cell px-4 py-3 align-top text-center">{product.stocks.length > 0 && product.stocks[0]?.discountPercentage && product.stocks[0]?.discountPercentage > 0 ? `${product.stocks[0]?.discountPercentage}%` : '-'}</td>
                 <td className="hidden sm:table-cell px-4 py-3 align-top">
                   {
                     product.stocks.length > 0 && !isEmptyVal(product.stocks[0].markupPercentage, true) && !isEmptyVal(product.stocks[0]?.markupPercentage, true) &&
