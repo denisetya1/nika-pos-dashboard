@@ -1,10 +1,10 @@
 
 import { Outlet } from "@prisma/client"
 import moment from "moment";
-import OutletDateRangeFilter from "../components/OutletDateRangeFilter";
 import { formatCurrency } from "@/lib/functions";
 import { getCookieString } from "@/actions/Cookies";
 import queryString from "query-string";
+import OutletDateRangeFilter from "../../components/OutletDateRangeFilter";
 
 type ProductSold = {
   _sum: { qty: number }
@@ -18,21 +18,21 @@ const StockReportPage = async ({
   searchParams,
   params
 }: {
-  searchParams?: { [key: string]: string | undefined}
+  searchParams?: { [key: string]: string | undefined }
   params: {
     productId: string
   }
 }) => {
   const requestHeaders: HeadersInit = new Headers()
   requestHeaders.set('Cookie', getCookieString())
-  
+
   const resOutlet = await fetch(`${process.env.URL}/api/outlets`, {
     headers: requestHeaders,
     cache: 'no-cache'
   })
   const outlets: Outlet[] = await resOutlet.json()
   const outletId = searchParams?.outletId === undefined ? outlets[0].id.toString() : searchParams?.outletId
-  
+
   const startDate = searchParams?.startDate || moment().format('YYYY-MM-DD')
   const endDate = searchParams?.endDate || moment().format('YYYY-MM-DD')
   const search = searchParams?.search
@@ -50,7 +50,7 @@ const StockReportPage = async ({
   })
 
   const resProductSold = await fetch(
-    `${process.env.URL}/api/reports/product-sold?${qs}`, 
+    `${process.env.URL}/api/reports/product-sold?${qs}`,
     {
       headers: requestHeaders,
       cache: 'no-cache'
@@ -66,7 +66,7 @@ const StockReportPage = async ({
       </div>
 
       <div>
-        <OutletDateRangeFilter 
+        <OutletDateRangeFilter
           outlets={outlets}
           selectedStartDate={startDate}
           selectedEndDate={endDate}
@@ -97,7 +97,7 @@ const StockReportPage = async ({
               return (
                 <tr key={ps.productStockId} className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
                   <td className="px-6 py-3 w-10">{index + 1}</td>
-                  <td className="px-6 py-3 text-black dark:text-white w-[100px]">{ps.barcode ? ps.barcode  : '-'}</td>
+                  <td className="px-6 py-3 text-black dark:text-white w-[100px]">{ps.barcode ? ps.barcode : '-'}</td>
                   <td className="px-6 py-3 w-80 text-black dark:text-white">{ps.name}</td>
                   <td className="px-6 py-3 text-center">{formatCurrency(Number(ps.finalSellPrice))}</td>
                   <td className="px-6 py-3 text-center">{ps._sum.qty}</td>

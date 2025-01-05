@@ -9,7 +9,7 @@ import { useReactToPrint } from "react-to-print";
 import { useQuery } from "@tanstack/react-query";
 
 type ProductStock = Prisma.ProductStockGetPayload<{
-  include: { 
+  include: {
     product: {
       include: {
         brand: true,
@@ -53,31 +53,31 @@ const PrintPricePage = () => {
       cache: 'no-cache'
     }).then((res) => res.json())
   })
-  
+
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
   });
 
   useEffect(() => {
-    if(outlets && outletId === null){
+    if (outlets && outletId === null) {
       setOutletId(outlets[0].id)
     }
   }, [outlets, outletId])
 
   useEffect(() => {
-    if(brands && brandId === null){
+    if (brands && brandId === null) {
       setOutletId(brands[0].id)
     }
   }, [brands, outletId])
 
   useEffect(() => {
-    if(categories && categoryId === null){
+    if (categories && categoryId === null) {
       setOutletId(categories[0].id)
     }
   }, [categories, outletId])
 
   useEffect(() => {
-    if(outletId !== null)
+    if (outletId !== null)
       findProductPrice(outletId)
   }, [outletId, brandId, categoryId])
 
@@ -85,7 +85,8 @@ const PrintPricePage = () => {
     outletId,
     brandId,
     categoryId,
-    searchProduct
+    searchProduct,
+    havePriceOnly: 1
   }, {
     skipEmptyString: true,
     skipNull: true
@@ -95,13 +96,13 @@ const PrintPricePage = () => {
     fetch(`/api/products/prices/${outletId}${query !== '' ? `?${query}` : ''}`, {
       cache: 'no-cache'
     }).then((res) => res.json())
-    .then((data) => {
-      setProductPrices(data)
-    })
+      .then((data) => {
+        setProductPrices(data)
+      })
   }
 
   return (
-    <div  className="grow">
+    <div className="grow">
       <div>
         <h1 className="font-bold text-2xl mb-10">CETAK HARGA PRODUK</h1>
       </div>
@@ -113,13 +114,13 @@ const PrintPricePage = () => {
             <div className="mb-2 block">
               <Label htmlFor="product-name" value="Outlet" />
             </div>
-            
-              <Select color="info" onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setOutletId(e.target.value)} value={outletId}>
-                {outlets.map((outlet: Outlet) => (<option key={outlet.id} value={outlet.id.toString()}>{outlet.name}</option>))}
-              </Select>
-          </div>} 
 
-          {categories && categories?.length > 0 && <div> 
+            <Select color="info" onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setOutletId(e.target.value)} value={outletId}>
+              {outlets.map((outlet: Outlet) => (<option key={outlet.id} value={outlet.id.toString()}>{outlet.name}</option>))}
+            </Select>
+          </div>}
+
+          {categories && categories?.length > 0 && <div>
             <div className="mb-2 block">
               <Label htmlFor="product-name" value="Ketegori" />
             </div>
@@ -133,21 +134,21 @@ const PrintPricePage = () => {
             <div className="mb-2 block">
               <Label htmlFor="product-name" value="Brand" />
             </div>
-              <Select onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setBrandId(e.target.value)} value={brandId}>
+            <Select onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setBrandId(e.target.value)} value={brandId}>
               <option value="">Semua Brand</option>
               {brands.map((brand: Brand) => (<option key={brand.id} value={brand.id.toString()} >{brand.name}</option>))}
             </Select>
           </div>}
-          
+
         </div>
       </div>
 
       <div className="w-full bg-white p-6 rounded-md border-[1px] border-slate-200">
-        
+
         <div className="flex justify-end align-middle mb-5">
           <Button color="purple" onClick={handlePrint}>Cetak Label</Button>
         </div>
-        <ComponentToPrint ref={componentRef} productPrices={productPrices}/>
+        <ComponentToPrint ref={componentRef} productPrices={productPrices} />
       </div>
 
     </div>

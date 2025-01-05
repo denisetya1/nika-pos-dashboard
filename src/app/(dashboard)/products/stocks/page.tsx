@@ -225,7 +225,6 @@ const ProductStock = async ({
                 </td>
                 <td className="px-4 py-3 text-center">
                   <StockTransferForm
-                    direction="OUT"
                     product={product}
                     outlet={outlets.filter((o) => (o.id.toString() === outletId))[0]}
                     currentQuantity={product.stocks[0]?.quantity}
