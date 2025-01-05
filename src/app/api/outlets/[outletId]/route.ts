@@ -1,14 +1,16 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/client";
 
-export const PUT = async (request: NextRequest, {params}: {params: {
-  outletId: string,
-}}) =>  {
+export const PUT = async (request: NextRequest, { params }: {
+  params: {
+    outletId: string,
+  }
+}) => {
   const body = await request.json()
   const { outletId } = params
 
   const outlet = await prisma.outlet.update({
-    where:{
+    where: {
       id: Number(outletId)
     },
     data: {
@@ -21,6 +23,23 @@ export const PUT = async (request: NextRequest, {params}: {params: {
       printHeaderLine3: body.printHeaderLine3,
       printHeaderLine4: body.printHeaderLine4,
       printHeaderLine5: body.printHeaderLine5,
+    }
+  })
+
+
+  return NextResponse.json(outlet);
+}
+
+export const DELETE = async (request: NextRequest, { params }: {
+  params: {
+    outletId: string,
+  }
+}) => {
+  const { outletId } = params
+
+  const outlet = await prisma.outlet.delete({
+    where: {
+      id: Number(outletId)
     }
   })
 
