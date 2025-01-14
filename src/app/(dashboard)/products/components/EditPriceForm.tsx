@@ -112,7 +112,7 @@ const EditPriceForm = ({
                   <div className="mb-2 block">
                     <Label htmlFor="input-gray" color="gray" value="Harga Jual" />
                   </div>
-                  <TextInput className="w-[150px]" onFocus={setSelected} min={0} type="number" {...register('sellPrice')} placeholder="" />
+                  <TextInput className="w-[150px]" onFocus={setSelected} min={product.barcode && product.barcode.startsWith('DISKON') ? -99999 : 0} type="number" {...register('sellPrice')} placeholder="" />
                 </div>
 
                 <div className="flex flex-row justify-between items-center">

@@ -34,7 +34,7 @@ export const GET = async (req: NextRequest, { params }: {
                 { barcode: search }
               ]
             } : {})
-          },
+          }
         ]
       },
       sellPrice: havePriceOnly ? { gt: 0 } : { gte: 0 }

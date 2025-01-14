@@ -4,13 +4,13 @@ export default withAuth(
   {
     callbacks: {
       authorized: ({ req, token }) => {
-        
+
         const path = req.nextUrl.pathname
-        if(path.startsWith('/api/pos')){
-          
+        if (path.startsWith('/api/pos')) {
+
           return true;
         }
-        
+
         return !!token
       },
     },

@@ -6,7 +6,6 @@ import React from 'react'
 import Image from "next/image";
 import Barcode from 'react-barcode';
 import { HiTrash } from 'react-icons/hi2';
-import { Button } from 'flowbite-react';
 
 type ProductStock = Prisma.ProductStockGetPayload<{
   include: {
