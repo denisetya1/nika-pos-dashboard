@@ -2,13 +2,16 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/lib/client";
 import { getSessionData } from "@/actions/Sessions";
 
-export const GET = async () =>  {
+export const GET = async () => {
   const session = await getSessionData();
 
   const userOutlets = await prisma.userOutlet.findMany({
     where: {
       userId: session?.user.id,
-      isActive: true
+      isActive: true,
+      outlet: {
+        deletedAt: null
+      }
     },
     select: {
       userId: true,

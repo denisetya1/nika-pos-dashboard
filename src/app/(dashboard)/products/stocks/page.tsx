@@ -10,6 +10,7 @@ import { RiBarcodeBoxLine } from "react-icons/ri"
 import { getCookieString } from "@/actions/Cookies"
 import { getOutletList } from "@/actions/Outlets"
 import StockTransferForm from "../components/StockTransferForm"
+import StockOpnameModal from "../components/StockOpnameModal"
 
 type Product = Prisma.ProductGetPayload<{
   include: { brand: true, category: true, stocks: true }
@@ -105,16 +106,7 @@ const ProductStock = async ({
                 />
               </th>
               <th scope="col" className="hidden sm:table-cell px-4 py-5 hover:bg-gray-200">
-                <SortableHeader
-                  title="Kategori"
-                  fieldName="category"
-                />
-              </th>
-              <th scope="col" className="hidden sm:table-cell px-4 py-5 hover:bg-gray-200">
-                <SortableHeader
-                  title="Brand"
-                  fieldName="brand"
-                />
+                Kategori/Brand
               </th>
               <th scope="col" className="hidden sm:table-cell px-4 py-5 hover:bg-gray-200">
                 <SortableHeader
@@ -163,8 +155,7 @@ const ProductStock = async ({
                     {product.linkShopee !== null ? <a target="_blank" className="hover:text-blue-600" href={product.linkShopee}>{product.linkShopee.substring(0,100)}...</a> : "-" }
                   </div> */}
                 </td>
-                <td className="hidden sm:table-cell px-4 py-3 align-top">{product.category.name}</td>
-                <td className="hidden sm:table-cell px-4 py-3 align-top">{product.brand.name}</td>
+                <td className="hidden sm:table-cell px-4 py-3 align-top">{product.category.name} / {product.brand.name}</td>
                 <td className="px-4 py-3 align-top">
                   <div className="flex justify-end items-start align-top gap-2">
                     <div className="">
@@ -223,12 +214,18 @@ const ProductStock = async ({
                     </div>
                   </div>
                 </td>
-                <td className="px-4 py-3 text-center">
+                <td className="px-4 py-3 text-center flex flex-col gap-2 justify-center items-center">
                   <StockTransferForm
                     product={product}
                     outlet={outlets.filter((o) => (o.id.toString() === outletId))[0]}
                     currentQuantity={product.stocks[0]?.quantity}
                     outlets={LitOutlets}
+                    productStock={product.stocks[0]}
+                  />
+                  <StockOpnameModal
+                    product={product}
+                    outlet={outlets.filter((o) => (o.id.toString() === outletId))[0]}
+                    currentQuantity={product.stocks[0]?.quantity}
                     productStock={product.stocks[0]}
                   />
                 </td>

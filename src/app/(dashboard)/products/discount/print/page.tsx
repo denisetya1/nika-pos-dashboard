@@ -45,8 +45,8 @@ const PrintPricePage = () => {
             <Button color="purple" onClick={handlePrint}>Cetak Label</Button>
           </div>
         </div>
-        {/* <ComponentToPrint ref={componentRef} discountVal={Number(discVal)} /> */}
-        <PrintBarcode ref={componentRef} />
+        <ComponentToPrint ref={componentRef} discountVal={Number(discVal)} />
+        {/* <PrintBarcode ref={componentRef} /> */}
       </div>
 
     </div>

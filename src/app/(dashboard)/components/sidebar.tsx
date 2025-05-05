@@ -206,25 +206,25 @@ export const DashboardSidebar: FC = function () {
         <Sidebar.ItemGroup>
 
           {menus.map((menu, idx) => {
-            if(menu?.childs && menu?.childs?.length > 0){
+            if (menu?.childs && menu?.childs?.length > 0) {
               const findActiveMenu = menu.childs.filter((c) => c.url === pathname)
 
               return (
                 <Sidebar.Collapse key={idx} icon={menu.icon} href={menu.url} label={menu.title} open={findActiveMenu.length > 0 ? true : false}>
-                  {menu?.childs?.map( (sub, i) => <Sidebar.Item key={i} href={sub.url} active={sub.url === pathname}>{sub.title}</Sidebar.Item>)}
+                  {menu?.childs?.map((sub, i) => <Sidebar.Item key={i} href={sub.url} active={sub.url === pathname}>{sub.title}</Sidebar.Item>)}
                 </Sidebar.Collapse>
               )
             } else {
               return (
                 <Sidebar.Item key={idx} href={menu.url} icon={menu.icon} active={pathname === menu.url}>
-                    {menu.title}
+                  {menu.title}
                 </Sidebar.Item>
               )
             }
 
           })}
 
-          
+
         </Sidebar.ItemGroup>
         {/* <Sidebar.ItemGroup>
           <Sidebar.Item href="#" icon={HiChartPie}>
