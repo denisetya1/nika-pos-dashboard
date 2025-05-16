@@ -30,7 +30,7 @@ export const GET = async (request: NextRequest, { params }: {
         transaction: {
           outletId: Number(outletId),
           createdAt: {
-            gte: new Date(startDate),
+            gte: new Date(moment(startDate).subtract(7, 'hours').format('YYYY-MM-DD HH:mm:ss')),
             lte: new Date(endDate),
           },
         },
@@ -93,12 +93,12 @@ export const GET = async (request: NextRequest, { params }: {
     let moveStock = await prisma.stockMovement.findMany({
       where: {
         productStock: {
-          productId: Number(productId),
-          createdAt: {
-            gte: new Date(startDate),
-            lte: new Date(endDate),
-          },
-        }
+          productId: Number(productId)
+        },
+        createdAt: {
+          gte: new Date(moment(startDate).subtract(7, 'hours').format('YYYY-MM-DD HH:mm:ss')),
+          lte: new Date(endDate),
+        },
       },
       select: {
         productStock: {
