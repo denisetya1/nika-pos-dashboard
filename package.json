@@ -8,7 +8,7 @@
     "build:prod": "NODE_ENV=production next build",
     "start": "next start",
     "lint": "next lint",
-    "rsync": "rsync -avz -e \"ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null\" --progress ./.next denisetya1@103.150.190.252:/var/www/nika-pos-dashboard/",
+    "rsync": "rsync -avz -e \"ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null\" --progress ./.next denisetya1@103.150.93.51:/var/www/nika-pos-dashboard/",
     "prerelease": "node release.js develop prerelease",
     "release:major": "REPO=nika-pos-dashboard node release.js main major",
     "release:minor": "REPO=nika-pos-dashboard node release.js main minor",
