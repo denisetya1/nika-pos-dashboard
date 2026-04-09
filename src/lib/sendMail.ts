@@ -21,29 +21,27 @@ const sendMail = async ({
   subject: string;
   htmlContent: string;
 }) => {
-  const data: SendEmailV3_1.Body = {
-    Messages: [
-      {
-        From: {
-          Email: sender.email,
-          Name: sender.name,
-        },
-        To: to.map((t) => ({
-          Email: t.email,
-          Name: t.name,
-        })),
-        Subject: subject,
-        TextPart: htmlContent,
-        HTMLPart: htmlContent,
-      },
-    ],
-  };
-
-  const result: LibraryResponse<SendEmailV3_1.Response> = await mailjet
-    .post("send", { version: "v3.1" })
-    .request(data);
-
-  const { Status } = result.body.Messages[0];
+  // const data: SendEmailV3_1.Body = {
+  //   Messages: [
+  //     {
+  //       From: {
+  //         Email: sender.email,
+  //         Name: sender.name,
+  //       },
+  //       To: to.map((t) => ({
+  //         Email: t.email,
+  //         Name: t.name,
+  //       })),
+  //       Subject: subject,
+  //       TextPart: htmlContent,
+  //       HTMLPart: htmlContent,
+  //     },
+  //   ],
+  // };
+  // const result: LibraryResponse<SendEmailV3_1.Response> = await mailjet
+  //   .post("send", { version: "v3.1" })
+  //   .request(data);
+  // const { Status } = result.body.Messages[0];
 };
 
 export default sendMail;
