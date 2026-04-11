@@ -1,14 +1,21 @@
-import { getRealtimeSummary, getTopCategory, getTopMonthlyProducts } from "@/actions/Summaries"
+import {
+  getRealtimeSummary,
+  getTopCategory,
+  getTopMonthlyProducts,
+} from "@/actions/Summaries";
 
 const HomePage = async () => {
-  const getTopProduct = await getTopMonthlyProducts()
-  const summary = await getRealtimeSummary()
+  const getTopProduct = await getTopMonthlyProducts();
+  const summary = await getRealtimeSummary();
   const cat = await getTopCategory();
 
   return (
     <div className="flex w-full">
       <div className="flex p-5 bg-white rounded-lg shadow-md flex-col gap-5 w-full">
-        <div className="mb-10"><h1 className="font-semibold text-xl">Produk Terlaris</h1></div>
+        <p>
+          Selamat Datang di Nika POS, gunakan menu disamping untuk navigasi.
+        </p>
+        {/* <div className="mb-10"><h1 className="font-semibold text-xl">Produk Terlaris</h1></div>
         <table className="w-full">
           <thead>
             <tr>
@@ -24,10 +31,10 @@ const HomePage = async () => {
               <td className="p-2">{product.qty}</td>
             </tr>)}
           </tbody>
-        </table>
+        </table> */}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default HomePage
+export default HomePage;

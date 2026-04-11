@@ -4,12 +4,11 @@ import { getSessionData } from "@/actions/Sessions";
 
 export const GET = async (req: NextRequest) => {
   const session = await getSessionData();
-  console.log("session", session);
   const search = req.nextUrl.searchParams.get("search");
 
   const outlets = await prisma.outlet.findMany({
     where: {
-      storeId: 1, //Number(session?.user.storeId),
+      storeId: Number(session?.user.storeId),
       ...(session?.user.isSubAccount
         ? { id: Number(session?.user.outletId) }
         : {}),

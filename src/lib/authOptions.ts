@@ -1,84 +1,87 @@
-import { NextAuthOptions } from "next-auth"
-import { prisma } from "./client"
-import bcrypt from 'bcrypt';
+import { NextAuthOptions } from "next-auth";
+import { prisma } from "./client";
+import bcrypt from "bcrypt";
 import CredentialsProvider from "next-auth/providers/credentials";
 
 export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
-        name: "Credentials",
-        credentials: {
-          username: { label: "Username", type: "text", placeholder: "username" },
-          password: { label: "Password", type: "password" }
-        },
-        async authorize(credentials) {
-          
-          const user = await prisma.user.findUnique({
-            where: {
-              username: credentials?.username
-            }
-          })
-        
-          if(user && (await bcrypt.compare(credentials?.password as string, user.password))) {
-            const { password , ...userWithoutPass } = user
-            let outletId = null
-            let roles = null
+      name: "Credentials",
+      credentials: {
+        username: { label: "Username", type: "text", placeholder: "username" },
+        password: { label: "Password", type: "password" },
+      },
+      async authorize(credentials) {
+        const user = await prisma.user.findUnique({
+          where: {
+            username: credentials?.username,
+          },
+        });
 
-            if(user.isSubAccount){
-              const userAccess = await prisma.userOutlet.findFirst({
-                where: {
-                  userId: user.id,
-                  outlet: {
-                    storeId: Number(user.storeId)
-                  }
+        if (
+          user &&
+          (await bcrypt.compare(credentials?.password as string, user.password))
+        ) {
+          const { password, ...userWithoutPass } = user;
+          let outletId = null;
+          let roles = null;
+
+          if (user.isSubAccount) {
+            const userAccess = await prisma.userOutlet.findFirst({
+              where: {
+                userId: user.id,
+                outlet: {
+                  storeId: Number(user.storeId),
+                  isActive: true,
+                  deletedAt: null,
                 },
-                include: {
-                  role: true,
-                }
-              })
+                isActive: true,
+              },
+              include: {
+                role: true,
+              },
+            });
 
-              roles = userAccess?.role.roles
-              outletId = userAccess?.outletId
-            } else {
-              const outlet = await prisma.outlet.findFirst({
-                where: {
-                  storeId: Number(user.storeId)
-                }
-              })
-
-              const role = await prisma.role.findFirst({
-                where: {
-                  id: 1
-                }
-              })
-
-              roles = role?.roles
-              outletId = outlet?.id
-            }
-        
-            return {
-              ...userWithoutPass,
-              outletId,
-              roles
-            }
+            roles = userAccess?.role.roles;
+            outletId = userAccess?.outletId;
           } else {
-            return null
+            const outlet = await prisma.outlet.findFirst({
+              where: {
+                storeId: Number(user.storeId),
+              },
+            });
+
+            const role = await prisma.role.findFirst({
+              where: {
+                id: 1,
+              },
+            });
+
+            roles = role?.roles;
+            outletId = outlet?.id;
           }
+
+          return {
+            ...userWithoutPass,
+            outletId,
+            roles,
+          };
+        } else {
+          return null;
         }
-      }
-    )
+      },
+    }),
   ],
   session: {
-    strategy: 'jwt'
+    strategy: "jwt",
   },
   secret: process.env.NEXTAUTH_SECRET,
   debug: false,
   callbacks: {
-    async jwt({token, user, trigger, session}){
-      if(trigger === 'update'){
-        if(String(session.update.outletId) !== String(token.outletId)){
-          
-          if(token.isSubaccount){
+    async jwt({ token, user, trigger, session }) {
+      if (trigger === "update") {
+        if (String(session.update.outletId) !== String(token.outletId)) {
+          if (token.isSubaccount) {
             //check is user have access
             const userOutlet = await prisma.userOutlet.findFirst({
               where: {
@@ -86,7 +89,7 @@ export const authOptions: NextAuthOptions = {
                   storeId: Number(token.storeId),
                 },
                 userId: String(token.id),
-                isActive: true
+                isActive: true,
               },
               select: {
                 userId: true,
@@ -95,52 +98,51 @@ export const authOptions: NextAuthOptions = {
                   select: {
                     id: true,
                     name: true,
-                    roles: true
-                  }
+                    roles: true,
+                  },
                 },
-                outletId: true
-              }
-            })
+                outletId: true,
+              },
+            });
 
-            if(userOutlet){
+            if (userOutlet) {
               token = {
                 ...token,
                 outletId: userOutlet.outletId,
-                roles: userOutlet.role.roles
-              }
+                roles: userOutlet.role.roles,
+              };
             }
           } else {
             const outlet = await prisma.outlet.findFirst({
               where: {
                 id: Number(session.update.outletId),
-                storeId: Number(token.storeId)
-              }
-            })
-            
-            if(outlet){
+                storeId: Number(token.storeId),
+              },
+            });
+
+            if (outlet) {
               token = {
                 ...token,
-                outletId: outlet.id
-              }
+                outletId: outlet.id,
+              };
             }
           }
-
         }
       }
 
-      return { ...token, ...user}
+      return { ...token, ...user };
     },
-    async session({session, token}){
-     session.user = token as any
+    async session({ session, token }) {
+      session.user = token as any;
 
-     return session
-    }
+      return session;
+    },
   },
   pages: {
-    signIn: '/login',
-    signOut: '/auth/signout',
-    error: '/auth/error', // Error code passed in query string as ?error=
-    verifyRequest: '/auth/verify-request', // (used for check email message)
-    newUser: '/auth/new-user' // New users will be directed here on first sign in (leave the property out if not of interest)
-  }
-}
+    signIn: "/login",
+    signOut: "/auth/signout",
+    error: "/auth/error", // Error code passed in query string as ?error=
+    verifyRequest: "/auth/verify-request", // (used for check email message)
+    newUser: "/auth/new-user", // New users will be directed here on first sign in (leave the property out if not of interest)
+  },
+};
