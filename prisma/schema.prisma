@@ -173,7 +173,7 @@ model Product {
   updatedAt            DateTime?             @updatedAt @map("updated_at")
   deletedAt            DateTime?             @map("deleted_at")
   updateBy             String?               @default("") @map("updated_by")
-  product_type         String?               @default("PRODUCT") @db.VarChar(100)
+  productType          String?               @default("PRODUCT") @db.VarChar(100) @map("product_type")
   stocks               ProductStock[]
   brand                Brand                 @relation(fields: [brandId], references: [id])
   category             Category              @relation(fields: [categoryId], references: [id])

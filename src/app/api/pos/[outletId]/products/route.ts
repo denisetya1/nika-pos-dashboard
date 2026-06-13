@@ -3,66 +3,87 @@ import { prisma } from "@/lib/client";
 import { isEmptyVal } from "@/lib/functions";
 import { verifyJwt } from "@/lib/jwt";
 
-export const GET = async (req: NextRequest, {params} : { params: {
-  outletId: string
-}}) =>  {
-  const authorization = req.headers.get('authorization') || ''
-  const [__, accessToken] = authorization.split(' ')
+export const GET = async (
+  req: NextRequest,
+  {
+    params,
+  }: {
+    params: {
+      outletId: string;
+    };
+  },
+) => {
+  const authorization = req.headers.get("authorization") || "";
+  const [__, accessToken] = authorization.split(" ");
 
-  const userData = verifyJwt(accessToken)
+  const userData = verifyJwt(accessToken);
 
-  if(accessToken && userData) {
+  if (accessToken && userData) {
     const { outletId } = params;
-    const categoryId = req.nextUrl.searchParams.get('categoryId');
-    const brandId = req.nextUrl.searchParams.get('brandId');
-    const search = req.nextUrl.searchParams.get('search');
+    const categoryId = req.nextUrl.searchParams.get("categoryId");
+    const brandId = req.nextUrl.searchParams.get("brandId");
+    const search = req.nextUrl.searchParams.get("search");
 
     // const sort: string = req.nextUrl.searchParams.get('sort') || ''
     // const direction = req.nextUrl.searchParams.get('direction') || "asc"
 
-    let limit = Number(req.nextUrl.searchParams.get('limit'))
-    let page = Number(req.nextUrl.searchParams.get('page'))
+    let limit = Number(req.nextUrl.searchParams.get("limit"));
+    let page = Number(req.nextUrl.searchParams.get("page"));
 
-    if(isEmptyVal(limit, true)){
-      limit = 20
+    if (isEmptyVal(limit, true)) {
+      limit = 20;
     }
 
-    if(isEmptyVal(page, true)){
-      page = 1
+    if (isEmptyVal(page, true)) {
+      page = 1;
     }
 
     const productsStocks = await prisma.productStock.findManyAndCount({
       where: {
-        AND : [
-          {storeId: 1},
-          {outletId: Number(outletId)},
-          {...(brandId !== "" && brandId !== undefined && brandId !== null ? {product: { brandId: Number(brandId)}} : {})},
-          {...(categoryId !== "" && categoryId !== undefined && categoryId !== null ? {product: { categoryId: Number(categoryId) }} : {})},
+        AND: [
+          { storeId: 1 },
+          { outletId: Number(outletId) },
+          {
+            ...(brandId !== "" && brandId !== undefined && brandId !== null
+              ? { product: { brandId: Number(brandId) } }
+              : {}),
+          },
+          {
+            ...(categoryId !== "" &&
+            categoryId !== undefined &&
+            categoryId !== null
+              ? { product: { categoryId: Number(categoryId) } }
+              : {}),
+          },
           {
             product: {
-              deletedAt: null
-            }
+              deletedAt: null,
+            },
           },
-          {...(search !== null ? { OR: [
-              {product: {
-                  name: {
-                    contains: search
-                  }
+          {
+            ...(search !== null
+              ? {
+                  OR: [
+                    {
+                      product: {
+                        name: {
+                          contains: search,
+                        },
+                      },
+                    },
+                    { product: { sku: search } },
+                    { product: { barcode: search } },
+                  ],
                 }
-              },
-              {product: { sku: search }
-              },
-              {product: { barcode: search }
-              }
-            ] } : {})
+              : {}),
           },
-          {outletId: Number(outletId)}
-        ]
+          { outletId: Number(outletId) },
+        ],
       },
       orderBy: {
         product: {
-          name: "asc"
-        }
+          name: "asc",
+        },
       },
       take: limit,
       skip: (page - 1) * limit,
@@ -84,38 +105,42 @@ export const GET = async (req: NextRequest, {params} : { params: {
             brandId: true,
             linkShopee: true,
             isActive: true,
-            createdAt:true,
+            createdAt: true,
+            productType: true,
             brand: {
               select: {
                 id: true,
                 name: true,
-              }
+              },
             },
             category: {
               select: {
                 id: true,
                 name: true,
-              }
-            }
-          }
-        }
+              },
+            },
+          },
+        },
       },
-    })
+    });
 
-    productsStocks.push(page)
-    productsStocks.push(limit)
+    productsStocks.push(page);
+    productsStocks.push(limit);
 
     return NextResponse.json({
       code: "SUCCESS",
       message: "",
-      data: productsStocks
+      data: productsStocks,
     });
   } else {
-    return NextResponse.json({
-      code: "UNATHORIZED",
-      message: "Unathorized Error!"
-    }, {
-      status: 401
-    });
+    return NextResponse.json(
+      {
+        code: "UNATHORIZED",
+        message: "Unathorized Error!",
+      },
+      {
+        status: 401,
+      },
+    );
   }
-}
+};
