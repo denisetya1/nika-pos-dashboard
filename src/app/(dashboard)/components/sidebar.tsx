@@ -3,25 +3,21 @@ import { Sidebar } from "flowbite-react";
 import { usePathname } from "next/navigation";
 import type { FC } from "react";
 import { BiSolidCategory } from "react-icons/bi";
-import {
-  HiHome,
-  HiShoppingBag,
-  HiBuildingStorefront
-} from "react-icons/hi2";
+import { HiHome, HiShoppingBag, HiBuildingStorefront } from "react-icons/hi2";
 import { TbFileReport } from "react-icons/tb";
 import { twMerge } from "tailwind-merge";
 import { HiUser } from "react-icons/hi";
 
 export const DashboardSidebar: FC = function () {
-  const { isCollapsed } = useSidebarContext()
-  const pathname = usePathname()
+  const { isCollapsed } = useSidebarContext();
+  const pathname = usePathname();
 
   const menus = [
     {
-      name: 'home',
+      name: "home",
       title: "Home",
       url: "/",
-      icon: HiHome
+      icon: HiHome,
     },
     // {
     //     name: 'online-sales',
@@ -60,137 +56,142 @@ export const DashboardSidebar: FC = function () {
     //   ]
     // },
     {
-      name: 'manage-product',
+      name: "manage-product",
       title: "Manajemen Produk",
       url: "/products",
       icon: HiShoppingBag,
       childs: [
         {
-          name: 'product-list',
+          name: "product-list",
           title: "Daftar Produk",
           url: "/products",
         },
         {
-          name: 'product-stock',
+          name: "product-stock",
           title: "Stok & Harga",
           url: "/products/stocks",
         },
         {
-          name: 'prints',
+          name: "prints",
           title: "Cetak Harga",
           url: "/products/prints",
-        }
-      ]
+        },
+      ],
     },
     {
-      name: 'reports',
+      name: "reports",
       title: "Laporan",
       url: "/reports",
       icon: TbFileReport,
       childs: [
         {
-          name: 'report-sales',
+          name: "report-sales",
           title: "Penjualan",
           url: "/reports/sales",
         },
         {
-          name: 'report-online-sales',
+          name: "report-online-sales",
           title: "Penjualan Online",
           url: "/reports/online-sales",
         },
         {
-          name: 'report-product-sold',
+          name: "report-product-sold",
           title: "Barang Terjual",
           url: "/reports/product-sold",
         },
         {
-          name: 'report-stock',
+          name: "report-stock",
           title: "Perpindahan Stok",
           url: "/reports/stocks",
         },
         {
-          name: 'report-stock-by-products',
+          name: "report-expired-products",
+          title: "Barang Expired",
+          url: "/reports/expired",
+        },
+        {
+          name: "report-stock-by-products",
           title: "Keluar/Masuk Stok",
           url: "/reports/stocks/by-products",
-        }
-      ]
+        },
+      ],
     },
     {
-      name: 'outlets',
+      name: "outlets",
       title: "Outlet",
       url: "/outlets",
       icon: HiBuildingStorefront,
       childs: [
         {
-          name: 'list-outlet',
+          name: "list-outlet",
           title: "Daftar Outlet",
           url: "/outlets",
         },
         {
-          name: 'outlet-payment-methods',
+          name: "outlet-payment-methods",
           title: "Metode Pembayaran",
           url: "/outlets/payment-methods",
         },
         {
-          name: 'outlet-shifts',
+          name: "outlet-shifts",
           title: "Daftar Shift Kasir",
           url: "/outlets/shifts",
         },
         {
-          name: 'outlet-users',
+          name: "outlet-users",
           title: "Daftar Pengguna Outlet",
           url: "/outlets/users",
-        }
-      ]
+        },
+      ],
     },
     {
-      name: 'master-data',
+      name: "master-data",
       title: "Master Data",
       url: "/master/categories",
       icon: BiSolidCategory,
       childs: [
         {
-          name: 'master-category',
+          name: "master-category",
           title: "Kategori",
           url: "/master/categories",
         },
         {
-          name: 'master-brand',
+          name: "master-brand",
           title: "Brand",
           url: "/master/brands",
         },
         {
-          name: 'master-stock-move-type',
+          name: "master-stock-move-type",
           title: "Jenis Perpindahan Stok",
           url: "/master/movements",
         },
-      ]
+      ],
     },
     {
-      name: 'sub-accounts',
+      name: "sub-accounts",
       title: "Manajemen Pengguna",
       url: "/users/",
       icon: HiUser,
       childs: [
         {
-          name: 'user-sub-accounts',
+          name: "user-sub-accounts",
           title: "Daftar Pengguna",
           url: "/users/sub-accounts",
         },
         {
-          name: 'user-roles',
+          name: "user-roles",
           title: "Daftar Hak Akses",
           url: "/users/roles",
         },
-      ]
-    }
+      ],
+    },
     // {
     //   name: 'sub-accounts',
     //   title: "Daftar Pengguna",
     //   url: "/sub-accounts",
     //   icon: HiUser
     // }
-  ]
+  ];
 
   return (
     <Sidebar
@@ -204,27 +205,44 @@ export const DashboardSidebar: FC = function () {
     >
       <Sidebar.Items>
         <Sidebar.ItemGroup>
-
           {menus.map((menu, idx) => {
             if (menu?.childs && menu?.childs?.length > 0) {
-              const findActiveMenu = menu.childs.filter((c) => c.url === pathname)
+              const findActiveMenu = menu.childs.filter(
+                (c) => c.url === pathname,
+              );
 
               return (
-                <Sidebar.Collapse key={idx} icon={menu.icon} href={menu.url} label={menu.title} open={findActiveMenu.length > 0 ? true : false}>
-                  {menu?.childs?.map((sub, i) => <Sidebar.Item key={i} href={sub.url} active={sub.url === pathname}>{sub.title}</Sidebar.Item>)}
+                <Sidebar.Collapse
+                  key={idx}
+                  icon={menu.icon}
+                  href={menu.url}
+                  label={menu.title}
+                  open={findActiveMenu.length > 0 ? true : false}
+                >
+                  {menu?.childs?.map((sub, i) => (
+                    <Sidebar.Item
+                      key={i}
+                      href={sub.url}
+                      active={sub.url === pathname}
+                    >
+                      {sub.title}
+                    </Sidebar.Item>
+                  ))}
                 </Sidebar.Collapse>
-              )
+              );
             } else {
               return (
-                <Sidebar.Item key={idx} href={menu.url} icon={menu.icon} active={pathname === menu.url}>
+                <Sidebar.Item
+                  key={idx}
+                  href={menu.url}
+                  icon={menu.icon}
+                  active={pathname === menu.url}
+                >
                   {menu.title}
                 </Sidebar.Item>
-              )
+              );
             }
-
           })}
-
-
         </Sidebar.ItemGroup>
         {/* <Sidebar.ItemGroup>
           <Sidebar.Item href="#" icon={HiChartPie}>

@@ -1,28 +1,63 @@
-import type { Config } from 'tailwindcss'
+import type { Config } from "tailwindcss";
 
 const config: Config = {
   content: [
-    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
-    './node_modules/flowbite-react/lib/**/*.js',
+    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./node_modules/flowbite-react/lib/**/*.js",
   ],
   theme: {
     extend: {
       colors: {
         primary: {
-          50: 'rgb(245,243,255)',
-          100: 'rgb(237,233,254)',
-          200: 'rgb(221,214,254)',
-          300: 'rgb(196,181,253)',
-          400: 'rgb(167,139,250)',
-          500: 'rgb(139,92,246)',
-          600: 'rgb(124,58,237)',
-          700: 'rgb(109,40,217)',
-          800: 'rgb(91,33,182)',
-          900: 'rgb(76,29,149)',
-          950: 'rgb(46,16,101)', 
+          50: "rgb(245,243,255)",
+          100: "rgb(237,233,254)",
+          200: "rgb(221,214,254)",
+          300: "rgb(196,181,253)",
+          400: "rgb(167,139,250)",
+          500: "rgb(139,92,246)",
+          600: "rgb(124,58,237)",
+          700: "rgb(109,40,217)",
+          800: "rgb(91,33,182)",
+          900: "rgb(76,29,149)",
+          950: "rgb(46,16,101)",
+          foreground: "hsl(var(--primary-foreground))",
         },
+        border: "rgba(0,0,0,0.1 )",
+        input: "hsl(var(--input))",
+        ring: "hsl(var(--ring))",
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
+        secondary: {
+          DEFAULT: "hsl(var(--secondary))",
+          foreground: "hsl(var(--secondary-foreground))",
+        },
+        destructive: {
+          DEFAULT: "hsl(var(--destructive))",
+          foreground: "hsl(var(--destructive-foreground))",
+        },
+        muted: {
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))",
+        },
+        accent: {
+          DEFAULT: "hsl(var(--accent))",
+          foreground: "hsl(var(--accent-foreground))",
+        },
+        popover: {
+          DEFAULT: "hsl(var(--popover))",
+          foreground: "hsl(var(--popover-foreground))",
+        },
+        card: {
+          DEFAULT: "hsl(var(--card))",
+          foreground: "hsl(var(--card-foreground))",
+        },
+      },
+      borderRadius: {
+        lg: "var(--radius)",
+        md: "calc(var(--radius) - 2px)",
+        sm: "calc(var(--radius) - 4px)",
       },
       fontFamily: {
         sans: [
@@ -72,8 +107,6 @@ const config: Config = {
       },
     },
   },
-  plugins: [
-    require('flowbite/plugin'),
-  ],
-}
-export default config
+  plugins: [require("flowbite/plugin")],
+};
+export default config;

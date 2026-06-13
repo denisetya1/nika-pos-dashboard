@@ -124,6 +124,12 @@ const ProductStock = async ({
                   scope="col"
                   className="hidden sm:table-cell px-4 py-5 hover:bg-gray-200"
                 >
+                  <SortableHeader title="HPP" fieldName="cogs" />
+                </th>
+                <th
+                  scope="col"
+                  className="hidden sm:table-cell px-4 py-5 hover:bg-gray-200"
+                >
                   <SortableHeader title="Harga" fieldName="sellPrice" />
                 </th>
                 <th
@@ -171,7 +177,7 @@ const ProductStock = async ({
                   className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700"
                 >
                   <td className="px-4 py-3 w-10 align-top">{index + 1}</td>
-                  <td className="px-4 py-3 w-80 text-black dark:text-white">
+                  <td className="px-4 py-3 w-80 text-black dark:text-white  align-top">
                     <div>{product.name}</div>
                     <div className="flex justify-start items-center gap-4 text-gray-500 text-xs align-top">
                       {/* <div>sku: {product.sku === '' || product.sku === null ? '-' : product.sku}</div> */}
@@ -189,6 +195,11 @@ const ProductStock = async ({
                   </td>
                   <td className="hidden sm:table-cell px-4 py-3 align-top">
                     {product.category.name} / {product.brand.name}
+                  </td>
+                  <td className="hidden sm:table-cell px-4 py-3 align-top">
+                    {product.stocks.length > 0
+                      ? formatCurrency(Number(product.stocks[0]?.cogs))
+                      : "-"}
                   </td>
                   <td className="px-4 py-3 align-top">
                     <div className="flex justify-end items-start align-top gap-2">
@@ -264,7 +275,7 @@ const ProductStock = async ({
                         )}
                     </div>
                   </td>
-                  <td className="px-4 py-3 text-center">
+                  <td className="px-4 py-3 text-center align-top">
                     <div className="flex justify-center items-center">
                       <div className="border-[1px] border-gray-200 rounded-l-lg overflow-hidden">
                         <StockMovementForm

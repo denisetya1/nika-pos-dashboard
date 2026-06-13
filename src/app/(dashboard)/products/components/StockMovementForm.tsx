@@ -1,28 +1,39 @@
-'use client';
+"use client";
 
 import { useAlertContext } from "@/context/alert/AlertContext";
 import { useToastContext } from "@/context/toast/ToastContext";
 import { MoveType, Outlet, Prisma, ProductStock } from "@prisma/client";
-import { Button, Datepicker, Label, Modal, Select, TextInput, Textarea, Tooltip } from "flowbite-react";
+import {
+  Button,
+  Datepicker,
+  Label,
+  Modal,
+  Select,
+  TextInput,
+  Textarea,
+  Tooltip,
+} from "flowbite-react";
 import moment from "moment";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { useForm, SubmitHandler } from 'react-hook-form';
+import { useForm, SubmitHandler } from "react-hook-form";
 
 type Product = Prisma.ProductGetPayload<{
-  include: { brand: true, category: true, stocks: true }
-}>
+  include: { brand: true; category: true; stocks: true };
+}>;
 
 type FormValues = {
-  quantity: String
-  moveTypeId: String
-  description: String
-  outletId: String
-  productId: String
-  productStockId: String
-  direction: String
-  moveDate: String
-}
+  quantity: String;
+  moveTypeId: String;
+  description: String;
+  outletId: String;
+  productId: String;
+  productStockId: String;
+  direction: String;
+  moveDate: String;
+  cogs: String;
+  expiredDate: String;
+};
 
 const StockMovementForm = ({
   outlet,
@@ -31,84 +42,102 @@ const StockMovementForm = ({
   movements,
   productStock,
   disabled,
-  currentQuantity
-}:
-  {
-    outlet: Outlet
-    product: Product
-    direction: string
-    currentQuantity: number
-    movements: MoveType[]
-    productStock?: ProductStock
-    disabled?: boolean
-  }) => {
-  const router = useRouter()
-  const [isOpen, setOpen] = useState(false)
-  const [moveDateStr, setMoveDateStr] = useState(moment().format('YYYY-MM-D'))
-  const { setToast } = useToastContext()
+  currentQuantity,
+}: {
+  outlet: Outlet;
+  product: Product;
+  direction: string;
+  currentQuantity: number;
+  movements: MoveType[];
+  productStock?: ProductStock;
+  disabled?: boolean;
+}) => {
+  const router = useRouter();
+  const [isOpen, setOpen] = useState(false);
+  const [moveDateStr, setMoveDateStr] = useState(moment().format("YYYY-MM-D"));
+  const [expiredDateStr, setExpiredDateStr] = useState("");
+  const { setToast } = useToastContext();
 
   const formOptions = {
     defaultValues: {
       outletId: outlet.id.toString(),
       productId: product.id.toString(),
-      productStockId: productStock ? productStock.id.toString() : '',
-      direction
-    }
-  }
+      productStockId: productStock ? productStock.id.toString() : "",
+      direction,
+    },
+  };
 
   movements = movements.filter((m) => m.direction === direction);
 
-  const { register, handleSubmit, reset, control } = useForm<FormValues>(formOptions);
+  const { register, handleSubmit, reset, control } =
+    useForm<FormValues>(formOptions);
 
   const SubmitForm: SubmitHandler<FormValues> = async (formData) => {
-    const body = formData
+    const body = formData;
 
     try {
-      const res = await fetch(`/api/products/${product.id}/${outlet.id}/stock`, {
-        method: 'POST',
-        body: JSON.stringify({
-          ...body,
-          moveDateStr
-        })
-      })
+      const res = await fetch(
+        `/api/products/${product.id}/${outlet.id}/stock`,
+        {
+          method: "POST",
+          body: JSON.stringify({
+            ...body,
+            moveDateStr,
+            expiredDateStr,
+          }),
+        },
+      )
         .then((res) => res.json())
-        .then(resJson => setToast({
-          content: "Ubah Stok berhasil tersimpan.",
-          type: "success"
-        }))
+        .then((resJson) =>
+          setToast({
+            content: "Ubah Stok berhasil tersimpan.",
+            type: "success",
+          }),
+        );
 
-      reset({ ...formOptions.defaultValues })
-      router.refresh()
-      setOpen(false)
-
+      reset({ ...formOptions.defaultValues });
+      router.refresh();
+      setOpen(false);
     } catch (e: any) {
       setToast({
         content: e.message,
-        type: "failure"
-      })
+        type: "failure",
+      });
     }
-  }
+  };
 
   useEffect(() => {
     if (productStock !== undefined) {
-      reset({ ...formOptions.defaultValues })
+      reset({ ...formOptions.defaultValues });
     }
-
-  }, [productStock])
+  }, [productStock]);
 
   return (
     <>
-      <Tooltip content={direction === 'IN' ? 'Penambahan Stok' : 'Pengurangan Stok'} placement="bottom" style="light">
-        <button className={`w-full h-full block py-2 px-4 ${disabled ? 'text-gray-300' : ' hover:bg-gray-200'}`} disabled={disabled} onClick={() => setOpen(true)}>{direction === 'IN' ? "+" : "-"}</button>
+      <Tooltip
+        content={direction === "IN" ? "Penambahan Stok" : "Pengurangan Stok"}
+        placement="bottom"
+        style="light"
+      >
+        <button
+          className={`w-full h-full block py-2 px-4 ${disabled ? "text-gray-300" : " hover:bg-gray-200"}`}
+          disabled={disabled}
+          onClick={() => setOpen(true)}
+        >
+          {direction === "IN" ? "+" : "-"}
+        </button>
       </Tooltip>
 
       <Modal show={isOpen} onClose={() => setOpen(false)}>
         <form onSubmit={handleSubmit(SubmitForm)}>
-          <Modal.Header>{direction === 'IN' ? 'PENAMBAHAN STOK (STOK MASUK)' : 'PENGURANGAN STOK (STOK KELUAR)'}</Modal.Header>
+          <Modal.Header>
+            {direction === "IN"
+              ? "PENAMBAHAN STOK (STOK MASUK)"
+              : "PENGURANGAN STOK (STOK KELUAR)"}
+          </Modal.Header>
           <Modal.Body className="dark:text-gray-300 max-h-[400px] overflow-auto">
             <div className="space-y-6">
               <div className="grid gap-4 mb-4 grid-cols-2">
-
                 <div className="col-span-2">
                   <div className="mb-2 block">
                     <Label htmlFor="input-gray" color="gray" value="Outlet" />
@@ -118,10 +147,18 @@ const StockMovementForm = ({
 
                 <div className="col-span-2">
                   <div className="mb-2 block">
-                    <Label htmlFor="input-gray" color="gray" value="Nama Produk" />
+                    <Label
+                      htmlFor="input-gray"
+                      color="gray"
+                      value="Nama Produk"
+                    />
                   </div>
-                  <TextInput id="input-gray" name="name" value={product.name} disabled />
-
+                  <TextInput
+                    id="input-gray"
+                    name="name"
+                    value={product.name}
+                    disabled
+                  />
                 </div>
 
                 <div className="col-span-2">
@@ -134,42 +171,100 @@ const StockMovementForm = ({
                     labelTodayButton="Hari Ini"
                     labelClearButton="Batal"
                     weekStart={1}
-                    onSelectedDateChanged={(d) => setMoveDateStr(moment(d).format('YYYY-MM-D'))}
-                    defaultDate={new Date(moment().format())}
-                    minDate={new Date(moment().subtract(4, 'days').format())}
-                  />
-
-                </div>
-
-                <div className="col-span-2">
-                  <div className="mb-2 block">
-                    <Label htmlFor="input-gray" color="gray" value="Jumlah" />
-                  </div>
-                  <TextInput className="w-[100px]" min={1} max={direction === 'OUT' ? currentQuantity : 999999999} type="number" {...register('quantity')} placeholder=""
-                    helperText={
-                      <>
-                        stok tersedia: {currentQuantity}
-                      </>
+                    onSelectedDateChanged={(d) =>
+                      setMoveDateStr(moment(d).format("YYYY-MM-D"))
                     }
+                    defaultDate={new Date(moment().format())}
+                    minDate={new Date(moment().subtract(4, "days").format())}
                   />
+                </div>
+
+                <div className="flex w-[330px] justify-between">
+                  <div className="col-span-2">
+                    <div className="mb-2 block">
+                      <Label htmlFor="input-gray" color="gray" value="Jumlah" />
+                    </div>
+                    <TextInput
+                      className="w-[100px]"
+                      min={1}
+                      max={direction === "OUT" ? currentQuantity : 999999999}
+                      type="number"
+                      {...register("quantity")}
+                      placeholder=""
+                      helperText={<>stok tersedia: {currentQuantity}</>}
+                    />
+                  </div>
+
+                  {direction === "IN" && (
+                    <div className="col-span-2">
+                      <div className="mb-2 block">
+                        <Label htmlFor="input-gray" color="gray" value="HPP" />
+                      </div>
+                      <TextInput
+                        className="w-[160px]"
+                        min={0}
+                        type="number"
+                        {...register("cogs")}
+                        placeholder=""
+                      />
+                    </div>
+                  )}
                 </div>
 
                 <div className="col-span-2">
                   <div className="mb-2 block">
-                    <Label htmlFor="input-gray" color="gray" value={`Jenis ${direction === 'IN' ? 'Penambahan' : 'Pengurangan'} Stok`} />
+                    <Label
+                      htmlFor="input-gray"
+                      color="gray"
+                      value={`Jenis ${direction === "IN" ? "Penambahan" : "Pengurangan"} Stok`}
+                    />
                   </div>
-                  <Select {...register('moveTypeId')}>
-                    {movements.map((movement) => <option key={movement.id} value={movement.id.toString()}>{movement.name}</option>)}
+                  <Select {...register("moveTypeId")}>
+                    {movements.map((movement) => (
+                      <option key={movement.id} value={movement.id.toString()}>
+                        {movement.name}
+                      </option>
+                    ))}
                   </Select>
                 </div>
 
+                {direction === "IN" && (
+                  <div className="col-span-2">
+                    <div className="mb-2 block">
+                      <Label
+                        htmlFor="input-gray"
+                        color="gray"
+                        value="Tanggal Expired"
+                      />
+                    </div>
+
+                    <Datepicker
+                      language="en-ID"
+                      labelTodayButton="Hari Ini"
+                      labelClearButton="Batal"
+                      weekStart={1}
+                      onSelectedDateChanged={(d) =>
+                        setExpiredDateStr(moment(d).format("YYYY-MM-D"))
+                      }
+                      minDate={new Date(moment().format())}
+                    />
+                  </div>
+                )}
+
                 <div className="col-span-2">
                   <div className="mb-2 block">
-                    <Label htmlFor="input-gray" color="gray" value="Keterangan" />
+                    <Label
+                      htmlFor="input-gray"
+                      color="gray"
+                      value="Keterangan"
+                    />
                   </div>
-                  <Textarea className="" {...register('description')} placeholder="" />
+                  <Textarea
+                    className=""
+                    {...register("description")}
+                    placeholder=""
+                  />
                 </div>
-
               </div>
               <input type="hidden" {...register("direction")} />
             </div>
@@ -183,7 +278,7 @@ const StockMovementForm = ({
         </form>
       </Modal>
     </>
-  )
-}
+  );
+};
 
-export default StockMovementForm
+export default StockMovementForm;
