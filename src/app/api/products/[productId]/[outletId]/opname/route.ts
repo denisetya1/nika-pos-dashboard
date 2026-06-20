@@ -131,15 +131,6 @@ export const GET = async (
         },
       },
     });
-    console.log("moveStock", {
-      where: {
-        productId: productId,
-        createdAt: {
-          gte: new Date(startDate),
-          lte: new Date(endDate),
-        },
-      },
-    });
 
     if (moveStock) {
       moveStock.map((move) => {
