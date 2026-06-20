@@ -173,7 +173,7 @@ model Product {
   updatedAt            DateTime?             @updatedAt @map("updated_at")
   deletedAt            DateTime?             @map("deleted_at")
   updateBy             String?               @default("") @map("updated_by")
-  productType          String?               @default("PRODUCT") @db.VarChar(100) @map("product_type")
+  productType          String?               @default("PRODUCT") @map("product_type") @db.VarChar(100)
   stocks               ProductStock[]
   brand                Brand                 @relation(fields: [brandId], references: [id])
   category             Category              @relation(fields: [categoryId], references: [id])
@@ -251,7 +251,7 @@ model ProductStock {
   updatedAt          DateTime?       @updatedAt @map("updated_at")
   deletedAt          DateTime?       @map("deleted_at")
   updateBy           String?         @default("") @map("updated_by")
-  cogs               Decimal?        @db.Decimal(10, 2)
+  cogs               Decimal         @default(0.00) @db.Decimal(10, 2)
   Outlet             Outlet          @relation(fields: [outletId], references: [id])
   product            Product         @relation(fields: [productId], references: [id])
   store              Store           @relation(fields: [storeId], references: [id])
@@ -543,6 +543,14 @@ model TestTransaction {
   updatedAt     DateTime? @updatedAt @map("updated_at")
   deletedAt     DateTime? @map("deleted_at")
   updateBy      String?   @default("") @map("updated_by")
+}
+
+model Barcode {
+  id        BigInt  @id @default(autoincrement())
+  productId BigInt  @map("product_id")
+  barcode   String? @db.VarChar(100)
+
+  @@map("barcodes")
 }
 
 enum DirectionEnum {

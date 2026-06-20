@@ -12,6 +12,7 @@ import { getOutletList } from "@/actions/Outlets";
 import StockTransferForm from "../components/StockTransferForm";
 import StockOpnameModal from "../components/StockOpnameModal";
 import { Suspense } from "react";
+import PrintBarcodeModal from "../components/PrintBarcodeModal";
 
 type Product = Prisma.ProductGetPayload<{
   include: { brand: true; category: true; stocks: true };
@@ -334,6 +335,8 @@ const ProductStock = async ({
                       currentQuantity={product.stocks[0]?.quantity}
                       productStock={product.stocks[0]}
                     />
+
+                    <PrintBarcodeModal product={product} />
                   </td>
                 </tr>
               ))}

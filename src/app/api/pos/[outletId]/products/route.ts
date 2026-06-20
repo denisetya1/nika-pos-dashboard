@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/client";
-import { isEmptyVal } from "@/lib/functions";
+import { getFinalPrice, isEmptyVal } from "@/lib/functions";
 import { verifyJwt } from "@/lib/jwt";
 
 export const GET = async (
@@ -124,8 +124,28 @@ export const GET = async (
       },
     });
 
+    productsStocks[0] = productsStocks[0].map((productStok) => {
+      return {
+        ...productStok,
+        finalPrice:
+          productStok.product.productType === "DISCOUNT_PERCENT"
+            ? productStok.sellPrice
+            : getFinalPrice(
+                Number(productStok.sellPrice),
+                productStok.markupPercentage,
+                productStok.discountPercentage,
+                true,
+                false,
+              ),
+      };
+    });
+
+    console.log(productsStocks[0]);
+
     productsStocks.push(page);
     productsStocks.push(limit);
+
+    //console.log(JSON.stringify(productsStocks));
 
     return NextResponse.json({
       code: "SUCCESS",
