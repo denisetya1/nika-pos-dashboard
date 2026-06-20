@@ -12,7 +12,7 @@ const PrintBarcodeModal = ({
   disabled = false,
 }: {
   product: Product;
-  disabled: boolean;
+  disabled?: boolean;
 }) => {
   const [isOpen, setOpen] = useState(false);
   const componentRef = useRef(null);
