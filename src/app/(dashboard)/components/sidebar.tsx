@@ -71,6 +71,11 @@ export const DashboardSidebar: FC = function () {
           title: "Stok & Harga",
           url: "/products/stocks",
         },
+        // {
+        //   name: "product-discount",
+        //   title: "Diskon",
+        //   url: "/products/discounts",
+        // },
         {
           name: "prints",
           title: "Cetak Harga",

@@ -17,13 +17,13 @@ class BarcodePrintComponent extends React.Component<MyProps> {
     return (
       <div className="w-[150px] flex flex-col items-center justify-center text-center p-[4px]">
         <div className="w-full text-[9px] text-left z-10 capitalize px-[4px]">
-          {this.props.product.name.substring(0, 18).toLowerCase()}
+          {this.props.product.name.substring(0, 30).toLowerCase()}
         </div>
         <div className="mt-[-10px]">
           {this.props.product.barcode !== null &&
             this.props.product.barcode !== "" && (
               <Barcode
-                height={19}
+                height={22}
                 width={1}
                 displayValue={false}
                 value={this.props.product.barcode}
