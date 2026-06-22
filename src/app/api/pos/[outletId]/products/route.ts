@@ -140,8 +140,6 @@ export const GET = async (
       };
     });
 
-    console.log(productsStocks[0]);
-
     productsStocks.push(page);
     productsStocks.push(limit);
 

@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/lib/client";
 import moment from "moment";
 import { dateUTC } from "@/lib/functions";
+import { getSessionData } from "@/actions/Sessions";
 
 export const POST = async (
   request: Request,
@@ -14,6 +15,7 @@ export const POST = async (
     };
   },
 ) => {
+  const session = await getSessionData();
   const { productId, outletId } = params;
   const body = await request.json();
   const {
@@ -58,6 +60,7 @@ export const POST = async (
           body.direction === "IN" ? Number(quantity) : -1 * Number(quantity),
       },
       cogs: Number(cogs),
+      updateBy: session?.user.username,
       stockMovements: {
         create: {
           moveDate: dateUTC(moveDateStr),
@@ -71,6 +74,7 @@ export const POST = async (
           cogs: Number(cogs),
           endQuantity,
           description: description,
+          updateBy: session?.user.username,
         },
       },
     },
@@ -86,6 +90,7 @@ export const POST = async (
       discountPercentage: 0,
       isActive: true,
       cogs: Number(cogs),
+      updateBy: session?.user.username,
       stockMovements: {
         create: {
           moveDate: dateUTC(moveDateStr),
@@ -99,6 +104,7 @@ export const POST = async (
           cogs: Number(cogs),
           endQuantity,
           description: description,
+          updateBy: session?.user.username,
         },
       },
     },

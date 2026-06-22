@@ -21,7 +21,7 @@ export const GET = async (
   if (accessToken && userData) {
     const { outletId } = params;
 
-    const discounts = await prisma.discount.findManyAndCount({
+    const discounts = await prisma.discount.findMany({
       where: {
         outletId: Number(outletId),
         isActive: true,
@@ -45,7 +45,7 @@ export const GET = async (
     return NextResponse.json({
       code: "SUCCESS",
       message: "",
-      data: discounts,
+      data: [...discounts, ...discounts, ...discounts],
     });
   } else {
     return NextResponse.json(

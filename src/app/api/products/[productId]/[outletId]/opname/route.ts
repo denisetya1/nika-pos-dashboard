@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/client";
 import moment from "moment";
 import { history } from "@/types/common";
+import { getSessionData } from "@/actions/Sessions";
 
 export const GET = async (
   request: NextRequest,
@@ -14,7 +15,10 @@ export const GET = async (
     };
   },
 ) => {
-  const { productId, outletId } = params;
+  const session = await getSessionData();
+  const { productId } = params;
+
+  const outletId = session?.user.outletId;
 
   const stock = await prisma.productStock.findFirst({
     where: {
