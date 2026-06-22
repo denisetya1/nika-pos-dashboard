@@ -107,6 +107,7 @@ export const GET = async (
       where: {
         productStock: {
           productId: Number(productId),
+          outletId: Number(outletId),
         },
         createdAt: {
           gte: new Date(startDate),
