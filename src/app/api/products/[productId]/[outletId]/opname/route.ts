@@ -103,6 +103,14 @@ export const GET = async (
       });
     }
 
+    console.log(
+      "asdsa",
+      productId,
+      outletId,
+      startDate,
+      moment(endDate).add(1, "d").format("YYYY-MM-DD"),
+    );
+
     let moveStock = await prisma.stockMovement.findMany({
       where: {
         productStock: {
@@ -111,7 +119,7 @@ export const GET = async (
         },
         createdAt: {
           gte: new Date(startDate),
-          lte: new Date(endDate),
+          lt: new Date(moment(endDate).add(1, "d").format("YYYY-MM-DD")),
         },
       },
       select: {
