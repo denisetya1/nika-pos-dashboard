@@ -1,44 +1,51 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/client";
 import moment from "moment";
+import { getSessionData } from "@/actions/Sessions";
 
+export const GET = async (req: NextRequest) => {
+  const session = await getSessionData();
 
-export const GET = async (req: NextRequest) =>  {
-  const outletId = req.nextUrl.searchParams.get('outletId');
-  const date = req.nextUrl.searchParams.get('date') || moment().format('YYYY-MM-DD');
-  const online = req.nextUrl.searchParams.get('online') || false;
+  const outletId = session?.user.outletId;
+  const date =
+    req.nextUrl.searchParams.get("date") || moment().format("YYYY-MM-DD");
+  const online = req.nextUrl.searchParams.get("online") || false;
 
-  const startDate = new Date(date)
-  const endDate = new Date(`${moment(date).add(1, "day").format('YYYY-MM-DD')} 07:00:00`)
+  const startDate = new Date(date);
+  const endDate = new Date(
+    `${moment(date).add(1, "day").format("YYYY-MM-DD")} 07:00:00`,
+  );
 
   const transactions = await prisma.transaction.findMany({
     where: {
       outletId: Number(outletId),
       transactionTime: {
         gte: startDate,
-        lte: endDate
+        lte: endDate,
       },
-      ...(online ? {outletPaymentMethod: {paymentMethodId: 4} } : {outletPaymentMethod: {paymentMethodId: { not: 4}} })
+      ...(online
+        ? { outletPaymentMethod: { paymentMethodId: 4 } }
+        : { outletPaymentMethod: { paymentMethodId: { not: 4 } } }),
     },
     orderBy: {
-      transactionTime: 'asc'
+      transactionTime: "asc",
     },
     include: {
       user: true,
       userShift: {
         include: {
-          shift: true
-        }
+          shift: true,
+        },
       },
       transactionDetails: true,
       outlet: true,
       outletPaymentMethod: {
         include: {
-          paymentMethod: true
-        }
-      }
-    }
-  })
+          paymentMethod: true,
+        },
+      },
+    },
+  });
 
   return NextResponse.json(transactions);
-}
+};
