@@ -28,6 +28,10 @@ export const POST = async (
     cogs,
   } = body;
 
+  console.log("outletId", outletId);
+
+  let _cogs = cogs || 0;
+
   const stock = await prisma.productStock.findFirst({
     where: {
       storeId: 1,
@@ -42,8 +46,12 @@ export const POST = async (
   if (stock !== null) {
     startQuantity = stock.quantity;
 
-    if (body.direction === "IN") endQuantity = startQuantity + Number(quantity);
-    else endQuantity = startQuantity - Number(quantity);
+    if (body.direction === "IN") {
+      endQuantity = startQuantity + Number(quantity);
+    } else {
+      _cogs = 0;
+      endQuantity = startQuantity - Number(quantity);
+    }
   }
 
   const updateStock = await prisma.productStock.upsert({
@@ -59,7 +67,7 @@ export const POST = async (
         increment:
           body.direction === "IN" ? Number(quantity) : -1 * Number(quantity),
       },
-      cogs: Number(cogs),
+      cogs: Number(_cogs),
       updateBy: session?.user.username,
       stockMovements: {
         create: {
@@ -71,7 +79,7 @@ export const POST = async (
           direction: direction,
           startQuantity,
           quantity: Number(quantity),
-          cogs: Number(cogs),
+          cogs: Number(_cogs),
           endQuantity,
           description: description,
           updateBy: session?.user.username,
@@ -89,7 +97,7 @@ export const POST = async (
       markupPercentage: 0,
       discountPercentage: 0,
       isActive: true,
-      cogs: Number(cogs),
+      cogs: Number(_cogs),
       updateBy: session?.user.username,
       stockMovements: {
         create: {
@@ -101,7 +109,7 @@ export const POST = async (
           direction: direction,
           startQuantity,
           quantity: Number(quantity),
-          cogs: Number(cogs),
+          cogs: Number(_cogs),
           endQuantity,
           description: description,
           updateBy: session?.user.username,
