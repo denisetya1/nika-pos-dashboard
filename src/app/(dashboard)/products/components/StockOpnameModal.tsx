@@ -6,9 +6,8 @@ import { useQuery } from "@tanstack/react-query";
 import { Button, Modal, Tooltip } from "flowbite-react";
 import moment from "moment";
 import { useEffect, useRef, useState } from "react";
-import DatePicker from "react-datepicker";
 import { LuHistory } from "react-icons/lu";
-import { DateRangePicker } from "rsuite";
+import { Datepicker } from "flowbite-react";
 
 type Product = Prisma.ProductGetPayload<{
   include: { brand: true; category: true; stocks: true };
@@ -39,11 +38,10 @@ const StockOpnameModal = ({
   disabled?: boolean;
 }) => {
   const [isOpen, setOpen] = useState(false);
-  const [dateRange, setDateRange] = useState<(Date | null)[]>([
+  const [startDate, setStartDate] = useState(
     new Date(moment().subtract(30, "days").format("YYYY-MM-DD")),
-    new Date(moment().format("YYYY-MM-DD")),
-  ]);
-  const [startDate, endDate] = dateRange;
+  );
+  const [endDate, setEndDate] = useState(new Date());
   const [totalIn, setTotalIn] = useState(0);
   const [totalOut, setTotalOut] = useState(0);
 
@@ -68,6 +66,7 @@ const StockOpnameModal = ({
       }
     },
   });
+
   useEffect(() => {
     if (data) {
       let countIn = 0;
@@ -111,17 +110,26 @@ const StockOpnameModal = ({
 
           <div>
             <div>Pilih Tanggal: </div>
-            <DatePicker
-              selectsRange={true}
-              startDate={startDate || undefined}
-              endDate={endDate || undefined}
-              onChange={(update) => {
-                setDateRange(update);
-              }}
-              isClearable={true}
-              className="border-[1px] border-slate-300 p-[10px] pr-5 rounded-lg w-[260px] bg-slate-50 text-sm"
-              dateFormat="d MMM Y"
-            />
+            <div className="flex flex-row gap-4 justify-start items-center">
+              <Datepicker
+                language="en-ID"
+                labelTodayButton="Hari Ini"
+                labelClearButton="Batal"
+                defaultDate={startDate}
+                weekStart={1}
+                onSelectedDateChanged={(d) => setStartDate(d)}
+              />{" "}
+              <div>-</div>
+              <Datepicker
+                language="en-ID"
+                labelTodayButton="Hari Ini"
+                labelClearButton="Batal"
+                defaultDate={endDate}
+                minDate={startDate}
+                weekStart={1}
+                onSelectedDateChanged={(d) => setEndDate(d)}
+              />
+            </div>
           </div>
 
           {isLoading && (

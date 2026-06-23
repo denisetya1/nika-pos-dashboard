@@ -70,9 +70,17 @@ export const POST = async (req: NextRequest) => {
 
   const userData = verifyJwt(accessToken);
 
-  if (accessToken && userData) {
+  if (!accessToken || !userData) {
+    return NextResponse.json(
+      { code: "UNAUTHORIZED", message: "Unauthorized Error!", data: null },
+      { status: 401 },
+    );
+  }
+
+  try {
     const body = await req.json();
 
+    // 1. FILTER UNTUK TEST PRODUCT
     const testProduct = body.transactionDetails.filter((p: any) =>
       p.name.toLowerCase().includes("test product"),
     );
@@ -86,42 +94,19 @@ export const POST = async (req: NextRequest) => {
       });
       return NextResponse.json({
         code: "SUCCESS",
-        message: "",
+        message: "Test transaction saved.",
         data: body,
       });
     }
 
-    const checkTransaction = await prisma.transaction.findUnique({
-      where: {
-        id: body.id,
-      },
-    });
-
-    if (checkTransaction) {
-      return NextResponse.json(
-        {
-          code: "DATA_IS_EXISTS",
-          message: "Nomor transaksi sudah ada!",
-          data: body,
-        },
-        {
-          status: 400,
-        },
-      );
-    }
-
-    //CHEK RESI FOR MARKETPLACE
+    // 2. CHECK RESI FOR MARKETPLACE (Pre-check di luar transaksi untuk menghemat resource)
     const paymentMethod = await prisma.outletPaymentMethod.findUnique({
-      where: {
-        id: Number(body.outletPaymentMethodId),
-      },
+      where: { id: Number(body.outletPaymentMethodId) },
     });
 
     if (paymentMethod && paymentMethod.paymentMethodId === 4) {
       const checkResi = await prisma.transaction.findFirst({
-        where: {
-          confirmNumber: body.confirmNumber,
-        },
+        where: { confirmNumber: body.confirmNumber },
       });
 
       if (checkResi) {
@@ -131,112 +116,182 @@ export const POST = async (req: NextRequest) => {
             message: "Nomor Resi sudah ada!",
             data: body,
           },
-          {
-            status: 400,
-          },
+          { status: 400 },
         );
       }
     }
 
-    const transaction = await prisma.transaction.create({
-      data: {
-        id: body.id,
-        outlet: {
-          connect: {
-            id: body.outletId,
+    // ===================================================
+    // 3. JALANKAN PRISMA $TRANSACTION (SAFE & ACID)
+    // ===================================================
+    const finalTransaction = await prisma.$transaction(async (tx) => {
+      // A. Amankan Double Submit (Pindahkan check ID ke dalam transaksi agar terkena DB lock)
+      const checkTransactionInner = await tx.transaction.findUnique({
+        where: { id: body.id },
+      });
+
+      if (checkTransactionInner) {
+        throw new Error("TRANSACTION_ALREADY_EXISTS");
+      }
+
+      // B. Validasi Stok Terlebih Dahulu Sebelum Dikurangi
+      for (const item of body.transactionDetails) {
+        const currentStock = await tx.productStock.findUnique({
+          where: { id: item.productStockId },
+        });
+
+        if (!currentStock) {
+          throw new Error(`PRODUCT_STOCK_NOT_FOUND:${item.name}`);
+        }
+
+        if (currentStock.quantity < Number(item.qty)) {
+          throw new Error(`INSUFFICIENT_STOCK:${item.name}`);
+        }
+      }
+
+      // C. Sanitasi & Mapping Data Details (Pastikan tipe data angka valid)
+      const sanitizedDetails = body.transactionDetails.map((dt: any) => {
+        const {
+          productId,
+          categoryId,
+          brandId,
+          qty,
+          sellPrice,
+          discountPercentage,
+          markupPercentage,
+          discountAmount,
+          finalSellPrice,
+          total,
+          totalDiscount,
+          ...rest
+        } = dt;
+
+        return {
+          productStockId: dt.productStockId,
+          productId: Number(productId),
+          categoryId: Number(categoryId),
+          brandId: Number(brandId),
+          qty: Number(qty),
+          sellPrice: Number(sellPrice),
+          discountPercentage: Number(discountPercentage),
+          markupPercentage: Number(markupPercentage),
+          discountAmount: Number(discountAmount),
+          finalSellPrice: Number(finalSellPrice),
+          total: Number(total),
+          totalDiscount: Number(totalDiscount),
+          ...rest,
+        };
+      });
+
+      // D. Buat Transaksi Utama
+      const transaction = await tx.transaction.create({
+        data: {
+          id: body.id,
+          storeId: body.storeId,
+          cardNumber: body.cardNumber,
+          confirmNumber: body.confirmNumber,
+          transactionTime: body.transactionTime,
+          totalItem: Number(body.totalItem),
+          totalPrice: Number(body.totalPrice),
+          subTotal: Number(body.subTotal),
+          totalDiscount: Number(body.totalDiscount),
+          amountPaid: Number(body.amountPaid),
+          amountChange: Number(body.amountChange),
+          outlet: { connect: { id: body.outletId } },
+          user: { connect: { id: body.userId } },
+          userShift: { connect: { id: body.userShiftId } },
+          outletPaymentMethod: { connect: { id: body.outletPaymentMethodId } },
+          transactionDetails: {
+            createMany: { data: sanitizedDetails },
           },
         },
-        storeId: body.storeId,
-        user: {
-          connect: {
-            id: body.userId,
+        include: { transactionDetails: true },
+      });
+
+      // E. Simpan Diskon Transaksi (Jika ada)
+      if (body.discountData) {
+        const { id, maxAmount, ...discountData } = body.discountData;
+        await tx.transactionDiscount.create({
+          data: {
+            transactionId: transaction.id,
+            discountId: Number(id),
+            maxAmount: Number(maxAmount),
+            ...discountData,
           },
-        },
-        userShift: {
-          connect: {
-            id: body.userShiftId,
+        });
+      }
+
+      // F. Kurangi Stok Produk (Sudah tervalidasi dengan aman di atas)
+      const stockUpdates = transaction.transactionDetails.map((product) => {
+        return tx.productStock.update({
+          where: { id: product.productStockId },
+          data: {
+            quantity: { decrement: product.qty }, // 'decrement' otomatis mengurangi nilai di DB
           },
-        },
-        totalItem: Number(body.totalItem),
-        totalPrice: Number(body.totalPrice),
-        totalDiscount: Number(body.totalDiscount),
-        amountPaid: Number(body.amountPaid),
-        amountChange: Number(body.amountChange),
-        outletPaymentMethod: {
-          connect: {
-            id: body.outletPaymentMethodId,
-          },
-        },
-        cardNumber: body.cardNumber,
-        confirmNumber: body.confirmNumber,
-        transactionTime: body.transactionTime,
-        transactionDetails: {
-          createMany: {
-            data: body.transactionDetails,
-          },
-        },
-      },
-      include: {
-        transactionDetails: true,
-      },
+        });
+      });
+
+      await Promise.all(stockUpdates);
+
+      return transaction;
     });
 
-    if (transaction && body.discountData) {
-      const { id, maxAmount, ...discountData } = body.discountData;
-
-      await prisma.transactionDiscount.create({
-        data: {
-          transactionId: transaction.id,
-          discountId: Number(id),
-          maxAmount: Number(maxAmount),
-          ...discountData,
-        },
-      });
-    }
-
-    transaction.transactionDetails.map(async (product) => {
-      await prisma.productStock.update({
-        where: {
-          id: product.productStockId,
-        },
-        data: {
-          quantity: {
-            increment: -1 * product.qty,
-          },
-        },
-      });
+    // Jika semua proses di dalam transaksi sukses tanpa throws/error
+    return NextResponse.json({
+      code: "SUCCESS",
+      message: "Transaksi berhasil disimpan.",
+      data: finalTransaction,
     });
+  } catch (error: any) {
+    console.error(
+      "⚠️ Transaction Failed. Rollbacked! Error log:",
+      error.message,
+    );
 
-    // const transaction = await createTransaction(body)
-
-    if (transaction) {
-      return NextResponse.json({
-        code: "SUCCESS",
-        message: "",
-        data: transaction,
-      });
-    } else {
+    // Custom Error Handler berdasarkan flag string error yang kita buat di atas
+    if (error.message === "TRANSACTION_ALREADY_EXISTS") {
       return NextResponse.json(
         {
-          code: "ERROR",
-          message: "Gagal menyimpan data!",
+          code: "DATA_IS_EXISTS",
+          message: "Nomor transaksi sudah ada!",
           data: null,
         },
-        {
-          status: 400,
-        },
+        { status: 400 },
       );
     }
-  } else {
+
+    if (error.message.startsWith("INSUFFICIENT_STOCK")) {
+      const productName = error.message.split(":")[1];
+      return NextResponse.json(
+        {
+          code: "STOCK_NOT_ENOUGH",
+          message: `Stok produk '${productName}' tidak mencukupi!`,
+          data: null,
+        },
+        { status: 400 },
+      );
+    }
+
+    if (error.message.startsWith("PRODUCT_STOCK_NOT_FOUND")) {
+      const productName = error.message.split(":")[1];
+      return NextResponse.json(
+        {
+          code: "NOT_FOUND",
+          message: `Data stok untuk produk '${productName}' tidak ditemukan!`,
+          data: null,
+        },
+        { status: 400 },
+      );
+    }
+
+    // Default Error Database / Prisma Constraint
     return NextResponse.json(
       {
-        code: "UNATHORIZED",
-        message: "Unathorized Error!",
-        data: null,
+        code: "ERROR",
+        message: "Gagal memproses transaksi di server!",
+        error: error.message,
       },
-      {
-        status: 401,
-      },
+      { status: 500 },
     );
   }
 };

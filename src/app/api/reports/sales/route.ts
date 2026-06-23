@@ -38,6 +38,7 @@ export const GET = async (req: NextRequest) => {
         },
       },
       transactionDetails: true,
+      transactionDiscount: true,
       outlet: true,
       outletPaymentMethod: {
         include: {

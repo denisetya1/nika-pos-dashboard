@@ -461,7 +461,7 @@ model Transaction {
   updateBy              String?               @default("") @map("updated_by")
   subTotal              Decimal?              @db.Decimal(10, 2) @map("sub_total")
   transactionDetails    TransactionDetail[]
-  transactionDiscount   transactionDiscount[]
+  transactionDiscount   transactionDiscount?
   outlet                Outlet                @relation(fields: [outletId], references: [id])
   outletPaymentMethod   OutletPaymentMethod   @relation(fields: [outletPaymentMethodId], references: [id])
   user                  User                  @relation(fields: [userId], references: [id])
@@ -581,7 +581,7 @@ model Discount {
 
 model transactionDiscount {
   id             BigInt      @id @default(autoincrement())
-  transactionId  String      @map("transaction_id") @db.VarChar(255)
+  transactionId  String     @unique @map("transaction_id") @db.VarChar(255)
   discountId     BigInt?     @map("discount_id")
   name           String?     @db.VarChar(100)
   code           String?     @db.VarChar(100)
@@ -591,7 +591,7 @@ model transactionDiscount {
   maxAmount      Decimal?    @map("max_amount") @db.Decimal(10, 2)
   isActive       Boolean?    @map("is_active")
   recommendation Boolean?
-  transactions   Transaction @relation(fields: [transactionId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "transaction_discounts_transactions_FK")
+  transaction   Transaction @relation(fields: [transactionId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "transaction_discounts_transactions_FK")
 
   @@index([transactionId], map: "transaction_discounts_transactions_FK")
   @@map("transaction_discounts")
