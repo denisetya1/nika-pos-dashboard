@@ -42,12 +42,10 @@ export const GET = async (
       },
     });
 
-    console.log(outletId, discounts);
-
     return NextResponse.json({
       code: "SUCCESS",
       message: "",
-      data: [...discounts, ...discounts, ...discounts],
+      data: discounts,
     });
   } else {
     return NextResponse.json(
