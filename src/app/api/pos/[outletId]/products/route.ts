@@ -127,6 +127,13 @@ export const GET = async (
     productsStocks[0] = productsStocks[0].map((productStok) => {
       return {
         ...productStok,
+        markUpPrice: getFinalPrice(
+          Number(productStok.sellPrice),
+          productStok.markupPercentage,
+          0,
+          true,
+          false,
+        ),
         finalPrice:
           productStok.product.productType === "DISCOUNT_PERCENT"
             ? productStok.sellPrice

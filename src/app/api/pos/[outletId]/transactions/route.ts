@@ -9,125 +9,132 @@ const createTransaction = (data: any) => {
         id: data.id,
         outlet: {
           connect: {
-            id: data.outletId
-          }
+            id: data.outletId,
+          },
         },
         storeId: data.storeId,
         user: {
           connect: {
-            id: data.userId
-          }
+            id: data.userId,
+          },
         },
         userShift: {
           connect: {
-            id: data.userShiftId
-          }
+            id: data.userShiftId,
+          },
         },
         totalItem: data.totalItem,
         totalPrice: data.totalPrice,
         totalDiscount: 0,
         amountPaid: data.amountPaid,
         amountChange: data.amountChange,
-        outletPaymentMethod:{
+        outletPaymentMethod: {
           connect: {
-            id: data.outletPaymentMethodId
-          }
+            id: data.outletPaymentMethodId,
+          },
         },
         cardNumber: data.cardNumber,
         confirmNumber: data.confirmNumber,
         transactionTime: data.transactionTime,
         transactionDetails: {
           createMany: {
-            data: data.transactionDetails
-          }
-        }
-      }, 
-      include:{
-        transactionDetails: true
-      }
-    })
+            data: data.transactionDetails,
+          },
+        },
+      },
+      include: {
+        transactionDetails: true,
+      },
+    });
 
     transaction.transactionDetails.map(async (product) => {
       const ps = await tx.productStock.update({
         where: {
-          id: product.productStockId
+          id: product.productStockId,
         },
         data: {
           quantity: {
-            increment: -1*product.qty
-          }
-        }
-      })
-    })
+            increment: -1 * product.qty,
+          },
+        },
+      });
+    });
 
-    return transaction
-  })
-}
+    return transaction;
+  });
+};
 
-export const POST = async (req: NextRequest) =>  {
-  const authorization = req.headers.get('authorization') || ''
-  const [__, accessToken] = authorization.split(' ')
+export const POST = async (req: NextRequest) => {
+  const authorization = req.headers.get("authorization") || "";
+  const [__, accessToken] = authorization.split(" ");
 
-  const userData = verifyJwt(accessToken)
+  const userData = verifyJwt(accessToken);
 
-  if(accessToken && userData) {
-    const body = await req.json()
+  if (accessToken && userData) {
+    const body = await req.json();
 
-    const testProduct = body.transactionDetails.filter((p: any)=> p.name.toLowerCase().includes('test product'))
-    
-    if(testProduct.length > 0) {
+    const testProduct = body.transactionDetails.filter((p: any) =>
+      p.name.toLowerCase().includes("test product"),
+    );
+
+    if (testProduct.length > 0) {
       await prisma.testTransaction.create({
         data: {
           transactionId: body.id,
-          data: JSON.stringify(body)
-        }
-      })
+          data: JSON.stringify(body),
+        },
+      });
       return NextResponse.json({
         code: "SUCCESS",
         message: "",
-        data: body
+        data: body,
       });
     }
 
     const checkTransaction = await prisma.transaction.findUnique({
       where: {
-        id: body.id
-      }
-    })
+        id: body.id,
+      },
+    });
 
-    if(checkTransaction){
-      return NextResponse.json({
-        code: "DATA_IS_EXISTS",
-        message: "Nomor transaksi sudah ada!",
-        data: body
-      }, {
-        status: 400
-      });
+    if (checkTransaction) {
+      return NextResponse.json(
+        {
+          code: "DATA_IS_EXISTS",
+          message: "Nomor transaksi sudah ada!",
+          data: body,
+        },
+        {
+          status: 400,
+        },
+      );
     }
-
 
     //CHEK RESI FOR MARKETPLACE
     const paymentMethod = await prisma.outletPaymentMethod.findUnique({
       where: {
-        id: Number(body.outletPaymentMethodId)
-      }
-    })
+        id: Number(body.outletPaymentMethodId),
+      },
+    });
 
-    if(paymentMethod && paymentMethod.paymentMethodId === 4){
+    if (paymentMethod && paymentMethod.paymentMethodId === 4) {
       const checkResi = await prisma.transaction.findFirst({
         where: {
-          confirmNumber: body.confirmNumber
-        }
-      })
+          confirmNumber: body.confirmNumber,
+        },
+      });
 
-      if(checkResi){
-        return NextResponse.json({
-          code: "DATA_IS_EXISTS",
-          message: "Nomor Resi sudah ada!",
-          data: body
-        }, {
-          status: 400
-        });
+      if (checkResi) {
+        return NextResponse.json(
+          {
+            code: "DATA_IS_EXISTS",
+            message: "Nomor Resi sudah ada!",
+            data: body,
+          },
+          {
+            status: 400,
+          },
+        );
       }
     }
 
@@ -136,82 +143,100 @@ export const POST = async (req: NextRequest) =>  {
         id: body.id,
         outlet: {
           connect: {
-            id: body.outletId
-          }
+            id: body.outletId,
+          },
         },
         storeId: body.storeId,
         user: {
           connect: {
-            id: body.userId
-          }
+            id: body.userId,
+          },
         },
         userShift: {
           connect: {
-            id: body.userShiftId
-          }
+            id: body.userShiftId,
+          },
         },
-        totalItem: body.totalItem,
-        totalPrice: body.totalPrice,
-        totalDiscount: 0,
-        amountPaid: body.amountPaid,
-        amountChange: body.amountChange,
-        outletPaymentMethod:{
+        totalItem: Number(body.totalItem),
+        totalPrice: Number(body.totalPrice),
+        totalDiscount: Number(body.totalDiscount),
+        amountPaid: Number(body.amountPaid),
+        amountChange: Number(body.amountChange),
+        outletPaymentMethod: {
           connect: {
-            id: body.outletPaymentMethodId
-          }
+            id: body.outletPaymentMethodId,
+          },
         },
         cardNumber: body.cardNumber,
         confirmNumber: body.confirmNumber,
         transactionTime: body.transactionTime,
         transactionDetails: {
           createMany: {
-            data: body.transactionDetails
-          }
-        }
-      }, 
-      include:{
-        transactionDetails: true
-      }
-    })
+            data: body.transactionDetails,
+          },
+        },
+      },
+      include: {
+        transactionDetails: true,
+      },
+    });
+
+    if (transaction && body.discountData) {
+      const { id, maxAmount, ...discountData } = body.discountData;
+
+      await prisma.transactionDiscount.create({
+        data: {
+          transactionId: transaction.id,
+          discountId: Number(id),
+          maxAmount: Number(maxAmount),
+          ...discountData,
+        },
+      });
+    }
 
     transaction.transactionDetails.map(async (product) => {
       await prisma.productStock.update({
         where: {
-          id: product.productStockId
+          id: product.productStockId,
         },
         data: {
           quantity: {
-            increment: -1 * product.qty
-          }
-        }
-      })
-    })
+            increment: -1 * product.qty,
+          },
+        },
+      });
+    });
 
     // const transaction = await createTransaction(body)
 
-    if(transaction){
+    if (transaction) {
       return NextResponse.json({
         code: "SUCCESS",
         message: "",
-        data: transaction
+        data: transaction,
       });
     } else {
-      return NextResponse.json({
-        code: "ERROR",
-        message: "Gagal menyimpan data!",
-        data: null
-      }, {
-        status: 400
-      });
+      return NextResponse.json(
+        {
+          code: "ERROR",
+          message: "Gagal menyimpan data!",
+          data: null,
+        },
+        {
+          status: 400,
+        },
+      );
     }
-
   } else {
-    return NextResponse.json({
-      code: "UNATHORIZED",
-      message: "Unathorized Error!",
-      data: null
-    }, {
-      status: 401
-    });
+    return NextResponse.json(
+      {
+        code: "UNATHORIZED",
+        message: "Unathorized Error!",
+        data: null,
+      },
+      {
+        status: 401,
+      },
+    );
   }
-}
+};

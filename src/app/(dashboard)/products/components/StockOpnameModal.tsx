@@ -8,6 +8,7 @@ import moment from "moment";
 import { useEffect, useRef, useState } from "react";
 import DatePicker from "react-datepicker";
 import { LuHistory } from "react-icons/lu";
+import { DateRangePicker } from "rsuite";
 
 type Product = Prisma.ProductGetPayload<{
   include: { brand: true; category: true; stocks: true };

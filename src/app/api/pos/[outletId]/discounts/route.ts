@@ -42,6 +42,8 @@ export const GET = async (
       },
     });
 
+    console.log(outletId, discounts);
+
     return NextResponse.json({
       code: "SUCCESS",
       message: "",
