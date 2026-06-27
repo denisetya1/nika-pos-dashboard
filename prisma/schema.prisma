@@ -604,6 +604,7 @@ enum DirectionEnum {
 
 enum DetailCategoryEnum {
   PRODUCT
+  PRODUCT_UNCOUNT
   DISCOUNT
   DISCOUNT_VOUCHER
   DISCOUNT_ADDITIONAL
