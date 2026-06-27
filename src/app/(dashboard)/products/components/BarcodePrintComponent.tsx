@@ -6,6 +6,7 @@ import Barcode from "react-barcode";
 
 type MyProps = {
   product: Product;
+  rotate: boolean;
 };
 
 class BarcodePrintComponent extends React.Component<MyProps> {
@@ -15,7 +16,9 @@ class BarcodePrintComponent extends React.Component<MyProps> {
 
   render() {
     return (
-      <div className="w-[150px] flex flex-col items-center justify-center text-center p-[4px]">
+      <div
+        className={`w-[150px] flex flex-col items-center justify-center text-center p-[4px] ${this.props.rotate ? "rotate-90" : ""}`}
+      >
         <div className="w-full text-[9px] text-left z-10 capitalize px-[4px]">
           {this.props.product.name.substring(0, 30).toLowerCase()}
         </div>
