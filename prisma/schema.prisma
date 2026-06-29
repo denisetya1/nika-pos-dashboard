@@ -21,7 +21,7 @@ model User {
   createdAt     DateTime      @default(now()) @map("created_at")
   updatedAt     DateTime?     @updatedAt @map("updated_at")
   deletedAt     DateTime?     @map("deleted_at")
-  updateBy      String?       @default("") @map("update_by")
+  updateBy    String?       @default("") @map("updated_by")
   isSubAccount  Boolean?      @map("is_sub_account")
   transactions  Transaction[]
   userOutlets   UserOutlet[]
@@ -459,7 +459,7 @@ model Transaction {
   updatedAt             DateTime?             @updatedAt @map("updated_at")
   deletedAt             DateTime?             @map("deleted_at")
   updateBy              String?               @default("") @map("updated_by")
-  subTotal              Decimal?              @db.Decimal(10, 2) @map("sub_total")
+  subTotal              Decimal?              @map("sub_total") @db.Decimal(10, 2)
   transactionDetails    TransactionDetail[]
   transactionDiscount   transactionDiscount?
   outlet                Outlet                @relation(fields: [outletId], references: [id])
@@ -475,28 +475,28 @@ model Transaction {
 }
 
 model TransactionDetail {
-  id                 BigInt             @id @default(autoincrement())
-  transactionId      String             @map("transaction_id")
-  productId          BigInt             @map("product_id")
+  id                 BigInt                              @id @default(autoincrement())
+  transactionId      String                              @map("transaction_id")
+  productId          BigInt                              @map("product_id")
   name               String
   barcode            String?
-  categoryId         BigInt             @map("category_id")
-  brandId            BigInt             @map("brand_id")
-  detailCategory     DetailCategoryEnum @default(PRODUCT) @map("detail_category")
-  qty                Int                @map("qty")
-  sellPrice          Decimal            @map("sell_price") @db.Decimal(10, 2)
-  discountPercentage Int?               @map("discount_percentage")
-  markupPercentage   Int?               @map("markup_percentage")
-  discountAmount     Decimal            @map("discount_amount") @db.Decimal(10, 2)
-  finalSellPrice     Decimal            @map("final_sell_price") @db.Decimal(10, 2)
-  total              Decimal            @map("total") @db.Decimal(10, 2)
-  totalDiscount      Decimal            @map("total_discount") @db.Decimal(10, 2)
-  createdAt          DateTime           @default(now()) @map("created_at")
-  updatedAt          DateTime?          @updatedAt @map("updated_at")
-  deletedAt          DateTime?          @map("deleted_at")
-  updateBy           String?            @default("") @map("updated_by")
-  productStockId     BigInt             @map("product_stock_id")
-  transaction        Transaction        @relation(fields: [transactionId], references: [id])
+  categoryId         BigInt                              @map("category_id")
+  brandId            BigInt                              @map("brand_id")
+  detailCategory     transaction_details_detail_category @default(PRODUCT) @map("detail_category")
+  qty                Int                                 @map("qty")
+  sellPrice          Decimal                             @map("sell_price") @db.Decimal(10, 2)
+  discountPercentage Int?                                @map("discount_percentage")
+  markupPercentage   Int?                                @map("markup_percentage")
+  discountAmount     Decimal                             @map("discount_amount") @db.Decimal(10, 2)
+  finalSellPrice     Decimal                             @map("final_sell_price") @db.Decimal(10, 2)
+  total              Decimal                             @map("total") @db.Decimal(10, 2)
+  totalDiscount      Decimal                             @map("total_discount") @db.Decimal(10, 2)
+  createdAt          DateTime                            @default(now()) @map("created_at")
+  updatedAt          DateTime?                           @updatedAt @map("updated_at")
+  deletedAt          DateTime?                           @map("deleted_at")
+  updateBy           String?                             @default("") @map("updated_by")
+  productStockId     BigInt                              @map("product_stock_id")
+  transaction        Transaction                         @relation(fields: [transactionId], references: [id])
 
   @@index([transactionId], map: "transaction_details_transaction_id_fkey")
   @@map("transaction_details")
@@ -573,6 +573,9 @@ model Discount {
   createdBy      String?                 @map("created_by") @db.VarChar(100)
   discountValue  Decimal?                @default(0.00) @map("discount_value") @db.Decimal(10, 2)
   recommendation Boolean?                @default(true)
+  startDate     DateTime?               @db.Date @map("start_date")
+  endDate       DateTime?               @db.Date @map("end_date")
+  quota          Int?
   outlets        Outlet?                 @relation(fields: [outletId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "discounts_outlets_FK")
 
   @@index([outletId], map: "discounts_outlets_FK")
@@ -581,7 +584,7 @@ model Discount {
 
 model transactionDiscount {
   id             BigInt      @id @default(autoincrement())
-  transactionId  String     @unique @map("transaction_id") @db.VarChar(255)
+  transactionId  String      @map("transaction_id") @db.VarChar(255) @unique
   discountId     BigInt?     @map("discount_id")
   name           String?     @db.VarChar(100)
   code           String?     @db.VarChar(100)
@@ -591,7 +594,7 @@ model transactionDiscount {
   maxAmount      Decimal?    @map("max_amount") @db.Decimal(10, 2)
   isActive       Boolean?    @map("is_active")
   recommendation Boolean?
-  transaction   Transaction @relation(fields: [transactionId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "transaction_discounts_transactions_FK")
+  transaction    Transaction @relation(fields: [transactionId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "transaction_discounts_transactions_FK")
 
   @@index([transactionId], map: "transaction_discounts_transactions_FK")
   @@map("transaction_discounts")
@@ -602,15 +605,15 @@ enum DirectionEnum {
   OUT
 }
 
-enum DetailCategoryEnum {
+enum discounts_discount_type {
+  PERCENT
+  AMOUNT
+}
+
+enum transaction_details_detail_category {
   PRODUCT
   PRODUCT_UNCOUNT
   DISCOUNT
   DISCOUNT_VOUCHER
   DISCOUNT_ADDITIONAL
-}
-
-enum discounts_discount_type {
-  PERCENT
-  AMOUNT
 }
