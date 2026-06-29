@@ -1,23 +1,20 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/client";
 
-export const GET = async (req: NextRequest) =>  {
-  const search = req.nextUrl.searchParams.get('search');
+export const GET = async (req: NextRequest) => {
+  const search = req.nextUrl.searchParams.get("search");
 
   const roles = await prisma.role.findMany({
     where: {
-      OR: [
-        {storeId: 1},
-        {storeId: null}
-      ]
-    }
+      OR: [{ storeId: 1 }, { storeId: null }],
+    },
   });
 
   return NextResponse.json(roles);
-}
+};
 
-export const POST = async (request: Request) =>  {
-  const body = await request.json()
+export const POST = async (request: Request) => {
+  const body = await request.json();
 
   const role = await prisma.role.create({
     data: {
@@ -25,9 +22,9 @@ export const POST = async (request: Request) =>  {
       storeId: 1,
       roles: {},
       isActive: true,
-      updateBy: 'user'
-    }
-  })
+      updatedBy: "user",
+    },
+  });
 
   return NextResponse.json(role);
-}
+};

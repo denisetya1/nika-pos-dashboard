@@ -68,7 +68,7 @@ export const POST = async (
           body.direction === "IN" ? Number(quantity) : -1 * Number(quantity),
       },
       cogs: Number(_cogs),
-      updateBy: session?.user.username,
+      updatedBy: session?.user.username,
       stockMovements: {
         create: {
           moveDate: dateUTC(moveDateStr),
@@ -82,7 +82,7 @@ export const POST = async (
           cogs: Number(_cogs),
           endQuantity,
           description: description,
-          updateBy: session?.user.username,
+          updatedBy: session?.user.username,
         },
       },
     },
@@ -98,7 +98,7 @@ export const POST = async (
       discountPercentage: 0,
       isActive: true,
       cogs: Number(_cogs),
-      updateBy: session?.user.username,
+      updatedBy: session?.user.username,
       stockMovements: {
         create: {
           moveDate: dateUTC(moveDateStr),
@@ -112,7 +112,7 @@ export const POST = async (
           cogs: Number(_cogs),
           endQuantity,
           description: description,
-          updateBy: session?.user.username,
+          updatedBy: session?.user.username,
         },
       },
     },
