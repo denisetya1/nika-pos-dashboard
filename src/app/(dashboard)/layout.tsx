@@ -9,7 +9,6 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import ToastContextProvider from "@/context/toast/ToastContextProvider";
 import ToastMsg from "./components/ToastMsg";
 import AuthSessionProvider from "@/context/session/AuthSessionProvider";
-import { redirect } from "next/navigation";
 
 const queryClient = new QueryClient();
 
@@ -23,7 +22,6 @@ const DashboardLayout: FC<PropsWithChildren> = function ({ children }) {
 
 const DashboardLayoutContent: FC<PropsWithChildren> = function ({ children }) {
   const { isCollapsed } = useSidebarContext();
-  redirect("https://nika-pos.beautycat.id");
 
   return (
     <AuthSessionProvider>
