@@ -48,21 +48,6 @@ export const POST = async (req: NextRequest) => {
     let trackingNumber = null;
 
     if (paymentMethod && paymentMethod.paymentMethodId === 4) {
-      const checkResi = await prisma.transaction.findFirst({
-        where: { confirmNumber: body.confirmNumber },
-      });
-
-      if (checkResi) {
-        return NextResponse.json(
-          {
-            code: "DATA_IS_EXISTS",
-            message: "Nomor Resi sudah ada!",
-            data: body,
-          },
-          { status: 400 },
-        );
-      }
-
       const map = ["Shopee", "Tokopedia", "BliBli", "Lazada", "TikTok"];
 
       const cr = [
@@ -99,6 +84,21 @@ export const POST = async (req: NextRequest) => {
       }
       if (couriers?.[1]) {
         trackingNumber = couriers[1].trim();
+      }
+
+      const checkResi = await prisma.transaction.findFirst({
+        where: { trackingNumber: trackingNumber },
+      });
+
+      if (checkResi) {
+        return NextResponse.json(
+          {
+            code: "DATA_IS_EXISTS",
+            message: "Nomor Resi sudah ada!",
+            data: body,
+          },
+          { status: 400 },
+        );
       }
     }
 
@@ -200,12 +200,20 @@ export const POST = async (req: NextRequest) => {
 
       // E. Simpan Diskon Transaksi (Jika ada)
       if (body.discountData) {
-        const { id, maxAmount, ...discountData } = body.discountData;
+        const {
+          id,
+          maxAmount,
+          minTransaction,
+          discountValue,
+          ...discountData
+        } = body.discountData;
         await tx.transactionDiscount.create({
           data: {
             transactionId: transaction.id,
             discountId: Number(id),
             maxAmount: Number(maxAmount),
+            minTransaction: Number(minTransaction),
+            discountValue: Number(discountValue),
             ...discountData,
           },
         });
