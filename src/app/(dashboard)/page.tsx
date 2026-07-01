@@ -3,11 +3,14 @@ import {
   getTopCategory,
   getTopMonthlyProducts,
 } from "@/actions/Summaries";
+import { redirect } from "next/navigation";
 
 const HomePage = async () => {
-  const getTopProduct = await getTopMonthlyProducts();
-  const summary = await getRealtimeSummary();
-  const cat = await getTopCategory();
+  // const getTopProduct = await getTopMonthlyProducts();
+  // const summary = await getRealtimeSummary();
+  // const cat = await getTopCategory();
+
+  redirect("/dashboard");
 
   return (
     <div className="flex w-full">
