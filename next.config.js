@@ -9,7 +9,7 @@ const nextConfig = {
         destination: "https://nika-pos.beautycat.id/",
         // permanent: true akan menghasilkan HTTP Status 301 (Permanent Redirect)
         // permanent: false akan menghasilkan HTTP Status 307 (Temporary Redirect)
-        permanent: true,
+        permanent: false,
       },
     ];
   },
