@@ -5,15 +5,13 @@ import type { FC, PropsWithChildren } from "react";
 import { twMerge } from "tailwind-merge";
 import { DashboardNavbar } from "./components/navbar";
 import { DashboardSidebar } from "./components/sidebar";
-import {
-  QueryClient,
-  QueryClientProvider,
-} from '@tanstack/react-query'
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import ToastContextProvider from "@/context/toast/ToastContextProvider";
 import ToastMsg from "./components/ToastMsg";
 import AuthSessionProvider from "@/context/session/AuthSessionProvider";
+import { redirect } from "next/navigation";
 
-const queryClient = new QueryClient()
+const queryClient = new QueryClient();
 
 const DashboardLayout: FC<PropsWithChildren> = function ({ children }) {
   return (
@@ -25,6 +23,7 @@ const DashboardLayout: FC<PropsWithChildren> = function ({ children }) {
 
 const DashboardLayoutContent: FC<PropsWithChildren> = function ({ children }) {
   const { isCollapsed } = useSidebarContext();
+  redirect("https://nika-pos.beautycat.id");
 
   return (
     <AuthSessionProvider>
@@ -43,9 +42,8 @@ const DashboardLayoutContent: FC<PropsWithChildren> = function ({ children }) {
               {children}
             </div>
           </div>
-          
+
           <ToastMsg />
-          
         </ToastContextProvider>
       </QueryClientProvider>
     </AuthSessionProvider>
