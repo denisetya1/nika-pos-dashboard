@@ -44,6 +44,8 @@ export const POST = async (req: NextRequest) => {
 
     let marketplaceId = null;
     let courierId = null;
+    let marketplaceReffId = null;
+    let trackingNumber = null;
 
     if (paymentMethod && paymentMethod.paymentMethodId === 4) {
       const checkResi = await prisma.transaction.findFirst({
@@ -80,13 +82,23 @@ export const POST = async (req: NextRequest) => {
       const marketplaces = body.cardNumber.split("/");
       const couriers = body.confirmNumber.split("/");
 
-      console.log(body.cardNumber, body.confirmNumber);
-
       if (marketplaces?.[0]) {
-        marketplaceId = marketplaces.indexOf(marketplaces[0].trim()) + 1;
+        marketplaceId =
+          map.indexOf(marketplaces[0].trim()) > -1
+            ? map.indexOf(marketplaces[0].trim()) + 1
+            : null;
+      }
+      if (marketplaces?.[1]) {
+        marketplaceReffId = marketplaces?.[1].trim();
       }
       if (couriers?.[0]) {
-        courierId = cr.indexOf(couriers[0].trim()) + 1;
+        courierId =
+          cr.indexOf(couriers[0].trim()) > -1
+            ? cr.indexOf(couriers[0].trim()) + 1
+            : null;
+      }
+      if (couriers?.[1]) {
+        trackingNumber = couriers[1].trim();
       }
     }
 
@@ -170,6 +182,8 @@ export const POST = async (req: NextRequest) => {
           user: { connect: { id: body.userId } },
           userShift: { connect: { id: body.userShiftId } },
           outletPaymentMethod: { connect: { id: body.outletPaymentMethodId } },
+          marketplaceReffId: marketplaceReffId,
+          trackingNumber: trackingNumber,
           marketplace: marketplaceId
             ? { connect: { id: Number(marketplaceId) } }
             : undefined,
