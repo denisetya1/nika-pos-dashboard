@@ -2,68 +2,6 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/client";
 import { verifyJwt } from "@/lib/jwt";
 
-const createTransaction = (data: any) => {
-  return prisma.$transaction(async (tx) => {
-    const transaction = await tx.transaction.create({
-      data: {
-        id: data.id,
-        outlet: {
-          connect: {
-            id: data.outletId,
-          },
-        },
-        storeId: data.storeId,
-        user: {
-          connect: {
-            id: data.userId,
-          },
-        },
-        userShift: {
-          connect: {
-            id: data.userShiftId,
-          },
-        },
-        totalItem: data.totalItem,
-        totalPrice: data.totalPrice,
-        totalDiscount: 0,
-        amountPaid: data.amountPaid,
-        amountChange: data.amountChange,
-        outletPaymentMethod: {
-          connect: {
-            id: data.outletPaymentMethodId,
-          },
-        },
-        cardNumber: data.cardNumber,
-        confirmNumber: data.confirmNumber,
-        transactionTime: data.transactionTime,
-        transactionDetails: {
-          createMany: {
-            data: data.transactionDetails,
-          },
-        },
-      },
-      include: {
-        transactionDetails: true,
-      },
-    });
-
-    transaction.transactionDetails.map(async (product) => {
-      const ps = await tx.productStock.update({
-        where: {
-          id: product.productStockId,
-        },
-        data: {
-          quantity: {
-            increment: -1 * product.qty,
-          },
-        },
-      });
-    });
-
-    return transaction;
-  });
-};
-
 export const POST = async (req: NextRequest) => {
   const authorization = req.headers.get("authorization") || "";
   const [__, accessToken] = authorization.split(" ");
@@ -104,6 +42,9 @@ export const POST = async (req: NextRequest) => {
       where: { id: Number(body.outletPaymentMethodId) },
     });
 
+    let marketplaceId = null;
+    let courierId = null;
+
     if (paymentMethod && paymentMethod.paymentMethodId === 4) {
       const checkResi = await prisma.transaction.findFirst({
         where: { confirmNumber: body.confirmNumber },
@@ -118,6 +59,34 @@ export const POST = async (req: NextRequest) => {
           },
           { status: 400 },
         );
+      }
+
+      const map = ["Shopee", "Tokopedia", "BliBli", "Lazada", "TikTok"];
+
+      const cr = [
+        "LEX",
+        "SPX",
+        "Ninja",
+        "AnterAja",
+        "J&T",
+        "SAPX",
+        "Sicepat",
+        "JNE",
+        "SPX-Instant",
+        "GRAB",
+        "GOSEND",
+      ];
+
+      const marketplaces = body.cardNumber.split("/");
+      const couriers = body.confirmNumber.split("/");
+
+      console.log(body.cardNumber, body.confirmNumber);
+
+      if (marketplaces?.[0]) {
+        marketplaceId = marketplaces.indexOf(marketplaces[0].trim()) + 1;
+      }
+      if (couriers?.[0]) {
+        courierId = cr.indexOf(couriers[0].trim()) + 1;
       }
     }
 
@@ -201,6 +170,13 @@ export const POST = async (req: NextRequest) => {
           user: { connect: { id: body.userId } },
           userShift: { connect: { id: body.userShiftId } },
           outletPaymentMethod: { connect: { id: body.outletPaymentMethodId } },
+          marketplace: marketplaceId
+            ? { connect: { id: Number(marketplaceId) } }
+            : undefined,
+
+          courier: courierId
+            ? { connect: { id: Number(courierId) } }
+            : undefined,
           transactionDetails: {
             createMany: { data: sanitizedDetails },
           },
